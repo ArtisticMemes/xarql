@@ -1,0 +1,265 @@
+@charset "UTF-8";
+#wrapper,
+html,
+body {
+  font-family: 'Roboto';
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  visibility: visible;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: #f2f2f2;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 100;
+  margin: .5em 0 .5em 0;
+  letter-spacing: −0 0.09375rem;
+}
+
+h2 {
+  font-size: 3.75rem;
+  font-weight: 200;
+  margin: .5em 0 .5em 0;
+  letter-spacing: −0 0.03125rem;
+}
+
+h3 {
+  font-size: 3rem;
+  font-weight: 300;
+  margin: .5em 0 .5em 0;
+  letter-spacing: 0rem;
+}
+
+h4 {
+  font-size: 2.125rem;
+  font-weight: 400;
+  margin: .5em 0 .5em 0;
+  letter-spacing: .015625rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: .5em 0 .5em 0;
+  letter-spacing: 0rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: .5em 0 .5em 0;
+  letter-spacing: .009375rem;
+}
+
+.subtitle {
+  margin: .5em 0 .5em 0;
+  letter-spacing: .009375rem;
+}
+
+.subtitle2 {
+  font-size: .875rem;
+  font-weight: 600;
+  margin: .5em 0 .5em 0;
+  letter-spacing: .00625rem;
+}
+
+p {
+  margin: .5em 0 .5em 0;
+  letter-spacing: .03125rem;
+}
+
+.small {
+  font-size: .875rem;
+  margin: .5em 0 .5em 0;
+  letter-spacing: .015625rem;
+}
+
+.overline, .concrete::before, .addition::before, .deletion::before {
+  font-size: .625rem;
+  margin: .5em 0 .5em 0;
+  letter-spacing: .09375rem;
+  text-transform: uppercase;
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #49f;
+  /* WebKit/Blink Browsers */
+}
+
+::selection {
+  color: #fff;
+  background: #49f;
+  /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #49f;
+  /* Gecko Browsers */
+}
+
+#wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+
+html,
+body {
+  width: 100vw;
+  max-width: 100vw;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+#column {
+  display: block;
+  max-width: 100%;
+  padding: 4vh .5rem 0 .5rem;
+}
+
+.card, .concrete, .addition, .deletion {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 40rem;
+  max-width: 100%;
+  min-height: 16rem;
+  margin: 0 0 2rem 0;
+  padding: 1rem 2rem 3rem 2rem;
+  text-align: left;
+  color: #000;
+  border: 0;
+  border-radius: .4rem;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.concrete, .addition, .deletion {
+  border-top: .2rem solid #000;
+}
+
+.concrete::before, .addition::before, .deletion::before {
+  position: relative;
+  top: -.4em;
+}
+
+.concrete {
+  border-color: #000;
+}
+
+.concrete::before {
+  content: 'concrete';
+}
+
+.addition {
+  border-color: #0f0;
+}
+
+.addition::before {
+  content: 'addition';
+}
+
+.deletion {
+  border-color: #f00;
+}
+
+.deletion::before {
+  content: 'deletion';
+}
+
+.spacer::after {
+  content: '-';
+  color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: #00f;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+a:active {
+  position: relative;
+  top: .05rem;
+}
+
+a:visited {
+  color: #00f;
+}
+
+button {
+  font-size: .875rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  margin: 3px;
+  padding: .5rem 1rem;
+  letter-spacing: .046875rem;
+  text-transform: uppercase;
+  color: #fff;
+  border: 0;
+  border-radius: .15rem;
+  outline: 0;
+  background-color: #2196f3;
+  -webkit-box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button .ripple {
+  position: absolute;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-animation: ripple .5s linear;
+  animation: ripple .5s linear;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+@-webkit-keyframes ripple {
+  to {
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple {
+  to {
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.centered {
+  width: 100%;
+  text-align: center;
+}

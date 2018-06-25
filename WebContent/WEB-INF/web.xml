@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>xarql</display-name>
+  <welcome-file-list>
+    <welcome-file>/src/code/index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description></description>
+    <display-name>Welcome</display-name>
+    <servlet-name>Welcome</servlet-name>
+    <servlet-class>com.xarql.main.Welcome</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Welcome</servlet-name>
+    <url-pattern>//*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Welcome</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Error</display-name>
+    <servlet-name>Error</servlet-name>
+    <servlet-class>com.xarql.main.Error</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Error</servlet-name>
+    <url-pattern>/error</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Test</display-name>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>com.xarql.main.Test</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Test</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Polr</display-name>
+    <servlet-name>Polr</servlet-name>
+    <servlet-class>com.xarql.main.Polr</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Polr</servlet-name>
+    <url-pattern>/polr</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Docs</display-name>
+    <servlet-name>Docs</servlet-name>
+    <servlet-class>com.xarql.main.Docs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Docs</servlet-name>
+    <url-pattern>/docs</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Code</display-name>
+    <servlet-name>Code</servlet-name>
+    <servlet-class>com.xarql.main.Code</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Code</servlet-name>
+    <url-pattern>/code</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Help</display-name>
+    <servlet-name>Help</servlet-name>
+    <servlet-class>com.xarql.main.Help</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Help</servlet-name>
+    <url-pattern>/help</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error?code=404</location>
+  </error-page>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/error?code=400</location>
+  </error-page>
+  
+  
+<!-- Cache Management (Experimental Values) -->
+<filter>
+  <filter-name>ExpiresFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.ExpiresFilter</filter-class>
+  <init-param>
+    <param-name>ExpiresByType image</param-name>
+    <param-value>access plus 10 minutes</param-value>
+  </init-param>
+  <init-param>
+    <param-name>ExpiresByType text/css</param-name>
+    <param-value>access plus 1 hour</param-value>
+  </init-param>
+  <init-param>
+    <param-name>ExpiresByType application/javascript</param-name>
+    <param-value>access plus 10 minutes</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>ExpiresFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  <dispatcher>REQUEST</dispatcher>
+</filter-mapping>
+
+</web-app>

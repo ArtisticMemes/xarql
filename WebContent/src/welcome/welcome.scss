@@ -1,0 +1,44 @@
+h3
+{
+    font-size: 3rem;
+    font-weight: 300;
+
+    margin: .5em 0 .5em 0;
+
+    letter-spacing: 0rem;
+}
+
+.overline
+{
+    font-size: .625rem;
+
+    margin: .5em 0 .5em 0;
+
+    letter-spacing: .09375rem;
+    text-transform: uppercase;
+}
+
+#xarql
+{
+  @extend h3;
+  letter-spacing: .09375rem;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+#moto
+{
+  @extend .overline;
+  width: 100%;
+  text-align: center;
+  margin-top: 0px;
+  font-size: 0.8rem;
+}
+
+#breaker
+{
+  height: 5rem;
+  width: 1rem;
+}
