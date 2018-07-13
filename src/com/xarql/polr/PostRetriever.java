@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,62 +18,75 @@ public class PostRetriever {
 	// Request Parameters
 	private int id;
 	private String sort;
-	private String order;
+	private String flow;
 	
 	// Defaults and Limits
 	private static final int DEFAULT_ID = 0;
 	private static final String DEFAULT_SORT = "bump";
-	private static final String DEFAULT_ORDER = "desc";
+	private static final String DEFAULT_FLOW = "desc";
 	
-	public PostRetriever(int id, String sort, String order)
+	public PostRetriever(int id, String sort, String flow)
 	{
 		setID(id);
 		setSort(sort);
-		setOrder(order);
-	} // PostRetriever(int id, String sort, String order)
+		setFlow(flow);
+	} // PostRetriever(int id, String sort, String flow)
 	
 	public PostRetriever(int id)
 	{
-		this(id, DEFAULT_SORT, DEFAULT_ORDER);
+		this(id, DEFAULT_SORT, DEFAULT_FLOW);
 	} // PostRetriever(int id)
 	
 	private void setID(int id)
 	{
-		this.id = id;
+		if(id < DEFAULT_ID)
+			this.id = DEFAULT_ID;
+		else
+			this.id = id;
 	} // setID(int id)
 	
 	private void setSort(String sort)
 	{
-		if(sort.equals("date") || sort.equals("responses") || sort.equals("bump"))
-			this.sort = sort;
-		else
+		if(sort == null)
 			this.sort = DEFAULT_SORT;
+		else
+		{
+			if(sort.equals("date") || sort.equals("responses") || sort.equals("subresponses") || sort.equals("bump") || sort.equals("subbump"))
+				this.sort = sort;
+			else
+				this.sort = DEFAULT_SORT;
+		}
 	} // setSort(String sort)
 	
-	private void setOrder(String order)
+	private void setFlow(String flow)
 	{
-		if(order.equals("asc") || order.equals("desc"))
-			this.order = order;
+		if(flow == null)
+			this.flow = DEFAULT_FLOW;
 		else
-			this.order = DEFAULT_ORDER;
+		{
+			if(flow.equals("asc") || flow.equals("desc"))
+				this.flow = flow;
+			else
+				this.flow = DEFAULT_FLOW;
+		}
 	} // setSort(String sort)
 	
 	// Return a specific set of posts
-	public ArrayList execute(HttpServletResponse response)
+	public ArrayList<Post> execute(HttpServletResponse response)
 	{
 		// TODO: Write sql querying
-		ArrayList posts = new ArrayList();
-		posts.add(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
-		posts.add(sqlQuery("SELECT * FROM polr WHERE answers=?", id, response));
+		ArrayList<Post> posts = new ArrayList<Post>();
+		posts.addAll(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
+		posts.addAll(sqlQuery("SELECT * FROM polr WHERE answers=? ORDER BY " + sort + " " + flow, id, response));
 		return posts;
 	} // ArrayList execute(HttpServletResponse response)
 	
-	private ArrayList sqlQuery(String query, int id, HttpServletResponse response)
+	private ArrayList<Post> sqlQuery(String query, int id, HttpServletResponse response)
 	{
 		Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
-		ArrayList posts = new ArrayList();
+	    ArrayList<Post> posts = new ArrayList<Post>();
 
 	    try 
 	    {
@@ -84,12 +98,17 @@ public class PostRetriever {
 	        rs = statement.executeQuery();
 	        while (rs.next())
 	        {
-	        	int rsID = rs.getInt("id");
+	        	int rsId = rs.getInt("id");
 	        	String rsTitle = rs.getString("title");
 	        	String rsContent = rs.getString("content");
+	        	int rsAnswers = rs.getInt("answers");
+	        	int rsRemoved = rs.getInt("removed");
+	        	Timestamp rsDate = rs.getTimestamp("date");
+	        	Timestamp rsBump = rs.getTimestamp("bump");
+	        	Timestamp rsSubbump = rs.getTimestamp("subbump");
 	        	int rsResponses = rs.getInt("responses");
-	        	Date rsBump = rs.getDate("bump");
-	        	Post currentPost = new Post(rsID, rsTitle, rsContent, rsResponses, rsBump);
+	        	int rsSubresponses = rs.getInt("subresponses");
+	        	Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses);
 	        	posts.add(currentPost);
 	        }
 	        
@@ -100,6 +119,7 @@ public class PostRetriever {
 	    	try 
 	    	{
 				response.sendError(500);
+				return posts;
 			} 
 	    	catch (IOException e) 
 	    	{

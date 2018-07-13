@@ -17,10 +17,11 @@
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <c:forEach begin="0" var="post" items="${posts}" end="0">
 		  <div class="card">
-		    <p class="overline">ID : ${post.getID()} --- Replies : ${post.getResponses()}</p>
+		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()}</p>
 		    <h4>${post.getTitle()}</h4>
 		    <p>${post.getContent()}</p>
-		    <p><a href="http://xarql.com/polr?id=${post.getID()}">View Replies</a></p>
+		    <p class="overline">Sort : ${sort} --- Flow : ${flow}</p>
+		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>
 		  </div>
 		</c:forEach>
       <div class="card" style="x-overflow:hidden;">
@@ -47,10 +48,10 @@
       </script>
 		<c:forEach begin="1" var="post" items="${posts}">
 		  <div class="card">
-		    <p class="overline">ID : ${post.getID()} --- Replies : ${post.getResponses()}</p>
+		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()}</p>
 		    <h4>${post.getTitle()}</h4>
 		    <p>${post.getContent()}</p>
-		    <p><a href="http://xarql.com/polr?id=${post.getID()}">View Replies</a></p>
+		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>
 		  </div>
 		</c:forEach>
     </div>

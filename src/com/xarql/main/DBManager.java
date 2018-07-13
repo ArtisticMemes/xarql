@@ -11,7 +11,7 @@ public class DBManager {
 		try 
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://sql.xarql.com/main", Secrets.DBUser, Secrets.DBPass);
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/main", Secrets.DBUser, Secrets.DBPass);
 			return conn;
 		} 
 		catch (ClassNotFoundException e) 

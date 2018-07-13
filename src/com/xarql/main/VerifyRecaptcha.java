@@ -1,5 +1,7 @@
 package com.xarql.main;
 
+import com.xarql.main.Secrets;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
