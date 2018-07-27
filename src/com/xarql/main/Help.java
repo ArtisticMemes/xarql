@@ -27,7 +27,7 @@ public class Help extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		response.sendRedirect("http://xarql.com/docs?for=xarql");
+		response.sendRedirect("http://xarql.com/docs/xarql/xarql.html");
 	}
 
 	/**

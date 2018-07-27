@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>polr | ${id}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/src/code/common.css">
+  <link rel="stylesheet" type="text/css" href="/src/common/common.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>

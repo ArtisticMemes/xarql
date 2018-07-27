@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="/src/code/common.css">
+<link rel="stylesheet" type="text/css" href="/src/common/common.css">
 <link rel="stylesheet" type="text/css" href="/src/welcome/welcome.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
@@ -19,11 +19,7 @@
         <div id="breaker"></div>
         <p class="overline">Pages</p>
         <p><a href="http://xarql.com/polr">polr</a></p>
-        <p><a href="http://xarql.com/docs">docs</a></p>
-        <p><a href="http://xarql.com/code">code</a></p>
         <p><a href="http://xarql.com/help">help</a></p>
-        <p class="overline">Discord Server</p>
-        <p><a href="https://discordapp.com/invite/HjEfxk7">d.xarql.com</a></p>
       </div>
     </div>
   </div>
