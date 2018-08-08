@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>polr | ${id}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/src/common/common.css">
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -18,7 +18,7 @@
       <c:forEach begin="0" var="post" items="${posts}" end="0">
 		  <div class="card">
 		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()}</p>
-		    <h4>${post.getTitle()}</h4>
+		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
 		    <p class="overline">Sort : ${sort} --- Flow : ${flow}</p>
 		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>
@@ -26,7 +26,7 @@
 		</c:forEach>
       <div class="card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
-       <form action = "/polr" method = "POST">
+       <form action = "/polr/post" method = "POST">
          <input type = "text" name = "title" placeholder="Title" maxlength="128" style="width:100%;">
          <br />
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
@@ -49,13 +49,13 @@
 		<c:forEach begin="1" var="post" items="${posts}">
 		  <div class="card">
 		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()}</p>
-		    <h4>${post.getTitle()}</h4>
+		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
 		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>
 		  </div>
 		</c:forEach>
     </div>
   </div>
-  <script src="/src/code/common.min.js"></script>
+  <script src="http://xarql.com/src/code/common.min.js"></script>
 </body>
 </html>
