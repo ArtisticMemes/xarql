@@ -263,3 +263,18 @@ button .ripple {
   width: 100%;
   text-align: center;
 }
+
+form {
+  font-size: 1rem;
+  font-family: "Roboto";
+}
+
+form input {
+	font-size: 1rem;
+	font-family: "Roboto";
+}
+
+form textarea {
+	font-size: 1rem;
+	font-family: "Roboto";
+}
