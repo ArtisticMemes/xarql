@@ -23,6 +23,7 @@ public class PostCreator {
 	// Limits
 	public static final int MAX_TITLE_LENGTH = 128;
 	public static final int MAX_CONTENT_LENGTH = 4096;
+	public static final int MIN_CONTENT_LENGTH = 1;
 	public static final int MIN_ID = 0;
 	
 	public PostCreator(String title, String content, int answers)
@@ -55,6 +56,11 @@ public class PostCreator {
 			this.content = "[CONTENT TOO LONG]";
 			this.goodParameters = false;
 		}
+		else if(content.length() < MIN_CONTENT_LENGTH)
+		{
+			this.content = "[CONTENT TOO SHORT]";
+			this.goodParameters = false;
+		}
 		else
 			this.content = htmlSafe(content);
 	} // setContent()
@@ -78,16 +84,93 @@ public class PostCreator {
 	
 	private String htmlSafe(String unsafeText)
 	{
-		return unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replaceAll("?", "&#63;");
+		return unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replace("?", "&#63;");
 	} // htmlSafe()
 	
 	public boolean execute(HttpServletResponse response)
 	{
 		//System.out.println("Attempting to creat post");
-		return sqlQuery("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response);
+		if(postExists(answers, response))
+			return createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response);
+		else
+			return false;
 	} // execute(HttpServletResponse response)
 	
-	private boolean sqlQuery(String query, String title, String content, int answers, HttpServletResponse response)
+	private boolean updateStats(int startingId, HttpServletResponse response)
+	{
+		
+	} // updateStats()
+	
+	private boolean postExists(int id, HttpServletResponse response)
+	{
+		Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet rs = null;
+	    
+	    if(goodParameters)
+	    {
+	    	//System.out.println("Parameters = good");
+		    try 
+		    {
+		        connection = DBManager.getConnection();
+		        statement = connection.prepareStatement("SELECT * FROM polr where id=?");
+		        
+		        statement.setInt(1, answers);
+		        
+		        rs = statement.executeQuery();
+		        if(rs.next())
+		        {
+		        	return true;
+		        }
+		        else
+		        {
+		        	try {
+						response.sendError(400);
+						//System.out.println("Prevented post with bad id");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        	return false;
+		        }
+		    }
+		    catch(SQLException s)
+		    {
+		    	try 
+		    	{
+					response.sendError(500);
+					return false;
+				} 
+		    	catch (IOException e) 
+		    	{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	return false;
+		    }
+		    finally 
+		    {
+		        // Close in reversed order.
+		        //if (rs != null) try { rs.close(); } catch (SQLException s) {}
+		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
+		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
+		    }
+	    }
+	    else
+	    {
+	    	try {
+				response.sendError(400);
+				return false;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    
+		return false;
+	} // postExists()
+	
+	private boolean createPost(String query, String title, String content, int answers, HttpServletResponse response)
 	{
 		Connection connection = null;
 	    PreparedStatement statement = null;
@@ -142,5 +225,5 @@ public class PostCreator {
 	    }
 	    
 		return false;
-	} // ArrayList sqlQuery(String query, int id, HttpServletResponse response)
+	} // ArrayList createPost()
 }
