@@ -43,7 +43,7 @@ public class PostCreator {
 			this.goodParameters = false;
 		}
 		else
-			this.title = title;
+			this.title = htmlSafe(title);
 	} // setTitle(String title)
 	
 	private void setContent(String content)
@@ -56,7 +56,7 @@ public class PostCreator {
 			this.goodParameters = false;
 		}
 		else
-			this.content = content;
+			this.content = htmlSafe(content);
 	} // setContent()
 	
 	private void setAnswers(int answers)
@@ -75,6 +75,11 @@ public class PostCreator {
 	{
 		return answers;
 	} // getAnswers()
+	
+	private String htmlSafe(String unsafeText)
+	{
+		return unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replaceAll("?", "&#63;");
+	} // htmlSafe()
 	
 	public boolean execute(HttpServletResponse response)
 	{
