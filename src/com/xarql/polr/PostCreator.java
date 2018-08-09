@@ -57,7 +57,7 @@ public class PostCreator {
 		}
 		else
 			this.content = content;
-	}
+	} // setContent()
 	
 	private void setAnswers(int answers)
 	{
@@ -69,21 +69,28 @@ public class PostCreator {
 		}
 		else
 			this.answers = answers;
-	}
+	} // setAnswers()
 	
-	public void execute(HttpServletResponse response)
+	public int getAnswers()
 	{
-		sqlQuery("INSERT INTO polr (title, content, answers) values (\"?\", \"?\", ?)", title, content, answers, response);
+		return answers;
+	} // getAnswers()
+	
+	public boolean execute(HttpServletResponse response)
+	{
+		//System.out.println("Attempting to creat post");
+		return sqlQuery("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response);
 	} // execute(HttpServletResponse response)
 	
-	private void sqlQuery(String query, String title, String content, int answers, HttpServletResponse response)
+	private boolean sqlQuery(String query, String title, String content, int answers, HttpServletResponse response)
 	{
 		Connection connection = null;
 	    PreparedStatement statement = null;
-	    ResultSet rs = null;
+	    int result;
 	    
 	    if(goodParameters)
 	    {
+	    	//System.out.println("Parameters = good");
 		    try 
 		    {
 		        connection = DBManager.getConnection();
@@ -93,26 +100,27 @@ public class PostCreator {
 		        statement.setString(2, content);
 		        statement.setInt(3, answers);
 		        
-		        rs = statement.executeQuery();
+		        result = statement.executeUpdate();
+		        return true;
 		    }
 		    catch(SQLException s)
 		    {
 		    	try 
 		    	{
 					response.sendError(500);
-					return;
+					return false;
 				} 
 		    	catch (IOException e) 
 		    	{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    	return;
+		    	return false;
 		    }
 		    finally 
 		    {
 		        // Close in reversed order.
-		        if (rs != null) try { rs.close(); } catch (SQLException s) {}
+		        //if (rs != null) try { rs.close(); } catch (SQLException s) {}
 		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
 		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
 		    }
@@ -121,13 +129,13 @@ public class PostCreator {
 	    {
 	    	try {
 				response.sendError(400);
-				return;
+				return false;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
 	    
-		return;
+		return false;
 	} // ArrayList sqlQuery(String query, int id, HttpServletResponse response)
 }

@@ -46,18 +46,12 @@ public class Polr extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		//System.out.println("incoming request for /polr");
 		currentRequest = request;
 		currentResponse = response;
 		
 		request.setAttribute("id", request.getParameter("id"));
-		request.setAttribute("title", request.getParameter("title"));
-		request.setAttribute("content", request.getParameter("content"));
-		request.setAttribute("answers", request.getParameter("answers"));
-		request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
 		
-		if(attributeEmpty("content"))
-		{
-			
 			// use sort parameter
 			String sort;
 			request.setAttribute("sort", request.getParameter("sort"));
@@ -96,43 +90,6 @@ public class Polr extends HttpServlet {
 				request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
 				return;
 			}
-		}
-		else
-		{
-			if(attributeEmpty("answers") || attributeEmpty("g-recaptcha-response"))
-			{
-				response.sendError(400);
-				return;
-			}
-			else
-			{
-				String g_recaptcha_response = request.getAttribute("g-recaptcha-response").toString();
-				if(VerifyRecaptcha.verify(g_recaptcha_response))
-				{
-					int answers;
-					try
-					{
-						answers = Integer.parseInt(request.getAttribute("answers").toString());
-					}
-					catch (NumberFormatException nfe)
-					{
-						response.sendError(400);
-						return;
-					}
-					
-					String title = request.getAttribute("title").toString();
-					String content = request.getAttribute("content").toString();
-					
-					PostCreator pc = new PostCreator(title, content, answers);
-					pc.execute(response);
-				}
-				else
-				{
-					response.sendError(400);
-					return;
-				}
-			}
-		}
 			
 	} // doGet()
 	
