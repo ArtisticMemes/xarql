@@ -84,7 +84,35 @@ public class PostCreator {
 	
 	private String htmlSafe(String unsafeText)
 	{
-		return unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replace("?", "&#63;");
+		String safeText = unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replace("?", "&#63;");
+		
+		// Enable links with ~
+		boolean insideTilde = false;
+		String safeLinkedText = "";
+		String withinTilde = "";
+		for(int i = 0; i < safeText.length(); i++)
+		{
+			if(safeText.charAt(i) == '~' && insideTilde == false && safeText.substring(i + 1, safeText.length()).contains("~"))
+			{
+				insideTilde = true;
+				safeLinkedText += "<a href=\"";
+			}
+			else if(safeText.charAt(i) == '~' && insideTilde == true)
+			{
+				insideTilde = false;
+				safeLinkedText += withinTilde + "\" target=\"_blank\">" + withinTilde + "</a>";
+				withinTilde = "";
+			}
+			else if(insideTilde)
+			{
+				withinTilde += safeText.charAt(i);
+			}
+			else
+			{
+				safeLinkedText += safeText.charAt(i);
+			}
+		}
+		return safeLinkedText;
 	} // htmlSafe()
 	
 	public boolean execute(HttpServletResponse response)
