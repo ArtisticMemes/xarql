@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DBManager;
+import com.xarql.main.VerifyRecaptcha;
 
 public class PostCreator {
 	
@@ -115,19 +116,19 @@ public class PostCreator {
 		return safeLinkedText;
 	} // htmlSafe()
 	
-	public boolean execute(HttpServletResponse response)
+	public boolean execute(HttpServletResponse response, String g_recaptcha_response) // <-- Not up to naming conventions, but looks Google's naming
 	{
-		//System.out.println("Attempting to creat post");
-		if(postExists(answers, response))
+		//System.out.println("Attempting to create post");
+		if(VerifyRecaptcha.verify(g_recaptcha_response) && postExists(answers, response))
 			return createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response);
 		else
 			return false;
 	} // execute(HttpServletResponse response)
 	
-	private boolean updateStats(int startingId, HttpServletResponse response)
+	/*private boolean updateStats(int startingId, HttpServletResponse response)
 	{
 		
-	} // updateStats()
+	} // updateStats()*/
 	
 	private boolean postExists(int id, HttpServletResponse response)
 	{

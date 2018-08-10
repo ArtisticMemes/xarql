@@ -39,10 +39,10 @@ public class PostProcessor extends HttpServlet {
 		request.setAttribute("title", request.getParameter("title"));
 		request.setAttribute("content", request.getParameter("content"));
 		request.setAttribute("answers", request.getParameter("answers"));
+		request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
 		
 		String title = request.getAttribute("title").toString();
 		String content = request.getAttribute("content").toString();
-		
 		// Get an int from the answers string in the request
 		int answers;
 		try
@@ -54,10 +54,10 @@ public class PostProcessor extends HttpServlet {
 			response.sendError(400);
 			return;
 		}
-		
+		String g_recaptcha_response = request.getAttribute("g-recaptcha-response").toString();
 		
 		PostCreator pc = new PostCreator(title, content, answers);
-		if(pc.execute(response))
+		if(pc.execute(response, g_recaptcha_response))
 			response.sendRedirect("http://xarql.com/polr?id=" + pc.getAnswers());
 		
 		
