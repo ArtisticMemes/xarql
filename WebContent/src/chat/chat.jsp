@@ -20,7 +20,7 @@
 		</div>
 	  </c:forEach>
 	  <div class="card" style="x-overflow:hidden;">
-       <form action = "/xarql/chat/send" method = "POST">
+       <form action = "/chat/send" method = "POST">
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input id="submit" type="submit" value="Send" /> <input type="reset" value="Clear" />
        </form>
