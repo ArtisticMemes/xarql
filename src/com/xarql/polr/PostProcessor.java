@@ -41,6 +41,13 @@ public class PostProcessor extends HttpServlet {
 		request.setAttribute("answers", request.getParameter("answers"));
 		request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
 		
+		// null pointer exception prevention
+		if(request.getAttribute("title") == null || request.getAttribute("content") == null || request.getAttribute("answers") == null || request.getAttribute("g-recaptcha-response") == null)
+		{
+			response.sendError(400);
+			return;
+		}
+		
 		String title = request.getAttribute("title").toString();
 		String content = request.getAttribute("content").toString();
 		// Get an int from the answers string in the request

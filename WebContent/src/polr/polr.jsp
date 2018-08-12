@@ -38,7 +38,7 @@
          	<input id='recaptcha_check_empty' required tabindex='-1', style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
-       <p><a href="http://xarql.com/docs?for=xarql&part=polr">Help</a></p>
+       <p><a href="http://xarql.com/help">Help</a></p>
       </div>
       <script>
       function recaptchaCallback()

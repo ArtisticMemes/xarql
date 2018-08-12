@@ -28,7 +28,6 @@ public class Polr extends HttpServlet {
 	
 	private HttpServletRequest currentRequest = null;
 	private HttpServletResponse currentResponse = null;
-	private String gRecaptchaResponse = "";
 	
 	public static final String DEFAULT_SORT = "subbump";
 	public static final String DEFAULT_FLOW = "desc";
@@ -107,12 +106,5 @@ public class Polr extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-	
-	public static String removeHTML(String unsafeInput)
-	{
-		String safeInput = unsafeInput.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("\'", "&#039;").replace("\\", "&#092;");
-		return safeInput;
-	}
-
-}
+	} // doPost()
+} // Polr

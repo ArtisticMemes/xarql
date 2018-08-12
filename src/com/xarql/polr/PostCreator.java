@@ -139,36 +139,35 @@ public class PostCreator {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    
-	    	//System.out.println("Parameters = good");
-		    try 
-		    {
-		        connection = DBManager.getConnection();
-
-		        
-		        updateStatLoop(startingId, true, connection, statement, rs);
-		        return true;
-		    }
-		    catch(SQLException s)
-		    {
-		    	try 
-		    	{
-					response.sendError(500);
-					return false;
-				} 
-		    	catch (IOException e) 
-		    	{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		    	return false;
-		    }
-		    finally 
-		    {
-		        // Close in reversed order.
-		        //if (rs != null) try { rs.close(); } catch (SQLException s) {}
-		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
-		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
-		    }
+	    //System.out.println("Parameters = good");
+	    try 
+	    {
+	    	connection = DBManager.getConnection();
+	    	updateStatLoop(startingId, true, connection, statement, rs);
+	    	return true;
+	    }
+	    catch(SQLException s)
+	    {
+	    	try 
+	    	{
+	    		response.sendError(500);
+	    		return false;
+	    	}
+	    	catch (IOException e) 
+	    	{
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    		
+	    	}
+	    	return false;	
+	    }
+		finally 
+		{
+			// Close in reversed order.
+			if (rs != null) try { rs.close(); } catch (SQLException s) {}
+			if (statement != null) try { statement.close(); } catch (SQLException s) {}
+			if (connection != null) try { connection.close(); } catch (SQLException s) {}
+		}
 	} // updateStats()
 	
 	private void updateStatLoop(int answers, boolean firstRun, Connection connection, PreparedStatement statement, ResultSet rs) throws SQLException
@@ -184,17 +183,14 @@ public class PostCreator {
 			statement.executeUpdate();
 		}
 		
-		System.out.println("id was : " + answers);
 		if(answers != 0)
 		{
-			System.out.println("Entered if statement");
 			// Get next id
 			statement = connection.prepareStatement("SELECT answers FROM polr WHERE id=?");
 			statement.setInt(1, answers);
 			rs = statement.executeQuery();
 			if(rs.next())
 				answers = rs.getInt("answers");
-			System.out.println("Looking to update id=" + answers);
 			// Increase subresponses
 			statement = connection.prepareStatement("UPDATE polr SET subresponses=subresponses+1 WHERE id=?");
 			statement.setInt(1, answers);
@@ -251,7 +247,7 @@ public class PostCreator {
 		    finally 
 		    {
 		        // Close in reversed order.
-		        //if (rs != null) try { rs.close(); } catch (SQLException s) {}
+		        if (rs != null) try { rs.close(); } catch (SQLException s) {}
 		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
 		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
 		    }
