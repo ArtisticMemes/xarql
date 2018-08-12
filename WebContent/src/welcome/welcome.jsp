@@ -19,6 +19,7 @@
         <div id="breaker"></div>
         <p class="overline">Pages</p>
         <p><a href="http://xarql.com/polr">polr</a></p>
+        <p><a href="http://xarql.com/chat">chat</a>
         <p><a href="http://xarql.com/help">help</a></p>
       </div>
     </div>

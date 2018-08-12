@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.polr.PostCreator;
+
 /**
  * Servlet implementation class SendProcessor
  */
@@ -26,16 +28,33 @@ public class SendProcessor extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		response.sendError(400);
+	} // doGet()
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		request.setAttribute("message", request.getParameter("message"));
+		request.setAttribute("session", request.getRequestedSessionId());
+		
+		// null pointer exception prevention
+		if(request.getAttribute("message") == null || request.getAttribute("session") == null)
+		{
+			response.sendError(400);
+			return;
+		}
+		
+		String message = request.getAttribute("message").toString();
+		String session = request.getAttribute("session").toString();
+		
+		//System.out.println("SendProcessor worked");
+		MessageCreator mc = new MessageCreator(message, session);
+		if(mc.execute(response))
+			response.sendRedirect("http://xarql.com/chat");
+		
+		
+		return;
+	} // doPost()
 
 }
