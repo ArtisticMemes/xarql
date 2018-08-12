@@ -17,7 +17,7 @@
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <c:forEach begin="0" var="post" items="${posts}" end="0">
 		  <div class="card">
-		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()}</p>
+		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()} --- SubReplies : ${post.getSubresponses()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
 		    <p class="overline">Sort : ${sort} --- Flow : ${flow}</p>
@@ -48,7 +48,7 @@
       </script>
 		<c:forEach begin="1" var="post" items="${posts}">
 		  <div class="card">
-		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()}</p>
+		    <p class="overline">ID : ${post.getId()} --- Replies : ${post.getResponses()} --- SubReplies : ${post.getSubresponses()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
 		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>

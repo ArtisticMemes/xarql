@@ -119,16 +119,89 @@ public class PostCreator {
 	public boolean execute(HttpServletResponse response, String g_recaptcha_response) // <-- Not up to naming conventions, but looks Google's naming
 	{
 		//System.out.println("Attempting to create post");
-		if(VerifyRecaptcha.verify(g_recaptcha_response) && postExists(answers, response))
-			return createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response);
+		if(goodParameters && VerifyRecaptcha.verify(g_recaptcha_response) && postExists(answers, response))
+		{
+			// These should only return false if the sql connection is faulty, as the conditions in which they fail were tested for in the above if statement
+			if(createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response))
+				return false;
+			if(updateStats(answers, response) == false)
+				return false;
+			
+			return true; // Will execute if neither of the above 2 return statements have
+		}
 		else
 			return false;
 	} // execute(HttpServletResponse response)
 	
-	/*private boolean updateStats(int startingId, HttpServletResponse response)
+	private boolean updateStats(int startingId, HttpServletResponse response)
 	{
+		Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet rs = null;
+	    
+	    	//System.out.println("Parameters = good");
+		    try 
+		    {
+		        connection = DBManager.getConnection();
+
+		        
+		        updateStatLoop(startingId, true, connection, statement, rs);
+		        return true;
+		    }
+		    catch(SQLException s)
+		    {
+		    	try 
+		    	{
+					response.sendError(500);
+					return false;
+				} 
+		    	catch (IOException e) 
+		    	{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	return false;
+		    }
+		    finally 
+		    {
+		        // Close in reversed order.
+		        //if (rs != null) try { rs.close(); } catch (SQLException s) {}
+		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
+		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
+		    }
+	} // updateStats()
+	
+	private void updateStatLoop(int answers, boolean firstRun, Connection connection, PreparedStatement statement, ResultSet rs) throws SQLException
+	{
+		// responses column
+		if(firstRun == true)
+		{
+			statement = connection.prepareStatement("UPDATE polr SET responses=responses+1 WHERE id=?");
+			statement.setInt(1, answers);
+			statement.executeUpdate();
+			statement = connection.prepareStatement("UPDATE polr SET subresponses=subresponses+1 WHERE id=?");
+			statement.setInt(1, answers);
+			statement.executeUpdate();
+		}
 		
-	} // updateStats()*/
+		System.out.println("id was : " + answers);
+		if(answers != 0)
+		{
+			System.out.println("Entered if statement");
+			// Get next id
+			statement = connection.prepareStatement("SELECT answers FROM polr WHERE id=?");
+			statement.setInt(1, answers);
+			rs = statement.executeQuery();
+			if(rs.next())
+				answers = rs.getInt("answers");
+			System.out.println("Looking to update id=" + answers);
+			// Increase subresponses
+			statement = connection.prepareStatement("UPDATE polr SET subresponses=subresponses+1 WHERE id=?");
+			statement.setInt(1, answers);
+			statement.executeUpdate();
+			updateStatLoop(answers, false, connection, statement, rs);
+		}
+	}
 	
 	private boolean postExists(int id, HttpServletResponse response)
 	{
@@ -136,8 +209,6 @@ public class PostCreator {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    
-	    if(goodParameters)
-	    {
 	    	//System.out.println("Parameters = good");
 		    try 
 		    {
@@ -184,19 +255,6 @@ public class PostCreator {
 		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
 		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
 		    }
-	    }
-	    else
-	    {
-	    	try {
-				response.sendError(400);
-				return false;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	    
-		return false;
 	} // postExists()
 	
 	private boolean createPost(String query, String title, String content, int answers, HttpServletResponse response)
@@ -205,8 +263,6 @@ public class PostCreator {
 	    PreparedStatement statement = null;
 	    int result;
 	    
-	    if(goodParameters)
-	    {
 	    	//System.out.println("Parameters = good");
 		    try 
 		    {
@@ -241,18 +297,5 @@ public class PostCreator {
 		        if (statement != null) try { statement.close(); } catch (SQLException s) {}
 		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
 		    }
-	    }
-	    else
-	    {
-	    	try {
-				response.sendError(400);
-				return false;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	    
-		return false;
 	} // ArrayList createPost()
 }
