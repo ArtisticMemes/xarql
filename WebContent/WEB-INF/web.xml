@@ -28,7 +28,6 @@
     <servlet-name>com.xarql.main.Error</servlet-name>
     <url-pattern>/error</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>Polr</display-name>
@@ -39,7 +38,6 @@
     <servlet-name>com.xarql.main.Polr</servlet-name>
     <url-pattern>/polr</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>PostProcessor</display-name>
@@ -50,7 +48,27 @@
     <servlet-name>com.xarql.polr.PostProcessor</servlet-name>
     <url-pattern>/polr/post</url-pattern>
   </servlet-mapping>
-    
+  <servlet>
+    <description></description>
+    <display-name>Chat</display-name>
+    <servlet-name>Chat</servlet-name>
+    <servlet-class>com.xarql.main.Chat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Chat</servlet-name>
+    <url-pattern>/chat</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SendProcessor</display-name>
+    <servlet-name>SendProcessor</servlet-name>
+    <servlet-class>com.xarql.chat.SendProcessor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.chat.SendProcessor</servlet-name>
+    <url-pattern>/chat/send</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>Help</display-name>
