@@ -146,8 +146,9 @@ public class PostCreator {
 		if(goodParameters && VerifyRecaptcha.verify(g_recaptcha_response) && postExists(answers, response))
 		{
 			// These should only return false if the sql connection is faulty, as the conditions in which they fail were tested for in the above if statement
-			if(createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response))
+			if(createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response) == false)
 				return false;
+			//System.out.println("updating stats next");
 			if(updateStats(answers, response) == false)
 				return false;
 			
@@ -196,32 +197,61 @@ public class PostCreator {
 	
 	private void updateStatLoop(int answers, boolean firstRun, Connection connection, PreparedStatement statement, ResultSet rs) throws SQLException
 	{
-		// responses column
+		//System.out.println("updateStatLoop");
+		// On the first post
 		if(firstRun == true)
 		{
-			statement = connection.prepareStatement("UPDATE polr SET responses=responses+1 WHERE id=?");
+			//System.out.println("First run on updateStatLoop");
+			// Increase responses and subresponses by 1
+			statement = connection.prepareStatement("UPDATE polr SET responses=responses+1 WHERE id=?"); // responses
 			statement.setInt(1, answers);
 			statement.executeUpdate();
-			statement = connection.prepareStatement("UPDATE polr SET subresponses=subresponses+1 WHERE id=?");
+			statement = connection.prepareStatement("UPDATE polr SET subresponses=subresponses+1 WHERE id=?"); // subresponses
 			statement.setInt(1, answers);
 			statement.executeUpdate();
-		}
+			
+			// Set bump and subbump to now
+			//System.out.println("Bump & Subbump in first run on statloop");
+			Timestamp now = new Timestamp(System.currentTimeMillis());
+			statement = connection.prepareStatement("UPDATE polr SET bump=? WHERE id=?"); // bump
+			statement.setTimestamp(1, now);
+			statement.setInt(2, answers);
+			statement.executeUpdate();
+			statement = connection.prepareStatement("UPDATE polr SET subbump=? WHERE id=?"); // subbump
+			statement.setTimestamp(1, now);
+			statement.setInt(2, answers);
+			statement.executeUpdate();
+		} // if(firstRun == true)
 		
+		// On all subsequent posts
 		if(answers != 0)
 		{
+			//System.out.println("Inside of answers!=0");
 			// Get next id
 			statement = connection.prepareStatement("SELECT answers FROM polr WHERE id=?");
 			statement.setInt(1, answers);
 			rs = statement.executeQuery();
 			if(rs.next())
 				answers = rs.getInt("answers");
+			
+			//System.out.println("Increasing subresponses next");
 			// Increase subresponses
 			statement = connection.prepareStatement("UPDATE polr SET subresponses=subresponses+1 WHERE id=?");
 			statement.setInt(1, answers);
 			statement.executeUpdate();
-			updateStatLoop(answers, false, connection, statement, rs);
-		}
-	}
+			
+			//System.out.println("Updating subbump next");
+			// Set subbump to now
+			Timestamp now = new Timestamp(System.currentTimeMillis());
+			statement = connection.prepareStatement("UPDATE polr SET subbump=? WHERE id=?");
+			statement.setTimestamp(1, now);
+			statement.setInt(2, answers);
+			statement.executeUpdate();
+			
+			//System.out.println("Continuing to next updateStatLoop next");
+			updateStatLoop(answers, false, connection, statement, rs); // Continue to next post
+		} // if(answers != 0)
+	} // updateStatLoop()
 	
 	private boolean postExists(int id, HttpServletResponse response)
 	{
@@ -318,4 +348,4 @@ public class PostCreator {
 		        if (connection != null) try { connection.close(); } catch (SQLException s) {}
 		    }
 	} // ArrayList createPost()
-}
+} // PostCreator
