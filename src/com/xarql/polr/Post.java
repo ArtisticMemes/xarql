@@ -175,10 +175,36 @@ public class Post {
 		return bump;
 	} // getBump()
 	
+	public String timeSinceBump()
+	{
+		long timeSince = System.currentTimeMillis() - bump.getTime();
+		if(timeSince < 60000) // Less than 1 minute
+			return timeSince / 1000 + "s";
+		else if(timeSince < 3600000) // Less than 1 hour
+			return timeSince / 60000 + "m";
+		else if(timeSince < 86400000) // Less than 1 day
+			return timeSince / 3600000 + "h";
+		else
+			return timeSince / 86400000 + "d";
+	} // timeSinceBump()
+	
 	public Timestamp getSubbump()
 	{
 		return subbump;
 	} // getSubbump()
+	
+	public String timeSinceSubbump()
+	{
+		long timeSince = System.currentTimeMillis() - subbump.getTime();
+		if(timeSince < 60000) // Less than 1 minute
+			return timeSince / 1000 + "s";
+		else if(timeSince < 3600000) // Less than 1 hour
+			return timeSince / 60000 + "m";
+		else if(timeSince < 86400000) // Less than 1 day
+			return timeSince / 3600000 + "h";
+		else
+			return timeSince / 86400000 + "d";
+	} // timeSinceBump()
 	
 	public int getResponses()
 	{
