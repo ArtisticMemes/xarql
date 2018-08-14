@@ -68,7 +68,16 @@
     <servlet-name>com.xarql.chat.SendProcessor</servlet-name>
     <url-pattern>/chat/send</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>Conf</display-name>
+    <servlet-name>Conf</servlet-name>
+    <servlet-class>com.xarql.main.Conf</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Conf</servlet-name>
+    <url-pattern>/conf</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>Help</display-name>
