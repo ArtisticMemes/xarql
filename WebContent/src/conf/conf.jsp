@@ -14,7 +14,7 @@
   <div id="wrapper">
     <div id="column">
       <div class="card">
-      <form action="/xarql/conf" method="POST">
+      <form action="/conf" method="POST">
          <input type="text" name="password" placeholder="password" style="width:100%;">
          <input id="submit" type="submit" value="Submit"/> <input type="reset" value="Clear"/>
          <div style="position:relative;">
