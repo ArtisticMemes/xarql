@@ -1,0 +1,5 @@
+.card, .concrete, .addition, .deletion {
+	min-height: 14rem;
+	margin: 0 0 2rem 0;
+	padding: 1rem 2rem 3rem 2rem;
+}

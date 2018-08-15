@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Chat</title>
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/small.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 </head>

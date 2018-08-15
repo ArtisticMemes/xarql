@@ -8,6 +8,7 @@
   <title>polr | ${id}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
