@@ -83,7 +83,7 @@ p {
   letter-spacing: .015625rem;
 }
 
-.overline, .concrete::before, .addition::before, .deletion::before {
+.overline {
   font-size: .625rem;
   margin: .5em 0 .5em 0;
   letter-spacing: .09375rem;
@@ -137,7 +137,7 @@ html {
   padding: 4vh .5rem 0 .5rem;
 }
 
-.card, .concrete, .addition, .deletion {
+.card {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 40rem;
@@ -149,39 +149,6 @@ html {
   background-color: #fff;
   -webkit-box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
-}
-
-.concrete, .addition, .deletion {
-  border-top: .2rem solid #000;
-}
-
-.concrete::before, .addition::before, .deletion::before {
-  position: relative;
-  top: -.4em;
-}
-
-.concrete {
-  border-color: #000;
-}
-
-.concrete::before {
-  content: 'concrete';
-}
-
-.addition {
-  border-color: #0f0;
-}
-
-.addition::before {
-  content: 'addition';
-}
-
-.deletion {
-  border-color: #f00;
-}
-
-.deletion::before {
-  content: 'deletion';
 }
 
 .spacer::after {
