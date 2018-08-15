@@ -53,7 +53,7 @@ public class Message {
 		int g = Integer.parseInt(backgroundColor().substring(2, 4), 16);
 		int b = Integer.parseInt(backgroundColor().substring(4, 6), 16);
 		double luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Adjust for human eyes
-		System.out.println(luma);
+		//System.out.println(luma);
 		if(luma > 80)
 			return "000";
 		else
