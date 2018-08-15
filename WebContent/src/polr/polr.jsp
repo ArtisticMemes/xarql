@@ -57,6 +57,5 @@
 		</c:forEach>
     </div>
   </div>
-  <script src="http://xarql.com/src/code/common.min.js"></script>
 </body>
 </html>

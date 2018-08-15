@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Chat</title>
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/chat/chat.css">
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 </head>
@@ -14,9 +14,8 @@
     <div id="column">
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <c:forEach begin="0" var="message" items="${messages}">
-        <div class="card">
-          <p class="overline">ID : ${message.getId()}</p>
-		  <p>${message.getMessage()}</p>
+        <div class="card" style="background-color:#${message.backgroundColor()}">
+          <p style="color:#${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
 		</div>
 	  </c:forEach>
 	  <div class="card" style="x-overflow:hidden;">
