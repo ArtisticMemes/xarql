@@ -46,7 +46,7 @@ public class PostCreator {
 	private boolean goodParameters;
 	
 	// Limits
-	public static final int MAX_TITLE_LENGTH = 128;
+	public static final int MAX_TITLE_LENGTH = 64;
 	public static final int MAX_CONTENT_LENGTH = 4096;
 	public static final int MIN_CONTENT_LENGTH = 1;
 	public static final int MIN_ID = 0;

@@ -60,16 +60,16 @@ html, body {
 		</c:forEach>
       <div class="card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
-       <form action = "/polr/post" method = "POST">
-         <input type = "text" name = "title" placeholder="Title" maxlength="128" style="width:100%;">
-         <br />
+       <form action="/polr/post" method="POST">
+         <input type="text" name="title" placeholder="Title" maxlength="64" style="width:100%;">
+         <br/>
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
-         <br />
-         Replying To : <input type = "number" name="answers" value="${id}" min="0" size="4" required style="width:4rem;"/>
-         <input id="submit" type = "submit" value = "Post" /> <input type="reset" value="Clear" />
+         <br/>
+         Replying To : <input type="number" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
+         <input id="submit" type="submit" value="Post"/> <input type="reset" value="Clear"/>
          <div style="position:relative;">
          	<div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div> 
-         	<input id='recaptcha_check_empty' required tabindex='-1', style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
+         	<input id='recaptcha_check_empty' required="" tabindex='-1', style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
        <p><a href="http://xarql.com/help">Help</a></p>

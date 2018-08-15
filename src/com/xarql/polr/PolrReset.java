@@ -19,7 +19,7 @@ public class PolrReset {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    String[] query = {
-	    		"CREATE TABLE polr(id int PRIMARY KEY AUTO_INCREMENT, title text(128), content text(4096) NOT NULL, answers int NOT NULL DEFAULT 0, date timestamp NOT NULL DEFAULT NOW(), bump timestamp NOT NULL DEFAULT NOW(), subbump timestamp NOT NULL DEFAULT NOW(), responses int NOT NULL DEFAULT 0, subresponses int NOT NULL DEFAULT 0)",
+	    		"CREATE TABLE polr(id int PRIMARY KEY AUTO_INCREMENT, title text(64), content text(4096) NOT NULL, answers int NOT NULL DEFAULT 0, date timestamp NOT NULL DEFAULT NOW(), bump timestamp NOT NULL DEFAULT NOW(), subbump timestamp NOT NULL DEFAULT NOW(), responses int NOT NULL DEFAULT 0, subresponses int NOT NULL DEFAULT 0)",
 	    		"DELETE FROM polr",
 	    		"ALTER TABLE polr AUTO_INCREMENT=0",
 	    		"INSERT INTO polr (title, content, answers) VALUES ('ROOT POST', 'ROOT POST', -1)",
