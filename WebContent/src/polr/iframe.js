@@ -12,19 +12,7 @@ $(document).ready(function () {
 	            return sParameterName[1] === undefined ? true : sParameterName[1];
 	        }
 	    }
-	};
-	// Inject iframe mentioned in url
-	var urliframe = getUrlParameter('frame');
-	if(typeof urliframe != 'undefined') {
-		var iframe = document.createElement('iframe');
-		iframe.setAttribute('src', 'http://xarql.com/polr/peek?id=' + urliframe);
-		iframe.setAttribute('class', 'injected-iframe');
-		iframe.setAttribute('id', 'iframe-' + urliframe);
-		document.getElementById('wrapper').appendChild(iframe);
-		$('#injector' + urliframe).hide();
-		$('#remover' + urliframe).show();
 	}
-	
 	$('.inject-button').each(function () {
 		var $this = $(this);
 		$this.on("click", function () {
@@ -52,4 +40,15 @@ $(document).ready(function () {
 			}
 		});
 	});
+	// Inject iframe mentioned in url
+	var urliframe = getUrlParameter('frame');
+	if(typeof urliframe != 'undefined') {
+		var iframe = document.createElement('iframe');
+		iframe.setAttribute('src', 'http://xarql.com/polr/peek?id=' + urliframe);
+		iframe.setAttribute('class', 'injected-iframe');
+		iframe.setAttribute('id', 'iframe-' + urliframe);
+		document.getElementById('wrapper').appendChild(iframe);
+		$('#injector' + urliframe).hide();
+		$('#remover' + urliframe).show();
+	}
 });
