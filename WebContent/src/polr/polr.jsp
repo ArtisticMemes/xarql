@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src='https://www.google.com/recaptcha/api.js' async="" defer=""></script>
   <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
-  <script src="http://xarql.com/src/polr/iframe.js" defer=""></script>
+  <script src="/xarql/src/polr/iframe.js" defer=""></script>
   <style>
 @charset "UTF-8";
 #wrapper, html, body {
@@ -53,7 +53,7 @@ html, body {
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <c:forEach begin="0" var="post" items="${posts}" end="0">
 		  <div class="card">
-		    <p class="overline">ID : ${post.getId()} ~ Replied To : <a href="http://xarql.com/polr?id=${post.getAnswers()}">${post.getAnswers()}</a> ~ Date : ${post.getDate().toString().substring(0,19)}</p>
+		    <p class="overline">ID : <span id="main-post">${post.getId()}</span> ~ Replied To : <a href="http://xarql.com/polr?id=${post.getAnswers()}">${post.getAnswers()}</a> ~ Date : ${post.getDate().toString().substring(0,19)}</p>
 		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>

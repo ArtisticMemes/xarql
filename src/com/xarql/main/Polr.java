@@ -109,8 +109,12 @@ public class Polr extends HttpServlet {
 					return;
 				}
 				PostRetriever ps = new PostRetriever(id, sort, flow);
-				request.setAttribute("posts", ps.execute(response));
-				request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
+				ArrayList<Post> posts = ps.execute(response);
+				request.setAttribute("posts", posts);
+				if(posts.size() > 0)
+					request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
+				else
+					response.sendError(404);
 				return;
 			}
 			

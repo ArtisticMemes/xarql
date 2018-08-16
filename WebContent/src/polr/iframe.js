@@ -10,6 +10,7 @@ $(document).ready(function () {
 				document.getElementById('wrapper').appendChild(iframe);
 				$this.hide();
 				$('#remover' + $this.attr('post-id')).show();
+				history.pushState("xarql", "xarql", window.location.pathname + "?id=" + $('#main-post').text() + "&iframe=" + $this.attr('post-id'));
 			}
 		});
 	});
@@ -18,6 +19,7 @@ $(document).ready(function () {
 		$this.hide();
 		$this.on("click", function () {
 			if($('#iframe-' + $this.attr('post-id')).length > 0) {
+				history.pushState("xarql", "xarql", window.location.pathname + "?id=" + $('#main-post').text());
 				$('#iframe-' + $this.attr('post-id')).remove();
 				$this.hide();
 				$('#injector' + $this.attr('post-id')).show();
