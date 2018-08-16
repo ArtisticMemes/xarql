@@ -7,7 +7,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   visibility: visible;
-  overflow-x: hidden;
+  
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -241,4 +241,14 @@ form input {
 form textarea {
 	font-size: 1rem;
 	font-family: "Roboto";
+}
+
+.injected-iframe {
+  display: block;
+  padding: 0 .5rem 0 .5rem;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 40rem;
+  max-width: 100vw;
+  border: 0;
 }

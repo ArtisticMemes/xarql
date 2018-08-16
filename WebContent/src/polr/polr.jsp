@@ -5,9 +5,11 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>polr | ${id}</title>
+  <title>${posts.get(0).getTitle()} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src='https://www.google.com/recaptcha/api.js' async="" defer=""></script>
+  <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
+  <script src="http://xarql.com/src/polr/iframe.js" defer=""></script>
   <style>
 @charset "UTF-8";
 #wrapper, html, body {
@@ -55,7 +57,6 @@ html, body {
 		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
-		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>
 		  </div>
 		</c:forEach>
       <div class="card" style="x-overflow:hidden;">
@@ -86,11 +87,10 @@ html, body {
 		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
-		    <p><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a></p>
+		    <p id="action-bar${post.getId()}"><a href="http://xarql.com/polr?id=${post.getId()}">View Replies</a> <a class="inject-button" id="injector${post.getId()}" post-id="${post.getId()}">Inject Replies</a> <a class="remove-button" id="remover${post.getId()}" post-id="${post.getId()}">Remove Injection</a></p>
 		  </div>
 		</c:forEach>
     </div>
-  </div>
   <no-script>
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
