@@ -110,7 +110,6 @@ public class PostCreator {
 	private String htmlSafe(String unsafeText)
 	{
 		String safeText = unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replace("?", "&#63;");
-		
 		// Enable links with ~
 		boolean insideTilde = false;
 		String safeLinkedText = "";
