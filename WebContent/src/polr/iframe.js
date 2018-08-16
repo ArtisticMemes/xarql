@@ -4,7 +4,7 @@ $(document).ready(function () {
 		$this.on("click", function () {
 			if($('#iframe-' + $this.attr('post-id')).length == 0) {
 				var iframe = document.createElement('iframe');
-				iframe.setAttribute('src', 'http://xarql.com/polr?id=' + $this.attr('post-id'));
+				iframe.setAttribute('src', 'http://xarql.com/polr/peek?id=' + $this.attr('post-id'));
 				iframe.setAttribute('class', 'injected-iframe');
 				iframe.setAttribute('id', 'iframe-' + $this.attr('post-id'));
 				document.getElementById('wrapper').appendChild(iframe);

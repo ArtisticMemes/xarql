@@ -49,6 +49,16 @@
     <url-pattern>/polr/post</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>provide replies for iframes</description>
+    <display-name>Peek</display-name>
+    <servlet-name>Peek</servlet-name>
+    <servlet-class>com.xarql.polr.Peek</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.polr.Peek</servlet-name>
+    <url-pattern>/polr/peek</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Chat</display-name>
     <servlet-name>Chat</servlet-name>

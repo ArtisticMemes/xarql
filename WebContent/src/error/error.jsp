@@ -5,10 +5,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
-<link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <title>${code}</title>
+<style>
+#wrapper, html, body {
+  font-family: 'Roboto';
+  display: flex;
+  visibility: visible;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+html, body {
+  width: 100vw;
+  max-width: 100vw;
+}
+*, *:before, *:after {
+  font-display:swap
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+#column {
+  max-width: 100%;
+}
+.card {
+  width: 40rem;
+  max-width: 100%;
+}
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -20,5 +52,10 @@
     </div>
   </div>
 </div>
+<no-script>
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+</no-script>
 </body>
 </html>
