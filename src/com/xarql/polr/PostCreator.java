@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DBManager;
+import com.xarql.main.TextFormatter;
 import com.xarql.main.VerifyRecaptcha;
 
 public class PostCreator {
@@ -69,7 +70,7 @@ public class PostCreator {
 			this.goodParameters = false;
 		}
 		else
-			this.title = htmlSafe(title);
+			this.title = TextFormatter.full(title);
 	} // setTitle(String title)
 	
 	private void setContent(String content)
@@ -87,7 +88,7 @@ public class PostCreator {
 			this.goodParameters = false;
 		}
 		else
-			this.content = htmlSafe(content);
+			this.content = TextFormatter.full(content);
 	} // setContent()
 	
 	private void setAnswers(int answers)
@@ -106,38 +107,6 @@ public class PostCreator {
 	{
 		return answers;
 	} // getAnswers()
-	
-	private String htmlSafe(String unsafeText)
-	{
-		String safeText = unsafeText.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replace("?", "&#63;");
-		// Enable links with ~
-		boolean insideTilde = false;
-		String safeLinkedText = "";
-		String withinTilde = "";
-		for(int i = 0; i < safeText.length(); i++)
-		{
-			if(safeText.charAt(i) == '~' && insideTilde == false && safeText.substring(i + 1, safeText.length()).contains("~"))
-			{
-				insideTilde = true;
-				safeLinkedText += "<a href=\"";
-			}
-			else if(safeText.charAt(i) == '~' && insideTilde == true)
-			{
-				insideTilde = false;
-				safeLinkedText += withinTilde + "\" target=\"_blank\">" + withinTilde + "</a>";
-				withinTilde = "";
-			}
-			else if(insideTilde)
-			{
-				withinTilde += safeText.charAt(i);
-			}
-			else
-			{
-				safeLinkedText += safeText.charAt(i);
-			}
-		}
-		return safeLinkedText;
-	} // htmlSafe()
 	
 	public boolean execute(HttpServletResponse response, String g_recaptcha_response) // <-- Not up to naming conventions, but looks Google's naming
 	{
