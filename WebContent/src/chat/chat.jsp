@@ -61,7 +61,7 @@ html, body {
   </div>
   <no-script>
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/small.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   </no-script>
 </body>
