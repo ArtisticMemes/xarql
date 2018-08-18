@@ -49,14 +49,14 @@
     <url-pattern>/polr/post</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>provide replies for iframes</description>
-    <display-name>Peek</display-name>
-    <servlet-name>Peek</servlet-name>
-    <servlet-class>com.xarql.polr.Peek</servlet-class>
+    <description>provide replies for updating page without reload</description>
+    <display-name>Updt</display-name>
+    <servlet-name>Updt</servlet-name>
+    <servlet-class>com.xarql.polr.Updt</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.polr.Peek</servlet-name>
-    <url-pattern>/polr/peek</url-pattern>
+    <servlet-name>com.xarql.polr.Updt</servlet-name>
+    <url-pattern>/polr/updt</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

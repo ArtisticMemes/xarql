@@ -10,22 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Peek
+ * Servlet implementation class Updt
  */
-@WebServlet("/Peek")
-public class Peek extends HttpServlet {
+@WebServlet("/Updt")
+public class Updt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	private HttpServletRequest currentRequest = null;
 	private HttpServletResponse currentResponse = null;
 	
 	public static final String DEFAULT_SORT = "subbump";
 	public static final String DEFAULT_FLOW = "desc";
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Peek() {
+    public Updt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,51 +39,35 @@ public class Peek extends HttpServlet {
 		
 		request.setAttribute("id", request.getParameter("id"));
 		
-			// use sort parameter
-			String sort;
-			request.setAttribute("sort", request.getParameter("sort"));
-			if(attributeEmpty("sort"))
-				sort = DEFAULT_SORT;
-			else
-				sort = request.getAttribute("sort").toString();
-			
-			// use flow parameter
-			String flow;
-			request.setAttribute("flow", request.getParameter("flow"));
-			if(attributeEmpty("flow"))
-				flow = DEFAULT_FLOW;
-			else
-				flow = request.getAttribute("flow").toString();
-			
-			if(attributeEmpty("id"))
+		if(attributeEmpty("id"))
+		{
+			//System.out.println("Parameters not found");
+			response.sendError(400);
+			return;
+		}
+		else
+		{
+			int id;
+			try
 			{
-				response.sendRedirect("http://xarql.com/polr?id=0");
+				id = Integer.parseInt(request.getAttribute("id").toString());
+			}
+			catch (NumberFormatException nfe)
+			{
+				response.sendError(400);
 				return;
 			}
+			PostRetriever ps = new PostRetriever(id);
+			ArrayList<Post> posts = ps.execute(response);
+			//System.out.println(posts.size());
+			//System.out.println("ps.execute() ran well");
+			request.setAttribute("posts", posts);
+			if(posts.size() > 0)
+				request.getRequestDispatcher("/src/polr/updt.jsp").forward(request, response);
 			else
-			{
-				int id;
-				try
-				{
-					id = Integer.parseInt(request.getAttribute("id").toString());
-				}
-				catch (NumberFormatException nfe)
-				{
-					response.sendError(400);
-					return;
-				}
-				PostRetriever ps = new PostRetriever(id, sort, flow);
-				ArrayList<Post> posts = ps.execute(response);
-				//System.out.println(posts.size());
-				request.setAttribute("posts", posts);
-				if(posts.size() > 1)
-					request.getRequestDispatcher("/src/polr/peek.jsp").forward(request, response);
-				else if(posts.size() > 0)
-					request.getRequestDispatcher("/src/polr/peek-none.jsp").forward(request, response);
-				else
-					response.sendError(404);
-				return;
-			}
+				response.sendError(404);
+			return;
+		}
 	} // doGet()
 	
 	private boolean attributeEmpty(String name)
@@ -102,4 +86,4 @@ public class Peek extends HttpServlet {
 		doGet(request, response);
 	} // doPost()
 
-} // Peek
+} // Updt

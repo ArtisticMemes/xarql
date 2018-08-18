@@ -20,13 +20,12 @@
          <input id="submit" type="submit" value="Submit"/> <input type="reset" value="Clear"/>
          <div style="position:relative;">
          	<div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div> 
-         	<input id='recaptcha_check_empty' tabindex='-1', style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
+         	<input id='recaptcha_check_empty' tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
        <p><a href="http://xarql.com/help">Help</a></p>
       </div>
       </div>
     </div>
-  </div>
 </body>
 </html>
