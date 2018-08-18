@@ -3,7 +3,7 @@ $(document).ready(function () {
 		var $this = $(this);
 		$this.on("click", function () {
 			$("#status").text("trying");
-		    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + " #full", function() {
+		    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + " #full", function(response, status, xhr) {
 		    	if(status == "error") {
 		    		$("#status").text(xhr.statusText);
 		    	}
