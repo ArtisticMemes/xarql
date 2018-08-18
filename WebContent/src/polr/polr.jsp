@@ -62,9 +62,9 @@ html, body {
       <div class="card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
        <form action="/polr/post" method="POST">
-         <input type="text" name="title" placeholder="Title" maxlength="64" style="width:100%;">
+         <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;">
          <br/>
-         <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
+         <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
          <br/>
          Replying To : <input type="number" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
          <input id="submit" type="submit" value="Post"/> <input type="reset" value="Clear"/>
@@ -95,6 +95,7 @@ html, body {
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
   </no-script>
 </body>
 </html>

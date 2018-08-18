@@ -13,6 +13,7 @@ public class TextFormatter {
 		output = addFormat(output, "code", 'c');
 		output = addFormat(output, "italic", 'i');
 		output = addFormat(output, "underline", 'u');
+		output = addFormat(output, "warn", 'w');
 		return output;
 	} // full()
 	
@@ -24,7 +25,7 @@ public class TextFormatter {
 	    boolean withinFormat = false;
 	    for(int i = 0; i < input.length(); i++)
 	    {
-	      if(input.length() > i + 1 && input.charAt(i) == '`' && input.charAt(i + 1) == trigger)
+	      if(input.length() > i + 2 && input.charAt(i) == '`' && input.charAt(i + 1) == trigger && input.charAt(i + 2) == '`')
 	      {
 	        output += "<br/>";
 	        i += 2;

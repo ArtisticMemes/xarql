@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
+<link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+<title>docs | xarql.com</title>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="column">
+      <div class="card">
+        <h4>Clickable Links</h4>
+        <p>Links can be made clickable by surrounding a URL with tildes (~).</p>
+        <p>Include all parts of the URL, or you will produce a broken link. The parts of a URL are the protocol, domain name, path, and parameters.</p>
+        <p>Example : <span class="code">~http://xarql.com/polr?id=0~</span></p>
+        <p>HTML Produced : <a href="http://xarql.com/polr?id=0" target="_blank">http://xarql.com/polr?id=0</a></p>
+      </div>
+      <div class="card">
+        <h4>Text Modification</h4>
+        <p>Every modification requires you to surround the text that will be changed with markers.</p>
+        <p>Markers are formed with the symbol for a type of text modification surrounded with backticks (`).</p>
+        <p>Symbols</p>
+        <ul>
+          <li>Bold : <span class="code">b</span></li>
+          <li>Italics : <span class="code">i</span></li>
+          <li>Code : <span class="code">c</span></li>
+          <li>Underlined : <span class="code">u</span></li>
+          <li>Warning : <span class="code">w</span></li>
+        </ul>
+        <p>Example : <span class="code">`b`Important Text`b`</span></p>
+        <p>HTML Produced : <span class="bold">Important Text</span></p>
+      </div>
+      <div class="card">
+        <h4>Newlines</h4>
+        <p>Newlines allow you to separate text vertically across multiple lines.</p>
+        <p>Example : <span class="code">`n`</span></p>
+        <p>HTML Produced : <br/></p>
+      </div>
+      <div class="card">
+        <h4>.txt</h4>
+        <p><a href="http://xarql.com/docs/xarql/formatting.txt">View</a> <a href="http://xarql.com/docs/xarql/formatting.txt" download="formatting">Download</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

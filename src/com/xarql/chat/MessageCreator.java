@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DBManager;
+import com.xarql.main.TextFormatter;
 
 public class MessageCreator {
 	private boolean goodParameters;
@@ -27,7 +28,7 @@ public class MessageCreator {
 	private void setMessage(String message)
 	{
 		if(message.length() > 0)
-			this.message = message;
+			this.message = TextFormatter.full(message);
 		else
 			goodParameters = false;
 	} // setMessage()
