@@ -18,6 +18,18 @@ body {
   justify-content: center;
 }
 
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
 h1 {
   font-size: 6rem;
   font-weight: 100;

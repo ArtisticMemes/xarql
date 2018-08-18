@@ -111,6 +111,6 @@ public class TextFormatter {
 	  // Strip potentially dangerous characters
 	  private static String clean(String input)
 	  {
-		  return input.replace("&", "&#38;").replace("\"", "&#34;").replace("'", "&#39;").replace("<", "&#60;").replace("=", "&#61;").replace(">", "&#62;").replace("?", "&#63;");
+		  return input.replace("<", "&#60;").replace(">", "&#62;");
 	  } // clean()
 } // TextFormatter
