@@ -34,6 +34,22 @@ public class PathReader extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 		String[] pathParts = pathInfo.split("/");
 		
+		// use sort parameter
+		String sort;
+		request.setAttribute("sort", request.getParameter("sort"));
+		if(request.getAttribute("sort") == null)
+			sort = DEFAULT_SORT;
+		else
+			sort = request.getAttribute("sort").toString();
+								
+		// use flow parameter
+		String flow;
+		request.setAttribute("flow", request.getParameter("flow"));
+		if(request.getAttribute("flow") == null)
+			flow = DEFAULT_FLOW;
+		else
+			flow = request.getAttribute("flow").toString();
+		
 		/*System.out.println(pathParts.length);
 		for(int i = 0; i < pathParts.length; i++)
 			System.out.println(pathParts[i]);*/
@@ -45,26 +61,15 @@ public class PathReader extends HttpServlet {
 		}
 		else if(pathParts.length == 2)
 		{
-			// use sort parameter
-			String sort;
-			request.setAttribute("sort", request.getParameter("sort"));
-			if(request.getAttribute("sort") == null)
-				sort = DEFAULT_SORT;
-			else
-				sort = request.getAttribute("sort").toString();
-						
-			// use flow parameter
-			String flow;
-			request.setAttribute("flow", request.getParameter("flow"));
-			if(request.getAttribute("flow") == null)
-				flow = DEFAULT_FLOW;
-			else
-				flow = request.getAttribute("flow").toString();
+			
 						
 				int id;
 				try
 				{
-					id = Integer.parseInt(pathParts[1]);
+					if(pathParts[1].contains("&"))
+						id = Integer.parseInt(pathParts[1].substring(0, pathParts[1].indexOf('&')));
+					else
+						id = Integer.parseInt(pathParts[1]);
 				}
 				catch (NumberFormatException nfe)
 				{

@@ -69,9 +69,52 @@ public class Polr extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// Placeholder for a homepage
-		response.sendRedirect("http://xarql.com/polr/0");
-		return;
+		//System.out.println("incoming request for /polr");
+		currentRequest = request;
+		currentResponse = response;
+		
+		request.setAttribute("id", request.getParameter("id"));
+		
+			// use sort parameter
+			String sort;
+			request.setAttribute("sort", request.getParameter("sort"));
+			if(attributeEmpty("sort"))
+				sort = DEFAULT_SORT;
+			else
+				sort = request.getAttribute("sort").toString();
+			
+			// use flow parameter
+			String flow;
+			request.setAttribute("flow", request.getParameter("flow"));
+			if(attributeEmpty("flow"))
+				flow = DEFAULT_FLOW;
+			else
+				flow = request.getAttribute("flow").toString();
+			
+			if(attributeEmpty("id"))
+			{
+				response.sendRedirect("http://xarql.com/polr/0");
+				return;
+			}
+			else
+			{
+				int id;
+				try
+				{
+					id = Integer.parseInt(request.getAttribute("id").toString());
+				}
+				catch (NumberFormatException nfe)
+				{
+					response.sendError(400);
+					return;
+				}
+				if(sort != DEFAULT_SORT || flow != DEFAULT_FLOW)
+					response.sendRedirect("http://xarql.com/polr/" + id + "&sort=" + sort + "&flow=" + flow);
+				else
+					response.sendRedirect("http://xarql.com/polr/" + id);
+				return;
+			}
+			
 	} // doGet()
 	
 	private boolean attributeEmpty(String name)
