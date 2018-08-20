@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>http://xarql.com/</loc>
+  <lastmod>2018-08-20T18:51:31+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://xarql.com/polr/0</loc>
+  <lastmod>2018-08-20T18:51:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://xarql.com/chat</loc>
+  <lastmod>2018-08-20T18:51:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/xarql.html</loc>
+  <lastmod>2018-08-18T01:45:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/polr.html</loc>
+  <lastmod>2018-08-16T17:08:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/formatting.html</loc>
+  <lastmod>2018-08-18T01:50:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/chat.html</loc>
+  <lastmod>2018-08-18T01:34:06+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/external-links.html</loc>
+  <lastmod>2018-08-14T20:38:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/mission-statement.html</loc>
+  <lastmod>2018-08-18T01:34:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/disclaimer.txt</loc>
+  <lastmod>2018-08-18T01:36:48+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/license.txt</loc>
+  <lastmod>2018-08-16T17:19:16+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://xarql.com/docs/xarql/formatting.txt</loc>
+  <lastmod>2018-08-18T01:50:26+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
