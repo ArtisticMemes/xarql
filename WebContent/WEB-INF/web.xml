@@ -40,6 +40,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>PathReader</display-name>
+    <servlet-name>PathReader</servlet-name>
+    <servlet-class>com.xarql.polr.PathReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.polr.PathReader</servlet-name>
+    <url-pattern>/polr/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>PostProcessor</display-name>
     <servlet-name>PostProcessor</servlet-name>
     <servlet-class>com.xarql.polr.PostProcessor</servlet-class>

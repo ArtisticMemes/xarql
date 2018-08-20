@@ -69,55 +69,9 @@ public class Polr extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		//System.out.println("incoming request for /polr");
-		currentRequest = request;
-		currentResponse = response;
-		
-		request.setAttribute("id", request.getParameter("id"));
-		
-			// use sort parameter
-			String sort;
-			request.setAttribute("sort", request.getParameter("sort"));
-			if(attributeEmpty("sort"))
-				sort = DEFAULT_SORT;
-			else
-				sort = request.getAttribute("sort").toString();
-			
-			// use flow parameter
-			String flow;
-			request.setAttribute("flow", request.getParameter("flow"));
-			if(attributeEmpty("flow"))
-				flow = DEFAULT_FLOW;
-			else
-				flow = request.getAttribute("flow").toString();
-			
-			if(attributeEmpty("id"))
-			{
-				response.sendRedirect("http://xarql.com/polr?id=0");
-				return;
-			}
-			else
-			{
-				int id;
-				try
-				{
-					id = Integer.parseInt(request.getAttribute("id").toString());
-				}
-				catch (NumberFormatException nfe)
-				{
-					response.sendError(400);
-					return;
-				}
-				PostRetriever ps = new PostRetriever(id, sort, flow);
-				ArrayList<Post> posts = ps.execute(response);
-				request.setAttribute("posts", posts);
-				if(posts.size() > 0)
-					request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
-				else
-					response.sendError(404);
-				return;
-			}
-			
+		// Placeholder for a homepage
+		response.sendRedirect("http://xarql.com/polr/0");
+		return;
 	} // doGet()
 	
 	private boolean attributeEmpty(String name)
