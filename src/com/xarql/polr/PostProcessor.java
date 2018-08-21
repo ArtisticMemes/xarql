@@ -65,8 +65,7 @@ public class PostProcessor extends HttpServlet {
 		
 		PostCreator pc = new PostCreator(title, content, answers);
 		if(pc.execute(response, g_recaptcha_response))
-			response.sendRedirect("http://xarql.com/polr?id=" + pc.getAnswers());
-		
+			response.sendRedirect("http://xarql.com/polr/" + pc.getAnswers() + "?refresh=true"); // Update with AJAX
 		
 		return;
 	} // doPost()
