@@ -76,6 +76,7 @@ public class PathReader extends HttpServlet {
 					response.sendError(400);
 					return;
 				}
+				request.setAttribute("id", id);
 				PostRetriever ps = new PostRetriever(id, sort, flow);
 				ArrayList<Post> posts = ps.execute(response);
 				request.setAttribute("posts", posts);
