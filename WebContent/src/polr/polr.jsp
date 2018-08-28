@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html id="html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>${posts.get(0).getTitleText()} ~ xarql</title>
@@ -75,7 +75,7 @@ html, body {
          	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
-       <p><a href="http://xarql.com/help">Help</a><span id="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span id="status"></span></span></p>
+       <p><a href="http://xarql.com/help">Help</a><span id="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span id="status"></span> <span style="float:right"><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></span></span></p>
       </div>
       <script>
       function recaptchaCallback()

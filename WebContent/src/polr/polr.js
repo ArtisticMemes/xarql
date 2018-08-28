@@ -70,6 +70,14 @@ $(document).ready(function () {
     		$form.trigger('reset');
     	});
     });
+  $("#text-up").on("click", function() {
+	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
+	  $('html').css('font-size', (computedFontSize + 1) + 'px');
+  });
+  $("#text-dn").on("click", function() {
+	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // Get font size of <html></html>
+	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
+  });
   function crunch() {
     $("#styles").replaceWith('<link id="styles" rel="stylesheet" type="text/css" href="http://xarql.com/src/common/crunch.css">');
   }
@@ -85,7 +93,7 @@ $(document).ready(function () {
     uncrunch();
     $("#uncrunch-button").hide();
     $("#crunch-button").show();
-  })
+  });
   $("#uncrunch-button").hide();
   $("#ajax-bar").show();
 });
