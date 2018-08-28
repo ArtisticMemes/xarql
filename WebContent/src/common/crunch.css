@@ -3,11 +3,11 @@
 html,
 body {
   font-family: 'Roboto';
+  font-display: swap;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   visibility: visible;
-
   min-height: 100vh;
   margin: 0;
   padding: 0;

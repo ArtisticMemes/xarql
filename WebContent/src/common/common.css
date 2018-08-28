@@ -2,12 +2,12 @@
 #wrapper,
 html,
 body {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
+  font-display: swap;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   visibility: visible;
-
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -23,7 +23,7 @@ body {
 }
 
 .code {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .italic {
