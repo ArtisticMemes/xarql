@@ -39,7 +39,10 @@ public class PostProcessor extends HttpServlet {
 		request.setAttribute("title", request.getParameter("title"));
 		request.setAttribute("content", request.getParameter("content"));
 		request.setAttribute("answers", request.getParameter("answers"));
-		request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
+		if(request.getParameter("g-recaptcha-response") != null)
+			request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
+		else
+			request.setAttribute("g-recaptcha-response", request.getParameter("captcha"));
 		
 		// null pointer exception prevention
 		if(request.getAttribute("title") == null || request.getAttribute("content") == null || request.getAttribute("answers") == null || request.getAttribute("g-recaptcha-response") == null)

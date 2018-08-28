@@ -63,7 +63,7 @@ html, body {
 		</div>
       <div class="card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
-       <form action="/polr/post" method="POST">
+       <form action="http://xarql.com/polr/post" method="POST" id="post-form">
          <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;">
          <br/>
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
@@ -75,7 +75,7 @@ html, body {
          	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
-       <p><a href="http://xarql.com/help">Help</a><span id="ajax-bar"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span id="status"></span></span></p>
+       <p><a href="http://xarql.com/help">Help</a><span id="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span id="status"></span></span></p>
       </div>
       <script>
       function recaptchaCallback()

@@ -38,6 +38,38 @@ $(document).ready(function () {
 			update();
 		});
 	});
+  // Attach a submit handler to the form
+  $( "#post-form" ).submit(function( event ) {
+	  $("#status").text("trying");
+    // Stop form from submitting normally
+    event.preventDefault();
+   
+    // Get some values from elements on the page:
+    var $form = $( this ),
+      title = $form.find("input[name='title']").val(),
+      content = $form.find("textarea[name='content']").val(),
+      answers = $form.find("input[name='answers']").val(),
+      url = $form.attr("action");
+   
+    // Send the data using AJAX POST
+    $.ajax({
+    	type: "POST",
+    	url: url,
+    	data : {
+    		title: title,
+    		content: content,
+    		answers: answers,
+    		captcha: grecaptcha.getResponse()
+    	}
+    	}).done(function(){
+    		$("#status").text("success");
+    	}).fail(function(){
+    		$("#status").text("error");
+    	}).always(function(){
+    		update();
+    		$form.trigger('reset');
+    	});
+    });
   function crunch() {
     $("#styles").replaceWith('<link id="styles" rel="stylesheet" type="text/css" href="http://xarql.com/src/common/crunch.css">');
   }
