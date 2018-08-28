@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>${posts.get(0).getTitle()} ~ xarql</title>
+  <title>${posts.get(0).getTitleText()} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src='https://www.google.com/recaptcha/api.js' async="" defer=""></script>
   <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
@@ -71,11 +71,11 @@ html, body {
          Replying To : <input type="number" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
          <input id="submit" type="submit" value="Post"/> <input type="reset" value="Clear"/>
          <div style="position:relative;">
-         	<div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div> 
+         	<div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
          	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
-       <p><a href="http://xarql.com/help">Help</a> <a class="update-button">Update</a> <span id="status"></span></p>
+       <p><a href="http://xarql.com/help">Help</a><span id="ajax-bar"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span id="status"></span></span></p>
       </div>
       <script>
       function recaptchaCallback()
@@ -96,11 +96,37 @@ html, body {
 	  </div>
     </div>
   </div>
-  <no-script>
+  <noscript id="styles">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+  </noscript>
+  <noscript id="fonts">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
-  </no-script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source-Code-Pro">
+  </noscript>
+  <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        replacement.id = "styles";
+        document.body.appendChild(replacement);
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var loadDeferredFonts = function() {
+    	  var addFontsNode = document.getElementById("fonts");
+    	  var replacement = document.createElement("div");
+    	  replacement.innerHTML = addFontsNode.textContent;
+    	  replacement.id = "fonts";
+    	  document.body.appendChild(replacement);
+    	  addFontsNode.parentElement.removeChild(addFontsNode);
+      };
+      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+      if (raf) raf(function() { window.setTimeout(loadDeferredFonts, 0); });
+      else window.addEventListener('load', loadDeferredFonts);
+  </script>
 </body>
 </html>

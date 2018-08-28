@@ -150,10 +150,20 @@ public class Post {
 		return title;
 	} // getTitle()
 	
+	public String getTitleText()
+	{
+		return title.replaceAll("<[^>]*>", "");
+	} // getTitleText()
+	
 	public String getContent()
 	{
 		return content;
 	} // getContent()
+	
+	public String getContentText()
+	{
+		return content.replaceAll("<[^>]*>", "");
+	} // getContentText()
 	
 	public int getAnswers()
 	{

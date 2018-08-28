@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 #wrapper,
 html,
 body {
@@ -41,73 +41,73 @@ body {
 h1 {
   font-size: 6rem;
   font-weight: 100;
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: −0 0.09375rem;
 }
 
 h2 {
   font-size: 3.75rem;
   font-weight: 200;
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: −0 0.03125rem;
 }
 
 h3 {
   font-size: 3rem;
   font-weight: 300;
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: 0rem;
 }
 
 h4 {
   font-size: 2.125rem;
   font-weight: 400;
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: .015625rem;
 }
 
 h5 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: 0rem;
 }
 
 h6 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin: .5em 0 .5em 0;
+  margin: .1em 0 .1em 0;
   letter-spacing: .009375rem;
 }
 
 .subtitle {
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: .009375rem;
 }
 
 .subtitle2 {
   font-size: .875rem;
   font-weight: 600;
-  margin: .5em 0 .5em 0;
+  margin: .1em 0 .1em 0;
   letter-spacing: .00625rem;
 }
 
 p {
-  margin: .5em 0 .5em 0;
+  margin: .1em 0 .1em 0;
   letter-spacing: .03125rem;
-  word-break: normal;
+  word-break: break-word;
   word-wrap: break-word;
 }
 
 .small {
   font-size: .875rem;
-  margin: .5em 0 .5em 0;
+  margin: 0.1em 0 0.1em 0;
   letter-spacing: .015625rem;
 }
 
 .overline {
   font-size: .625rem;
-  margin: .5em 0 .5em 0;
+  margin: .1em 0 .1em 0;
   letter-spacing: .09375rem;
   text-transform: uppercase;
 }
@@ -156,7 +156,7 @@ html {
 #column {
   display: block;
   max-width: 100%;
-  padding: 4vh .5rem 0 .5rem;
+  padding: 0 0 0 0;
 }
 
 .card {
@@ -166,11 +166,10 @@ html {
   max-width: 100%;
   text-align: left;
   color: #000;
-  border: 0;
-  border-radius: .4rem;
+  border: 0.1rem;
+  border-style: solid;
+  border-color: #000;
   background-color: #fff;
-  -webkit-box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .spacer::after {
@@ -267,10 +266,15 @@ form textarea {
 
 .injected-iframe {
   display: block;
-  padding: 0 .5rem 0 .5rem;
+  padding: 0 0.1rem 0 0.1rem;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 40rem;
   max-width: 100vw;
   border: 0;
+}
+
+.card, .concrete, .addition, .deletion {
+	margin: 0 0 0 0;
+	padding: 0.1rem 0.1rem 0.1rem 0.1rem;
 }
