@@ -4,7 +4,7 @@
     <div id="main-post">
       <c:forEach begin="0" end="0" var="post" items="${posts}">
         <div class="card">
-          <p class="overline">ID : <span id="main-post-id">${post.getId()}</span> ~ Replied To : <a href="http://xarql.com/polr?id=${post.getAnswers()}">${post.getAnswers()}</a> ~ Date : ${post.getDate().toString().substring(0,19)}</p>
+          <p class="overline">ID : <span id="main-post-id">${post.getId()}</span> ~ <a href="http://xarql.com/polr?id=${post.getAnswers()}">Replied To : ${post.getAnswers()}</a> ~ Date : ${post.getDate().toString().substring(0,19)}</p>
           <p class="overline">Replies : <span id="reply-count">${post.getResponses()}</span> ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
           <h6>${post.getTitle()}</h6>
           <p>${post.getContent()}</p>
