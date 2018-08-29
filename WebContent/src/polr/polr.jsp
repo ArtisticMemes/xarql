@@ -7,8 +7,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>${posts.get(0).getTitleText()} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src='https://www.google.com/recaptcha/api.js' async="" defer=""></script>
+  <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
   <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
+  <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/polr.js" defer=""></script>
   <style>
 @charset "UTF-8";
@@ -96,9 +97,10 @@ html, body {
 	  </div>
     </div>
   </div>
-  <noscript id="styles">
+  <noscript id="default-styles">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+    <script>defaultStylesInjected = true;</script>
   </noscript>
   <noscript id="fonts">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -106,7 +108,7 @@ html, body {
   </noscript>
   <script>
       var loadDeferredStyles = function() {
-        var addStylesNode = document.getElementById("styles");
+        var addStylesNode = document.getElementById("default-styles");
         var replacement = document.createElement("div");
         replacement.innerHTML = addStylesNode.textContent;
         replacement.id = "styles";
@@ -127,6 +129,7 @@ html, body {
       else window.addEventListener('load', loadDeferredStyles);
       if (raf) raf(function() { window.setTimeout(loadDeferredFonts, 0); });
       else window.addEventListener('load', loadDeferredFonts);
+      var defaultStylesInjected = false;
   </script>
 </body>
 </html>

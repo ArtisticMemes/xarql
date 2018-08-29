@@ -70,30 +70,46 @@ $(document).ready(function () {
     		$form.trigger('reset');
     	});
     });
+  $('html').css('font-size', Cookies.get('font-size'));
   $("#text-up").on("click", function() {
 	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
 	  $('html').css('font-size', (computedFontSize + 1) + 'px');
+	  Cookies.set('font-size', (computedFontSize + 1) + 'px', { path: '' });
   });
   $("#text-dn").on("click", function() {
 	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // Get font size of <html></html>
 	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
+	  Cookies.set('font-size', (computedFontSize - 1) + 'px', { path: '' });
   });
   function crunch() {
     $("#styles").replaceWith('<link id="styles" rel="stylesheet" type="text/css" href="http://xarql.com/src/common/crunch.css">');
+    Cookies.set('crunch', 'true', { path: ''});
+    $("#crunch-button").hide();
+    $("#uncrunch-button").show();
   }
   function uncrunch() {
-    $("#styles").replaceWith('<div id="styles"><link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css"><link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css"></div>')
+    $("#styles").replaceWith('<div id="styles"><link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css"><link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css"></div>');
+    Cookies.set('crunch', 'false', { path: ''});
+    $("#uncrunch-button").hide();
+    $("#crunch-button").show();
   }
   $("#crunch-button").on("click", function() {
     crunch();
-    $("#crunch-button").hide();
-    $("#uncrunch-button").show();
   });
   $("#uncrunch-button").on("click", function() {
     uncrunch();
-    $("#uncrunch-button").hide();
-    $("#crunch-button").show();
   });
   $("#uncrunch-button").hide();
   $("#ajax-bar").show();
+  function autoCrunch() {
+	  if($('#styles').length)
+		  defaultStylesInjected = true;
+	  if(defaultStylesInjected == false)
+		  window.setTimeout(autoCrunch, 100); /* wait 100 milliseconds before checking again */
+	  else {
+		  if(Cookies.get('crunch') === 'true')
+			  crunch();
+	  }
+  }
+  autoCrunch();
 });
