@@ -16,7 +16,9 @@ $(document).ready(function () {
 	
 	// Update page contents
 	function update() {
-		$("#status").text("trying");
+		$(".status").each(function() {
+			$(this).text("trying");
+		});
 	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + "&page=" + $("#page").text() + "&sort=" + $("#sort").text() + "&flow=" + $("#flow").text() + "#full", function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
