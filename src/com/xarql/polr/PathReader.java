@@ -20,7 +20,7 @@ public class PathReader extends HttpServlet {
 	public static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 	
 	public static final int MIN_PAGE = 0;
-	public static final int MAX_PAGE = 10;
+	public static final int MAX_PAGE = 9;
 	
 	public static final int POSTS_PER_PAGE = 10;
        

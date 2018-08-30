@@ -118,7 +118,7 @@ public class PostRetriever {
 	
 	private void setPostCount(int postCount)
 	{
-		if(postCount >= 0 && postCount < (FARTHEST_POST - postSkipCount))
+		if(postCount > 0 && postCount < (FARTHEST_POST - postSkipCount))
 			this.postCount = postCount;
 		else
 			this.postCount = DEFAULT_POST_COUNT;
