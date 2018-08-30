@@ -95,6 +95,11 @@ html, body {
 		  </div>
 		</c:forEach>
 	  </div>
+	    <div id="data" class="card" style="visibility:hidden;display:none;">
+		  <p id="page">${page}</p>
+		  <p id="sort">${sort}</p>
+		  <p id="flow">${flow}</p>
+	  </div>
     </div>
   </div>
   <noscript id="default-styles">

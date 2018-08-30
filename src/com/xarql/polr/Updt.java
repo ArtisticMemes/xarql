@@ -19,8 +19,8 @@ public class Updt extends HttpServlet {
 	private HttpServletRequest currentRequest = null;
 	private HttpServletResponse currentResponse = null;
 	
-	public static final String DEFAULT_SORT = "subbump";
-	public static final String DEFAULT_FLOW = "desc";
+	public static final String DEFAULT_SORT = "use-default";
+	public static final String DEFAULT_FLOW = "use-default";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,9 +37,32 @@ public class Updt extends HttpServlet {
 		currentRequest = request;
 		currentResponse = response;
 		
-		request.setAttribute("id", request.getParameter("id"));
+		// Get sort and flow, not needed, will go to defaults
+		// use sort parameter
+		String sort;
+		request.setAttribute("sort", request.getParameter("sort"));
+		if(request.getAttribute("sort") == null)
+			sort = DEFAULT_SORT;
+		else
+			sort = request.getAttribute("sort").toString();
+		request.setAttribute("sort", sort);
+										
+		// use flow parameter
+		String flow;
+		request.setAttribute("flow", request.getParameter("flow"));
+		if(request.getAttribute("flow") == null)
+			flow = DEFAULT_FLOW;
+		else
+			flow = request.getAttribute("flow").toString();
+		request.setAttribute("flow", flow);
 		
-		if(attributeEmpty("id"))
+		
+		
+		// Get id and page numbers, these must be included in ajax request
+		request.setAttribute("id", request.getParameter("id"));
+		request.setAttribute("page", request.getParameter("page"));
+		
+		if(attributeEmpty("id") || attributeEmpty("page"))
 		{
 			//System.out.println("Parameters not found");
 			response.sendError(400);
@@ -48,16 +71,22 @@ public class Updt extends HttpServlet {
 		else
 		{
 			int id;
+			int page;
 			try
 			{
 				id = Integer.parseInt(request.getAttribute("id").toString());
+				page = Integer.parseInt(request.getAttribute("page").toString());
 			}
 			catch (NumberFormatException nfe)
 			{
 				response.sendError(400);
 				return;
 			}
-			PostRetriever ps = new PostRetriever(id);
+			if(page < PathReader.MIN_PAGE || page > PathReader.MAX_PAGE)
+				page = PathReader.MIN_PAGE; // default
+			int postSkipCount = page * PathReader.POSTS_PER_PAGE;
+			int postCount = PathReader.POSTS_PER_PAGE;
+			PostRetriever ps = new PostRetriever(id, sort, flow, postSkipCount, postCount);
 			ArrayList<Post> posts = ps.execute(response);
 			//System.out.println(posts.size());
 			//System.out.println("ps.execute() ran well");

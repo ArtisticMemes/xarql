@@ -43,17 +43,30 @@ public class PostRetriever {
 	private int id;
 	private String sort;
 	private String flow;
+	private int postSkipCount;
+	private int postCount;
 	
 	// Defaults and Limits
 	private static final int DEFAULT_ID = 0;
-	private static final String DEFAULT_SORT = "bump";
+	private static final String DEFAULT_SORT = "subbump";
 	private static final String DEFAULT_FLOW = "desc";
+	private static final int DEFAULT_POST_SKIP_COUNT = 0;
+	private static final int DEFAULT_POST_COUNT = 10;
 	
-	public PostRetriever(int id, String sort, String flow)
+	private static final int FARTHEST_POST = 100;
+	
+	public PostRetriever(int id, String sort, String flow, int postSkipCount, int postCount)
 	{
 		setID(id);
 		setSort(sort);
 		setFlow(flow);
+		setPostSkipCount(postSkipCount);
+		setPostCount(postCount);
+	} // PostRetriever(int id, String sort, String flow, int postSkipCount, int postCount)
+	
+	public PostRetriever(int id, String sort, String flow)
+	{
+		this(id, sort, flow, DEFAULT_POST_SKIP_COUNT, DEFAULT_POST_COUNT);
 	} // PostRetriever(int id, String sort, String flow)
 	
 	public PostRetriever(int id)
@@ -95,13 +108,29 @@ public class PostRetriever {
 		}
 	} // setSort(String sort)
 	
+	private void setPostSkipCount(int postSkipCount)
+	{
+		if(postSkipCount >= 0 && postSkipCount < FARTHEST_POST)
+			this.postSkipCount = postSkipCount;
+		else
+			this.postSkipCount = DEFAULT_POST_SKIP_COUNT;
+	} // setPostSkipCount(int postSkipCount)
+	
+	private void setPostCount(int postCount)
+	{
+		if(postCount >= 0 && postCount < (FARTHEST_POST - postSkipCount))
+			this.postCount = postCount;
+		else
+			this.postCount = DEFAULT_POST_COUNT;
+	} // setPostCount(int postCount)
+	
 	// Return a specific set of posts
 	public ArrayList<Post> execute(HttpServletResponse response)
 	{
 		// TODO: Write sql querying
 		ArrayList<Post> posts = new ArrayList<Post>();
 		posts.addAll(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
-		posts.addAll(sqlQuery("SELECT * FROM polr WHERE answers=? ORDER BY " + sort + " " + flow, id, response));
+		posts.addAll(sqlQuery("SELECT * FROM polr WHERE answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount, id, response));
 		return posts;
 	} // ArrayList execute(HttpServletResponse response)
 	
@@ -133,7 +162,8 @@ public class PostRetriever {
 	        	int rsResponses = rs.getInt("responses");
 	        	int rsSubresponses = rs.getInt("subresponses");
 	        	Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses);
-	        	posts.add(currentPost);
+	        	if(rsRemoved == 0 || rsId == id) // Don't show a removed post at all unless it's the main post
+	        		posts.add(currentPost);
 	        }
 	        
 	    }

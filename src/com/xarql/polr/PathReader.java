@@ -16,8 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 public class PathReader extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static final String DEFAULT_SORT = "subbump";
-	public static final String DEFAULT_FLOW = "desc";
+	public static final String DEFAULT_SORT = "use-default";
+	public static final String DEFAULT_FLOW = "use-default";
+	
+	public static final int MIN_PAGE = 0;
+	public static final int MAX_PAGE = 10;
+	
+	public static final int POSTS_PER_PAGE = 10;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,6 +46,7 @@ public class PathReader extends HttpServlet {
 			sort = DEFAULT_SORT;
 		else
 			sort = request.getAttribute("sort").toString();
+		request.setAttribute("sort", sort);
 								
 		// use flow parameter
 		String flow;
@@ -49,6 +55,31 @@ public class PathReader extends HttpServlet {
 			flow = DEFAULT_FLOW;
 		else
 			flow = request.getAttribute("flow").toString();
+		request.setAttribute("flow", flow);
+		
+		// get page
+		int page;
+		request.setAttribute("page", request.getParameter("page"));
+		if(request.getAttribute("page") == null)
+			page = MIN_PAGE; // default
+		else
+		{
+			try
+			{
+				page = Integer.parseInt(request.getAttribute("page").toString());
+			}
+			catch(NumberFormatException nfe)
+			{
+				page = MIN_PAGE; // default
+			}
+		}
+		if(page < MIN_PAGE || page > MAX_PAGE)
+			page = MIN_PAGE; // default
+		request.setAttribute("page", page);
+		
+		int postSkipCount = page * POSTS_PER_PAGE;
+		int postCount = POSTS_PER_PAGE;
+			
 		
 		/*System.out.println(pathParts.length);
 		for(int i = 0; i < pathParts.length; i++)
@@ -77,7 +108,7 @@ public class PathReader extends HttpServlet {
 					return;
 				}
 				request.setAttribute("id", id);
-				PostRetriever ps = new PostRetriever(id, sort, flow);
+				PostRetriever ps = new PostRetriever(id, sort, flow, postSkipCount, postCount);
 				ArrayList<Post> posts = ps.execute(response);
 				request.setAttribute("posts", posts);
 				if(posts.size() > 0)
