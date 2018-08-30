@@ -19,8 +19,8 @@ public class Updt extends HttpServlet {
 	private HttpServletRequest currentRequest = null;
 	private HttpServletResponse currentResponse = null;
 	
-	public static final String DEFAULT_SORT = "use-default";
-	public static final String DEFAULT_FLOW = "use-default";
+	public static final String DEFAULT_SORT = "default";
+	public static final String DEFAULT_FLOW = "default";
        
     /**
      * @see HttpServlet#HttpServlet()

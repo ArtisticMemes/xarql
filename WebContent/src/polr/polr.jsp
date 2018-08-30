@@ -95,6 +95,30 @@ html, body {
 		  </div>
 		</c:forEach>
 	  </div>
+	  <div class="card">
+	    <h4>Navigation</h4>
+	    <table>
+	      <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
+	      <tr><td><select name="page" id="page-dropdown">
+	              <c:forEach begin="0" end="10" var="i">
+                  <option value="${i}" <c:if test="${i == (page + 1)}">selected="selected"</c:if> >${i}</option>
+                  </c:forEach>
+                </select></td>
+              <td><select name="sort" id="sort-dropdown">
+                  <option value="date" <c:if test="${sort.equals('date')}">selected="selected"</c:if> >Date</option>
+                  <option value="responses" <c:if test="${sort.equals('responses')}">selected="selected"</c:if> >Responses</option>
+                  <option value="subresponses" <c:if test="${sort.equals('subresponses')}">selected="selected"</c:if> >SubResponses</option>
+                  <option value="bump" <c:if test="${sort.equals('bump')}">selected="selected"</c:if> >Bump</option>
+                  <option value="subbump" <c:if test="${sort.equals('subbump')}">selected="selected"</c:if> >SubBump</option>
+                </select></td>
+              <td><select name="flow" id="flow-dropdown">
+                  <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
+                  <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
+                </select></td>
+              <td><a href="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" id="nav-link">Go</a></td>
+          </tr>
+	    </table>
+	  </div>
 	    <div id="data" class="card" style="visibility:hidden;display:none;">
 		  <p id="page">${page}</p>
 		  <p id="sort">${sort}</p>

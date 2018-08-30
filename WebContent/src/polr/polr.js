@@ -13,6 +13,8 @@ $(document).ready(function () {
 	        }
 	    }
 	}
+	
+	// Update page contents
 	function update() {
 		$("#status").text("trying");
 	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + "&page=" + $("#page").text() + "&sort=" + $("#sort").text() + "&flow=" + $("#flow").text() + "#full", function(response, status, xhr) {
@@ -38,7 +40,8 @@ $(document).ready(function () {
 			update();
 		});
 	});
-  // Attach a submit handler to the form
+  
+  // AJAX posting
   $( "#post-form" ).submit(function( event ) {
 	  $("#status").text("trying");
     // Stop form from submitting normally
@@ -70,6 +73,30 @@ $(document).ready(function () {
     		$form.trigger('reset');
     	});
     });
+  
+  // Enable Navigation link
+  var defaultPage = parseInt($('#page').text(), 10) + 1;
+  $('#page-dropdown').val(defaultPage);
+  $('#sort-dropdown').val($('#sort').text());
+  $('#flow-dropdown').val($('#flow').text());
+  function navlink() {
+	  var page = $('#page-dropdown').val();
+      var sort = $('#sort-dropdown').val();
+      var flow = $('#flow-dropdown').val();
+      $('#nav-link').html('<a href="http://xarql.com/polr/' + $("#main-post-id").text() + '?page=' + page + '&sort=' + sort + '&flow=' + flow + '" id="nav-link">Go</a>');
+  }
+  $('#page-dropdown').change(function () {
+	  navlink();
+  });
+  $('#sort-dropdown').change(function () {
+	  navlink();
+  });
+  $('#flow-dropdown').change(function () {
+	  navlink();
+  });
+  navlink();
+  
+  // Change font size
   $('html').css('font-size', Cookies.get('font-size'));
   $("#text-up").on("click", function() {
 	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
@@ -81,6 +108,8 @@ $(document).ready(function () {
 	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
 	  Cookies.set('font-size', (computedFontSize - 1) + 'px', { path: '' });
   });
+  
+  // Use crunch styles
   function crunch() {
     $("#styles").replaceWith('<link id="styles" rel="stylesheet" type="text/css" href="http://xarql.com/src/common/crunch.css">');
     Cookies.set('crunch', 'true', { path: ''});
