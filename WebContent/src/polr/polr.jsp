@@ -76,7 +76,7 @@ html, body {
          	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
          </div>
        </form>
-       <p><a href="http://xarql.com/help">Help</a><span id="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span id="status"></span> <span style="float:right"><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></span></span></p>
+       <p><a href="http://xarql.com/help">Help</a><span class="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span class="status"></span> <span style="float:right"><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></span></span></p>
       </div>
       <script>
       function recaptchaCallback()
@@ -118,6 +118,7 @@ html, body {
               <td><a href="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" id="nav-link">Go</a></td>
           </tr>
 	    </table>
+	    <p><span class="ajax-bar" style="display:none;"> <a class="update-button">Update</a> <span class="status"></span></span>
 	  </div>
 	    <div id="data" class="card" style="visibility:hidden;display:none;">
 		  <p id="page">${page}</p>

@@ -19,12 +19,16 @@ $(document).ready(function () {
 		$("#status").text("trying");
 	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + "&page=" + $("#page").text() + "&sort=" + $("#sort").text() + "&flow=" + $("#flow").text() + "#full", function(response, status, xhr) {
 	    	if(status == "error") {
-	    		$("#status").text(xhr.statusText);
+	    		$(".status").each(function() {
+	    			$(this).text(xhr.statusText);
+	    		});
 	    	}
 	    	else {
 				$("#main-post").replaceWith(updt.find("#main-post-container").html());
 				$("#replies").replaceWith(updt.find("#replies-container").html());
-				$("#status").text(xhr.statusText);
+				$(".status").each(function() {
+					$(this).text(xhr.statusText);
+				});
 	    	}
 	    });
 	}
@@ -69,7 +73,7 @@ $(document).ready(function () {
     	}).fail(function(){
     		$("#status").text("error");
     	}).always(function(){
-    		update();
+    		window.setTimeout(update, 300); // wait 300 milliseconds
     		$form.trigger('reset');
     	});
     });
@@ -129,7 +133,9 @@ $(document).ready(function () {
     uncrunch();
   });
   $("#uncrunch-button").hide();
-  $("#ajax-bar").show();
+  $(".ajax-bar").each(function() {
+	  $(this).show();
+  });
   function autoCrunch() {
 	  if($('#styles').length)
 		  defaultStylesInjected = true;
