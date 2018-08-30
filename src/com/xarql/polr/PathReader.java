@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class PathReader extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static final String DEFAULT_SORT = "default";
-	public static final String DEFAULT_FLOW = "default";
+	public static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
+	public static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 	
 	public static final int MIN_PAGE = 0;
 	public static final int MAX_PAGE = 10;

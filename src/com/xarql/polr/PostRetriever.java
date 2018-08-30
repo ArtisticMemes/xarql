@@ -48,8 +48,8 @@ public class PostRetriever {
 	
 	// Defaults and Limits
 	private static final int DEFAULT_ID = 0;
-	private static final String DEFAULT_SORT = "subbump";
-	private static final String DEFAULT_FLOW = "desc";
+	public static final String DEFAULT_SORT = "subbump";
+	public static final String DEFAULT_FLOW = "desc";
 	private static final int DEFAULT_POST_SKIP_COUNT = 0;
 	private static final int DEFAULT_POST_COUNT = 10;
 	
