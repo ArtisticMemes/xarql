@@ -32,7 +32,6 @@ public class ChatUpdt extends HttpServlet {
 		try 
 		{
 			last = Long.parseLong(request.getParameter("last"));
-			last *= 1000;
 		}
 		catch(NumberFormatException nfe)
 		{

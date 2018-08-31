@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	// Update Messages
-	var lastUpdate = Math.round(new Date().getTime() / 1000); // UNIX time in seconds
+	var lastUpdate = new Date().getTime(); // UNIX time in milliseconds
 	Cookies.set('last-update', lastUpdate, { path: '' });
 	function update() {
 		$(".status").each(function() {
@@ -19,7 +19,7 @@ $(document).ready(function () {
 				});
 	    	}
 	    });
-	    lastUpdate = Math.round(new Date().getTime() / 1000);
+	    lastUpdate = new Date().getTime();
 	    Cookies.set('last-update', lastUpdate, { path: '' });
 	}
 	$(".update-button").each(function () {
@@ -58,7 +58,7 @@ $(document).ready(function () {
 	});
 	function updateLoop() {
 		update();
-		window.setTimeout(updateLoop, 3000); // 2.2 seconds
+		window.setTimeout(updateLoop, 4000); // 4 seconds
 	}
 	updateLoop();
 });
