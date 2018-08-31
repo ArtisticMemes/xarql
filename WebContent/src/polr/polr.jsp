@@ -101,7 +101,7 @@ html, body {
 	      <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	      <tr><td><select name="page" id="page-dropdown">
 	              <c:forEach begin="0" end="10" var="i">
-                  <option value="${i}" <c:if test="${i == (page + 1)}">selected="selected"</c:if> >${i}</option>
+                  <option value="${i}" <c:if test="${i == (page)}">selected="selected"</c:if> >${i}</option>
                   </c:forEach>
                 </select></td>
               <td><select name="sort" id="sort-dropdown">
@@ -115,7 +115,7 @@ html, body {
                   <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
                   <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
                 </select></td>
-              <td><a href="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" id="nav-link">Go</a></td>
+              <td><a href="http://xarql.com/polr/${id}?page=${page}&sort=${sort}&flow=${flow}" id="nav-link">Go</a></td>
           </tr>
 	    </table>
 	    <p><span class="ajax-bar" style="display:none;"> <a class="update-button">Update</a> <span class="status"></span></span>

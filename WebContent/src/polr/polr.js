@@ -81,7 +81,7 @@ $(document).ready(function () {
     });
   
   // Enable Navigation link
-  var defaultPage = parseInt($('#page').text(), 10) + 1;
+  var defaultPage = parseInt($('#page').text(), 10);
   $('#page-dropdown').val(defaultPage);
   $('#sort-dropdown').val($('#sort').text());
   $('#flow-dropdown').val($('#flow').text());
