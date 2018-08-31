@@ -10,32 +10,32 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.main.DBManager;
-import com.xarql.polr.Post;
 
 public class MessageRetriever {
 	
 	private HttpServletResponse response;
-	private Timestamp lastUpdate;
+	private int lastID;
 	
-	public MessageRetriever(HttpServletResponse response, Timestamp lastUpdate)
+	private static final int DEFAULT_LAST_ID = 0;
+	
+	public MessageRetriever(HttpServletResponse response, int lastID)
 	{
 		this.response = response;
-		setLastUpdate(lastUpdate);
-	} // MessageRetriever(HttpServletResponse response, Timestamp lastUpdate)
+		setLastID(lastID);
+	} // MessageRetriever(HttpServletResponse response, int lastID)
 	
 	public MessageRetriever(HttpServletResponse response)
 	{
-		this(response, null);
+		this(response, 0);
 	} // MessageRetriever(HttpServletResponse response)
 	
-	private void setLastUpdate(Timestamp lastUpdate)
+	private void setLastID(int lastID)
 	{
-		Timestamp yesterday = new Timestamp(System.currentTimeMillis() - 86400000);
-		if(lastUpdate == null || lastUpdate.compareTo(yesterday) < 0)
-			this.lastUpdate = yesterday;
+		if(lastID >= 0)
+			this.lastID = lastID;
 		else
-			this.lastUpdate = lastUpdate;
-	} // setLastUpdate()
+			this.lastID = DEFAULT_LAST_ID;
+	} // setLastID()
 	
 	public ArrayList<Message> execute()
 	{
@@ -43,16 +43,18 @@ public class MessageRetriever {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    ArrayList<Message> messages = new ArrayList<Message>();
-	    String query = "SELECT * FROM chat WHERE date>? AND date<?";
+	    String query = "SELECT * FROM chat WHERE date>? AND date<? AND id>?";
 	    Timestamp now = new Timestamp(System.currentTimeMillis());
+	    Timestamp yesterday = new Timestamp(System.currentTimeMillis() - 86400000);
 
 	    try 
 	    {
 	        connection = DBManager.getConnection();
 	        statement = connection.prepareStatement(query);
 	        
-	        statement.setTimestamp(1, lastUpdate);
+	        statement.setTimestamp(1, yesterday);
 	        statement.setTimestamp(2, now);
+	        statement.setInt(3,  lastID);
 	        
 	        rs = statement.executeQuery();
 	        while (rs.next())

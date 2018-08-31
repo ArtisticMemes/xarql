@@ -1,12 +1,11 @@
 $(document).ready(function () {
 	// Update Messages
-	var lastUpdate = new Date().getTime(); // UNIX time in milliseconds
-	Cookies.set('last-update', lastUpdate, { path: '' });
+	var lastID = $("#last-id").text();
 	function update() {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
-	    var updt = $("<div></div>").load("http://xarql.com/chat/updt?last=" + Cookies.get('last-update'), function(response, status, xhr) {
+	    var updt = $("<div></div>").load("http://xarql.com/chat/updt?last=" + $("#last-id").text(), function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
@@ -14,13 +13,14 @@ $(document).ready(function () {
 	    	}
 	    	else {
 				$("#messages").append(updt.find("#messages").html());
+				if(updt.find("#last-id").text() == 0) {} else
+					$("#last-id").text(updt.find("#last-id").text());
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
 	    	}
+	    	lastID = $("#last-id").text();
 	    });
-	    lastUpdate = new Date().getTime();
-	    Cookies.set('last-update', lastUpdate, { path: '' });
 	}
 	$(".update-button").each(function () {
 		$(this).on("click", function () {

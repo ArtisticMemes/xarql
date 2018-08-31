@@ -7,4 +7,5 @@
       </div>
 	</c:forEach>
   </div>
+  <p id="last-id">${lastID}</p>
 </div>    

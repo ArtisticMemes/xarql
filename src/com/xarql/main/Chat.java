@@ -32,7 +32,12 @@ public class Chat extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MessageRetriever mr = new MessageRetriever(response);
-		request.setAttribute("messages", mr.execute());
+		ArrayList<Message> messages = mr.execute();
+		request.setAttribute("messages", messages);
+		if(messages.size() > 0)
+			request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
+		else
+			request.setAttribute("lastID", 0);
 		request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
 	} // doGet()
 

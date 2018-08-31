@@ -63,6 +63,9 @@ html, body {
        </form>
        <p><a href="http://xarql.com/help">Help</a> <span class="ajax-bar" style="display:none;"><a class="update-button">Update</a> <span class="status"></span></span></p>
       </div>
+      <div id="data" class="card" style="display:none;">
+        <p id="last-id">${lastID}</p>
+      </div>
     </div>
   </div>
   <noscript id="default-styles">
