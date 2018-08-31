@@ -13,14 +13,37 @@ import com.xarql.main.DBManager;
 import com.xarql.polr.Post;
 
 public class MessageRetriever {
-	public ArrayList<Message> execute(HttpServletResponse response)
+	
+	private HttpServletResponse response;
+	private Timestamp lastUpdate;
+	
+	public MessageRetriever(HttpServletResponse response, Timestamp lastUpdate)
+	{
+		this.response = response;
+		setLastUpdate(lastUpdate);
+	} // MessageRetriever(HttpServletResponse response, Timestamp lastUpdate)
+	
+	public MessageRetriever(HttpServletResponse response)
+	{
+		this(response, null);
+	} // MessageRetriever(HttpServletResponse response)
+	
+	private void setLastUpdate(Timestamp lastUpdate)
+	{
+		Timestamp yesterday = new Timestamp(System.currentTimeMillis() - 86400000);
+		if(lastUpdate == null || lastUpdate.compareTo(yesterday) < 0)
+			this.lastUpdate = yesterday;
+		else
+			this.lastUpdate = lastUpdate;
+	} // setLastUpdate()
+	
+	public ArrayList<Message> execute()
 	{
 		Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    ArrayList<Message> messages = new ArrayList<Message>();
 	    String query = "SELECT * FROM chat WHERE date>? AND date<?";
-	    Timestamp yesterday = new Timestamp(System.currentTimeMillis() - 86400000);
 	    Timestamp now = new Timestamp(System.currentTimeMillis());
 
 	    try 
@@ -28,7 +51,7 @@ public class MessageRetriever {
 	        connection = DBManager.getConnection();
 	        statement = connection.prepareStatement(query);
 	        
-	        statement.setTimestamp(1, yesterday);
+	        statement.setTimestamp(1, lastUpdate);
 	        statement.setTimestamp(2, now);
 	        
 	        rs = statement.executeQuery();

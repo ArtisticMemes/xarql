@@ -90,6 +90,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>ChatUpdt</display-name>
+    <servlet-name>ChatUpdt</servlet-name>
+    <servlet-class>com.xarql.chat.ChatUpdt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.chat.ChatUpdt</servlet-name>
+    <url-pattern>/chat/updt</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Conf</display-name>
     <servlet-name>Conf</servlet-name>
     <servlet-class>com.xarql.main.Conf</servlet-class>

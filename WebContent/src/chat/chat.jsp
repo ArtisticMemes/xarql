@@ -6,6 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat</title>
+  <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
+  <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
+  <script src="/xarql/src/chat/chat.js" defer=""></script>
   <style>
 #wrapper, html, body {
   font-family: 'Roboto';
@@ -46,25 +49,55 @@ html, body {
   <div id="wrapper">
     <div id="column">
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-      <c:forEach begin="0" var="message" items="${messages}">
-        <div class="card" style="background-color:#${message.backgroundColor()}">
-          <p style="color:#${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
-		</div>
-	  </c:forEach>
+      <div id="messages">
+        <c:forEach begin="0" var="message" items="${messages}">
+          <div class="card" style="background-color:#${message.backgroundColor()}">
+            <p style="color:#${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
+		  </div>
+	    </c:forEach>
+	  </div>
 	  <div class="card" style="x-overflow:hidden;">
-       <form action="/chat/send" method="POST">
+       <form action="http://xarql.com/chat/send" method="POST" id="message-form">
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
-         <input id="submit" type="submit" value="Send" /> <input type="reset" value="Clear" />
+         <input id="submit" type="submit" value="Send"/> <input type="reset" value="Clear"/>
        </form>
-       <p><a href="http://xarql.com/help">Help</a></p>
+       <p><a href="http://xarql.com/help">Help</a> <span class="ajax-bar" style="display:none;"><a class="update-button">Update</a> <span class="status"></span></span></p>
       </div>
     </div>
   </div>
-  <no-script>
+  <noscript id="default-styles">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/small.css">
+    <script>defaultStylesInjected = true;</script>
+  </noscript>
+  <noscript id="fonts">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
-  </no-script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  </noscript>
+  <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("default-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        replacement.id = "styles";
+        document.body.appendChild(replacement);
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var loadDeferredFonts = function() {
+    	  var addFontsNode = document.getElementById("fonts");
+    	  var replacement = document.createElement("div");
+    	  replacement.innerHTML = addFontsNode.textContent;
+    	  replacement.id = "fonts";
+    	  document.body.appendChild(replacement);
+    	  addFontsNode.parentElement.removeChild(addFontsNode);
+      };
+      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+      if (raf) raf(function() { window.setTimeout(loadDeferredFonts, 0); });
+      else window.addEventListener('load', loadDeferredFonts);
+      var defaultStylesInjected = false;
+  </script>
 </body>
 </html>

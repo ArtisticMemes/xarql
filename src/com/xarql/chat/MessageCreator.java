@@ -18,6 +18,8 @@ public class MessageCreator {
 	private String message;
 	private String session;
 	
+	private static final int MAX_MESSAGE_LENGTH = 256;
+	
 	public MessageCreator(String message, String session)
 	{
 		goodParameters = true;
@@ -27,7 +29,7 @@ public class MessageCreator {
 	
 	private void setMessage(String message)
 	{
-		if(message.length() > 0)
+		if(message.length() > 0 && message.length() < MAX_MESSAGE_LENGTH)
 			this.message = TextFormatter.full(message);
 		else
 			goodParameters = false;

@@ -1,7 +1,7 @@
-package com.xarql.main;
+package com.xarql.chat;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.chat.Message;
-import com.xarql.chat.MessageRetriever;
-
 /**
- * Servlet implementation class Chat
+ * Servlet implementation class ChatUpdt
  */
-@WebServlet("/chat")
-public class Chat extends HttpServlet {
+@WebServlet("/ChatUpdt")
+public class ChatUpdt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Chat() {
+    public ChatUpdt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +28,21 @@ public class Chat extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MessageRetriever mr = new MessageRetriever(response);
+		long last;
+		try 
+		{
+			last = Long.parseLong(request.getParameter("last"));
+			last *= 1000;
+		}
+		catch(NumberFormatException nfe)
+		{
+			response.sendError(400);
+			return;
+		}
+		Timestamp lastUpdate = new Timestamp(last);
+		MessageRetriever mr = new MessageRetriever(response, lastUpdate);
 		request.setAttribute("messages", mr.execute());
-		request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
+		request.getRequestDispatcher("/src/chat/updt.jsp").forward(request, response);
 	} // doGet()
 
 	/**
@@ -44,4 +53,4 @@ public class Chat extends HttpServlet {
 		doGet(request, response);
 	} // doPost()
 
-}
+} // ChatUpdt

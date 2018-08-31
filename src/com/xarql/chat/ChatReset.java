@@ -19,7 +19,7 @@ public class ChatReset {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    String[] query = {
-	    		"CREATE TABLE chat(id int PRIMARY KEY AUTO_INCREMENT, message text(256) NOT NULL, date TIMESTAMP, session text(32) NOT NULL)",
+	    		"CREATE TABLE chat(id int PRIMARY KEY AUTO_INCREMENT, message text NOT NULL, date TIMESTAMP, session text(32) NOT NULL)",
 	    		"DELETE FROM chat",
 	    		"ALTER TABLE chat AUTO_INCREMENT=0"
 	    		};
