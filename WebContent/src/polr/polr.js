@@ -49,9 +49,12 @@ $(document).ready(function () {
   
   // AJAX posting
   $( "#post-form" ).submit(function( event ) {
-	  $("#status").text("trying");
-    // Stop form from submitting normally
-    event.preventDefault();
+	// Stop form from submitting normally
+	    event.preventDefault();
+	$(".status").each(function() {
+		$(this).text("trying");
+	});
+    $form.trigger('reset');
    
     // Get some values from elements on the page:
     var $form = $( this ),
@@ -71,12 +74,15 @@ $(document).ready(function () {
     		captcha: grecaptcha.getResponse()
     	}
     	}).done(function(){
-    		$("#status").text("success");
+    		$(".status").each(function() {
+    			$(this).text("success");
+    		});
     	}).fail(function(){
-    		$("#status").text("error");
+    		$(".status").each(function() {
+    			$(this).text("success");
+    		});
     	}).always(function(){
     		window.setTimeout(update, 300); // wait 300 milliseconds
-    		$form.trigger('reset');
     	});
     });
   
