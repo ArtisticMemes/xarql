@@ -12,22 +12,56 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DBManager;
 
-public class PostFinder {
+public class FlatPostRetriever {
 	private HttpServletResponse response;
-	private String query;
+	private String sort;
+	private String flow;
+	private int page;
 	
-	// Defaults & Limits
+	private static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
+	private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 	private static final int POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
 	
-	public PostFinder(HttpServletResponse response, String query) {
+	public FlatPostRetriever(HttpServletResponse response, String sort, String flow, int page) {
 		this.response = response;
-		setQuery(query);
-	} // PostFinder(response, query)
+		setSort(sort);
+		setFlow(flow);
+		setPage(page);
+	} // FlatPostRetriever()
 	
-	private void setQuery(String query)
+	private void setSort(String sort)
 	{
-		this.query = "%" + query + "%";
-	} // setQuery()
+		if(sort == null)
+			this.sort = DEFAULT_SORT;
+		else
+		{
+			if(sort.equals("date") || sort.equals("responses") || sort.equals("subresponses") || sort.equals("bump") || sort.equals("subbump"))
+				this.sort = sort;
+			else
+				this.sort = DEFAULT_SORT;
+		}
+	} // setSort(String sort)
+	
+	private void setFlow(String flow)
+	{
+		if(flow == null)
+			this.flow = DEFAULT_FLOW;
+		else
+		{
+			if(flow.equals("asc") || flow.equals("desc"))
+				this.flow = flow;
+			else
+				this.flow = DEFAULT_FLOW;
+		}
+	} // setSort(String sort)
+	
+	private void setPage(int page)
+	{
+		if(page >= PathReader.MIN_PAGE && page <= PathReader.MIN_PAGE)
+			this.page = page;
+		else
+			this.page = 0;
+	} // setPage()
 	
 	public ArrayList<Post> execute()
 	{
@@ -35,16 +69,15 @@ public class PostFinder {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    ArrayList<Post> posts = new ArrayList<Post>();
-	    String sql = "SELECT * FROM polr WHERE title LIKE ? OR content LIKE ? LIMIT 0, ?";
+	    String sql = "SELECT * FROM polr ORDER BY " + sort + " " + flow + " LIMIT ?, ?";
 
 	    try 
 	    {
 	        connection = DBManager.getConnection();
 	        statement = connection.prepareStatement(sql);
 	        
-	        statement.setString(1, query);
-	        statement.setString(2, query);
-	        statement.setInt(3, POST_COUNT);
+	        statement.setInt(1, page * POST_COUNT);
+	        statement.setInt(2, POST_COUNT);
 	        
 	        rs = statement.executeQuery();
 	        while (rs.next())
@@ -89,5 +122,5 @@ public class PostFinder {
 	    
 		return posts;
 	} // execute()
-	
-} // PostFinder
+
+} // FlatPostRetriever

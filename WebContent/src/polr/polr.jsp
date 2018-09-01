@@ -101,7 +101,7 @@ html, body {
 	      <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	      <tr><td><select name="page" id="page-dropdown">
 	              <c:forEach begin="0" end="9" var="i">
-                  <option value="${i}" <c:if test="${i == (page)}">selected="selected"</c:if> >${i}</option>
+                  <option value="${i}" <c:if test="${i == page}">selected="selected"</c:if> >${i}</option>
                   </c:forEach>
                 </select></td>
               <td><select name="sort" id="sort-dropdown">

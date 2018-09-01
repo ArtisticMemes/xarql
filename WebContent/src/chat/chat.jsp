@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat</title>
   <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
-  <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/chat/chat.js" defer=""></script>
   <style>
 #wrapper, html, body {

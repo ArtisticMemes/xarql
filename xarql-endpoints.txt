@@ -1,0 +1,13 @@
+/polr      --> View text posts with replies
+/polr/post --> Post on /polr
+/polr/updt --> Grabs only the posts for a page
+/polr/find --> Search /polr
+/polr/flat --> Browse /polr while ignoring the reply hierarchy
+
+/chat      --> View live messages
+/chat/send --> Send a message
+/chat/updt --> Get new messages
+
+/help      --> Redirects to xarql's self hosted documentation
+
+/          --> Welcome page

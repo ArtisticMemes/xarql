@@ -79,6 +79,16 @@
     <url-pattern>/polr/find</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>browsing</description>
+    <display-name>PolrFlat</display-name>
+    <servlet-name>PolrFlat</servlet-name>
+    <servlet-class>com.xarql.polr.PolrFlat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.polr.PolrFlat</servlet-name>
+    <url-pattern>/polr/flat</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Chat</display-name>
     <servlet-name>Chat</servlet-name>
