@@ -54,7 +54,6 @@ $(document).ready(function () {
 	$(".status").each(function() {
 		$(this).text("trying");
 	});
-    $form.trigger('reset');
    
     // Get some values from elements on the page:
     var $form = $( this ),
@@ -62,6 +61,7 @@ $(document).ready(function () {
       content = $form.find("textarea[name='content']").val(),
       answers = $form.find("input[name='answers']").val(),
       url = $form.attr("action");
+    $form.trigger('reset');
    
     // Send the data using AJAX POST
     $.ajax({
