@@ -31,13 +31,15 @@ $(document).ready(function () {
 	$( "#message-form" ).submit(function(event) {
 		// Stop form from submitting normally
 		event.preventDefault();
-		$("#status").text("trying");
+		$(".status").each(function() {
+			$(this).text("trying");
+		});
 	   
 	    // Get some values from elements on the page:
 	    var $form = $(this),
 	      message = $form.find("input[name='message']").val(),
 	      url = $form.attr("action");
-	   
+	    $form.trigger('reset');
 	    // Send the data using AJAX POST
 	    $.ajax({
 	    	type: "POST",
@@ -46,19 +48,24 @@ $(document).ready(function () {
 	    		message: message
 	    	}
 	    	}).done(function(){
-	    		$("#status").text("success");
+	    		$(".status").each(function() {
+					$(this).text("success");
+				});
+	    		update();
 	    	}).fail(function(){
-	    		$("#status").text("error");
-	    	}).always(function(){
-	    		$form.trigger('reset');
+	    		$(".status").each(function() {
+					$(this).text("error");
+				});
 	    	});
 	});
 	$(".ajax-bar").each(function() {
 		$(this).show();
 	});
 	function updateLoop() {
-		update();
-		window.setTimeout(updateLoop, 4000); // 4 seconds
+		if($(".status").text() === "trying") {} else {
+			update();
+			window.setTimeout(updateLoop, 4000); // 4 seconds
+		}
 	}
 	updateLoop();
 });

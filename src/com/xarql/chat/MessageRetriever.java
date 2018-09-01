@@ -45,14 +45,14 @@ public class MessageRetriever {
 	    ArrayList<Message> messages = new ArrayList<Message>();
 	    String query = "SELECT * FROM chat WHERE date>? AND date<? AND id>?";
 	    Timestamp now = new Timestamp(System.currentTimeMillis());
-	    Timestamp yesterday = new Timestamp(System.currentTimeMillis() - 86400000);
+	    Timestamp sixHoursAgo = new Timestamp(System.currentTimeMillis() - 21600000);
 
-	    try 
+	    try
 	    {
 	        connection = DBManager.getConnection();
 	        statement = connection.prepareStatement(query);
 	        
-	        statement.setTimestamp(1, yesterday);
+	        statement.setTimestamp(1, sixHoursAgo);
 	        statement.setTimestamp(2, now);
 	        statement.setInt(3,  lastID);
 	        
