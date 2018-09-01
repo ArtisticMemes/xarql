@@ -231,7 +231,7 @@ public class PostCreator {
 		    try 
 		    {
 		        connection = DBManager.getConnection();
-		        statement = connection.prepareStatement("SELECT * FROM polr where id=?");
+		        statement = connection.prepareStatement("SELECT * FROM polr WHERE id=? AND removed=0");
 		        
 		        statement.setInt(1, answers);
 		        
