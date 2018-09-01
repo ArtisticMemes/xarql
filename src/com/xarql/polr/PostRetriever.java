@@ -162,8 +162,7 @@ public class PostRetriever {
 	        	int rsResponses = rs.getInt("responses");
 	        	int rsSubresponses = rs.getInt("subresponses");
 	        	Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses);
-	        	if(rsRemoved == 0 || rsId == id) // Don't show a removed post at all unless it's the main post
-	        		posts.add(currentPost);
+	        	posts.add(currentPost);
 	        }
 	        
 	    }
