@@ -61,7 +61,6 @@ $(document).ready(function () {
       content = $form.find("textarea[name='content']").val(),
       answers = $form.find("input[name='answers']").val(),
       url = $form.attr("action");
-    $form.trigger('reset');
    
     // Send the data using AJAX POST
     $.ajax({
@@ -82,6 +81,7 @@ $(document).ready(function () {
     			$(this).text("success");
     		});
     	}).always(function(){
+    		$form.trigger('reset');
     		window.setTimeout(update, 300); // wait 300 milliseconds
     	});
     });
