@@ -38,6 +38,10 @@ body {
   color: #ff0000;
 }
 
+.strike {
+  text-decoration: line-through;
+}
+
 h1 {
   font-size: 6rem;
   font-weight: 100;

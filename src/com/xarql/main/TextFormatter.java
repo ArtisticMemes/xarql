@@ -13,7 +13,7 @@ public class TextFormatter {
 		output = addFormat(output, "code", 'c');
 		output = addFormat(output, "italic", 'i');
 		output = addFormat(output, "underline", 'u');
-		output = addFormat(output, "warn", 'w');
+		output = addFormat(output, "strike", 's'); // strikethrough
 		return output;
 	} // full()
 	

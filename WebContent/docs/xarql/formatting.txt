@@ -6,7 +6,7 @@ HTML Produced : <a href="http://xarql.com/polr?id=0" target="_blank">http://xarq
   Text Modification :
 Every modification requires you to surround the text that will be changed with markers.
 Markers are formed with the symbol for a type of text modification surrounded with backticks (`).
-Symbols --> Bold : b, Italics : i, Code : c, Underlined : u, Warning : w
+Symbols --> Bold : b, Italics : i, Code : c, Underlined : u, Strikethrough : s
 Example : `b`Important Text`b`
 HTML Produced : <span class="bold">Important Text</span>
   Newlines :
