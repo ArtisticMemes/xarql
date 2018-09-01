@@ -55,13 +55,15 @@ $(document).ready(function () {
 		$(this).text("trying");
 	});
    
-    // Get some values from elements on the page:
+    // Get values from form, reset form
     var $form = $( this ),
       title = $form.find("input[name='title']").val(),
       content = $form.find("textarea[name='content']").val(),
       answers = $form.find("input[name='answers']").val(),
-      url = $form.attr("action");
-   
+      url = $form.attr("action"),
+      recaptchaData = grecaptcha.getResponse();
+    $form.trigger('reset');
+    
     // Send the data using AJAX POST
     $.ajax({
     	type: "POST",
@@ -70,7 +72,7 @@ $(document).ready(function () {
     		title: title,
     		content: content,
     		answers: answers,
-    		captcha: grecaptcha.getResponse()
+    		captcha: recaptchaData
     	}
     	}).done(function(){
     		$(".status").each(function() {
@@ -81,7 +83,6 @@ $(document).ready(function () {
     			$(this).text("success");
     		});
     	}).always(function(){
-    		$form.trigger('reset');
     		window.setTimeout(update, 300); // wait 300 milliseconds
     	});
     });

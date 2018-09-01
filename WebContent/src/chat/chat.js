@@ -51,7 +51,6 @@ $(document).ready(function () {
 	    		$(".status").each(function() {
 					$(this).text("success");
 				});
-	    		update();
 	    	}).fail(function(){
 	    		$(".status").each(function() {
 					$(this).text("error");
@@ -62,10 +61,8 @@ $(document).ready(function () {
 		$(this).show();
 	});
 	function updateLoop() {
-		if($(".status").text() === "trying") {} else {
-			update();
-			window.setTimeout(updateLoop, 4000); // 4 seconds
-		}
+		update();
+		window.setTimeout(updateLoop, 4000); // 4 seconds
 	}
 	updateLoop();
 });
