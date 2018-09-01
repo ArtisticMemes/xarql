@@ -69,6 +69,16 @@
     <url-pattern>/polr/updt</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>searches</description>
+    <display-name>PolrFind</display-name>
+    <servlet-name>PolrFind</servlet-name>
+    <servlet-class>com.xarql.polr.PolrFind</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.polr.PolrFind</servlet-name>
+    <url-pattern>/polr/find</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Chat</display-name>
     <servlet-name>Chat</servlet-name>

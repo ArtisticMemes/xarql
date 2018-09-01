@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.main.Conf;
 import com.xarql.main.DBManager;
 
 public class PolrReset {
@@ -19,7 +18,7 @@ public class PolrReset {
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    String[] query = {
-	    		"CREATE TABLE polr(id int PRIMARY KEY AUTO_INCREMENT, title text, content text NOT NULL, answers int NOT NULL DEFAULT 0, date timestamp NOT NULL DEFAULT NOW(), bump timestamp NOT NULL DEFAULT NOW(), subbump timestamp NOT NULL DEFAULT NOW(), responses int NOT NULL DEFAULT 0, subresponses int NOT NULL DEFAULT 0)",
+	    		"CREATE TABLE polr(id int PRIMARY KEY AUTO_INCREMENT, title text, content text NOT NULL, answers int NOT NULL DEFAULT 0, date timestamp NOT NULL DEFAULT NOW(), bump timestamp NOT NULL DEFAULT NOW(), subbump timestamp NOT NULL DEFAULT NOW(), responses int NOT NULL DEFAULT 0, subresponses int NOT NULL DEFAULT 0) CHARACTER SET utf8 COLLATE utf8_general_ci",
 	    		"DELETE FROM polr",
 	    		"ALTER TABLE polr AUTO_INCREMENT=0",
 	    		"INSERT INTO polr (title, content, answers) VALUES ('ROOT POST', 'ROOT POST', -1)",

@@ -201,4 +201,4 @@ public class PostRetriever {
 	} // getAll()
 	*/
 	
-}
+} // PostRetriever

@@ -228,4 +228,9 @@ public class Post {
 		return subresponses;
 	} // getSubresponses()
 	
+	public String toString()
+	{
+		return getTitleText() + " ~ " + getContentText();
+	} // toString()
+	
 } // Post
