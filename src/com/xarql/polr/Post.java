@@ -47,6 +47,8 @@ public class Post {
 	
 	// Constants
 	public static final String DELETION_MESSAGE = "[POST REMOVED]";
+	public static final String TITLE_DELETION_MESSAGE = DELETION_MESSAGE;
+	public static final String CONTENT_DELETION_MESSAGE = "[CONTENT NOT AVAILABLE]<br>[REPLYING NOT PERMITTED]";
 	
 	// Constructor
 	public Post(int id, String title, String content, int answers, int removed, Timestamp date,  Timestamp bump, Timestamp subbump, int responses, int subresponses)
@@ -101,8 +103,8 @@ public class Post {
 		else
 		{
 			this.removed = true;
-			setTitle(DELETION_MESSAGE);
-			setContent(DELETION_MESSAGE);
+			setTitle(TITLE_DELETION_MESSAGE);
+			setContent(CONTENT_DELETION_MESSAGE);
 		}
 	} // setRemoved(int removed)
 	
