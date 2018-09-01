@@ -61,7 +61,9 @@ $(document).ready(function () {
 		$(this).show();
 	});
 	function updateLoop() {
-		update();
+		if($(".status").text() === "trying") {} else {
+			update();
+		}
 		window.setTimeout(updateLoop, 4000); // 4 seconds
 	}
 	updateLoop();
