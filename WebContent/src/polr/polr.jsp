@@ -118,7 +118,7 @@ html, body {
               <td><a href="http://xarql.com/polr/${id}?page=${page}&sort=${sort}&flow=${flow}" id="nav-link">Go</a></td>
           </tr>
 	    </table>
-	    <p><span class="ajax-bar" style="display:none;"> <a class="update-button">Update</a> <span class="status"></span></span>
+	    <p><a href="http://xarql.com/polr/find">Search</a> <a href="http://xarql.com/polr/flat">Browse</a> <span class="ajax-bar" style="display:none;"> <a class="update-button">Update</a> <span class="status"></span></span>
 	  </div>
 	    <div id="data" class="card" style="visibility:hidden;display:none;">
 		  <p id="page">${page}</p>

@@ -50,7 +50,7 @@ html, body {
   <div id="wrapper">
     <div id="column">
     <div class="card">
-	    <h4>Navigation</h4>
+	    <h4>Browse</h4>
 	    <table>
 	      <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	      <tr><td><select name="page" id="page-dropdown">

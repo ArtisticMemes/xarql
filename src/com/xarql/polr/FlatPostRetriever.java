@@ -57,7 +57,7 @@ public class FlatPostRetriever {
 	
 	private void setPage(int page)
 	{
-		if(page >= PathReader.MIN_PAGE && page <= PathReader.MIN_PAGE)
+		if(page >= PathReader.MIN_PAGE && page <= PathReader.MAX_PAGE)
 			this.page = page;
 		else
 			this.page = 0;

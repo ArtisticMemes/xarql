@@ -49,7 +49,7 @@ html, body {
     <div class="card" style="x-overflow:hidden;">
       <h4>Search</h4>
       <form action="http://xarql.com/polr/find" method="GET" id="find-form">
-         <input type="text" name="q" placeholder="Phrase" maxlength="64" required="" style="max-width:50%;width:13rem;">
+         <input type="text" name="q" placeholder="Phrase" maxlength="64" required="" style="width:100%;">
          <br/>
          <input id="submit" type="submit" value="Find"/>
        </form>
