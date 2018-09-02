@@ -152,6 +152,14 @@ $(document).ready(function () {
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
+				$("html, body").animate({scrollTop: 0}, "fast");
+				$(".view-link").each(function () {
+					$(this).on("click", function () {
+						var id = $(this).attr("post-id");
+						view(id);
+						return false;
+					});
+				});
 	    	}
 	    });
 	}
