@@ -28,6 +28,7 @@ $(document).ready(function () {
 	    	else {
 				$("#main-post").replaceWith(updt.find("#main-post-container").html());
 				$("#replies").replaceWith(updt.find("#replies-container").html());
+				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -87,27 +88,35 @@ $(document).ready(function () {
     	});
     });
   
-  // Enable Navigation link
-  var defaultPage = parseInt($('#page').text(), 10);
-  $('#page-dropdown').val(defaultPage);
-  $('#sort-dropdown').val($('#sort').text());
-  $('#flow-dropdown').val($('#flow').text());
-  function navlink() {
-	  var page = $('#page-dropdown').val();
-      var sort = $('#sort-dropdown').val();
-      var flow = $('#flow-dropdown').val();
-      $('#nav-link').html('<a href="http://xarql.com/polr/' + $("#main-post-id").text() + '?page=' + page + '&sort=' + sort + '&flow=' + flow + '" id="nav-link">Go</a>');
-  }
-  $('#page-dropdown').change(function () {
-	  navlink();
-  });
-  $('#sort-dropdown').change(function () {
-	  navlink();
-  });
-  $('#flow-dropdown').change(function () {
-	  navlink();
-  });
-  navlink();
+  function nav() {
+		$(".status").each(function() {
+			$(this).text("trying");
+		});
+		var $form = $("#nav-form"),
+	      page = $("#page-dropdown").val(),
+	      sort = $("#sort-dropdown").val(),
+	      flow = $("#flow-dropdown").val();
+	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + "&page=" + page + "&sort=" + sort + "&flow=" + flow, function(response, status, xhr) {
+	    	if(status == "error") {
+	    		$(".status").each(function() {
+	    			$(this).text(xhr.statusText);
+	    		});
+	    	}
+	    	else {
+	    		$("#main-post").replaceWith(updt.find("#main-post-container").html());
+				$("#replies").replaceWith(updt.find("#replies-container").html());
+				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
+				history.pushState("xarql", "xarql", window.location.pathname + "?page=" + page + "&sort=" + sort + "&flow=" + flow);
+				$(".status").each(function() {
+					$(this).text(xhr.statusText);
+				});
+	    	}
+	    });
+	}
+	$("#nav-form").submit(function(event) {
+		event.preventDefault();
+		nav();
+	});
   
   // Change font size
   $('html').css('font-size', Cookies.get('font-size'));

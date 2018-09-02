@@ -70,7 +70,7 @@ html, body {
                     <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
                     <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
                   </select></td>
-                <td><input id="submit" type="submit" value="Find"/> <span class="status"></span></td>
+                <td><input id="submit" type="submit" value="Go"/> <span class="status"></span></td>
             </tr>
 	      </table>
 	    </form>
