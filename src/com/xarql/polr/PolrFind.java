@@ -37,10 +37,21 @@ public class PolrFind extends HttpServlet {
 			query = request.getAttribute("query").toString();
 		request.setAttribute("query", query);
 		
+		// use ajax parameter
+		boolean ajax;
+		request.setAttribute("ajax", request.getParameter("ajax"));
+		if(request.getAttribute("ajax") == null)
+			ajax = false;
+		else
+			ajax = Boolean.parseBoolean(request.getAttribute("ajax").toString());
+		
 		PostFinder pf = new PostFinder(response, query);
 		ArrayList<Post> posts = pf.execute();
 		request.setAttribute("posts", posts);
-		request.getRequestDispatcher("/src/polr/find.jsp").forward(request, response);
+		if(ajax)
+			request.getRequestDispatcher("/src/polr/find-ajax.jsp").forward(request, response);
+		else
+			request.getRequestDispatcher("/src/polr/find.jsp").forward(request, response);
 		
 	} // doGet()
 

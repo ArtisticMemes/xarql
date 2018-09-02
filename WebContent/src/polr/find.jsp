@@ -3,9 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${query} ~ xarql</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>${query} ~ xarql</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
+  <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
+  <script src="http://xarql.com/src/polr/find.js" defer=""></script>
 <style>
 @charset "UTF-8";
 #wrapper, html, body {
@@ -51,19 +54,21 @@ html, body {
       <form action="http://xarql.com/polr/find" method="GET" id="find-form">
          <input type="text" name="q" placeholder="Phrase" maxlength="64" required="" style="width:100%;">
          <br/>
-         <input id="submit" type="submit" value="Find"/>
+         <input id="submit" type="submit" value="Find"/> <span class="status"></span>
        </form>
     </div>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <c:forEach begin="0" var="post" items="${posts}">
-      <div class="card">
-        <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDate().toString().substring(0,19)}</p>
-        <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
-        <h6>${post.getTitle()}</h6>
-        <p>${post.getContent()}</p>
-        <p><a href="http://xarql.com/polr/${post.getId()}">View</a></p>
-      </div>
-    </c:forEach>
+    <div id="results">
+      <c:forEach begin="0" var="post" items="${posts}">
+        <div class="card">
+          <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDate().toString().substring(0,19)}</p>
+          <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+          <h6>${post.getTitle()}</h6>
+          <p>${post.getContent()}</p>
+          <p><a href="http://xarql.com/polr/${post.getId()}">View</a></p>
+        </div>
+      </c:forEach>
+    </div>
   </div>
 </div>
 <noscript id="default-styles">

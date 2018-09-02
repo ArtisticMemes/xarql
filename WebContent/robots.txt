@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /chat
 Disallow: /chat/
 Disallow: /polr/post
 Disallow: /polr/updt
