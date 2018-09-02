@@ -107,6 +107,9 @@ $(document).ready(function () {
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
 				history.pushState("xarql", "xarql", window.location.pathname + "?page=" + page + "&sort=" + sort + "&flow=" + flow);
+				$("#page").text(page);
+				$("#sort").text(sort);
+				$("#flow").text(flow);
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -130,6 +133,36 @@ $(document).ready(function () {
 	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
 	  Cookies.set('font-size', (computedFontSize - 1) + 'px', { path: '' });
   });
+  
+  function view(id) {
+		$(".status").each(function() {
+			$(this).text("trying");
+		});
+	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + id + "&page=0", function(response, status, xhr) {
+	    	if(status == "error") {
+	    		$(".status").each(function() {
+	    			$(this).text(xhr.statusText);
+	    		});
+	    	}
+	    	else {
+				$("#main-post").replaceWith(updt.find("#main-post-container").html());
+				$("#replies").replaceWith(updt.find("#replies-container").html());
+				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
+				history.pushState("xarql", "xarql", "http://xarql.com/polr/" + id);
+				$(".status").each(function() {
+					$(this).text(xhr.statusText);
+				});
+	    	}
+	    });
+	}
+  
+  $(".view-link").each(function () {
+		$(this).on("click", function () {
+			var id = $(this).attr("post-id");
+			view(id);
+			return false;
+		});
+	});
   
   // Use crunch styles
   function crunch() {
