@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /chat/
+Disallow: /polr/post
+Disallow: /polr/updt
+
+Sitemap: http://xarql.com/docs/xarql/sitemap.xml
