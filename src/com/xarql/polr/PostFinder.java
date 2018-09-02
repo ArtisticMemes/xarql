@@ -26,16 +26,18 @@ public class PostFinder {
 	
 	private void setQuery(String query)
 	{
-		this.query = "%" + query + "%";
+		this.query = query + "*";
 	} // setQuery()
 	
 	public ArrayList<Post> execute()
 	{
+		if(query.equals("*"))
+			return new ArrayList<Post>();
 		Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet rs = null;
 	    ArrayList<Post> posts = new ArrayList<Post>();
-	    String sql = "SELECT * FROM polr WHERE title LIKE ? OR content LIKE ? LIMIT 0, ?";
+	    String sql = "SELECT *, MATCH (title,content) AGAINST (? IN BOOLEAN MODE) as score FROM polr WHERE MATCH (title,content) AGAINST (? IN BOOLEAN MODE) > 0 ORDER BY score DESC LIMIT 0, ?";
 
 	    try 
 	    {
