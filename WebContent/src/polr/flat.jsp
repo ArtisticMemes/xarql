@@ -51,37 +51,41 @@ html, body {
     <div id="column">
     <div class="card">
 	    <h4>Browse</h4>
-	    <table>
-	      <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
-	      <tr><td><select name="page" id="page-dropdown">
-	              <c:forEach begin="0" end="9" var="i">
-                  <option value="${i}" <c:if test="${i == page}">selected="selected"</c:if> >${i}</option>
-                  </c:forEach>
-                </select></td>
-              <td><select name="sort" id="sort-dropdown">
-                  <option value="date" <c:if test="${sort.equals('date')}">selected="selected"</c:if> >Date</option>
-                  <option value="responses" <c:if test="${sort.equals('responses')}">selected="selected"</c:if> >Responses</option>
-                  <option value="subresponses" <c:if test="${sort.equals('subresponses')}">selected="selected"</c:if> >SubResponses</option>
-                  <option value="bump" <c:if test="${sort.equals('bump')}">selected="selected"</c:if> >Bump</option>
-                  <option value="subbump" <c:if test="${sort.equals('subbump')}">selected="selected"</c:if> >SubBump</option>
-                </select></td>
-              <td><select name="flow" id="flow-dropdown">
-                  <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
-                  <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
-                </select></td>
-              <td><a href="http://xarql.com/polr/flat?page=${page}&sort=${sort}&flow=${flow}" id="nav-link">Go</a></td>
-          </tr>
-	    </table>
+	    <form id="flat-form" action="http://xarql.com/polr/flat" method="GET" accept-charset="utf-8">
+	      <table>
+	        <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
+	        <tr><td><select name="page" id="page-dropdown">
+	                <c:forEach begin="0" end="9" var="i">
+                    <option value="${i}" <c:if test="${i == page}">selected="selected"</c:if> >${i}</option>
+                    </c:forEach>
+                  </select></td>
+                <td><select name="sort" id="sort-dropdown">
+                    <option value="date" <c:if test="${sort.equals('date')}">selected="selected"</c:if> >Date</option>
+                    <option value="responses" <c:if test="${sort.equals('responses')}">selected="selected"</c:if> >Responses</option>
+                    <option value="subresponses" <c:if test="${sort.equals('subresponses')}">selected="selected"</c:if> >SubResponses</option>
+                    <option value="bump" <c:if test="${sort.equals('bump')}">selected="selected"</c:if> >Bump</option>
+                    <option value="subbump" <c:if test="${sort.equals('subbump')}">selected="selected"</c:if> >SubBump</option>
+                  </select></td>
+                <td><select name="flow" id="flow-dropdown">
+                    <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
+                    <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
+                  </select></td>
+                <td><input id="submit" type="submit" value="Find"/> <span class="status"></span></td>
+            </tr>
+	      </table>
+	    </form>
 	  </div>
-      <c:forEach begin="0" var="post" items="${posts}">
-        <div class="card">
-          <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDate().toString().substring(0,19)}</p>
-          <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
-          <h6>${post.getTitle()}</h6>
-          <p>${post.getContent()}</p>
-          <p><a href="http://xarql.com/polr/${post.getId()}">View</a></p>
-        </div>
-      </c:forEach>
+	  <div id="results">
+        <c:forEach begin="0" var="post" items="${posts}">
+          <div class="card">
+            <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDate().toString().substring(0,19)}</p>
+            <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+            <h6>${post.getTitle()}</h6>
+            <p>${post.getContent()}</p>
+            <p><a href="http://xarql.com/polr/${post.getId()}">View</a></p>
+          </div>
+        </c:forEach>
+      </div>
       <div id="data" class="card" style="display:none;">
         <p id="page">${page}</p>
         <p id="sort">${sort}</p>

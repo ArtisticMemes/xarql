@@ -50,6 +50,14 @@ public class PolrFlat extends HttpServlet {
 		else
 			flow = request.getAttribute("flow").toString();
 		request.setAttribute("flow", flow);
+		
+		// use ajax parameter
+		boolean ajax;
+		request.setAttribute("ajax", request.getParameter("ajax"));
+		if(request.getAttribute("ajax") == null)
+			ajax = false;
+		else
+			ajax = Boolean.parseBoolean(request.getAttribute("ajax").toString());
 				
 		// get page
 		int page;
@@ -74,7 +82,10 @@ public class PolrFlat extends HttpServlet {
 		FlatPostRetriever fpr = new FlatPostRetriever(response, sort, flow, page);
 		ArrayList<Post> posts = fpr.execute();
 		request.setAttribute("posts", posts);
-		request.getRequestDispatcher("/src/polr/flat.jsp").forward(request, response);
+		if(ajax)
+			request.getRequestDispatcher("/src/polr/flat-ajax.jsp").forward(request, response);
+		else
+			request.getRequestDispatcher("/src/polr/flat.jsp").forward(request, response);
 	} // doGet()
 
 	/**
