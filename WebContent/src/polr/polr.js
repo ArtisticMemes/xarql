@@ -29,6 +29,7 @@ $(document).ready(function () {
 				$("#main-post").replaceWith(updt.find("#main-post-container").html());
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
+				viewLinks();
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -110,6 +111,7 @@ $(document).ready(function () {
 				$("#page").text(page);
 				$("#sort").text(sort);
 				$("#flow").text(flow);
+				viewLinks();
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -153,6 +155,7 @@ $(document).ready(function () {
 					$(this).text(xhr.statusText);
 				});
 				$("html, body").animate({scrollTop: 0}, "fast");
+				viewLinks();
 				$(".view-link").each(function () {
 					$(this).on("click", function () {
 						var id = $(this).attr("post-id");
@@ -164,13 +167,17 @@ $(document).ready(function () {
 	    });
 	}
   
-  $(".view-link").each(function () {
-		$(this).on("click", function () {
-			var id = $(this).attr("post-id");
-			view(id);
-			return false;
+  function viewLinks()
+  {
+	  $(".view-link").each(function () {
+		  $(this).on("click", function () {
+			  var id = $(this).attr("post-id");
+			  view(id);
+			  return false;
 		});
 	});
+  }
+  viewLinks();
   
   // Use crunch styles
   function crunch() {
