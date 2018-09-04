@@ -182,6 +182,11 @@ public class Post {
 		return date;
 	} // getDate()
 	
+	public String getDisplayDate()
+	{
+		return getDate().toString().substring(0, 19);
+	} // getDisplayDate()
+	
 	public Timestamp getBump()
 	{
 		return bump;

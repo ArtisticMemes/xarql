@@ -3,7 +3,7 @@
   <div id="results">
     <c:forEach begin="0" var="post" items="${posts}">
       <div class="card">
-        <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDate().toString().substring(0,19)}</p>
+        <p class="overline">ID : ${post.getId()} ~ <a href="http://xarql.com/polr/${post.getAnswers()}">Replied To : ${post.getAnswers()}</a> ~ Date : ${post.getDisplayDate()}</p>
         <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
         <h6>${post.getTitle()}</h6>
         <p>${post.getContent()}</p>
