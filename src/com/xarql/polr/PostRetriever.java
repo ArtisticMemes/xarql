@@ -129,10 +129,7 @@ public class PostRetriever {
 	{
 		int page = postSkipCount / 10;
 		if(PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page) != null)
-		{
-			System.out.println("Retrieving from cache");
 			return PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page);
-		}
 		else
 		{
 			ArrayList<Post> posts = new ArrayList<Post>();

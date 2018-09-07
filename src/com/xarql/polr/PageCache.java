@@ -18,6 +18,11 @@ public class PageCache {
 	// Limits and Defaults
 	private static final int MAX_CACHE_SIZE = 16;
 	
+	public static void clear()
+	{
+		cache.clear();
+	} // clear()
+	
 	public static PageCache getPage(String title)
 	{
 		if(cache.contains(title))

@@ -120,6 +120,7 @@ public class PostCreator {
 			if(updateStats(answers, response) == false)
 				return false;
 			
+			PageCache.clear();
 			return true; // Will execute if neither of the above 2 return statements have
 		}
 		else
