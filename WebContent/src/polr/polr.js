@@ -156,13 +156,6 @@ $(document).ready(function () {
 				});
 				$("html, body").animate({scrollTop: 0}, "fast");
 				viewLinks();
-				$(".view-link").each(function () {
-					$(this).on("click", function () {
-						var id = $(this).attr("post-id");
-						view(id);
-						return false;
-					});
-				});
 	    	}
 	    });
 	}
@@ -170,6 +163,7 @@ $(document).ready(function () {
   function viewLinks()
   {
 	  $(".view-link").each(function () {
+		  $(this).unbind("click");
 		  $(this).on("click", function () {
 			  var id = $(this).attr("post-id");
 			  view(id);

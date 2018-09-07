@@ -16,7 +16,7 @@ public class PageCache {
 	int page;
 	
 	// Limits and Defaults
-	private static final int MAX_CACHE_SIZE = 16;
+	private static final int MAX_CACHE_SIZE = 64;
 	
 	public static void clear()
 	{
