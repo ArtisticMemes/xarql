@@ -69,7 +69,7 @@ public class PageCache {
 	public void trim()
 	{
 		while(cache.size() > MAX_CACHE_SIZE)
-			cache.removeLast();
+			cache.removeFirst();
 	} // maintainSize()
 	
 	public ArrayList<Post> getPostsAsList()

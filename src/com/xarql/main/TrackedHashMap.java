@@ -85,6 +85,11 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     	remove(lastKey());
     } // removeLast()
     
+    public void removeFirst()
+    {
+    	remove(firstKey());
+    } // removeFirst()
+    
     public void clear()
     {
     	container.clear();
