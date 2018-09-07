@@ -127,10 +127,20 @@ public class PostRetriever {
 	// Return a specific set of posts
 	public ArrayList<Post> execute(HttpServletResponse response)
 	{
-		ArrayList<Post> posts = new ArrayList<Post>();
-		posts.addAll(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
-		posts.addAll(sqlQuery("SELECT * FROM polr WHERE answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount, id, response));
-		return posts;
+		int page = postSkipCount / 10;
+		if(PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page) != null)
+		{
+			System.out.println("Retrieving from cache");
+			return PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page);
+		}
+		else
+		{
+			ArrayList<Post> posts = new ArrayList<Post>();
+			posts.addAll(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
+			posts.addAll(sqlQuery("SELECT * FROM polr WHERE answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount, id, response));
+			PageCache pc = new PageCache(id, sort, flow, page, posts);
+			return posts;
+		}
 	} // ArrayList execute(HttpServletResponse response)
 	
 	private ArrayList<Post> sqlQuery(String query, int id, HttpServletResponse response)
