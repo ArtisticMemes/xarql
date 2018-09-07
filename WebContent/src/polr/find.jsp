@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>${query} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="http://xarql.com/src/common/jquery/jquery-3.3.1.min.js" defer=""></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/find.js" defer=""></script>
 <style>
