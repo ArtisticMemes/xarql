@@ -13,5 +13,18 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-api-client-1.24.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-api-client-servlet-1.24.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-http-client-1.24.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-http-client-jackson2-1.24.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-oauth-client-1.24.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-oauth-client-servlet-1.24.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-core-2.9.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jdo2-api-2.3-eb.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsr305-3.0.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/transaction-api-1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
