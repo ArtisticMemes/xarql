@@ -10,4 +10,9 @@
 
 /help      --> Redirects to xarql's self hosted documentation
 
+/auth        --> Provides Authentication options
+/auth/google --> Processes google authentication attempts
+
+/conf      --> Performs database set up
+
 /          --> Welcome page
