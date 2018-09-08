@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.main.DBManager;
+import com.xarql.util.DBManager;
 
 public class PolrReset {
 	public static boolean execute(HttpServletResponse response)

@@ -29,6 +29,26 @@
     <url-pattern>/error</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Provides Authentication Options</description>
+    <display-name>AuthMainPage</display-name>
+    <servlet-name>AuthMainPage</servlet-name>
+    <servlet-class>com.xarql.auth.AuthMainPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.auth.AuthMainPage</servlet-name>
+    <url-pattern>/auth</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Google Authentication</description>
+    <display-name>GoogleHandler</display-name>
+    <servlet-name>GoogleHandler</servlet-name>
+    <servlet-class>com.xarql.auth.GoogleHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.auth.GoogleHandler</servlet-name>
+    <url-pattern>/auth/google</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Polr</display-name>
     <servlet-name>Polr</servlet-name>

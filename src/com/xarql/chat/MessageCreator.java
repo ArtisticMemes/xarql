@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.main.DBManager;
-import com.xarql.main.TextFormatter;
+import com.xarql.util.DBManager;
+import com.xarql.util.TextFormatter;
 
 public class MessageCreator {
 	private boolean goodParameters;

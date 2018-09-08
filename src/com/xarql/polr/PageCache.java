@@ -7,7 +7,7 @@ package com.xarql.polr;
 
 import java.util.ArrayList;
 
-import com.xarql.main.TrackedHashMap;
+import com.xarql.util.TrackedHashMap;
 
 public class PageCache {
 	// Cache control

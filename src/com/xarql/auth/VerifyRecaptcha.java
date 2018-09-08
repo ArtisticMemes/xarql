@@ -3,9 +3,7 @@ MIT License
 http://g.xarql.com
 Copyright (c) 2018 Bryan Christopher Johnson
 */
-package com.xarql.main;
-
-import com.xarql.main.Secrets;
+package com.xarql.auth;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -26,6 +24,8 @@ import java.security.cert.X509Certificate;
 
 
 import org.json.JSONObject;
+
+import com.xarql.util.Secrets;
  
 public class VerifyRecaptcha {
 	private static String SECRET = Secrets.RecaptchaSecret;

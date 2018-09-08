@@ -3,7 +3,7 @@ MIT License
 http://g.xarql.com
 Copyright (c) 2018 Bryan Christopher Johnson
 */
-package com.xarql.main;
+package com.xarql.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     
     public boolean contains(K key)
     {
-    	return tracker.contains(key);
+    	return container.containsKey(key);
     } // contains()
     
     // Key

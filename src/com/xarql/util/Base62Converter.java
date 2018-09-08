@@ -3,7 +3,7 @@ MIT License
 http://g.xarql.com
 Copyright (c) 2018 Bryan Christopher Johnson
 */
-package com.xarql.main;
+package com.xarql.util;
 
 import java.util.HashMap;
 import java.util.ArrayList;
