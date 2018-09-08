@@ -5,7 +5,7 @@ Copyright (c) 2018 Bryan Christopher Johnson
 */
 package com.xarql.main;
 
-import com.xarql.main.Secrets;
+import com.xarql.util.Secrets;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

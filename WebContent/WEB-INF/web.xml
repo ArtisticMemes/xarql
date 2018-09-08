@@ -29,6 +29,16 @@
     <url-pattern>/error</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Blog</description>
+    <display-name>Blog</display-name>
+    <servlet-name>Blog</servlet-name>
+    <servlet-class>com.xarql.main.Blog</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Blog</servlet-name>
+    <url-pattern>/blog</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Polr</display-name>
     <servlet-name>Polr</servlet-name>
@@ -155,11 +165,11 @@
     </init-param>
     <init-param>
       <param-name>ExpiresByType text/css</param-name>
-      <param-value>access plus 1 hour</param-value>
+      <param-value>access plus 1 day</param-value>
     </init-param>
     <init-param>
       <param-name>ExpiresByType application/javascript</param-name>
-      <param-value>access plus 10 minutes</param-value>
+      <param-value>access plus 1 day</param-value>
     </init-param>
   </filter>
   <filter-mapping>
