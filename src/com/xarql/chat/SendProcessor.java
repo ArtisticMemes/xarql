@@ -56,8 +56,9 @@ public class SendProcessor extends HttpServlet {
 		
 		if(AuthTable.contains(session))
 		{
+			ChatSession chatSession = new ChatSession(AuthTable.get(session));
 			//System.out.println("SendProcessor worked");
-			MessageCreator mc = new MessageCreator(message, session);
+			MessageCreator mc = new MessageCreator(message, chatSession);
 			if(mc.execute(response))
 				response.sendRedirect("http://xarql.com/chat");
 			return;

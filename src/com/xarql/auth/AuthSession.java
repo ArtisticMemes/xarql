@@ -30,6 +30,21 @@ public class AuthSession {
 		AuthTable.add(this);
 	} // AuthSession
 	
+	protected AuthSession(AuthSession session)
+	{
+		this.verified = session.verified;
+		this.tomcatSession = session.tomcatSession;
+		this.creationTime = session.creationTime;
+		try
+		{
+			this.googleId = session.getGoogleId();
+		} 
+		catch(Exception e)
+		{
+			this.googleId = "";
+		}
+	}
+	
 	public boolean verified()
 	{
 		return verified;

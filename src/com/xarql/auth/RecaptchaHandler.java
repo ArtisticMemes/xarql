@@ -1,3 +1,8 @@
+/*
+MIT License
+http://g.xarql.com
+Copyright (c) 2018 Bryan Christopher Johnson
+*/
 package com.xarql.auth;
 
 import java.io.IOException;

@@ -35,6 +35,11 @@ public class MessageRetriever {
 		this(response, 0);
 	} // MessageRetriever(HttpServletResponse response)
 	
+	public MessageRetriever(int id)  // Backend only
+	{
+		setLastID(id);
+	} // MessageRetriever(int id)
+	
 	private void setLastID(int lastID)
 	{
 		if(lastID >= 0)
@@ -44,6 +49,24 @@ public class MessageRetriever {
 	} // setLastID()
 	
 	public ArrayList<Message> execute()
+	{
+		if(response != null)
+		{
+			if(ChatRoom.contains(new Integer(lastID)))
+				return ChatRoom.getList(lastID);
+			else
+			{
+				ChatRoom.init();
+				return ChatRoom.getList(lastID);
+			}
+		}
+		else
+		{
+			return getFromDatabase();
+		}
+	} // execute()
+	
+	private ArrayList<Message> getFromDatabase()
 	{
 		Connection connection = null;
 	    PreparedStatement statement = null;
@@ -77,16 +100,6 @@ public class MessageRetriever {
 	    catch(SQLException s)
 	    {
 	    	messages.clear();
-	    	try 
-	    	{
-				response.sendError(500);
-				return messages;
-			} 
-	    	catch (IOException e) 
-	    	{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	    	return messages;
 	    }
 	    finally 
@@ -96,5 +109,5 @@ public class MessageRetriever {
 	        if (statement != null) try { statement.close(); } catch (SQLException s) {}
 	        if (connection != null) try { connection.close(); } catch (SQLException s) {}
 	    }
-	} // execute()
+	} // getFromDatabase()
 } // MessageRetriever

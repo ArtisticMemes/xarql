@@ -12,14 +12,22 @@ public class Message {
 	private int id;
 	private String message;
 	private Timestamp date;
-	private String session;
+	private String color;
 	
-	public Message(int id, String message, Timestamp date, String session)
+	public Message(int id, String message, Timestamp date, ChatSession session)
 	{
 		setId(id);
 		setMessage(message);
 		setDate(date);
-		setSession(session);
+		setColor(session.getColor());
+	} // Message()
+	
+	public Message(int id, String message, Timestamp date, String color)
+	{
+		setId(id);
+		setMessage(message);
+		setDate(date);
+		setColor(color);
 	} // Message()
 	
 	private void setId(int id)
@@ -37,9 +45,9 @@ public class Message {
 		this.date = date;
 	} // setDate()
 	
-	private void setSession(String session)
+	private void setColor(String color)
 	{
-		this.session = session;
+		this.color = color;
 	} // setSession()
 	
 	public int getId()
@@ -54,9 +62,9 @@ public class Message {
 	
 	public String textColor()
 	{
-		int r = Integer.parseInt(backgroundColor().substring(0, 2), 16);
-		int g = Integer.parseInt(backgroundColor().substring(2, 4), 16);
-		int b = Integer.parseInt(backgroundColor().substring(4, 6), 16);
+		int r = Integer.parseInt(backgroundColor().substring(1, 3), 16);
+		int g = Integer.parseInt(backgroundColor().substring(3, 5), 16);
+		int b = Integer.parseInt(backgroundColor().substring(5, 7), 16);
 		double luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Adjust for human eyes
 		//System.out.println(luma);
 		if(luma > 80)
@@ -83,18 +91,13 @@ public class Message {
 			return timeSince / 86400000 + "d";
 	} // timeSince()
 	
-	public String getSession()
-	{
-		return session;
-	} // getSession()
-	
 	public String backgroundColor()
 	{
-		return session.substring(0, 6).toLowerCase();
+		return color;
 	} // backgroundColor()
 	
 	public String toString()
 	{
-		return getId() + " " + getMessage() + " " + getDate().toString() + " " + getSession();
+		return getId() + " " + getMessage() + " " + getDate().toString() + " " + backgroundColor();
 	} // toString()
 } // Message

@@ -44,4 +44,9 @@ public class AuthTable {
 				sessions.remove(sessions.key(i));
 		}
 	} // trim()
+	
+	public static AuthSession get(String session)
+	{
+		return sessions.get(session);
+	} // get()
 } // AuthTable

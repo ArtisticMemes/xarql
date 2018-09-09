@@ -8,10 +8,7 @@ package com.xarql.chat;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,11 +18,11 @@ import com.xarql.util.TextFormatter;
 public class MessageCreator {
 	private boolean goodParameters;
 	private String message;
-	private String session;
+	private ChatSession session;
 	
 	private static final int MAX_MESSAGE_LENGTH = 256;
 	
-	public MessageCreator(String message, String session)
+	public MessageCreator(String message, ChatSession session)
 	{
 		goodParameters = true;
 		setMessage(message);
@@ -40,18 +37,17 @@ public class MessageCreator {
 			goodParameters = false;
 	} // setMessage()
 	
-	private void setSession(String session)
+	private void setSession(ChatSession session)
 	{
-		if(session.length() == 32)
-			this.session = session;
-		else
-			goodParameters = false;
+		this.session = session;
 	} // setSession()
 	
 	public boolean execute(HttpServletResponse response)
 	{
 		if(goodParameters)
 		{
+			ChatRoom.add(message, session);
+			
 			Connection connection = null;
 		    PreparedStatement statement = null;
 		    String query = "INSERT INTO chat (message, session) VALUES (?, ?)";
@@ -62,7 +58,7 @@ public class MessageCreator {
 		        //System.out.println("Connection gotten");
 		        statement = connection.prepareStatement(query);
 		        statement.setString(1, message);
-		        statement.setString(2, session);
+		        statement.setString(2, session.getColor());
 		        statement.executeUpdate();
 		        //System.out.println("Update Executed");
 		        return true;
