@@ -41,7 +41,10 @@ public class AuthTable {
 		for(int i = 0; i < sessions.size(); i++)
 		{
 			if(sessions.get(sessions.key(i)).expired())
+			{
 				sessions.remove(sessions.key(i));
+				i--;
+			}
 		}
 	} // trim()
 	

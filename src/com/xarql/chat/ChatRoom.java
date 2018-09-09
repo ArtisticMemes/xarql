@@ -39,10 +39,24 @@ public class ChatRoom {
 			init();
 		else
 		{
+			trim();
 			currentId++;
 			messages.add(new Integer(currentId), new Message(currentId, message, new Timestamp(System.currentTimeMillis()), session));
 		}
 	} // add()
+	
+	public static void trim()
+	{
+		Timestamp sixHoursAgo = new Timestamp(System.currentTimeMillis() - 21600000);
+		for(int i = 0; i < messages.size(); i++)
+		{
+			if(messages.get(messages.key(i)).getDate().before(sixHoursAgo))
+			{
+				messages.remove(messages.key(i));
+				i--; // stay on the same index, it'll be occupied by a new object
+			}
+		}
+	} // trim()
 	
 	public static boolean contains(int id)
 	{
@@ -51,9 +65,18 @@ public class ChatRoom {
 	
 	public static ArrayList<Message> getList(int lastID)
 	{
+		Timestamp sixHoursAgo = new Timestamp(System.currentTimeMillis() - 21600000);
 		ArrayList<Message> messagesAsList = new ArrayList<Message>();
 		for(int i = lastID; i < messages.size(); i++)
-			messagesAsList.add(messages.get(new Integer(i)));
+		{
+			if(messages.get(messages.key(i)).getDate().before(sixHoursAgo))
+			{
+				messages.remove(messages.key(i));
+				i--;
+			}
+			else
+				messagesAsList.add(messages.get(new Integer(i)));
+		}
 		return messagesAsList;
 	} // getList()
 
