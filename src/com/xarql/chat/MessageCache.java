@@ -11,6 +11,6 @@ public class MessageCache {
 	
 	public MessageCache() {
 		// TODO Auto-generated constructor stub
-	}
+	} // MessageCache()
 
-}
+} // MessageCache

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.main.DBManager;
+import com.xarql.util.DBManager;
 
 public class PostRetriever {
 	// Request Parameters

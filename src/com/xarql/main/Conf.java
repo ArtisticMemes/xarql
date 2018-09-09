@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.VerifyRecaptcha;
 import com.xarql.chat.ChatReset;
 import com.xarql.polr.PolrReset;
 import com.xarql.util.Secrets;
