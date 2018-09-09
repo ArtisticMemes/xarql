@@ -16,13 +16,19 @@ public class AuthSession {
 	
 	private static final int MAX_LIFETIME_MINUTES = 60;
 	
-	public AuthSession(String tomcatSession, String googleIdToken)
+	public AuthSession(String tomcatSession, String input, String inputType)
 	{
-		setGoogleId(googleIdToken);
+		if(inputType.equals("google"))
+			verifyGoogleId(input);
+		else if(inputType.equals("recaptcha"))
+			verifyRecaptcha(input);
+		else
+			verified = false;
+		
 		setTomcatSession(tomcatSession);
 		setCreationTime();
 		AuthTable.add(this);
-	} // AuthSession()
+	} // AuthSession
 	
 	public boolean verified()
 	{
@@ -53,7 +59,7 @@ public class AuthSession {
 			return false;
 	} // expired()
 	
-	private void setGoogleId(String googleIdToken)
+	private void verifyGoogleId(String googleIdToken)
 	{
 		try
 		{
@@ -64,11 +70,27 @@ public class AuthSession {
 		{
 			verified = false;
 		}
-	} // setGoogleIdByToken()
+	} // verifyGoogleId()
 	
-	public String getGoogleId()
+	public String getGoogleId() throws NullPointerException, GeneralSecurityException
 	{
-		return googleId;
+		if(verified)
+		{
+			if(googleId.equals(""))
+				throw new NullPointerException("User's Google ID is unknown");
+			else
+				return googleId;
+		}
+		else
+			throw new GeneralSecurityException("User isn't verified");
 	} // getGoogleId()
+	
+	private void verifyRecaptcha(String recpatchaResponse)
+	{
+		if(VerifyRecaptcha.verify(recpatchaResponse))
+			verified = true;
+		else
+			verified = false;
+	} // verifyRecaptcha()
 	
 } // AuthSession

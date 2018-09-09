@@ -18,6 +18,11 @@ body {
   justify-content: center;
 }
 
+div .centered {
+  display: flex;
+  justify-content: center;
+}
+
 .bold {
   font-weight: bold;
 }

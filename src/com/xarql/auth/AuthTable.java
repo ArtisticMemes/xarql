@@ -18,16 +18,22 @@ public class AuthTable {
 	public static void add(AuthSession session)
 	{
 		if(session.verified() && !session.expired())
+		{
+			if(sessions.contains(session.getTomcatSession()))
+				sessions.remove(session.getTomcatSession());
 			sessions.add(session.getTomcatSession(), session);
-		trim();
+		}
 	} // add()
 	
 	public static boolean contains(String tomcatSession)
 	{
-		if(sessions.contains(tomcatSession))
+		if(sessions.contains(tomcatSession) && !sessions.get(tomcatSession).expired())
 			return true;
 		else
+		{
+			sessions.remove(tomcatSession);
 			return false;
+		}
 	} // contains()
 	
 	public static void trim()

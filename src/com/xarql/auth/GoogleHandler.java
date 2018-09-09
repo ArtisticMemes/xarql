@@ -48,7 +48,7 @@ public class GoogleHandler extends HttpServlet {
 		
 		String tomcatSession = request.getRequestedSessionId();
 		
-		new AuthSession(tomcatSession, idToken);
+		new AuthSession(tomcatSession, idToken, "google");
 		if(AuthTable.contains(tomcatSession))
 			response.setStatus(200);
 		else

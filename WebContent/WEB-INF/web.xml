@@ -47,6 +47,18 @@
   <servlet-mapping>
     <servlet-name>com.xarql.auth.GoogleHandler</servlet-name>
     <url-pattern>/auth/google</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Recaptcha Authentication</description>
+    <display-name>RecaptchaHandler</display-name>
+    <servlet-name>RecaptchaHandler</servlet-name>
+    <servlet-class>com.xarql.auth.RecaptchaHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.auth.RecaptchaHandler</servlet-name>
+    <url-pattern>/auth/recaptcha</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description>Blog</description>
     <display-name>Blog</display-name>
     <servlet-name>Blog</servlet-name>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthTable;
 import com.xarql.polr.PostCreator;
 
 /**
@@ -53,13 +54,20 @@ public class SendProcessor extends HttpServlet {
 		String message = request.getAttribute("message").toString();
 		String session = request.getAttribute("session").toString();
 		
-		//System.out.println("SendProcessor worked");
-		MessageCreator mc = new MessageCreator(message, session);
-		if(mc.execute(response))
-			response.sendRedirect("http://xarql.com/chat");
+		if(AuthTable.contains(session))
+		{
+			//System.out.println("SendProcessor worked");
+			MessageCreator mc = new MessageCreator(message, session);
+			if(mc.execute(response))
+				response.sendRedirect("http://xarql.com/chat");
+			return;
+		}
+		else
+		{
+			response.sendError(401, "http://xarql.com/auth");
+			return;
+		}
 		
-		
-		return;
 	} // doPost()
 
 }
