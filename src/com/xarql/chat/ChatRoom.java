@@ -67,10 +67,12 @@ public class ChatRoom {
 	
 	public static ArrayList<Message> getList(int lastID)
 	{
-		trim();
 		if(messages.size() == 0)
 			init();
-		return messages.getFrom(messages.getIndexOf(lastID));
+		if(messages.getIndexOf(lastID) == -1)
+			return messages.getFrom(0);
+		else
+			return messages.getFrom(messages.getIndexOf(lastID));
 	} // getList()
 
 } // ChatRoom

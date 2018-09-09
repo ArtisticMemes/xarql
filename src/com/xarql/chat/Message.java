@@ -70,9 +70,9 @@ public class Message {
 		double luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Adjust for human eyes
 		//System.out.println(luma);
 		if(luma > 80)
-			return "000";
+			return "#000";
 		else
-			return "FFF";
+			return "#FFF";
 	} // textColor()
 	
 	public Timestamp getDate()

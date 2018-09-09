@@ -44,7 +44,7 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     
     public K lastKey()
     {
-    	return tracker.get(size());
+    	return tracker.get(size() - 1);
     } // getLastKey()
     
     public K firstKey()
@@ -54,7 +54,10 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     
     public int getIndexOf(K key)
     {
-    	return tracker.lastIndexOf(key);
+    	if(contains(key))
+    		return tracker.lastIndexOf(key);
+    	else
+    		return -1;
     } // getIndexOf()
     
     
@@ -89,8 +92,8 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     
     public ArrayList<E> getRange(int startingIndex, int endingIndex)
     {
-    	if(startingIndex > size())
-    		startingIndex = size();
+    	if(startingIndex >= size())
+    		startingIndex = size() - 1;
     	else if(startingIndex < 0)
     		startingIndex = 0;
     	
@@ -99,7 +102,7 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     	else if(endingIndex < 0)
     		endingIndex = 0;
     	
-    	if(startingIndex <= endingIndex)
+    	if(startingIndex > endingIndex)
     	{
     		startingIndex = 0;
     		endingIndex = 0;
