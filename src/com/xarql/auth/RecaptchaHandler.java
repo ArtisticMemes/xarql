@@ -41,12 +41,13 @@ public class RecaptchaHandler extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String recaptcha;
-		request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
-		if(request.getAttribute("g-recaptcha-response") == null)
-			recaptcha = "";
+		if(request.getParameter("data") != null)
+			request.setAttribute("g-recaptcha-response", request.getParameter("data"));
+		else if(request.getParameter("g-recaptcha-response") != null)
+			request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
 		else
-			recaptcha = request.getAttribute("g-recaptcha-response").toString();
-		request.setAttribute("g-recaptcha-response", recaptcha);
+			request.setAttribute("g-recaptcha-response", "");
+		recaptcha = request.getAttribute("g-recaptcha-response").toString();
 		
 		String tomcatSession = request.getRequestedSessionId();
 		
