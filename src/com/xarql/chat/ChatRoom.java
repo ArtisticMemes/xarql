@@ -28,7 +28,7 @@ public class ChatRoom {
 		{
 			currentId = messagesAsList.get(messagesAsList.size() - 1).getId();
 			for(int i = 0; i < messagesAsList.size(); i++)
-				messages.add(new Integer(i), messagesAsList.get(i));
+				messages.add(new Integer(messagesAsList.get(i).getId()), messagesAsList.get(i));
 		}
 		else
 			currentId = 0;
@@ -69,10 +69,14 @@ public class ChatRoom {
 	{
 		if(messages.size() == 0)
 			init();
-		if(messages.getIndexOf(lastID) == -1)
-			return messages.getFrom(0);
+		if(messages.getIndexOf(lastID) == messages.size() - 1)
+			return new ArrayList<Message>(0);
+		else if(messages.contains(lastID + 1))
+		{
+			return messages.getFrom(messages.getIndexOf(lastID + 1));
+		}
 		else
-			return messages.getFrom(messages.getIndexOf(lastID));
+			return messages.getFrom(0);
 	} // getList()
 
 } // ChatRoom

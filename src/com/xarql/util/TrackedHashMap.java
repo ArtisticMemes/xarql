@@ -74,10 +74,7 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     
     public ArrayList<E> getAll()
     {
-    	ArrayList<E> al = new ArrayList<E>(size());
-    	for(int i = 0; i < size(); i++)
-    		al.add(get(key(i)));
-    	return al;
+    	return getRange(0, size());
     } // getAll()
     
     public ArrayList<E> getFrom(int startingIndex)
@@ -92,8 +89,8 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     
     public ArrayList<E> getRange(int startingIndex, int endingIndex)
     {
-    	if(startingIndex >= size())
-    		startingIndex = size() - 1;
+    	if(startingIndex > size())
+    		startingIndex = size();
     	else if(startingIndex < 0)
     		startingIndex = 0;
     	
@@ -108,8 +105,8 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
     		endingIndex = 0;
     	}
     	
-    	ArrayList<E> al = new ArrayList<E>(endingIndex);
-    	for(int i = 0; i < endingIndex; i++)
+    	ArrayList<E> al = new ArrayList<E>(endingIndex - startingIndex);
+    	for(int i = startingIndex; i < endingIndex; i++)
     		al.add(get(key(i)));
     	return al;
     } // getRange()
