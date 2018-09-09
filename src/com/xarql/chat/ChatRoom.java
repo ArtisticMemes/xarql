@@ -8,6 +8,7 @@ package com.xarql.chat;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import com.xarql.auth.AuthSession;
 import com.xarql.util.TrackedHashMap;
 
 public class ChatRoom {
@@ -23,9 +24,9 @@ public class ChatRoom {
 	{
 		MessageRetriever mr = new MessageRetriever(0);
 		ArrayList<Message> messagesAsList = mr.execute();
-		if(messages.size() > 0)
+		if(messagesAsList.size() > 0)
 		{
-			currentId = messages.get(messages.size() - 1).getId();
+			currentId = messagesAsList.get(messagesAsList.size() - 1).getId();
 			for(int i = 0; i < messagesAsList.size(); i++)
 				messages.add(new Integer(i), messagesAsList.get(i));
 		}
@@ -33,7 +34,7 @@ public class ChatRoom {
 			currentId = 0;
 	} // init()
 	
-	public static void add(String message, ChatSession session)
+	public static void add(String message, AuthSession session)
 	{
 		if(messages.size() == 0)
 			init();
@@ -41,7 +42,8 @@ public class ChatRoom {
 		{
 			trim();
 			currentId++;
-			messages.add(new Integer(currentId), new Message(currentId, message, new Timestamp(System.currentTimeMillis()), session));
+			Message input = new Message(currentId, message, new Timestamp(System.currentTimeMillis()), session);
+			messages.add(new Integer(currentId), input);
 		}
 	} // add()
 	
@@ -65,19 +67,10 @@ public class ChatRoom {
 	
 	public static ArrayList<Message> getList(int lastID)
 	{
-		Timestamp sixHoursAgo = new Timestamp(System.currentTimeMillis() - 21600000);
-		ArrayList<Message> messagesAsList = new ArrayList<Message>();
-		for(int i = lastID; i < messages.size(); i++)
-		{
-			if(messages.get(messages.key(i)).getDate().before(sixHoursAgo))
-			{
-				messages.remove(messages.key(i));
-				i--;
-			}
-			else
-				messagesAsList.add(messages.get(new Integer(i)));
-		}
-		return messagesAsList;
+		trim();
+		if(messages.size() == 0)
+			init();
+		return messages.getAll();
 	} // getList()
 
 } // ChatRoom

@@ -5,7 +5,6 @@ Copyright (c) 2018 Bryan Christopher Johnson
 */
 package com.xarql.chat;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,13 +51,7 @@ public class MessageRetriever {
 	{
 		if(response != null)
 		{
-			if(ChatRoom.contains(new Integer(lastID)))
-				return ChatRoom.getList(lastID);
-			else
-			{
-				ChatRoom.init();
-				return ChatRoom.getList(lastID);
-			}
+			return ChatRoom.getList(lastID);
 		}
 		else
 		{

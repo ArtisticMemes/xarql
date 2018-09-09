@@ -7,6 +7,8 @@ package com.xarql.chat;
 
 import java.sql.Timestamp;
 
+import com.xarql.auth.AuthSession;
+
 public class Message {
 	// Attributes
 	private int id;
@@ -14,7 +16,7 @@ public class Message {
 	private Timestamp date;
 	private String color;
 	
-	public Message(int id, String message, Timestamp date, ChatSession session)
+	public Message(int id, String message, Timestamp date, AuthSession session)
 	{
 		setId(id);
 		setMessage(message);

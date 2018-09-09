@@ -6,6 +6,7 @@ Copyright (c) 2018 Bryan Christopher Johnson
 package com.xarql.chat;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
-import com.xarql.polr.PostCreator;
 
 /**
  * Servlet implementation class SendProcessor
@@ -56,9 +56,8 @@ public class SendProcessor extends HttpServlet {
 		
 		if(AuthTable.contains(session))
 		{
-			ChatSession chatSession = new ChatSession(AuthTable.get(session));
 			//System.out.println("SendProcessor worked");
-			MessageCreator mc = new MessageCreator(message, chatSession);
+			MessageCreator mc = new MessageCreator(message, AuthTable.get(session));
 			if(mc.execute(response))
 				response.sendRedirect("http://xarql.com/chat");
 			return;

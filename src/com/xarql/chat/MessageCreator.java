@@ -12,17 +12,18 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthSession;
 import com.xarql.util.DBManager;
 import com.xarql.util.TextFormatter;
 
 public class MessageCreator {
 	private boolean goodParameters;
 	private String message;
-	private ChatSession session;
+	private AuthSession session;
 	
 	private static final int MAX_MESSAGE_LENGTH = 256;
 	
-	public MessageCreator(String message, ChatSession session)
+	public MessageCreator(String message, AuthSession session)
 	{
 		goodParameters = true;
 		setMessage(message);
@@ -37,7 +38,7 @@ public class MessageCreator {
 			goodParameters = false;
 	} // setMessage()
 	
-	private void setSession(ChatSession session)
+	private void setSession(AuthSession session)
 	{
 		this.session = session;
 	} // setSession()

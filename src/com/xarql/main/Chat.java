@@ -40,7 +40,9 @@ public class Chat extends HttpServlet {
 		ArrayList<Message> messages = mr.execute();
 		request.setAttribute("messages", messages);
 		if(messages.size() > 0)
+		{
 			request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
+		}
 		else
 			request.setAttribute("lastID", 0);
 		request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);

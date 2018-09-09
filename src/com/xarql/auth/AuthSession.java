@@ -7,10 +7,14 @@ package com.xarql.auth;
 
 import java.security.GeneralSecurityException;
 import java.sql.Timestamp;
+import java.util.Random;
 
 public class AuthSession {
+	public static Random r = new Random(); // For generating colors
+	
 	private boolean verified;
 	private String tomcatSession;
+	private String color;
 	private Timestamp creationTime;
 	private String googleId;
 	
@@ -27,6 +31,7 @@ public class AuthSession {
 		
 		setTomcatSession(tomcatSession);
 		setCreationTime();
+		randomizeColor();
 		AuthTable.add(this);
 	} // AuthSession
 	
@@ -59,6 +64,17 @@ public class AuthSession {
 	{
 		return tomcatSession;
 	} // getTomcatSession()
+	
+	private void randomizeColor()
+	{
+		int colorValue = r.nextInt(0xffffff + 1);
+		color = String.format("#%06x", colorValue);
+	} // randomizeColor()
+	
+	public String getColor()
+	{
+		return color;
+	} // getColor()
 	
 	private void setCreationTime()
 	{

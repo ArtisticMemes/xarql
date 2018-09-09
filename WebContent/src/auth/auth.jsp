@@ -46,7 +46,7 @@
     <script>defaultStylesInjected = true;</script>
   </noscript>
   <noscript id="fonts">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro"> -->
   </noscript>
   <script>
