@@ -36,17 +36,30 @@ public class Error extends HttpServlet {
 		currentRequest = request;
 		currentResponse = response;
 		request.setAttribute("code", request.getParameter("code"));
-		request.setAttribute("url", request.getParameter("url"));
-		request.setAttribute("name", request.getParameter("name"));
-		if(attributeEmpty("url") || attributeEmpty("name"))
-		{
-			request.setAttribute("url", "http://xarql.com/help");
-			request.setAttribute("name", "/help");
-		}
 		if(attributeEmpty("code"))
 		{
-			request.setAttribute("code", "Unknown");
+			request.setAttribute("code", "???");
 		}
+		String code = request.getAttribute("code").toString();
+		String type;
+		switch(code)
+		{
+		case "404":
+			type = "Not Found";
+			break;
+		case "403":
+			type = "Forbidden";
+			break;
+		case "401":
+			type = "Unauthenticated";
+			break;
+		case "400":
+			type="Bad Request";
+			break;
+		default:
+			type="Unknown";
+		}
+		request.setAttribute("type", type);
 		request.getRequestDispatcher("/src/error/error.jsp").forward(request, response);
 	}
 	

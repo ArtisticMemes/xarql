@@ -39,6 +39,16 @@
     <url-pattern>/auth</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Returns Authentication Status</description>
+    <display-name>AuthStatus</display-name>
+    <servlet-name>AuthStatus</servlet-name>
+    <servlet-class>com.xarql.auth.AuthStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.auth.AuthStatus</servlet-name>
+    <url-pattern>/auth/status</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description>Google Authentication</description>
     <display-name>GoogleHandler</display-name>
     <servlet-name>GoogleHandler</servlet-name>
@@ -181,6 +191,14 @@
   <error-page>
     <error-code>404</error-code>
     <location>/error?code=404</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error?code=403</location>
+  </error-page>
+  <error-page>
+    <error-code>401</error-code>
+    <location>/error?code=401</location>
   </error-page>
   <error-page>
     <error-code>400</error-code>
