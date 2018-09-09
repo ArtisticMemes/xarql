@@ -70,7 +70,7 @@ public class ChatRoom {
 		trim();
 		if(messages.size() == 0)
 			init();
-		return messages.getAll();
+		return messages.getFrom(messages.getIndexOf(lastID));
 	} // getList()
 
 } // ChatRoom
