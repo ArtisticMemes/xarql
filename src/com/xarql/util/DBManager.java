@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.xarql.util.Secrets;
+
 public class DBManager {
 	
 	public static Connection getConnection()

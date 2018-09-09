@@ -3,7 +3,9 @@ MIT License
 http://g.xarql.com
 Copyright (c) 2018 Bryan Christopher Johnson
 */
-package com.xarql.auth;
+package com.xarql.main;
+
+import com.xarql.util.Secrets;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -26,10 +28,10 @@ import java.security.cert.X509Certificate;
 import org.json.JSONObject;
 
 import com.xarql.util.Secrets;
- 
+
 public class VerifyRecaptcha {
 	private static String SECRET = Secrets.RecaptchaSecret;
-	
+
 	public static boolean verify(String response)
 	{
 		try {
@@ -45,18 +47,18 @@ public class VerifyRecaptcha {
 		          public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 		            return null;
 		          }
-	
+
 		          public void checkClientTrusted(X509Certificate[] certs, String authType) {  }
-	
+
 		          public void checkServerTrusted(X509Certificate[] certs, String authType) {  }
-	
+
 		       }
 		    };
-	
+
 		    SSLContext sc = SSLContext.getInstance("SSL");
 		    sc.init(null, trustAllCerts, new java.security.SecureRandom());
 		    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-	
+
 		    // Create all-trusting host name verifier
 		    HostnameVerifier allHostsValid = new HostnameVerifier() {
 		        public boolean verify(String hostname, SSLSession session) {
@@ -68,14 +70,14 @@ public class VerifyRecaptcha {
 		    /*
 		     * end of the fix
 		     */
-		
-	    
+
+
 	        String url = "https://www.google.com/recaptcha/api/siteverify?"
 	                + "secret=" + SECRET
 	                + "&response=" + response;
 	        InputStream res = new URL(url).openStream();
 	        BufferedReader rd = new BufferedReader(new InputStreamReader(res, Charset.forName("UTF-8")));
-	
+
 	        StringBuilder sb = new StringBuilder();
 	        int cp;
 	        while ((cp = rd.read()) != -1) {
@@ -83,7 +85,7 @@ public class VerifyRecaptcha {
 	        }
 	        String jsonText = sb.toString();
 	        res.close();
-	
+
 	        JSONObject json = new JSONObject(jsonText);
 	        return json.getBoolean("success");
 	    } catch (Exception e) {
