@@ -172,6 +172,7 @@ $(document).ready(function () {
 					$(this).text(xhr.statusText);
 				});
 				$("html, body").animate({scrollTop: 0}, "fast");
+				$("#replying-to-input").val(parseInt($("#main-post-id").text()));
 				$("#page-dropdown").val(0);
 				$("#prev-form").hide();
 				$("#next-form").show();
