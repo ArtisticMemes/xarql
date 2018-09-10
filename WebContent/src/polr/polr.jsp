@@ -96,8 +96,8 @@ html, body {
 	  </div>
 	  <div class="card">
 	    <h4>Navigation</h4>
-	    <form id="nav-form" action="http://xarql.com/polr/${id}" method="GET" accept-charset="utf-8">
-	      <table>
+	    <form id="nav-form" action="http://xarql.com/polr/${id}" method="GET" accept-charset="utf-8" style="display:inline;">
+	      <table style="display:inline">
 	        <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	        <tr><td><select name="page" id="page-dropdown">
 	                <c:forEach begin="0" end="9" var="i">
@@ -115,10 +115,12 @@ html, body {
                     <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
                     <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
                   </select></td>
-                <td><input id="submit" type="submit" value="Go"/> <span class="status"></span></td>
             </tr>
 	      </table>
+	      <input id="submit" type="submit" value="Custom"/>
 	    </form>
+	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="http://xarql.com/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" type="submit" value="Prev"/></form>
+	    <form <c:if test="${page >= 9}">style="display:none;"</c:if> id="next-form" action="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" type="submit" value="Next"/></form>
 	    <p><a href="http://xarql.com/polr/find">Search</a> <a href="http://xarql.com/polr/flat">Browse</a> <span class="ajax-bar" style="display:none;"> <a class="update-button">Update</a> <span class="status"></span></span>
 	  </div>
 	    <div id="data" class="card" style="visibility:hidden;display:none;">

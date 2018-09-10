@@ -60,7 +60,7 @@ html, body {
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input id="submit" type="submit" value="Send"/> <input type="reset" value="Clear"/>
        </form>
-       <p><a href="http://xarql.com/help">Help</a> <span class="ajax-bar" style="display:none;"><a href="http://xarql.com/auth">Get Authorized</a> <span class="status"></span></span></p>
+       <p><a href="http://xarql.com/help">help</a> <span class="status"></span></p>
       </div>
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>

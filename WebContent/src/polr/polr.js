@@ -112,14 +112,31 @@ $(document).ready(function () {
 				$("#sort").text(sort);
 				$("#flow").text(flow);
 				viewLinks();
+				if(page > 0) { $("#prev-form").show(); $("#prev-form").css("display", "inline");} else { $("#prev-form").hide(); }
+				if(page < 9) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
+				$("html, body").animate({scrollTop: 0}, "fast");
 	    	}
 	    });
 	}
 	$("#nav-form").submit(function(event) {
 		event.preventDefault();
+		nav();
+	});
+	$('#next-form').submit(function(event) {
+		event.preventDefault();
+		var pageNum = parseInt($('#page-dropdown').val());
+		if(pageNum < 9)
+			$('#page-dropdown').val(pageNum + 1);
+		nav();
+	});
+	$('#prev-form').submit(function(event) {
+		event.preventDefault();
+		var pageNum = parseInt($('#page-dropdown').val());
+		if(pageNum > 0)
+			$('#page-dropdown').val(pageNum - 1);
 		nav();
 	});
   
