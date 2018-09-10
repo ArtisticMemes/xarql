@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.chat.ChatRoom;
+import com.xarql.polr.PageCache;
 import com.xarql.util.DBManager;
 
 public class PostRemover
@@ -44,6 +45,7 @@ public class PostRemover
 		        statement = connection.prepareStatement(query);
 		        statement.setInt(1, id);
 		        statement.executeUpdate();
+		        PageCache.clear();
 		        return true;
 		    }
 		    catch(SQLException s)

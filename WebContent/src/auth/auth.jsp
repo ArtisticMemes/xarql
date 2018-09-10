@@ -14,7 +14,7 @@
 }
 .link {
   display: inline;
-  margin: 2rem;
+  margin: 1rem;
 }
 #link-div {
   display: flex;

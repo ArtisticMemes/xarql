@@ -46,7 +46,12 @@ public class PolrEdit extends HttpServlet
 			}
 			if(Secrets.modList().contains(associatedGoogleID))
 			{
-				request.getRequestDispatcher("/src/polr/edit.jsp");
+				request.getRequestDispatcher("/src/polr/edit.jsp").forward(request, response);
+				return;
+			}
+			else
+			{
+				response.sendError(401);
 				return;
 			}
 		}
