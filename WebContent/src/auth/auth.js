@@ -34,7 +34,7 @@ function checkStatus()
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() 
     {
-        if (this.readyState == 4) 
+        if(this.readyState == 4)
         {
         	if(this.status == 200)
         		document.getElementById('notice').innerHTML = 'You Are Authorized';
@@ -43,6 +43,8 @@ function checkStatus()
         	else
         		document.getElementById('notice').innerHTML = 'Something Unexpected Happened';
         }
+        else if(this.readyState == 1 || this.readyState == 2 || this.readyState == 3)
+        	document.getElementById('notice').innerHTML = 'Checking Status...';
     };
 	xhr.send();
 }

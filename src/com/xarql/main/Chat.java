@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthTable;
 import com.xarql.chat.Message;
 import com.xarql.chat.MessageRetriever;
 
@@ -36,16 +37,26 @@ public class Chat extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MessageRetriever mr = new MessageRetriever(response);
-		ArrayList<Message> messages = mr.execute();
-		request.setAttribute("messages", messages);
-		if(messages.size() > 0)
+		String tomcatSession = request.getRequestedSessionId();
+		if(tomcatSession != null && AuthTable.contains(tomcatSession))
 		{
-			request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
+			MessageRetriever mr = new MessageRetriever(response);
+			ArrayList<Message> messages = mr.execute();
+			request.setAttribute("messages", messages);
+			if(messages.size() > 0)
+			{
+				request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
+			}
+			else
+				request.setAttribute("lastID", 0);
+			request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
+			return;
 		}
 		else
-			request.setAttribute("lastID", 0);
-		request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
+		{
+			response.sendRedirect("http://xarql.com/auth");
+			return;
+		}
 	} // doGet()
 
 	/**

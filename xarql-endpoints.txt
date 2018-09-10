@@ -1,18 +1,20 @@
-/polr      --> View text posts with replies
-/polr/post --> Post on /polr
-/polr/updt --> Grabs only the posts for a page
-/polr/find --> Search /polr
-/polr/flat --> Browse /polr while ignoring the reply hierarchy
+/polr           --> View text posts with replies
+/polr/post      --> Post on /polr
+/polr/updt      --> Grabs only the posts for a page
+/polr/find      --> Search /polr
+/polr/flat      --> Browse /polr while ignoring the reply hierarchy
 
-/chat      --> View live messages
-/chat/send --> Send a message
-/chat/updt --> Get new messages
+/chat           --> View live messages
+/chat/send      --> Send a message
+/chat/updt      --> Get new messages
 
-/help      --> Redirects to xarql's self hosted documentation
+/help           --> Redirects to xarql's self hosted documentation
 
-/auth        --> Provides Authentication options
-/auth/google --> Processes google authentication attempts
+/auth           --> Provides Authentication options
+/auth/status    --> Responds withs status of Authentication
+/auth/google    --> Processes Google attempts
+/auth/recaptcha --> Processes Recaptcha attempts
 
-/conf      --> Performs database set up
+/conf           --> Performs database set up
 
-/          --> Welcome page
+/               --> Welcome page

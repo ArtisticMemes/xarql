@@ -139,6 +139,16 @@
     <url-pattern>/polr/flat</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Remove A Post</description>
+    <display-name>PolrEdit</display-name>
+    <servlet-name>PolrEdit</servlet-name>
+    <servlet-class>com.xarql.polr.edit.PolrEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.polr.edit.PolrEdit</servlet-name>
+    <url-pattern>/polr/edit</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Chat</display-name>
     <servlet-name>Chat</servlet-name>

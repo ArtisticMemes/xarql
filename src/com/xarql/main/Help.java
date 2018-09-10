@@ -33,7 +33,7 @@ public class Help extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		response.sendRedirect("http://xarql.com/docs/xarql/xarql.html");
-	}
+	} // doGet()
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +41,6 @@ public class Help extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
+	} // doPost()
 
-}
+} // Help

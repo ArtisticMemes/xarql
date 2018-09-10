@@ -8,6 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-signin-client_id" id="google-signin-client_id" content="541616841401-iqluj8gqbu0qvsn3kh7bl93e9mskoff3.apps.googleusercontent.com">
   <title>Authentication ~ xarql</title>
+  <style>
+#link-card {
+  position: relative;
+}
+.link {
+  display: inline;
+  margin: 2rem;
+}
+#link-div {
+  display: flex;
+  justify-content: center;
+  width: 100%;  
+}
+#link-span {
+  position: absolute;
+  top: 4rem;
+}
+  </style>
 </head>
 <body>
   <div id="wrapper">
@@ -24,6 +42,15 @@
          </div>
       </form>
       <p class="centered" id="status-p"><a href="#" id="check-status" onclick="checkStatus();">Check Status</a></p>
+      <div id="link-card">
+        <div id="link-div">
+          <span id="link-span">
+            <p class="link"><a href="http://xarql.com/polr">polr</a></p>
+            <p class="link"><a href="#" onclick="history.back()">Return</a></p>
+            <p class="link"><a href="http://xarql.com/chat">chat</a></p>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
   <noscript id="default-styles">

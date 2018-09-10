@@ -12,7 +12,6 @@
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/polr.js" defer=""></script>
   <style>
-@charset "UTF-8";
 #wrapper, html, body {
   font-family: 'Roboto';
   display: flex;

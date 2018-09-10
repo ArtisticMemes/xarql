@@ -1,9 +1,4 @@
-/*
-MIT License
-http://g.xarql.com
-Copyright (c) 2018 Bryan Christopher Johnson
-*/
-package com.xarql.chat;
+package com.xarql.polr.edit;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,57 +7,43 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.auth.AuthSession;
+import com.xarql.chat.ChatRoom;
 import com.xarql.util.DBManager;
-import com.xarql.util.TextFormatter;
 
-public class MessageCreator 
+public class PostRemover
 {
 	private boolean goodParameters;
-	private String message;
-	private AuthSession session;
-	
-	private static final int MAX_MESSAGE_LENGTH = 256;
-	
-	public MessageCreator(String message, AuthSession session)
+	private int id;
+	private HttpServletResponse response;
+	public PostRemover(int id, HttpServletResponse response)
 	{
 		goodParameters = true;
-		setMessage(message);
-		setSession(session);
-	} // MessageCreator()
+		this.response = response;
+		setId(id);
+	} // PostRemover()
 	
-	private void setMessage(String message)
+	private void setId(int id)
 	{
-		if(message.length() > 0 && message.length() < MAX_MESSAGE_LENGTH)
-			this.message = TextFormatter.full(message);
-		else
+		if(id <= 0)
 			goodParameters = false;
-	} // setMessage()
+		else
+			this.id = id;
+	} // setId(int id)
 	
-	private void setSession(AuthSession session)
-	{
-		this.session = session;
-	} // setSession()
-	
-	public boolean execute(HttpServletResponse response)
+	public boolean execute()
 	{
 		if(goodParameters)
 		{
-			ChatRoom.add(message, session);
-			
 			Connection connection = null;
 		    PreparedStatement statement = null;
-		    String query = "INSERT INTO chat (message, session) VALUES (?, ?)";
+		    String query = "UPDATE polr SET removed=1 WHERE id=?";
 
 		    try 
 		    {
 		        connection = DBManager.getConnection();
-		        //System.out.println("Connection gotten");
 		        statement = connection.prepareStatement(query);
-		        statement.setString(1, message);
-		        statement.setString(2, session.getColor());
+		        statement.setInt(1, id);
 		        statement.executeUpdate();
-		        //System.out.println("Update Executed");
 		        return true;
 		    }
 		    catch(SQLException s)
@@ -99,6 +80,6 @@ public class MessageCreator
 			}
 			return false;
 		}
-		
 	} // execute()
-} // MessageCreator
+
+} // PostRemover
