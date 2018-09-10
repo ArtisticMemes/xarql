@@ -3,6 +3,7 @@
 /polr/updt      --> Grabs only the posts for a page
 /polr/find      --> Search /polr
 /polr/flat      --> Browse /polr while ignoring the reply hierarchy
+/polr/edit      --> Remove/restore posts
 
 /chat           --> View live messages
 /chat/send      --> Send a message
