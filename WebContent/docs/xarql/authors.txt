@@ -1,0 +1,12 @@
+All legally recognized names of all contributors to this repository as of 
+September 9, 2018 are listed below.
+
+Bryan Christopher Johnson
+
+"contributors" is defined as all persons who satisfy the following criteria:
+(1) submitted source code to this repository, which is an original work made by 
+    the submitter for this repository.
+(2) gave sumbission(s) that were accepted to the master branch.
+(3) have recorded in written form at the time of this document's publication 
+    their desire to have their submission(s) make them designated and be 
+    recognized as a contributor.
