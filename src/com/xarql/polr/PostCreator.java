@@ -90,10 +90,10 @@ public class PostCreator {
 		return answers;
 	} // getAnswers()
 	
-	public boolean execute(HttpServletResponse response, String g_recaptcha_response) // <-- Not up to naming conventions, but looks Google's naming
+	public boolean execute(HttpServletResponse response) // <-- Not up to naming conventions, but looks Google's naming
 	{
 		//System.out.println("Attempting to create post");
-		if(goodParameters && VerifyRecaptcha.verify(g_recaptcha_response) && postExists(answers, response))
+		if(goodParameters && postExists(answers, response))
 		{
 			// These should only return false if the sql connection is faulty, as the conditions in which they fail were tested for in the above if statement
 			if(createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response) == false)

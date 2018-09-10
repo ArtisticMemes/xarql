@@ -22,13 +22,15 @@ import com.xarql.chat.MessageRetriever;
  * Servlet implementation class Chat
  */
 @WebServlet("/chat")
-public class Chat extends HttpServlet {
+public class Chat extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Chat() {
+    public Chat()
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,35 +38,32 @@ public class Chat extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tomcatSession = request.getRequestedSessionId();
-		if(tomcatSession != null && AuthTable.contains(tomcatSession))
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		boolean authenticated = AuthTable.contains(request.getRequestedSessionId());
+		request.setAttribute("authenticated", authenticated);
+		
+		MessageRetriever mr = new MessageRetriever(response);
+		ArrayList<Message> messages = mr.execute();
+		request.setAttribute("messages", messages);
+		if(messages.size() > 0)
 		{
-			MessageRetriever mr = new MessageRetriever(response);
-			ArrayList<Message> messages = mr.execute();
-			request.setAttribute("messages", messages);
-			if(messages.size() > 0)
-			{
-				request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
-			}
-			else
-				request.setAttribute("lastID", 0);
-			request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
-			return;
+			request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
 		}
 		else
-		{
-			response.sendRedirect("http://xarql.com/auth");
-			return;
-		}
+			request.setAttribute("lastID", 0);
+		request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
+		return;
+		
 	} // doGet()
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	} // doPost()
 
-}
+} // Chat

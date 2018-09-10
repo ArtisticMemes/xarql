@@ -60,6 +60,16 @@ html, body {
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input id="submit" type="submit" value="Send"/> <input type="reset" value="Clear"/>
        </form>
+       <c:if test="${not authenticated}">
+         <form action="http://xarql.com/auth/recaptcha" method="POST" id="recaptcha-form">
+           <div style="position:relative;">
+             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
+             <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
+           </div>
+         </form>
+         <script src="http://xarql.com/src/auth/auth.js" defer=""></script>
+         <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+       </c:if>
        <p><a href="http://xarql.com/help">help</a> <span class="status"></span></p>
       </div>
       <div id="data" class="card" style="display:none;">

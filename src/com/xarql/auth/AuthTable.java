@@ -9,10 +9,12 @@ import com.xarql.util.TrackedHashMap;
 
 public class AuthTable {
 	private static TrackedHashMap<String, AuthSession> sessions = new TrackedHashMap<String, AuthSession>();
+	private static int requestCount = 0;
 	
 	public AuthTable()
 	{
 		sessions.clear();
+		requestCount = 0;
 	} // AuthTable()
 	
 	public static void add(AuthSession session)
@@ -22,6 +24,12 @@ public class AuthTable {
 			if(sessions.contains(session.getTomcatSession()))
 				sessions.remove(session.getTomcatSession());
 			sessions.add(session.getTomcatSession(), session);
+		}
+		requestCount++;
+		if(requestCount >= 8) // Trim after every 8 additions
+		{
+			trim();
+			requestCount = 0;
 		}
 	} // add()
 	

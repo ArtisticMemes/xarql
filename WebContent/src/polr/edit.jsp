@@ -48,7 +48,7 @@ html, body {
       <div class="card">
         <form action="http://xarql.com/polr/edit?type=remove" method="POST" id="post-form">
           <br/>
-          ID : <input type="number" name="remove" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" type="submit" value="Remove"/>
         </form>
       </div>

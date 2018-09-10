@@ -62,8 +62,7 @@ $(document).ready(function () {
       title = $form.find("input[name='title']").val(),
       content = $form.find("textarea[name='content']").val(),
       answers = $form.find("input[name='answers']").val(),
-      url = $form.attr("action"),
-      recaptchaData = grecaptcha.getResponse();
+      url = $form.attr("action");
     $form.trigger('reset');
     
     // Send the data using AJAX POST
@@ -74,7 +73,6 @@ $(document).ready(function () {
     		title: title,
     		content: content,
     		answers: answers,
-    		captcha: recaptchaData
     	}
     	}).done(function(){
     		$(".status").each(function() {

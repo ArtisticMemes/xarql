@@ -27,7 +27,8 @@ public class Blog extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/src/blog/blog.jsp").forward(request, response);;
+		response.sendRedirect("https://xarql.tumblr.com"); // iFrame isn't working on mobile
+		return;
 	} // doGet()
 
 	/**

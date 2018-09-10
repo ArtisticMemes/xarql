@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.ArrayList" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html id="html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>${posts.get(0).getTitleText()} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/polr.js" defer=""></script>
@@ -50,7 +50,6 @@ html, body {
 <body>
   <div id="wrapper">
     <div id="column">
-      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <div id="main-post">
       <c:forEach begin="0" var="post" items="${posts}" end="0">
 		  <div class="card">
@@ -70,19 +69,19 @@ html, body {
          <br/>
          Replying To : <input type="number" id="replying-to-input" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
          <input id="submit" type="submit" value="Post"/> <input type="reset" value="Clear"/>
-         <div style="position:relative;">
-         	<div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
-         	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
-         </div>
        </form>
+       <c:if test="${not authenticated}">
+         <form action="http://xarql.com/auth/recaptcha" method="POST" id="recaptcha-form">
+           <div style="position:relative;">
+             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
+             <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
+           </div>
+         </form>
+         <script src="http://xarql.com/src/auth/auth.js" defer=""></script>
+         <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+       </c:if>
        <p><a href="http://xarql.com/help">Help</a><span class="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span class="status"></span> <span style="float:right"><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></span></span></p>
       </div>
-      <script>
-      function recaptchaCallback()
-      {
-    	  document.getElementById('recaptcha_check_empty').value = 1;
-      }
-      </script>
       <div id="replies">
 		<c:forEach begin="1" var="post" items="${posts}">
 		  <div class="card">

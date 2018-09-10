@@ -12,17 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthTable;
+
 /**
  * Servlet implementation class PolrPost
  */
 @WebServlet(description = "Processes post requests", urlPatterns = { "/polr/post" })
-public class PostProcessor extends HttpServlet {
+public class PostProcessor extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostProcessor() {
+    public PostProcessor() 
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,44 +42,47 @@ public class PostProcessor extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// response.sendRedirect("http://xarql.com/polr"); <-- Used to test servlet config
-		
-		request.setAttribute("title", request.getParameter("title"));
-		request.setAttribute("content", request.getParameter("content"));
-		request.setAttribute("answers", request.getParameter("answers"));
-		if(request.getParameter("g-recaptcha-response") != null)
-			request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		boolean authorized = AuthTable.contains(request.getRequestedSessionId());
+		if(authorized)
+		{
+			request.setAttribute("title", request.getParameter("title"));
+			request.setAttribute("content", request.getParameter("content"));
+			request.setAttribute("answers", request.getParameter("answers"));
+			
+			// null pointer exception prevention
+			if(request.getAttribute("title") == null || request.getAttribute("content") == null || request.getAttribute("answers") == null)
+			{
+				response.sendError(400);
+				return;
+			}
+			
+			String title = request.getAttribute("title").toString();
+			String content = request.getAttribute("content").toString();
+			// Get an int from the answers string in the request
+			int answers;
+			try
+			{
+				answers = Integer.parseInt(request.getAttribute("answers").toString());
+			}
+			catch (NumberFormatException nfe)
+			{
+				response.sendError(400);
+				return;
+			}
+			
+			PostCreator pc = new PostCreator(title, content, answers);
+			if(pc.execute(response))
+				response.sendRedirect("http://xarql.com/polr/" + pc.getAnswers() + "?refresh=true"); // Update with AJAX
+			
+			return;
+		}
 		else
-			request.setAttribute("g-recaptcha-response", request.getParameter("captcha"));
-		
-		// null pointer exception prevention
-		if(request.getAttribute("title") == null || request.getAttribute("content") == null || request.getAttribute("answers") == null || request.getAttribute("g-recaptcha-response") == null)
 		{
-			response.sendError(400);
+			response.sendError(401);
 			return;
 		}
-		
-		String title = request.getAttribute("title").toString();
-		String content = request.getAttribute("content").toString();
-		// Get an int from the answers string in the request
-		int answers;
-		try
-		{
-			answers = Integer.parseInt(request.getAttribute("answers").toString());
-		}
-		catch (NumberFormatException nfe)
-		{
-			response.sendError(400);
-			return;
-		}
-		String g_recaptcha_response = request.getAttribute("g-recaptcha-response").toString();
-		
-		PostCreator pc = new PostCreator(title, content, answers);
-		if(pc.execute(response, g_recaptcha_response))
-			response.sendRedirect("http://xarql.com/polr/" + pc.getAnswers() + "?refresh=true"); // Update with AJAX
-		
-		return;
 	} // doPost()
 
 } // PostProcessor

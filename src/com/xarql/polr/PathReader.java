@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthTable;
+
 /**
  * Servlet implementation class PathReader
  */
@@ -43,6 +45,9 @@ public class PathReader extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pathInfo = request.getPathInfo();
 		String[] pathParts = pathInfo.split("/");
+		
+		boolean authenticated = AuthTable.contains(request.getRequestedSessionId());
+		request.setAttribute("authenticated", authenticated);
 		
 		// use sort parameter
 		String sort;
