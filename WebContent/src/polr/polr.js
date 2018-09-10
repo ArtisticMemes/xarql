@@ -172,6 +172,10 @@ $(document).ready(function () {
 					$(this).text(xhr.statusText);
 				});
 				$("html, body").animate({scrollTop: 0}, "fast");
+				$("#page-dropdown").val(0);
+				$("#prev-form").hide();
+				$("#next-form").show();
+				$("#next-form").css("display", "inline");
 				viewLinks();
 	    	}
 	    });
