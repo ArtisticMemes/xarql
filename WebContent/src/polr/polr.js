@@ -64,6 +64,7 @@ $(document).ready(function () {
       answers = $form.find("input[name='answers']").val(),
       url = $form.attr("action");
     $form.trigger('reset');
+    $("#replying-to-input").val(parseInt($("#main-post-id").text()));
     
     // Send the data using AJAX POST
     $.ajax({
@@ -80,10 +81,10 @@ $(document).ready(function () {
     		});
     	}).fail(function(){
     		$(".status").each(function() {
-    			$(this).text("success");
+    			$(this).text("error");
     		});
     	}).always(function(){
-    		window.setTimeout(update, 300); // wait 300 milliseconds
+    		window.setTimeout(update, 500); // wait .5 seconds
     	});
     });
   
