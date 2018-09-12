@@ -48,10 +48,18 @@ public class ChatUpdt extends HttpServlet {
 		ArrayList<Message> messages = mr.execute();
 		request.setAttribute("messages", messages);
 		if(messages.size() > 0)
+		{
 			request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
+			request.getRequestDispatcher("/src/chat/updt.jsp").forward(request, response);
+			return;
+		}
 		else
+		{
 			request.setAttribute("lastID", 0);
-		request.getRequestDispatcher("/src/chat/updt.jsp").forward(request, response);
+			response.setStatus(304);
+			return;
+		}
+		
 	} // doGet()
 
 	/**
