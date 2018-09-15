@@ -29,7 +29,7 @@
   <servlet-mapping>
     <servlet-name>net.xarql.serve.Source</servlet-name>
     <url-pattern>/-/src/*</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>Error</display-name>
