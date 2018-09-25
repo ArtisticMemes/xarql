@@ -194,38 +194,58 @@ $(document).ready(function () {
   }
   viewLinks();
   
-  // Use crunch styles
-  function crunch() {
-    $("#styles").replaceWith('<link id="styles" rel="stylesheet" type="text/css" href="http://xarql.com/src/common/crunch.css">');
-    Cookies.set('crunch', 'true', { path: ''});
-    $("#crunch-button").hide();
-    $("#uncrunch-button").show();
+  // Option Pane
+  function fontWeight(weight)
+  {
+	  if(weight === 'light') {
+		  $('p').css('font-weight', 'lighter');
+		  $('.bold').css('font-weight', 'lighter');
+		  $('#font-light-button').hide();
+		  $('#font-normal-button').show();
+		  Cookies.set('font-weight', 'light', { path: ''});
+	  }
+	  else {
+		  $('p').css('font-weight', 'normal');
+		  $('.bold').css('font-weight', 'bold');
+		  $('#font-normal-button').hide();
+		  $('#font-light-button').show();
+		  Cookies.set('font-weight', 'normal', { path: ''});
+	  }
   }
-  function uncrunch() {
-    $("#styles").replaceWith('<div id="styles"><link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css"><link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css"></div>');
-    Cookies.set('crunch', 'false', { path: ''});
-    $("#uncrunch-button").hide();
-    $("#crunch-button").show();
-  }
-  $("#crunch-button").on("click", function() {
-    crunch();
+  fontWeight(Cookies.get('font-weight'));
+  $("#font-light-button").on('click', function() {
+	  fontWeight('light');
+	  
   });
-  $("#uncrunch-button").on("click", function() {
-    uncrunch();
+  $("#font-normal-button").on('click', function() {
+	  fontWeight('normal');
   });
-  $("#uncrunch-button").hide();
+  
+  // Enable JS buttons + Option Pane
   $(".ajax-bar").each(function() {
 	  $(this).show();
   });
-  function autoCrunch() {
+  $('#option-pane-open-button').on('click', function() {
+	  $("#option-pane").show();
+	  $("#option-pane-close-button").show();
+	  $(this).hide();
+  });
+  $('#option-pane-close-button').on('click', function() {
+	  $("#option-pane").hide();
+	  $("#option-pane-open-button").show();
+	  $(this).hide();
+  });
+  
+  /* Auto update page to reflect options set on another page
+  function autoOption() {
 	  if($('#styles').length)
 		  defaultStylesInjected = true;
 	  if(defaultStylesInjected == false)
-		  window.setTimeout(autoCrunch, 100); /* wait 100 milliseconds before checking again */
+		  window.setTimeout(autoCrunch, 100);  wait 100 milliseconds before checking again 
 	  else {
-		  if(Cookies.get('crunch') === 'true')
-			  crunch();
+		  if(Cookies.get('theme') === 'dark')
+			  setTheme('dark');
 	  }
   }
-  autoCrunch();
+  autoOption();*/
 });

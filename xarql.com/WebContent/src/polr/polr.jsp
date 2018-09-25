@@ -13,7 +13,6 @@
   <script src="http://xarql.com/src/polr/polr.js" defer=""></script>
   <style>
 #wrapper, html, body {
-  font-family: 'Roboto';
   display: flex;
   visibility: visible;
   overflow-x: hidden;
@@ -80,7 +79,14 @@ html, body {
          <script src="http://xarql.com/src/auth/auth.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-       <p><a href="http://xarql.com/help">Help</a><span class="ajax-bar" style="display:none"> <a id="crunch-button">Crunch</a> <a id="uncrunch-button">Spread</a> <a class="update-button">Update</a> <span class="status"></span> <span style="float:right"><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></span></span></p>
+       <p><a href="http://xarql.com/help">Help</a><span style="letter-spacing:1rem"> </span><span class="ajax-bar" style="display:none"> <a id="option-pane-open-button">Options</a><span style="letter-spacing:1rem"> </span></a><a class="update-button">Update</a> <span class="status"></span> </span></p>
+      </div>
+      <div class="card" id="option-pane" style="display:none;position:relative;">
+        <table>
+          <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
+          <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button" style="display:none;">Normal</a></p></td></tr>
+        </table>
+        <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>
       <div id="replies">
 		<c:forEach begin="1" var="post" items="${posts}">
@@ -120,7 +126,7 @@ html, body {
 	    </form>
 	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="http://xarql.com/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" type="submit" value="Prev"/></form>
 	    <form <c:if test="${page >= 9}">style="display:none;"</c:if> id="next-form" action="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" type="submit" value="Next"/></form>
-	    <p><a href="http://xarql.com/polr/find">Search</a> <a href="http://xarql.com/polr/flat">Browse</a> <span class="ajax-bar" style="display:none;"> <a class="update-button">Update</a> <span class="status"></span></span>
+	    <p><a href="http://xarql.com/polr/find">Search</a> <a href="http://xarql.com/polr/flat">Browse</a> <span class="ajax-bar" style="display:none;"> <a class="update-button" href="#">Update</a> <span class="status"></span></span>
 	  </div>
 	    <div id="data" class="card" style="visibility:hidden;display:none;">
 		  <p id="page">${page}</p>
@@ -134,10 +140,6 @@ html, body {
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
     <script>defaultStylesInjected = true;</script>
   </noscript>
-  <noscript id="fonts">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
-  </noscript>
   <script>
       var loadDeferredStyles = function() {
         var addStylesNode = document.getElementById("default-styles");
@@ -147,20 +149,10 @@ html, body {
         document.body.appendChild(replacement);
         addStylesNode.parentElement.removeChild(addStylesNode);
       };
-      var loadDeferredFonts = function() {
-    	  var addFontsNode = document.getElementById("fonts");
-    	  var replacement = document.createElement("div");
-    	  replacement.innerHTML = addFontsNode.textContent;
-    	  replacement.id = "fonts";
-    	  document.body.appendChild(replacement);
-    	  addFontsNode.parentElement.removeChild(addFontsNode);
-      };
       var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
           window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
       if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
       else window.addEventListener('load', loadDeferredStyles);
-      if (raf) raf(function() { window.setTimeout(loadDeferredFonts, 0); });
-      else window.addEventListener('load', loadDeferredFonts);
       var defaultStylesInjected = false;
   </script>
 </body>

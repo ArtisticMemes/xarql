@@ -2,7 +2,6 @@
 #wrapper,
 html,
 body {
-  font-family: 'Roboto', sans-serif;
   font-display: swap;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -18,6 +17,9 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
+body {font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
+h1,h2,h3,h4,h5,h6 {font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
 
 div .centered {
   display: flex;
@@ -107,6 +109,7 @@ p {
   letter-spacing: .03125rem;
   word-break: normal;
   word-wrap: break-word;
+  font-weight: normal;
 }
 
 .small {
@@ -120,6 +123,7 @@ p {
   margin: .5em 0 .5em 0;
   letter-spacing: .09375rem;
   text-transform: uppercase;
+  font-weight: normal;
 }
 
 ::-moz-selection {
@@ -262,17 +266,17 @@ button .ripple {
 
 form {
   font-size: 1rem;
-  font-family: "Roboto";
+  font-family: inherit;
 }
 
 form input {
 	font-size: 1rem;
-	font-family: "Roboto";
+	font-family: inherit;
 }
 
 form textarea {
 	font-size: 1rem;
-	font-family: "Roboto";
+	font-family: inherit;
 }
 
 .injected-iframe {
