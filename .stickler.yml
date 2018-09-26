@@ -1,8 +1,4 @@
+---
 linters:
-  csslint: {  }
   checkstyle:
       config: style/checkstyle.xml
-files:
-  ignore:
-    - 'bower_components/*'
-    - 'node_modules/*'
