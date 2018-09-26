@@ -1,5 +1,7 @@
 linters:
   csslint: {  }
+  checkstyle:
+      config: ./checkstyle.xml
 files:
   ignore:
     - 'bower_components/*'
