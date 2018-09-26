@@ -86,7 +86,7 @@ html, body {
           <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
           <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button" style="display:none;">Normal</a></p></td></tr>
         </table>
-        <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
+        <p><span style="position:absolute;bottom:1.1rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>
       <div id="replies">
 		<c:forEach begin="1" var="post" items="${posts}">
