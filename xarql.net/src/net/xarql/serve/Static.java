@@ -1,15 +1,11 @@
 /*
-MIT License
-http://g.xarql.net
-Copyright (c) 2018 Bryan Christopher Johnson
-*/
+ * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
+ */
 
 /*
-DISCLAIMER
-This code was based on code by Bauke Scholtz
-The original can be found here :
-http://balusc.omnifaces.org/2007/07/fileservlet.html
-*/
+ * DISCLAIMER This code was based on code by Bauke Scholtz The original can be
+ * found here : http://balusc.omnifaces.org/2007/07/fileservlet.html
+ */
 package net.xarql.serve;
 
 import java.io.BufferedInputStream;
@@ -32,8 +28,8 @@ public class Static extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String FILE_STORE = "/home/pi/xarql.net";
-    private static final int BUFFER_SIZE = 10240; // 10KB
+    private static final String FILE_STORE  = "/home/pi/xarql.net";
+    private static final int    BUFFER_SIZE = 10240;               // 10KB
 
     /**
      * @see HttpServlet#HttpServlet()

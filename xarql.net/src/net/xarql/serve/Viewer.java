@@ -1,8 +1,6 @@
 /*
-MIT License
-http://g.xarql.net
-Copyright (c) 2018 Bryan Christopher Johnson
-*/
+ * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
+ */
 package net.xarql.serve;
 
 import java.io.IOException;

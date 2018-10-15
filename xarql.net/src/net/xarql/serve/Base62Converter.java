@@ -1,8 +1,6 @@
 /*
-MIT License
-http://g.xarql.net
-Copyright (c) 2018 Bryan Christopher Johnson
-*/
+ * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
+ */
 package net.xarql.serve;
 
 import java.util.ArrayList;
@@ -73,7 +71,8 @@ public class Base62Converter
         {
             digits.add((int) (input % 62));
             input = (input - (input % 62)) / 62;
-        } while(input > 0);
+        }
+        while(input > 0);
 
         for(int i = digits.size() - 1; i >= 0; i--)
             output += charValues.get(digits.get(i));

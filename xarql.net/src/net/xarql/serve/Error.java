@@ -1,8 +1,6 @@
 /*
-MIT License
-http://g.xarql.net
-Copyright (c) 2018 Bryan Christopher Johnson
-*/
+ * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
+ */
 package net.xarql.serve;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class Error extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    HttpServletRequest currentRequest = null;
+    HttpServletRequest  currentRequest  = null;
     HttpServletResponse currentResponse = null;
 
     /**
