@@ -21,7 +21,7 @@ public class Viewer extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final String DOMAIN = "http://xarql.net";
+    public static final String DOMAIN = "http://localhost:8080";
 
     /**
      * @see HttpServlet#HttpServlet()
