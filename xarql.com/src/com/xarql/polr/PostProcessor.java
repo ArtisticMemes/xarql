@@ -1,8 +1,6 @@
 /*
-MIT License
-http://g.xarql.com
-Copyright (c) 2018 Bryan Christopher Johnson
-*/
+ * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
+ */
 package com.xarql.polr;
 
 import java.io.IOException;
@@ -18,8 +16,9 @@ import com.xarql.auth.AuthTable;
 /**
  * Servlet implementation class PolrPost
  */
-@WebServlet (description = "Processes post requests", urlPatterns =
-{ "/polr/post" })
+@WebServlet (description = "Processes post requests", urlPatterns = {
+        "/polr/post"
+})
 public class PostProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -59,8 +58,7 @@ public class PostProcessor extends HttpServlet
             request.setAttribute("answers", request.getParameter("answers"));
 
             // null pointer exception prevention
-            if(request.getAttribute("title") == null || request.getAttribute("content") == null
-                    || request.getAttribute("answers") == null)
+            if(request.getAttribute("title") == null || request.getAttribute("content") == null || request.getAttribute("answers") == null)
             {
                 response.sendError(400);
                 return;
