@@ -1,7 +1,33 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Home | i.xarql.com</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xarql Documentation</title>
 </head>
 <body>
-  <h>Testing</h>
+  <div id="wrapper">
+    <a href="https://artisticmemes.github.io/xarql/com/index.html">xarql.com Documentation</a>
+    <br>
+    <a href="https://artisticmemes.github.io/xarql/net/index.html">xarql.net Documentation</a>
+  </div>
+  <noscript id="default-styles">
+    <link rel="stylesheet" type="text/css" href="main.min.css">
+  </noscript>
+  <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("default-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        replacement.id = "styles";
+        document.body.appendChild(replacement);
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+      var defaultStylesInjected = false;
+  </script>
 </body>
+</html>

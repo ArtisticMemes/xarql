@@ -1,4 +1,0 @@
----
-linters:
-  checkstyle:
-      config: style/checkstyle.xml
