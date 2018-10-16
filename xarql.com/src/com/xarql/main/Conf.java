@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.auth.VerifyRecaptcha;
+import com.xarql.auth.AuthTable;
 import com.xarql.chat.ChatReset;
 import com.xarql.polr.PolrReset;
 import com.xarql.util.Secrets;
@@ -43,29 +43,39 @@ public class Conf extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
-        request.setAttribute("password", request.getParameter("password"));
-        request.setAttribute("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
-        String password = "";
-        String g_recaptcha_response = "";
-        if(request.getAttribute("password") != null && request.getAttribute("g-recaptcha-response") != null)
+        String tomcatSession = request.getRequestedSessionId();
+        if(tomcatSession != null)
         {
-            password = request.getAttribute("password").toString();
-            g_recaptcha_response = request.getAttribute("g-recaptcha-response").toString();
-        }
-
-        if(password.equals(Secrets.ConfPassword) && VerifyRecaptcha.verify(g_recaptcha_response))
-        {
-            boolean allWorked = ChatReset.execute(response) && PolrReset.execute(response);
-            request.setAttribute("success", allWorked);
-            if(allWorked)
-                request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
-            // System.out.println("Performed reset");
-            return;
+            String associatedGoogleID;
+            try
+            {
+                associatedGoogleID = AuthTable.get(tomcatSession).getGoogleId();
+            }
+            catch(Exception e)
+            {
+                response.sendError(401);
+                return;
+            }
+            if(Secrets.modList().contains(associatedGoogleID))
+            {
+                if(request.getParameter("reset") != null && request.getParameter("reset").equals("yes"))
+                {
+                    boolean allWorked = ChatReset.execute(response) && PolrReset.execute(response);
+                    request.setAttribute("success", allWorked);
+                    if(allWorked)
+                        request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
+                    return;
+                }
+                else
+                {
+                    request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
+                    return;
+                }
+            }
         }
         else
         {
-            request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
+            response.sendError(401);
             return;
         }
     } // doGet()
@@ -81,4 +91,4 @@ public class Conf extends HttpServlet
         doGet(request, response);
     } // doPost()
 
-}
+} // Conf

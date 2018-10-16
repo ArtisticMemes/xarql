@@ -19,7 +19,7 @@
 #link-div {
   display: flex;
   justify-content: center;
-  width: 100%;  
+  width: 100%;
 }
 #link-span {
   position: absolute;
@@ -54,13 +54,9 @@
     </div>
   </div>
   <noscript id="default-styles">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/small.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/small.min.css">
     <script>defaultStylesInjected = true;</script>
-  </noscript>
-  <noscript id="fonts">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro"> -->
   </noscript>
   <script>
       var loadDeferredStyles = function() {
@@ -71,23 +67,13 @@
         document.body.appendChild(replacement);
         addStylesNode.parentElement.removeChild(addStylesNode);
       };
-      var loadDeferredFonts = function() {
-    	  var addFontsNode = document.getElementById("fonts");
-    	  var replacement = document.createElement("div");
-    	  replacement.innerHTML = addFontsNode.textContent;
-    	  replacement.id = "fonts";
-    	  document.body.appendChild(replacement);
-    	  addFontsNode.parentElement.removeChild(addFontsNode);
-      };
       var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
           window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
       if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
       else window.addEventListener('load', loadDeferredStyles);
-      if (raf) raf(function() { window.setTimeout(loadDeferredFonts, 0); });
-      else window.addEventListener('load', loadDeferredFonts);
       var defaultStylesInjected = false;
   </script>
-  <script src="http://xarql.com/src/auth/auth.js" defer=""></script>
+  <script src="http://xarql.com/src/auth/auth.min.js" defer=""></script>
   <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
   <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
 </body>

@@ -60,8 +60,8 @@ html, body {
     </div>
   </div>
   <noscript id="default-styles">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.min.css">
     <script>defaultStylesInjected = true;</script>
   </noscript>
   <noscript id="fonts">

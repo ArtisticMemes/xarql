@@ -34,7 +34,7 @@ $(document).ready(function () {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
-	   
+
 	    // Get some values from elements on the page:
 	    var $form = $(this),
 	      message = $form.find("input[name='message']").val(),

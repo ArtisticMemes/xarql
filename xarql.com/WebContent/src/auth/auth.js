@@ -20,7 +20,7 @@ function checkStatus()
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'http://xarql.com/auth/status');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() 
+    xhr.onreadystatechange = function()
     {
         if(this.readyState == 4)
         {
@@ -62,7 +62,7 @@ function checkStatusHidden()
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'http://xarql.com/auth/status');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() 
+    xhr.onreadystatechange = function()
     {
         if(this.readyState == 4)
         {

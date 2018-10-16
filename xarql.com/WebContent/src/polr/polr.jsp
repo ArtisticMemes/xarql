@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
-  <script src="http://xarql.com/src/polr/polr.js" defer=""></script>
+  <script src="http://xarql.com/src/polr/polr.min.js" defer=""></script>
   <style>
 #wrapper, html, body {
   display: flex;
@@ -76,7 +76,7 @@ html, body {
              <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
            </div>
          </form>
-         <script src="http://xarql.com/src/auth/auth.js" defer=""></script>
+         <script src="http://xarql.com/src/auth/auth.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
        <p><a href="http://xarql.com/help">Help</a><span style="letter-spacing:1rem"> </span><span class="ajax-bar" style="display:none"> <a id="option-pane-open-button">Options</a><span style="letter-spacing:1rem"> </span></a><a class="update-button">Update</a> <span class="status"></span> </span></p>
@@ -136,8 +136,8 @@ html, body {
     </div>
   </div>
   <noscript id="default-styles">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.css">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
+    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.min.css">
     <script>defaultStylesInjected = true;</script>
   </noscript>
   <script>

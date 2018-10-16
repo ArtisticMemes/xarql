@@ -13,7 +13,7 @@ $(document).ready(function () {
 	        }
 	    }
 	}
-	
+
 	// Update page contents
 	function update() {
 		$(".status").each(function() {
@@ -48,7 +48,7 @@ $(document).ready(function () {
 			update();
 		});
 	});
-  
+
   // AJAX posting
   $( "#post-form" ).submit(function( event ) {
 	// Stop form from submitting normally
@@ -56,7 +56,7 @@ $(document).ready(function () {
 	$(".status").each(function() {
 		$(this).text("trying");
 	});
-   
+
     // Get values from form, reset form
     var $form = $( this ),
       title = $form.find("input[name='title']").val(),
@@ -65,7 +65,7 @@ $(document).ready(function () {
       url = $form.attr("action");
     $form.trigger('reset');
     $("#replying-to-input").val(parseInt($("#main-post-id").text()));
-    
+
     // Send the data using AJAX POST
     $.ajax({
     	type: "POST",
@@ -87,7 +87,7 @@ $(document).ready(function () {
     		window.setTimeout(update, 500); // wait .5 seconds
     	});
     });
-  
+
   function nav() {
 		$(".status").each(function() {
 			$(this).text("trying");
@@ -138,7 +138,7 @@ $(document).ready(function () {
 			$('#page-dropdown').val(pageNum - 1);
 		nav();
 	});
-  
+
   // Change font size
   $('html').css('font-size', Cookies.get('font-size'));
   $("#text-up").on("click", function() {
@@ -151,7 +151,7 @@ $(document).ready(function () {
 	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
 	  Cookies.set('font-size', (computedFontSize - 1) + 'px', { path: '' });
   });
-  
+
   function view(id) {
 		$(".status").each(function() {
 			$(this).text("trying");
@@ -180,7 +180,7 @@ $(document).ready(function () {
 	    	}
 	    });
 	}
-  
+
   function viewLinks()
   {
 	  $(".view-link").each(function () {
@@ -193,7 +193,7 @@ $(document).ready(function () {
 	});
   }
   viewLinks();
-  
+
   // Option Pane
   function fontWeight(weight)
   {
@@ -215,12 +215,12 @@ $(document).ready(function () {
   fontWeight(Cookies.get('font-weight'));
   $("#font-light-button").on('click', function() {
 	  fontWeight('light');
-	  
+
   });
   $("#font-normal-button").on('click', function() {
 	  fontWeight('normal');
   });
-  
+
   // Enable JS buttons + Option Pane
   $(".ajax-bar").each(function() {
 	  $(this).show();
@@ -235,13 +235,13 @@ $(document).ready(function () {
 	  $("#option-pane-open-button").show();
 	  $(this).hide();
   });
-  
+
   /* Auto update page to reflect options set on another page
   function autoOption() {
 	  if($('#styles').length)
 		  defaultStylesInjected = true;
 	  if(defaultStylesInjected == false)
-		  window.setTimeout(autoCrunch, 100);  wait 100 milliseconds before checking again 
+		  window.setTimeout(autoCrunch, 100);  wait 100 milliseconds before checking again
 	  else {
 		  if(Cookies.get('theme') === 'dark')
 			  setTheme('dark');
