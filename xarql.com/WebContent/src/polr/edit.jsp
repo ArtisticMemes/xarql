@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Remove A Post ~ xarql</title>
+  <title>Moderate Posts ~ xarql</title>
   <style>
 #wrapper, html, body {
   font-family: 'Roboto';
@@ -50,6 +50,11 @@ html, body {
           <br/>
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" type="submit" value="Remove"/>
+        </form>
+        <form action="http://xarql.com/polr/edit?type=restore" method="POST" id="post-form">
+          <br/>
+          ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          <input id="submit" type="submit" value="Restore"/>
         </form>
       </div>
     </div>

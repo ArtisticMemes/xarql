@@ -88,7 +88,7 @@ public class PolrEdit extends HttpServlet
             if(Secrets.modList().contains(associatedGoogleID))
             {
                 String type = request.getParameter("type");
-                if(type == null || !type.equals("remove"))
+                if(type == null || !(type.equals("remove") || type.equals("restore")))
                 {
                     response.sendError(400);
                     return;
@@ -110,10 +110,22 @@ public class PolrEdit extends HttpServlet
                     return;
                 }
 
-                PostRemover pr = new PostRemover(id, response);
-                if(pr.execute())
-                    response.sendRedirect("http://xarql.com/polr/edit");
-                return;
+                if(type.equals("remove"))
+                {
+                    PostRemover pr = new PostRemover(id, response);
+                    if(pr.execute())
+                        response.sendRedirect("http://xarql.com/polr/edit");
+                    return;
+                }
+                else if(type.equals("restore"))
+                {
+                    PostRestorer pr = new PostRestorer(id, response);
+                    if(pr.execute())
+                        response.sendRedirect("http://xarql.com/polr/edit");
+                    return;
+                }
+                else
+                    return;
             }
         }
         else
