@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browsing /polr ~ xarql</title>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
+  <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/flat.min.js" defer=""></script>
 </head>
 <body>
@@ -15,8 +16,8 @@
     <div id="column">
     <div class="large-card">
 	    <h4>Browse</h4>
-	    <form id="flat-form" action="http://xarql.com/polr/flat" method="GET" accept-charset="utf-8">
-	      <table>
+	    <form id="flat-form" action="http://xarql.com/polr/flat" method="GET" accept-charset="utf-8" style="display:inline;">
+	      <table style="display:inline;">
 	        <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	        <tr><td><select name="page" id="page-dropdown">
 	                <c:forEach begin="0" end="9" var="i">
@@ -34,9 +35,9 @@
                     <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
                     <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
                   </select></td>
-                <td><input id="submit" class="button" type="submit" value="Sort"/> <span class="status"></span></td>
             </tr>
 	      </table>
+        <input id="submit" class="button" type="submit" value="Sort"/> <span class="status"></span>
 	    </form>
 	  </div>
 	  <div id="results">
