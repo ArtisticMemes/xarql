@@ -9,47 +9,11 @@
   <title>Browsing /polr ~ xarql</title>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/polr/flat.min.js" defer=""></script>
-<style>
-@charset "UTF-8";
-#wrapper, html, body {
-  font-family: 'Roboto';
-  display: flex;
-  visibility: visible;
-  overflow-x: hidden;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  justify-content: center;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-#wrapper {
-  width: 100%;
-  max-width: 100%;
-}
-html, body {
-  width: 100vw;
-  max-width: 100vw;
-}
-*, *:before, *:after {
-  font-display:swap
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-#column {
-  max-width: 100%;
-}
-.card {
-  width: 40rem;
-  max-width: 100%;
-}
-  </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
-    <div class="card">
+    <div class="large-card">
 	    <h4>Browse</h4>
 	    <form id="flat-form" action="http://xarql.com/polr/flat" method="GET" accept-charset="utf-8">
 	      <table>
@@ -70,14 +34,14 @@ html, body {
                     <option value="asc"  <c:if test="${flow.equals('asc')}">selected="selected"</c:if> >Ascending</option>
                     <option value="desc" <c:if test="${flow.equals('desc')}">selected="selected"</c:if> >Descending</option>
                   </select></td>
-                <td><input id="submit" type="submit" value="Go"/> <span class="status"></span></td>
+                <td><input id="submit" class="button" type="submit" value="Sort"/> <span class="status"></span></td>
             </tr>
 	      </table>
 	    </form>
 	  </div>
 	  <div id="results">
         <c:forEach begin="0" var="post" items="${posts}">
-          <div class="card">
+          <div class="large-card">
             <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
             <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
             <h6>${post.getTitle()}</h6>
@@ -95,7 +59,6 @@ html, body {
   </div>
 <noscript id="default-styles">
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.min.css">
   <script>defaultStylesInjected = true;</script>
 </noscript>
 <script>

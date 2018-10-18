@@ -9,58 +9,22 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/find.min.js" defer=""></script>
-<style>
-@charset "UTF-8";
-#wrapper, html, body {
-  font-family: 'Roboto';
-  display: flex;
-  visibility: visible;
-  overflow-x: hidden;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  justify-content: center;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-#wrapper {
-  width: 100%;
-  max-width: 100%;
-}
-html, body {
-  width: 100vw;
-  max-width: 100vw;
-}
-*, *:before, *:after {
-  font-display:swap
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-#column {
-  max-width: 100%;
-}
-.card {
-  width: 40rem;
-  max-width: 100%;
-}
-  </style>
 </head>
 <body>
 <div id="wrapper">
   <div id="column">
-    <div class="card" style="x-overflow:hidden;">
+    <div class="large-card" style="x-overflow:hidden;">
       <h4>Search</h4>
       <form action="http://xarql.com/polr/find" method="GET" id="find-form">
          <input type="text" name="q" placeholder="Phrase" maxlength="64" required="" style="width:100%;">
          <br/>
-         <input id="submit" type="submit" value="Find"/> <span class="status"></span>
+         <input id="submit" class="button" type="submit" value="Find"/> <span class="status"></span>
        </form>
     </div>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <div id="results">
       <c:forEach begin="0" var="post" items="${posts}">
-        <div class="card">
+        <div class="large-card">
           <p class="overline">ID : ${post.getId()} ~ <a href="http://xarql.com/polr/${post.getAnswers()}">Replied To : ${post.getAnswers()}</a> ~ Date : ${post.getDisplayDate()}</p>
           <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
           <h6>${post.getTitle()}</h6>
@@ -73,7 +37,6 @@ html, body {
 </div>
 <noscript id="default-styles">
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.min.css">
   <script>defaultStylesInjected = true;</script>
 </noscript>
 <script>

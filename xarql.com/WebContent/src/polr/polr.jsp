@@ -11,47 +11,13 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/polr.min.js" defer=""></script>
-  <style>
-#wrapper, html, body {
-  display: flex;
-  visibility: visible;
-  overflow-x: hidden;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  justify-content: center;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-#wrapper {
-  width: 100%;
-  max-width: 100%;
-}
-html, body {
-  width: 100vw;
-  max-width: 100vw;
-}
-*, *:before, *:after {
-  font-display:swap
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-#column {
-  max-width: 100%;
-}
-.card {
-  width: 40rem;
-  max-width: 100%;
-}
-  </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
       <div id="main-post">
       <c:forEach begin="0" var="post" items="${posts}" end="0">
-		  <div class="card">
+		  <div class="large-card">
 		    <p class="overline">ID : <span id="main-post-id">${post.getId()}</span> ~ <a href="http://xarql.com/polr/${post.getAnswers()}" class="view-link" post-id="${post.getAnswers()}">Replied To : ${post.getAnswers()}</a> ~ Date : ${post.getDisplayDate()}</p>
 		    <p class="overline">Replies : <span id="reply-count">${post.getResponses()}</span> ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
 		    <h6>${post.getTitle()}</h6>
@@ -59,7 +25,7 @@ html, body {
 		  </div>
 		</c:forEach>
 		</div>
-      <div class="card" style="x-overflow:hidden;">
+      <div class="large-card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
        <form action="http://xarql.com/polr/post" method="POST" id="post-form">
          <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;">
@@ -67,7 +33,7 @@ html, body {
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
          <br/>
          Replying To : <input type="number" id="replying-to-input" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
-         <input id="submit" type="submit" value="Post"/> <input type="reset" value="Clear"/>
+         <input id="submit" class="button" type="submit" value="Post"/> <input type="reset" class="button" value="Clear"/>
        </form>
        <c:if test="${not authenticated}">
          <form action="http://xarql.com/auth/recaptcha" method="POST" id="recaptcha-form">
@@ -79,9 +45,17 @@ html, body {
          <script src="http://xarql.com/src/auth/auth.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-       <p><a href="http://xarql.com/help">Help</a><span style="letter-spacing:1rem"> </span><span class="ajax-bar" style="display:none"> <a id="option-pane-open-button">Options</a><span style="letter-spacing:1rem"> </span></a><a class="update-button">Update</a> <span class="status"></span> </span></p>
+       <div class="link-div">
+         <span class="link-span">
+           <p class="link"><a href="http://xarql.com/help">Help</a></p>
+           <span class="ajax-bar" style="display:none">
+             <p class="link"><a id="option-pane-open-button">Options</a></p>
+             <p class="link"><a class="update-button">Update</a> <span class="status"></span></p>
+           </span>
+         </span>
+       </div>
       </div>
-      <div class="card" id="option-pane" style="display:none;position:relative;">
+      <div class="large-card" id="option-pane" style="display:none;position:relative;">
         <table>
           <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
           <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button" style="display:none;">Normal</a></p></td></tr>
@@ -90,7 +64,7 @@ html, body {
       </div>
       <div id="replies">
 		<c:forEach begin="1" var="post" items="${posts}">
-		  <div class="card">
+		  <div class="large-card">
 		    <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
 		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
 		    <h6>${post.getTitle()}</h6>
@@ -99,7 +73,7 @@ html, body {
 		  </div>
 		</c:forEach>
 	  </div>
-	  <div class="card">
+	  <div class="large-card">
 	    <h4>Navigation</h4>
 	    <form id="nav-form" action="http://xarql.com/polr/${id}" method="GET" accept-charset="utf-8" style="display:inline;">
 	      <table style="display:inline">
@@ -122,11 +96,19 @@ html, body {
                   </select></td>
             </tr>
 	      </table>
-	      <input id="submit" type="submit" value="Custom"/>
+	      <input id="submit" class="button" type="submit" value="Custom"/>
 	    </form>
-	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="http://xarql.com/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" type="submit" value="Prev"/></form>
-	    <form <c:if test="${page >= 9}">style="display:none;"</c:if> id="next-form" action="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" type="submit" value="Next"/></form>
-	    <p><a href="http://xarql.com/polr/find">Search</a> <a href="http://xarql.com/polr/flat">Browse</a> <span class="ajax-bar" style="display:none;"> <a class="update-button" href="#">Update</a> <span class="status"></span></span>
+	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="http://xarql.com/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Prev"/></form>
+	    <form <c:if test="${page >= 9}">style="display:none;"</c:if> id="next-form" action="http://xarql.com/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
+      <div class="link-div">
+        <span class="link-span">
+          <p class="link"><a href="http://xarql.com/polr/find">Search</a></p>
+          <p class="link"><a href="http://xarql.com/polr/flat">Browse</a></p>
+          <span class="ajax-bar" style="display:none">
+            <p class="link"><a class="update-button" href="#">Update</a> <span class="status"></span></p>
+          </span>
+        </span>
+      </div>
 	  </div>
 	    <div id="data" class="card" style="visibility:hidden;display:none;">
 		  <p id="page">${page}</p>
@@ -137,7 +119,6 @@ html, body {
   </div>
   <noscript id="default-styles">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.min.css">
     <script>defaultStylesInjected = true;</script>
   </noscript>
   <script>

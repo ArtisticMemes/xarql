@@ -8,41 +8,6 @@
   <title>Chat</title>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/chat/chat.min.js" defer=""></script>
-  <style>
-#wrapper, html, body {
-  font-family: 'Roboto';
-  display: flex;
-  visibility: visible;
-  overflow-x: hidden;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  justify-content: center;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-#wrapper {
-  width: 100%;
-  max-width: 100%;
-}
-html, body {
-  width: 100vw;
-  max-width: 100vw;
-}
-*, *:before, *:after {
-  font-display:swap
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-#column {
-  max-width: 100%;
-}
-.card {
-  width: 40rem;
-  max-width: 100%;
-}
-  </style>
 </head>
 <body>
   <div id="wrapper">
@@ -50,12 +15,12 @@ html, body {
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <div id="messages">
         <c:forEach begin="0" var="message" items="${messages}">
-          <div class="card" style="background-color:${message.backgroundColor()}">
+          <div class="small-card" style="background-color:${message.backgroundColor()}">
             <p style="color:${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
 		  </div>
 	    </c:forEach>
 	  </div>
-	  <div class="card" style="x-overflow:hidden;">
+	  <div class="large-card" style="x-overflow:hidden;">
        <form action="http://xarql.com/chat/send" method="POST" id="message-form">
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input id="submit" type="submit" value="Send"/> <input type="reset" value="Clear"/>
@@ -70,7 +35,7 @@ html, body {
          <script src="http://xarql.com/src/auth/auth.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-       <p><a href="http://xarql.com/help">help</a> <span class="status"></span></p>
+       <p><a href="http://xarql.com/help">Help</a> <span class="status"></span></p>
       </div>
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>
@@ -79,7 +44,6 @@ html, body {
   </div>
   <noscript id="default-styles">
     <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/small.min.css">
     <script>defaultStylesInjected = true;</script>
   </noscript>
   <script>

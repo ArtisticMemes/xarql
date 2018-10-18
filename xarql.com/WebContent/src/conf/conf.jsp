@@ -7,12 +7,11 @@
   <title>conf</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/card/large.min.css">
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
-      <div class="card">
+      <div class="large-card">
       <form action="/conf?reset=yes" method="POST">
          <input id="submit" type="submit" value="Submit"/>
        </form>

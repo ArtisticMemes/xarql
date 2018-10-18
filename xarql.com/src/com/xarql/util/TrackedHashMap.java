@@ -11,12 +11,12 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
 {
     private ArrayList<K>  tracker   = new ArrayList<K>();
     private HashMap<K, E> container = new HashMap<K, E>();
-    private Random        r         = new Random();
+    private static Random r         = new Random();
 
     public TrackedHashMap()
     {
         tracker.ensureCapacity(0);
-    } // IgnorantHashMap()
+    } // TrackedHashMap()
 
     // Stats
     public int size()
@@ -141,4 +141,4 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
         tracker.clear();
     } // clear()
 
-} // IgnorantHashMap
+} // TrackedHashMap

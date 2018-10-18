@@ -144,12 +144,12 @@ $(document).ready(function () {
   $("#text-up").on("click", function() {
 	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
 	  $('html').css('font-size', (computedFontSize + 1) + 'px');
-	  Cookies.set('font-size', (computedFontSize + 1) + 'px', { path: '' });
+	  Cookies.set('font-size', (computedFontSize + 1) + 'px');
   });
   $("#text-dn").on("click", function() {
 	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // Get font size of <html></html>
 	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
-	  Cookies.set('font-size', (computedFontSize - 1) + 'px', { path: '' });
+	  Cookies.set('font-size', (computedFontSize - 1) + 'px');
   });
 
   function view(id) {
@@ -199,24 +199,24 @@ $(document).ready(function () {
   {
 	  if(weight === 'light') {
 		  $('p').css('font-weight', 'lighter');
-		  $('.bold').css('font-weight', 'lighter');
+		  $('.bold').css('font-weight', 'normal');
 		  $('#font-light-button').hide();
 		  $('#font-normal-button').show();
-		  Cookies.set('font-weight', 'light', { path: ''});
+		  Cookies.set('font-weight', 'light');
 	  }
 	  else {
 		  $('p').css('font-weight', 'normal');
 		  $('.bold').css('font-weight', 'bold');
 		  $('#font-normal-button').hide();
 		  $('#font-light-button').show();
-		  Cookies.set('font-weight', 'normal', { path: ''});
+		  Cookies.set('font-weight', 'normal');
 	  }
   }
   fontWeight(Cookies.get('font-weight'));
   $("#font-light-button").on('click', function() {
 	  fontWeight('light');
-
   });
+
   $("#font-normal-button").on('click', function() {
 	  fontWeight('normal');
   });

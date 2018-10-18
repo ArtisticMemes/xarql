@@ -5,7 +5,7 @@
 <div id="results-container">
   <div id="results">
     <c:forEach begin="0" var="post" items="${posts}">
-      <div class="card">
+      <div class="large-card">
         <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
         <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
         <h6>${post.getTitle()}</h6>
