@@ -81,6 +81,9 @@ $(document).ready(function () {
     		});
     	}).fail(function(){
     		$(".status").each(function() {
+          $form.find("input[name='title']").val(title);
+          $form.find("textarea[name='content']").val(content);
+          $form.find("input[name='answers']").val(answers);
     			$(this).text("error");
     		});
     	}).always(function(){
