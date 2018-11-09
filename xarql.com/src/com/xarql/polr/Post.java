@@ -28,7 +28,7 @@ public class Post
     // Constants
     public static final String DELETION_MESSAGE         = "<span class=\"warn\">[POST REMOVED]</span>";
     public static final String TITLE_DELETION_MESSAGE   = DELETION_MESSAGE;
-    public static final String CONTENT_DELETION_MESSAGE = "<span class=\"warn\">[CONTENT NOT AVAILABLE]</span><br><span class=\"warn\">[REPLYING NOT PERMITTED]</span>";
+    public static final String CONTENT_DELETION_MESSAGE = "<span class=\"warn\">CONTENT NOT AVAILABLE</span><br><span class=\"warn\">REPLYING NOT PERMITTED</span>";
 
     // Constructor
     public Post(int id, String title, String content, int answers, int removed, Timestamp date, Timestamp bump, Timestamp subbump, int responses, int subresponses)

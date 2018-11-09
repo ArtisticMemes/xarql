@@ -155,6 +155,7 @@ $(document).ready(function () {
 	  Cookies.set('font-size', (computedFontSize - 1) + 'px');
   });
 
+  var nav = false;
   function view(id) {
 		$(".status").each(function() {
 			$(this).text("trying");
@@ -169,7 +170,11 @@ $(document).ready(function () {
 				$("#main-post").replaceWith(updt.find("#main-post-container").html());
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
-				history.pushState("xarql", "xarql", "http://xarql.com/polr/" + id);
+        if(nav) {
+          history.replaceState("xarql", "xarql", "http://xarql.com/polr/" + id);
+        } else {
+          history.pushState("xarql", "xarql", "http://xarql.com/polr/" + id);
+        }
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -196,6 +201,14 @@ $(document).ready(function () {
 	});
   }
   viewLinks();
+
+  window.addEventListener('popstate', function(event) {
+      var pieces = window.location.href.split('/');
+      var currentID = pieces[pieces.length - 1];
+      nav = true;
+      view(currentID);
+      nav = false;
+  }, false);
 
   // Option Pane
   function fontWeight(weight)
