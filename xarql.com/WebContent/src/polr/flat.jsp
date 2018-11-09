@@ -7,6 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browsing /polr ~ xarql</title>
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/flat.min.js" defer=""></script>
@@ -58,24 +59,5 @@
       </div>
     </div>
   </div>
-<noscript id="default-styles">
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-  <script>defaultStylesInjected = true;</script>
-</noscript>
-<script>
-  var loadDeferredStyles = function() {
-    var addStylesNode = document.getElementById("default-styles");
-    var replacement = document.createElement("div");
-    replacement.innerHTML = addStylesNode.textContent;
-    replacement.id = "styles";
-    document.body.appendChild(replacement);
-    addStylesNode.parentElement.removeChild(addStylesNode);
-  };
-  var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-  else window.addEventListener('load', loadDeferredStyles);
-  var defaultStylesInjected = false;
-</script>
 </body>
 </html>

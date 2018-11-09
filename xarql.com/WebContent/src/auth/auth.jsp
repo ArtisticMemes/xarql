@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-signin-client_id" id="google-signin-client_id" content="541616841401-iqluj8gqbu0qvsn3kh7bl93e9mskoff3.apps.googleusercontent.com">
   <title>Authentication ~ xarql</title>
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
 </head>
 <body>
   <div id="wrapper">
@@ -35,25 +36,6 @@
       </div>
     </div>
   </div>
-  <noscript id="default-styles">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-    <script>defaultStylesInjected = true;</script>
-  </noscript>
-  <script>
-      var loadDeferredStyles = function() {
-        var addStylesNode = document.getElementById("default-styles");
-        var replacement = document.createElement("div");
-        replacement.innerHTML = addStylesNode.textContent;
-        replacement.id = "styles";
-        document.body.appendChild(replacement);
-        addStylesNode.parentElement.removeChild(addStylesNode);
-      };
-      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-      else window.addEventListener('load', loadDeferredStyles);
-      var defaultStylesInjected = false;
-  </script>
   <script src="http://xarql.com/src/auth/auth.min.js" defer=""></script>
   <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
   <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>

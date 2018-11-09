@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${code}</title>
+  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
 </head>
 <body>
 <div id="wrapper">
@@ -24,24 +25,5 @@
   </div>
 </div>
 </div>
-  <noscript id="default-styles">
-    <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-    <script>defaultStylesInjected = true;</script>
-  </noscript>
-  <script>
-      var loadDeferredStyles = function() {
-        var addStylesNode = document.getElementById("default-styles");
-        var replacement = document.createElement("div");
-        replacement.innerHTML = addStylesNode.textContent;
-        replacement.id = "styles";
-        document.body.appendChild(replacement);
-        addStylesNode.parentElement.removeChild(addStylesNode);
-      };
-      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-      else window.addEventListener('load', loadDeferredStyles);
-      var defaultStylesInjected = false;
-  </script>
 </body>
 </html>

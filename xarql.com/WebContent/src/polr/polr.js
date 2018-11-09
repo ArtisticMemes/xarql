@@ -171,7 +171,7 @@ $(document).ready(function () {
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
         if(nav) {
-          history.replaceState("xarql", "xarql", "http://xarql.com/polr/" + id);
+          // Do nothing
         } else {
           history.pushState("xarql", "xarql", "http://xarql.com/polr/" + id);
         }
