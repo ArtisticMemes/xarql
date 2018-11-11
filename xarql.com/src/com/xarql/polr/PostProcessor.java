@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.util.TextFormatter;
 
 /**
  * Servlet implementation class PolrPost
@@ -66,6 +67,14 @@ public class PostProcessor extends HttpServlet
 
             String title = request.getAttribute("title").toString();
             String content = request.getAttribute("content").toString();
+
+            // Censor bad words; send "forbidden" error
+            if(TextFormatter.shouldCensor(title) || TextFormatter.shouldCensor(content))
+            {
+                response.sendError(403);
+                return;
+            }
+
             // Get an int from the answers string in the request
             int answers;
             try

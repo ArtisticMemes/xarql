@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.util.TextFormatter;
 
 /**
  * Servlet implementation class SendProcessor
@@ -62,7 +63,13 @@ public class SendProcessor extends HttpServlet
 
         if(AuthTable.contains(session))
         {
-            // System.out.println("SendProcessor worked");
+            // Censor bad words; send "forbidden" error
+            if(TextFormatter.shouldCensor(message))
+            {
+                response.sendError(403);
+                return;
+            }
+
             MessageCreator mc = new MessageCreator(message, AuthTable.get(session));
             if(mc.execute(response))
                 response.sendRedirect("http://xarql.com/chat");

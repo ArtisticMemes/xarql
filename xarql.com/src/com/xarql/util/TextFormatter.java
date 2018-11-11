@@ -5,6 +5,26 @@ package com.xarql.util;
 
 public class TextFormatter
 {
+    public static boolean shouldCensor(String input)
+    {
+        input = input.toLowerCase();
+
+        // Remove all non-latin characters
+        String scannable = "";
+        for(int i = 0; i < input.length(); i++)
+        {
+            if(input.charAt(i) >= 97 && input.charAt(i) <= 122)
+                scannable += input.charAt(i);
+        }
+
+        // Check for censored words (return true if any are found)
+        for(int i = 0; i < Secrets.CENSORED_WORDS.length; i++)
+        {
+            if(scannable.contains(Secrets.CENSORED_WORDS[i]))
+                return true;
+        }
+        return false;
+    } // filter()
 
     // Do everything
     public static String full(String input)
