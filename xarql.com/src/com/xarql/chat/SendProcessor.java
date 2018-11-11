@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.util.Secrets;
 import com.xarql.util.TextFormatter;
 
 /**
@@ -67,6 +68,12 @@ public class SendProcessor extends HttpServlet
             if(TextFormatter.shouldCensor(message))
             {
                 response.sendError(403);
+                return;
+            }
+
+            if(message.contains(Secrets.MOD_SIGNATURE) && AuthTable.get(request.getRequestedSessionId()).isMod() == false)
+            {
+                response.sendError(401);
                 return;
             }
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.util.Secrets;
 import com.xarql.util.TextFormatter;
 
 /**
@@ -72,6 +73,12 @@ public class PostProcessor extends HttpServlet
             if(TextFormatter.shouldCensor(title) || TextFormatter.shouldCensor(content))
             {
                 response.sendError(403);
+                return;
+            }
+
+            if((content.contains(Secrets.MOD_SIGNATURE) || title.contains(Secrets.MOD_SIGNATURE)) && AuthTable.get(request.getRequestedSessionId()).isMod() == false)
+            {
+                response.sendError(401);
                 return;
             }
 

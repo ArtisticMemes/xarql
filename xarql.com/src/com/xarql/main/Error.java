@@ -49,6 +49,9 @@ public class Error extends HttpServlet
         String type;
         switch(code)
         {
+            case "410" :
+                type = "Gone";
+                break;
             case "404" :
                 type = "Not Found";
                 break;

@@ -7,6 +7,8 @@ import java.security.GeneralSecurityException;
 import java.sql.Timestamp;
 import java.util.Random;
 
+import com.xarql.util.Secrets;
+
 public class AuthSession
 {
     public static Random r = new Random(); // For generating colors
@@ -122,5 +124,14 @@ public class AuthSession
         else
             verified = false;
     } // verifyRecaptcha()
+
+    // Checks if this AuthSession belongs to a moderator
+    public boolean isMod()
+    {
+        if(Secrets.modList().contains(googleId))
+            return true;
+        else
+            return false;
+    } // isMod()
 
 } // AuthSession
