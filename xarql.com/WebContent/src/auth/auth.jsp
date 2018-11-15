@@ -9,6 +9,7 @@
   <meta name="google-signin-client_id" id="google-signin-client_id" content="541616841401-iqluj8gqbu0qvsn3kh7bl93e9mskoff3.apps.googleusercontent.com">
   <title>Authentication ~ xarql</title>
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
+  <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
 </head>
 <body>
   <div id="wrapper">

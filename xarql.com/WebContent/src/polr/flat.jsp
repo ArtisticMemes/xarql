@@ -11,6 +11,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
   <script src="http://xarql.com/src/polr/flat.min.js" defer=""></script>
+  <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
 </head>
 <body>
   <div id="wrapper">

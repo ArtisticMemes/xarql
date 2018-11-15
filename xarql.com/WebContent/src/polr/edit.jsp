@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moderate Posts ~ xarql</title>
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
+  <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
 </head>
 <body>
   <div id="wrapper">
