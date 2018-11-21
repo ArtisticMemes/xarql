@@ -50,6 +50,7 @@ public class PathReader extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("domain", DOMAIN);
+        request.setAttribute("recaptcha_key", DeveloperOptions.getRecaptchaKey());
 
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");

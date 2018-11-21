@@ -41,7 +41,7 @@
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">
-             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
+             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
              <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
            </div>
          </form>

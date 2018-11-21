@@ -10,7 +10,7 @@
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/chat/chat.min.js" defer=""></script>
-  <link rel="shortcut icon" href="/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
 </head>
 <body>
   <div id="wrapper">
@@ -31,7 +31,7 @@
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">
-             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
+             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
              <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
            </div>
          </form>

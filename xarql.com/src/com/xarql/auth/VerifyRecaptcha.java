@@ -19,11 +19,11 @@ import javax.net.ssl.X509TrustManager;
 
 import org.json.JSONObject;
 
-import com.xarql.util.Secrets;
+import com.xarql.main.DeveloperOptions;
 
 public class VerifyRecaptcha
 {
-    private static String SECRET = Secrets.RecaptchaSecret;
+    private static String SECRET = DeveloperOptions.getRecaptchaSecret();
 
     public static boolean verify(String response)
     {
