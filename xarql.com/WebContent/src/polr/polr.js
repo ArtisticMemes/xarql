@@ -1,3 +1,4 @@
+/* After editing, manually rename the nav() function in the .min.js file to stay as nav() */
 $(document).ready(function () {
   var domain = document.getElementById('domain').getAttribute('value');
 	function getUrlParameter(sParam) {
