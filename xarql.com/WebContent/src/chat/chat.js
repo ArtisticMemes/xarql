@@ -1,11 +1,12 @@
 $(document).ready(function () {
 	// Update Messages
+  var domain = document.getElementById('domain').getAttribute('value');
 	var lastID = $("#last-id").text();
 	function update() {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
-	    var updt = $("<div></div>").load("http://xarql.com/chat/updt?last=" + $("#last-id").text(), function(response, status, xhr) {
+	    var updt = $("<div></div>").load(domain + "/chat/updt?last=" + $("#last-id").text(), function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);

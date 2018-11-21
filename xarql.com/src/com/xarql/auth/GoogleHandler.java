@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.main.DeveloperOptions;
+
 /**
  * Servlet implementation class GoogleHandler
  */
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class GoogleHandler extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +39,8 @@ public class GoogleHandler extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.sendRedirect("http://xarql.com/auth");
+        // request.setAttribute("domain", DOMAIN);
+        response.sendRedirect(DOMAIN + "/auth");
     } // doGet()
 
     /**

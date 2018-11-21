@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.main.DeveloperOptions;
+
 /**
  * Servlet implementation class RecaptchaHandler
  */
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class RecaptchaHandler extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +39,8 @@ public class RecaptchaHandler extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.sendRedirect("http://xarql.com/auth");
+        // request.setAttribute("domain", DOMAIN);
+        response.sendRedirect(DOMAIN + "/auth");
     } // doGet()
 
     /**
@@ -60,7 +65,7 @@ public class RecaptchaHandler extends HttpServlet
         if(AuthTable.contains(tomcatSession))
         {
             response.setStatus(200);
-            response.sendRedirect("http://xarql.com/auth");
+            response.sendRedirect(DOMAIN + "/auth");
         }
         else
             response.sendError(400, "Recaptcha Invalid");

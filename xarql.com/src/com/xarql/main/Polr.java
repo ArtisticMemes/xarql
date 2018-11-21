@@ -26,6 +26,8 @@ public class Polr extends HttpServlet
     public static final String DEFAULT_SORT = "subbump";
     public static final String DEFAULT_FLOW = "desc";
 
+    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,6 +44,8 @@ public class Polr extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
+
         // System.out.println("incoming request for /polr");
         currentRequest = request;
         currentResponse = response;
@@ -66,7 +70,7 @@ public class Polr extends HttpServlet
 
         if(attributeEmpty("id"))
         {
-            response.sendRedirect("http://xarql.com/polr/0");
+            response.sendRedirect(DOMAIN + "/polr/0");
             return;
         }
         else
@@ -82,9 +86,9 @@ public class Polr extends HttpServlet
                 return;
             }
             if(sort != DEFAULT_SORT || flow != DEFAULT_FLOW)
-                response.sendRedirect("http://xarql.com/polr/" + id + "&sort=" + sort + "&flow=" + flow);
+                response.sendRedirect(DOMAIN + "/polr/" + id + "&sort=" + sort + "&flow=" + flow);
             else
-                response.sendRedirect("http://xarql.com/polr/" + id);
+                response.sendRedirect(DOMAIN + "/polr/" + id);
             return;
         }
 

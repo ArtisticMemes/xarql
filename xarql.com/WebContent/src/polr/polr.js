@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var domain = document.getElementById('domain').getAttribute('value');
 	function getUrlParameter(sParam) {
 	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 	        sURLVariables = sPageURL.split('&'),
@@ -19,7 +20,7 @@ $(document).ready(function () {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
-	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + "&page=" + $("#page").text() + "&sort=" + $("#sort").text() + "&flow=" + $("#flow").text() + "#full", function(response, status, xhr) {
+	    var updt = $("<div></div>").load(domain + "/polr/updt?id=" + $("#main-post-id").text() + "&page=" + $("#page").text() + "&sort=" + $("#sort").text() + "&flow=" + $("#flow").text() + "#full", function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
@@ -99,7 +100,7 @@ $(document).ready(function () {
 	      page = $("#page-dropdown").val(),
 	      sort = $("#sort-dropdown").val(),
 	      flow = $("#flow-dropdown").val();
-	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + $("#main-post-id").text() + "&page=" + page + "&sort=" + sort + "&flow=" + flow, function(response, status, xhr) {
+	    var updt = $("<div></div>").load(domain + "/polr/updt?id=" + $("#main-post-id").text() + "&page=" + page + "&sort=" + sort + "&flow=" + flow, function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
@@ -160,7 +161,7 @@ $(document).ready(function () {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
-	    var updt = $("<div></div>").load("http://xarql.com/polr/updt?id=" + id + "&page=0", function(response, status, xhr) {
+	    var updt = $("<div></div>").load(domain + "/polr/updt?id=" + id + "&page=0", function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
@@ -173,7 +174,7 @@ $(document).ready(function () {
         if(nav) {
           // Do nothing
         } else {
-          history.pushState("xarql", "xarql", "http://xarql.com/polr/" + id);
+          history.pushState("xarql", "xarql", domain + "/polr/" + id);
         }
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);

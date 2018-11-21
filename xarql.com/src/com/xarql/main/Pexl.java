@@ -18,6 +18,8 @@ public class Pexl extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,6 +36,8 @@ public class Pexl extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
+
         Canvas main = Canvas.main;
         // request.setAttribute("pexl-string", main.getPexlEncoding());
         request.getRequestDispatcher("/src/pexl/pexl.jsp").forward(request, response);

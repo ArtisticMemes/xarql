@@ -10,7 +10,7 @@
         <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
         <h6>${post.getTitle()}</h6>
         <p>${post.getContent()}</p>
-        <p><a href="http://xarql.com/polr/${post.getId()}">View</a></p>
+        <p><a href="${domain}/polr/${post.getId()}">View</a></p>
       </div>
     </c:forEach>
   </div>

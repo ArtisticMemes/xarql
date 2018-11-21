@@ -22,6 +22,8 @@ public class Error extends HttpServlet
     HttpServletRequest  currentRequest  = null;
     HttpServletResponse currentResponse = null;
 
+    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,6 +40,8 @@ public class Error extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
+
         currentRequest = request;
         currentResponse = response;
         request.setAttribute("code", request.getParameter("code"));

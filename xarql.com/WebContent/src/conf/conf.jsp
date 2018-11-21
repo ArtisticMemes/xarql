@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>conf</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
   <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
 </head>

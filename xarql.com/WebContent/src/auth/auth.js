@@ -1,3 +1,4 @@
+var domain = document.getElementById('domain').getAttribute('value');
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () {
@@ -8,7 +9,7 @@ function onSignIn(googleUser)
 {
 	var id_token = googleUser.getAuthResponse().id_token;
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://xarql.com/auth/google');
+	xhr.open('POST', domain + '/auth/google');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  //console.log('response loaded');
@@ -18,7 +19,7 @@ function onSignIn(googleUser)
 function checkStatus()
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://xarql.com/auth/status');
+	xhr.open('GET', domain + '/auth/status');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function()
     {
@@ -44,7 +45,7 @@ function recaptchaCallback()
 	document.getElementById('recaptcha_check_empty').value = 1;
 	var recaptchaData = grecaptcha.getResponse();
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://xarql.com/auth/recaptcha');
+	xhr.open('POST', domain + '/auth/recaptcha');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  //console.log('response loaded');
@@ -60,7 +61,7 @@ function recaptchaCallback()
 function checkStatusHidden()
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://xarql.com/auth/status');
+	xhr.open('GET', domain + '/auth/status');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function()
     {

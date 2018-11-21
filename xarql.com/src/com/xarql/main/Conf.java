@@ -27,6 +27,8 @@ public class Conf extends HttpServlet
     public static final String POLR_ROOT_POST_TITLE   = "ROOT POST";
     public static final String POLR_ROOT_POST_CONTENT = "Additional information available at <a href=\"http://xarql.com/help\">xarql.com/help</a>";
 
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,6 +45,8 @@ public class Conf extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
+
         String tomcatSession = request.getRequestedSessionId();
         if(tomcatSession != null)
         {

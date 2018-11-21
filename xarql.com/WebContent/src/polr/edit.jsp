@@ -5,20 +5,21 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta id="domain" value="${domain}">
   <title>Moderate Posts ~ xarql</title>
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-  <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
+  <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <form action="http://xarql.com/polr/edit?type=remove" method="POST" id="post-form">
+        <form action="${domain}/polr/edit?type=remove" method="POST" id="post-form">
           <br/>
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Remove"/>
         </form>
-        <form action="http://xarql.com/polr/edit?type=restore" method="POST" id="post-form">
+        <form action="${domain}/polr/edit?type=restore" method="POST" id="post-form">
           <br/>
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Restore"/>

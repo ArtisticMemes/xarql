@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.main.DeveloperOptions;
 
 /**
  * Servlet implementation class PathReader
@@ -30,6 +31,8 @@ public class PathReader extends HttpServlet
 
     public static final int POSTS_PER_PAGE = PostRetriever.DEFAULT_POST_COUNT;
 
+    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,6 +49,8 @@ public class PathReader extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
+
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
 
@@ -100,7 +105,7 @@ public class PathReader extends HttpServlet
 
         if(pathParts.length == 1)
         {
-            response.sendRedirect("http://xarql.com/polr/0");
+            response.sendRedirect(DOMAIN + "/polr/0");
             return;
         }
         else if(pathParts.length == 2)
@@ -131,12 +136,12 @@ public class PathReader extends HttpServlet
         }
         else if(pathParts.length > 2)
         {
-            response.sendRedirect("http://xarql.com/polr/" + pathParts[1]);
+            response.sendRedirect(DOMAIN + "/polr/" + pathParts[1]);
             return;
         }
         else
         {
-            response.sendRedirect("http://xarql.com/polr/0");
+            response.sendRedirect(DOMAIN + "/polr/0");
             return;
         }
 

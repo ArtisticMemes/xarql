@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.main.DeveloperOptions;
+
 /**
  * Servlet implementation class PolrFlat
  */
@@ -24,6 +26,8 @@ public class PolrFlat extends HttpServlet
     private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
     private static final int    MIN_PAGE     = PathReader.MIN_PAGE;
     private static final int    MAX_PAGE     = PathReader.MAX_PAGE;
+
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,6 +45,8 @@ public class PolrFlat extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
+
         // use sort parameter
         String sort;
         request.setAttribute("sort", request.getParameter("sort"));

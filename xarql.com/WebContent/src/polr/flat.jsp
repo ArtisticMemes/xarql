@@ -6,19 +6,20 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meat id="domain" value="${domain}">
   <title>Browsing /polr ~ xarql</title>
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
+  <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
-  <script src="http://xarql.com/src/common/jscookie.js" defer=""></script>
-  <script src="http://xarql.com/src/polr/flat.min.js" defer=""></script>
-  <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
+  <script src="${domain}/src/common/jscookie.js" defer=""></script>
+  <script src="${domain}/src/polr/flat.min.js" defer=""></script>
+  <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
     <div class="large-card">
 	    <h4>Browse</h4>
-	    <form id="flat-form" action="http://xarql.com/polr/flat" method="GET" accept-charset="utf-8" style="display:inline;">
+	    <form id="flat-form" action="${domain}/polr/flat" method="GET" accept-charset="utf-8" style="display:inline;">
 	      <table style="display:inline;">
 	        <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	        <tr><td><select name="page" id="page-dropdown">
@@ -49,7 +50,7 @@
             <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
             <h6>${post.getTitle()}</h6>
             <p>${post.getContent()}</p>
-            <p><a href="http://xarql.com/polr/${post.getId()}">View</a></p>
+            <p><a href="${domain}/polr/${post.getId()}">View</a></p>
           </div>
         </c:forEach>
       </div>

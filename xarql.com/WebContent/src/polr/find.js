@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var domain = document.getElementById('domain').getAttribute('value');
 	function search() {
 		$(".status").each(function() {
 			$(this).text("trying");
@@ -6,7 +7,7 @@ $(document).ready(function () {
 		var $form = $("#find-form"),
 	      query = $form.find("input[name='q']").serialize(),
 	      queryText = $form.find("input[name='q']").val();
-	    var updt = $("<div></div>").load("http://xarql.com/polr/find?ajax=true&" + query, function(response, status, xhr) {
+	    var updt = $("<div></div>").load(domain + "/polr/find?ajax=true&" + query, function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);

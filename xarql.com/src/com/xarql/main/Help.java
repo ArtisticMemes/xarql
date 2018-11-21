@@ -19,6 +19,8 @@ public class Help extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,7 +37,7 @@ public class Help extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.sendRedirect("http://xarql.com/docs/xarql/xarql.html");
+        response.sendRedirect(DOMAIN + "/docs/xarql/xarql.html");
     } // doGet()
 
     /**

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.main.DeveloperOptions;
+
 /**
  * Servlet implementation class AuthMainPage
  */
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthMainPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +39,7 @@ public class AuthMainPage extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("domain", DOMAIN);
         boolean authorized = AuthTable.contains(request.getRequestedSessionId());
         request.setAttribute("authorized", authorized);
         request.getRequestDispatcher("/src/auth/auth.jsp").forward(request, response);

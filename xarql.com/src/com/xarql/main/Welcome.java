@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet ("/Welcome")
 public class Welcome extends HttpServlet
 {
+    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -35,9 +37,9 @@ public class Welcome extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
+        request.setAttribute("domain", DOMAIN);
         request.getRequestDispatcher("/src/welcome/welcome.jsp").forward(request, response);
-    }
+    } // doGet()
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -48,6 +50,6 @@ public class Welcome extends HttpServlet
     {
         // TODO Auto-generated method stub
         doGet(request, response);
-    }
+    } // doPost()
 
 } // Welcome

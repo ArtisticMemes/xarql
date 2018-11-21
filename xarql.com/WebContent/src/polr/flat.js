@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var domain = document.getElementById('domain').getAttribute('value');
   function browse() {
 		$(".status").each(function() {
 			$(this).text("trying");
@@ -7,7 +8,7 @@ $(document).ready(function () {
 	      page = $("#page-dropdown").val(),
 	      sort = $("#sort-dropdown").val(),
 	      flow = $("#flow-dropdown").val();
-	    var updt = $("<div></div>").load("http://xarql.com/polr/flat?ajax=true&page=" + page + "&sort=" + sort + "&flow=" + flow, function(response, status, xhr) {
+	    var updt = $("<div></div>").load(domain + "/polr/flat?ajax=true&page=" + page + "&sort=" + sort + "&flow=" + flow, function(response, status, xhr) {
 	    	if(status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
