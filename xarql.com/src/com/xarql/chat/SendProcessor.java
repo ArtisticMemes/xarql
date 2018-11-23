@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.auth.IPTracker;
 import com.xarql.util.Secrets;
 import com.xarql.util.TextFormatter;
 
@@ -79,7 +80,10 @@ public class SendProcessor extends HttpServlet
 
             MessageCreator mc = new MessageCreator(message, AuthTable.get(session));
             if(mc.execute(response))
+            {
+                IPTracker.logChatSend(AuthTable.get(request.getRequestedSessionId()), request.getRemoteAddr(), mc.getDeterminedID());
                 response.setStatus(200);
+            }
             return;
         }
         else

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
 import com.xarql.util.TextFormatter;
@@ -100,7 +101,10 @@ public class PostProcessor extends HttpServlet
 
             PostCreator pc = new PostCreator(title, content, answers);
             if(pc.execute(response))
+            {
+                IPTracker.logPolrPost(AuthTable.get(request.getRequestedSessionId()), request.getRemoteAddr(), pc.getDeterminedID());
                 response.setStatus(200);
+            }
             return;
         }
         else

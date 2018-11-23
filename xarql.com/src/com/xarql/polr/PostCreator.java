@@ -25,6 +25,8 @@ public class PostCreator
     private int     answers;
     private boolean goodParameters;
 
+    private int determinedID;
+
     // Limits
     public static final int MAX_TITLE_LENGTH   = 64;
     public static final int MAX_CONTENT_LENGTH = 4096;
@@ -87,6 +89,11 @@ public class PostCreator
         return answers;
     } // getAnswers()
 
+    public int getDeterminedID()
+    {
+        return determinedID;
+    } // getDeterminedID()
+
     public boolean execute(HttpServletResponse response) // <-- Not up to naming conventions, but looks Google's naming
     {
         // System.out.println("Attempting to create post");
@@ -101,11 +108,78 @@ public class PostCreator
                 return false;
 
             PageCache.clear();
+
+            determinedID = determineID(response);
+            if(determinedID == 0)
+                return false;
+
             return true; // Will execute if neither of the above 2 return statements have
         }
         else
             return false;
     } // execute(HttpServletResponse response)
+
+    private int determineID(HttpServletResponse response)
+    {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        String query = "SELECT MAX(id) FROM polr";
+
+        // System.out.println("Parameters = good");
+        try
+        {
+            connection = DBManager.getConnection();
+            statement = connection.prepareStatement(query);
+
+            rs = statement.executeQuery();
+            rs.first();
+            int id = rs.getInt(1);
+            return id;
+        }
+        catch(SQLException s)
+        {
+            try
+            {
+                response.sendError(500);
+                return 0;
+            }
+            catch(IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return 0;
+        }
+        finally
+        {
+            // Close in reversed order.
+            if(rs != null)
+                try
+                {
+                    rs.close();
+                }
+                catch(SQLException s)
+                {
+                }
+            if(statement != null)
+                try
+                {
+                    statement.close();
+                }
+                catch(SQLException s)
+                {
+                }
+            if(connection != null)
+                try
+                {
+                    connection.close();
+                }
+                catch(SQLException s)
+                {
+                }
+        }
+    } // determineID()
 
     private boolean updateStats(int startingId, HttpServletResponse response)
     {
