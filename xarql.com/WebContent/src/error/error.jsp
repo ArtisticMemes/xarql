@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <title>${code}</title>
-  <link rel="stylesheet" type="text/css" href="http://xarql.com/src/common/common.min.css">
-  <link rel="shortcut icon" href="http://xarql.com/logo.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
+  <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
 </head>
 <body>
 <div id="wrapper">
@@ -19,9 +19,9 @@
       <h5 class="centered">${type}</h4>
       <div class="link-div">
         <span class="link-span">
-          <p class="link"><a href="http://xarql.com/help">Help</a></p>
+          <p class="link"><a href="${domain}/help">Help</a></p>
           <p class="link"><a href="#" onclick="history.back()">Return</a></p>
-          <p class="link"><a href="http://xarql.com">Home</a></p>
+          <p class="link"><a href="${domain}">Home</a></p>
         </span>
       </div>
   </div>
