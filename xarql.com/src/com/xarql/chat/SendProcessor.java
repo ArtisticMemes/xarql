@@ -79,7 +79,7 @@ public class SendProcessor extends HttpServlet
 
             MessageCreator mc = new MessageCreator(message, AuthTable.get(session));
             if(mc.execute(response))
-                response.sendRedirect("http://xarql.com/chat");
+                response.setStatus(200);
             return;
         }
         else

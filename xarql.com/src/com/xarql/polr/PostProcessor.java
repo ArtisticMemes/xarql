@@ -100,8 +100,7 @@ public class PostProcessor extends HttpServlet
 
             PostCreator pc = new PostCreator(title, content, answers);
             if(pc.execute(response))
-                response.sendRedirect("http://xarql.com/polr/" + pc.getAnswers() + "?refresh=true"); // Update with AJAX
-
+                response.setStatus(200);
             return;
         }
         else
