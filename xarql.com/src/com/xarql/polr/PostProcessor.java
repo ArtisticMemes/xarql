@@ -15,6 +15,7 @@ import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
+import com.xarql.util.ServletUtilities;
 import com.xarql.util.TextFormatter;
 
 /**
@@ -57,8 +58,7 @@ public class PostProcessor extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("domain", DOMAIN);
-        boolean authorized = AuthTable.contains(request.getRequestedSessionId());
-        if(authorized)
+        if(ServletUtilities.userIsAuth(request))
         {
             request.setAttribute("title", request.getParameter("title"));
             request.setAttribute("content", request.getParameter("content"));

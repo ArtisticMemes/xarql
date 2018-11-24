@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.pexl.Canvas;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class Pexl
@@ -36,7 +37,7 @@ public class Pexl extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
+        ServletUtilities.standardSetup(request);
 
         Canvas main = Canvas.main;
         // request.setAttribute("pexl-string", main.getPexlEncoding());

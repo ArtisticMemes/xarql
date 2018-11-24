@@ -3,6 +3,7 @@ package com.xarql.util;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
 
 public class ServletUtilities
@@ -16,6 +17,24 @@ public class ServletUtilities
         request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
         setTheme(request);
     } // standardSetup()
+
+    public static boolean userIsMod(HttpServletRequest request)
+    {
+        if(AuthTable.get(request.getRequestedSessionId()).isMod())
+            return true;
+        else
+            return false;
+    } // userIsMod()
+
+    public static boolean userIsAuth(HttpServletRequest request)
+    {
+        if(request.getRequestedSessionId() == null) // NullPointerException protection
+            return false;
+        else if(AuthTable.contains(request.getRequestedSessionId()))
+            return true;
+        else
+            return false;
+    } // userIsAuth()
 
     public static void setTheme(HttpServletRequest request)
     {

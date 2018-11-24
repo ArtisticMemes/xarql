@@ -41,9 +41,7 @@ public class AuthMainPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities.standardSetup(request);
-
-        boolean authorized = AuthTable.contains(request.getRequestedSessionId());
-        request.setAttribute("authorized", authorized);
+        request.setAttribute("authorized", ServletUtilities.userIsAuth(request));
         request.getRequestDispatcher("/src/auth/auth.jsp").forward(request, response);
     } // doGet()
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.util.Secrets;
+import com.xarql.util.ServletUtilities;
 import com.xarql.util.TextFormatter;
 
 /**
@@ -51,19 +52,17 @@ public class SendProcessor extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("message", request.getParameter("message"));
-        request.setAttribute("session", request.getRequestedSessionId());
 
         // null pointer exception prevention
-        if(request.getAttribute("message") == null || request.getAttribute("session") == null)
+        if(request.getAttribute("message") == null)
         {
             response.sendError(400);
             return;
         }
 
         String message = request.getAttribute("message").toString();
-        String session = request.getAttribute("session").toString();
 
-        if(AuthTable.contains(session))
+        if(ServletUtilities.userIsAuth(request))
         {
             // Censor bad words; send "forbidden" error
             if(TextFormatter.shouldCensor(message))
@@ -78,7 +77,7 @@ public class SendProcessor extends HttpServlet
                 return;
             }
 
-            MessageCreator mc = new MessageCreator(message, AuthTable.get(session));
+            MessageCreator mc = new MessageCreator(message, AuthTable.get(request.getRequestedSessionId()));
             if(mc.execute(response))
             {
                 IPTracker.logChatSend(AuthTable.get(request.getRequestedSessionId()), request.getRemoteAddr(), mc.getDeterminedID());

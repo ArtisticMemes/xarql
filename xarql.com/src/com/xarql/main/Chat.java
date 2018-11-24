@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.auth.AuthTable;
 import com.xarql.chat.Message;
 import com.xarql.chat.MessageRetriever;
 import com.xarql.util.ServletUtilities;
@@ -44,9 +43,7 @@ public class Chat extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities.standardSetup(request);
-
-        boolean authenticated = AuthTable.contains(request.getRequestedSessionId());
-        request.setAttribute("authenticated", authenticated);
+        request.setAttribute("authenticated", ServletUtilities.userIsAuth(request));
 
         MessageRetriever mr = new MessageRetriever(response);
         ArrayList<Message> messages = mr.execute();
