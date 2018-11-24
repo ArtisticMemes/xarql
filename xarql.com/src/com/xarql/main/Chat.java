@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthTable;
 import com.xarql.chat.Message;
 import com.xarql.chat.MessageRetriever;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class Chat
@@ -44,6 +45,8 @@ public class Chat extends HttpServlet
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("recaptcha_key", DeveloperOptions.getRecaptchaKey());
+
+        ServletUtilities.setTheme(request);
 
         boolean authenticated = AuthTable.contains(request.getRequestedSessionId());
         request.setAttribute("authenticated", authenticated);

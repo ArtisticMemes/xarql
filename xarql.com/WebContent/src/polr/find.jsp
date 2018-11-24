@@ -7,7 +7,7 @@
   <title>${query} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
-  <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
+  <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/find.min.js" defer=""></script>

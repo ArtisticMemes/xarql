@@ -9,7 +9,7 @@
   <title>${posts.get(0).getTitleText()} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
-  <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
+  <link rel="stylesheet" type="text/css" id="theme-styles" href="${domain}/src/common/${theme}-common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/polr.min.js" defer=""></script>
@@ -41,7 +41,7 @@
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">
-             <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
+             <div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
              <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
            </div>
          </form>
@@ -61,7 +61,8 @@
       <div class="large-card" id="option-pane" style="display:none;position:relative;">
         <table>
           <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
-          <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button" style="display:none;">Normal</a></p></td></tr>
+          <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button">Normal</a></p></td></tr>
+          <tr><td><p>Theme</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="light-theme-button">Light</a><a id="dark-theme-button">Dark</a></p></td></tr>
         </table>
         <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>

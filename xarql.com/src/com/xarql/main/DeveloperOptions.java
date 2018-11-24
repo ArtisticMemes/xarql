@@ -4,7 +4,7 @@ import com.xarql.util.Secrets;
 
 public class DeveloperOptions
 {
-    public static final String   DOMAIN  = "//xarql.com";
+    public static final String   DOMAIN  = "https://xarql.com";
     private static final boolean TESTING = false;
     /*
      * TESTING must equal true if you're trying to test something due to the

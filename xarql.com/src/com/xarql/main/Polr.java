@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.util.ServletUtilities;
+
 /**
  * Servlet implementation class Polr
  */
@@ -46,6 +48,8 @@ public class Polr extends HttpServlet
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("recaptcha_key", DeveloperOptions.getRecaptchaKey());
+
+        ServletUtilities.setTheme(request);
 
         // System.out.println("incoming request for /polr");
         currentRequest = request;

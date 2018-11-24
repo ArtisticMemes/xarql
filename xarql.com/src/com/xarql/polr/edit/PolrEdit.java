@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class PolrEdit
@@ -38,6 +39,7 @@ public class PolrEdit extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("domain", DOMAIN);
+        ServletUtilities.setTheme(request);
 
         String tomcatSession = request.getRequestedSessionId();
         if(tomcatSession != null)

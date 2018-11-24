@@ -212,6 +212,28 @@ $(document).ready(function () {
       nav = false;
   }, false);
 
+  function changeTheme(theme) {
+    if(theme === 'light') {
+      $("#theme-styles").attr("href", domain + "/src/common/light-common.min.css");
+      Cookies.set('theme', 'light');
+      $("#light-theme-button").hide();
+      $("#dark-theme-button").show();
+    }
+    else {
+      $("#theme-styles").attr("href", domain + "/src/common/dark-common.min.css");
+      Cookies.set('theme', 'dark');
+      $("#light-theme-button").show();
+      $("#dark-theme-button").hide();
+    }
+  }
+  changeTheme(Cookies.get('theme'));
+  $("#dark-theme-button").on('click', function() {
+    changeTheme('dark');
+  });
+  $("#light-theme-button").on('click', function() {
+    changeTheme('light');
+  });
+
   // Option Pane
   function fontWeight(weight)
   {

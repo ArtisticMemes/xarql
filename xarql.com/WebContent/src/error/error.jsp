@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <title>${code}</title>
-  <link rel="stylesheet" type="text/css" href="${domain}/src/common/common.min.css">
+  <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
 </head>
 <body>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class PathReader
@@ -51,6 +52,8 @@ public class PathReader extends HttpServlet
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("recaptcha_key", DeveloperOptions.getRecaptchaKey());
+
+        ServletUtilities.setTheme(request);
 
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");

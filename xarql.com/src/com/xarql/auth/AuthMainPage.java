@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class AuthMainPage
@@ -41,6 +42,8 @@ public class AuthMainPage extends HttpServlet
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("recaptcha-key", DeveloperOptions.getRecaptchaKey());
+
+        ServletUtilities.setTheme(request);
 
         boolean authorized = AuthTable.contains(request.getRequestedSessionId());
         request.setAttribute("authorized", authorized);
