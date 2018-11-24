@@ -219,7 +219,7 @@ $(document).ready(function () {
       $("#light-theme-button").hide();
       $("#dark-theme-button").show();
     }
-    else {
+    else if(theme === 'dark') {
       $("#theme-styles").attr("href", domain + "/src/common/dark-common.min.css");
       Cookies.set('theme', 'dark');
       $("#light-theme-button").show();
