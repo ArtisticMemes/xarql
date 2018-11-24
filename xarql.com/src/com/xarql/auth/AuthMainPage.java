@@ -40,10 +40,7 @@ public class AuthMainPage extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-        request.setAttribute("recaptcha-key", DeveloperOptions.getRecaptchaKey());
-
-        ServletUtilities.setTheme(request);
+        ServletUtilities.standardSetup(request);
 
         boolean authorized = AuthTable.contains(request.getRequestedSessionId());
         request.setAttribute("authorized", authorized);

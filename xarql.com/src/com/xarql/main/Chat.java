@@ -43,10 +43,7 @@ public class Chat extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-        request.setAttribute("recaptcha_key", DeveloperOptions.getRecaptchaKey());
-
-        ServletUtilities.setTheme(request);
+        ServletUtilities.standardSetup(request);
 
         boolean authenticated = AuthTable.contains(request.getRequestedSessionId());
         request.setAttribute("authenticated", authenticated);

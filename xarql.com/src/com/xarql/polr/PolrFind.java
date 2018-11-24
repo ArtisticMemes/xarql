@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.main.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -22,8 +21,6 @@ import com.xarql.util.ServletUtilities;
 public class PolrFind extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,8 +38,7 @@ public class PolrFind extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-        ServletUtilities.setTheme(request);
+        ServletUtilities.standardSetup(request);
 
         // use query parameter
         String query;

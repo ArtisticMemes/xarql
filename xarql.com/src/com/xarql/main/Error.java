@@ -42,9 +42,7 @@ public class Error extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-
-        ServletUtilities.setTheme(request);
+        ServletUtilities.standardSetup(request);
 
         currentRequest = request;
         currentResponse = response;

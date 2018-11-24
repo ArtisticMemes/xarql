@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
-import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 
@@ -20,8 +19,6 @@ import com.xarql.util.ServletUtilities;
 public class PolrEdit extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,9 +35,7 @@ public class PolrEdit extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-        ServletUtilities.setTheme(request);
-
+        ServletUtilities.standardSetup(request);
         String tomcatSession = request.getRequestedSessionId();
         if(tomcatSession != null)
         {

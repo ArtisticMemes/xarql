@@ -3,8 +3,19 @@ package com.xarql.util;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import com.xarql.main.DeveloperOptions;
+
 public class ServletUtilities
 {
+    private static final String DOMAIN        = DeveloperOptions.DOMAIN;
+    private static final String RECAPTCHA_KEY = DeveloperOptions.getRecaptchaKey();
+
+    public static void standardSetup(HttpServletRequest request)
+    {
+        request.setAttribute("domain", DOMAIN);
+        request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
+        setTheme(request);
+    } // standardSetup()
 
     public static void setTheme(HttpServletRequest request)
     {

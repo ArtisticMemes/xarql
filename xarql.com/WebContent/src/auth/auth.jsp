@@ -18,12 +18,12 @@
       <c:if test="${authorized == true}"><div class="small-card"><h4 class="centered" id="notice">You Are Authorized</h4></div></c:if>
       <c:if test="${authorized == false}"><div class="small-card"><h4 class="centered" id="notice">You Are Not Authorized</h4></div></c:if>
       <div class="large-card">
-        <div class="centered"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
+        <div class="centered"><div data-theme="dark" class="g-signin2" data-onsuccess="onSignIn"></div></div>
         <p class="centered" id="google-p"><a href="#" id="google-sign-out" onclick="signOut();">Sign out</a></p>
         <br><br>
         <form action="${domain}/auth/recaptcha" method="POST">
           <div class="centered">
-           	<div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ldv_V8UAAAAAA8oid2KDaOQqTu4kFFHDvhK9Blt"></div>
+           	<div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
            	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
           </div>
         </form>

@@ -39,10 +39,7 @@ public class Welcome extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-
-        ServletUtilities.setTheme(request);
-
+        ServletUtilities.standardSetup(request);
         request.getRequestDispatcher("/src/welcome/welcome.jsp").forward(request, response);
     } // doGet()
 
