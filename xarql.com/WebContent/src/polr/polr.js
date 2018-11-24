@@ -212,6 +212,7 @@ $(document).ready(function () {
       nav = false;
   }, false);
 
+
   function changeTheme(theme) {
     if(theme === 'light') {
       $("#theme-styles").attr("href", domain + "/src/common/light-common.min.css");
@@ -225,8 +226,12 @@ $(document).ready(function () {
       $("#light-theme-button").show();
       $("#dark-theme-button").hide();
     }
+    else {
+      $("#light-theme-button").hide();
+      $("#dark-theme-button").show();
+    }
   }
-  changeTheme(Cookies.get('theme'));
+  changeTheme(Cookies.get("theme"));
   $("#dark-theme-button").on('click', function() {
     changeTheme('dark');
   });

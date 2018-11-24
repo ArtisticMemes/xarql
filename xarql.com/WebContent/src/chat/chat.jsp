@@ -26,7 +26,7 @@
 	  <div class="large-card" style="x-overflow:hidden;">
        <form action="${domain}/chat/send" method="POST" id="message-form">
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
-         <input class="button" id="submit" type="submit" value="Send"/> <input class="button" type="reset" value="Clear"/>
+         <input class="button" id="submit" type="submit" value="Send"/>
        </form>
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">

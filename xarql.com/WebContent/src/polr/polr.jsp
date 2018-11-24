@@ -36,7 +36,7 @@
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
          <br/>
          Replying To : <input type="number" id="replying-to-input" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
-         <input id="submit" class="button" type="submit" value="Post"/> <input type="reset" class="button" value="Clear"/>
+         <input id="submit" class="button" type="submit" value="Post"/>
        </form>
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
