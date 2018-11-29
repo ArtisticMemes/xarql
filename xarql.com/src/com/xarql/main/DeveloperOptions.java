@@ -2,6 +2,12 @@ package com.xarql.main;
 
 import com.xarql.util.Secrets;
 
+/**
+ * Used for offline/local testing. <code>TESTING</code> determines if the
+ * Recaptcha is in testing mode.
+ * 
+ * @author Bryan Johnson
+ */
 public class DeveloperOptions
 {
     public static final String   DOMAIN  = "https://xarql.com";

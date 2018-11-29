@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
-import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 import com.xarql.util.TextFormatter;
@@ -27,8 +26,6 @@ import com.xarql.util.TextFormatter;
 public class PostProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -57,7 +54,7 @@ public class PostProcessor extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
+        ServletUtilities.standardSetup(request);
         if(ServletUtilities.userIsAuth(request))
         {
             request.setAttribute("title", request.getParameter("title"));
