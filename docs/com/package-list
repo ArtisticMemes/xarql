@@ -1,6 +1,7 @@
 com.xarql.auth
 com.xarql.chat
 com.xarql.main
+com.xarql.pexl
 com.xarql.polr
 com.xarql.polr.edit
 com.xarql.util

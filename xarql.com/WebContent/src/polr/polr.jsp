@@ -83,7 +83,7 @@
 	      <table style="display:inline">
 	        <tr><td>Page</td><td>Sort</td><td>Flow</td></tr>
 	        <tr><td><select name="page" id="page-dropdown">
-	                <c:forEach begin="0" end="9" var="i">
+	                <c:forEach begin="0" end="4" var="i">
                     <option value="${i}" <c:if test="${i == page}">selected="selected"</c:if> >${i}</option>
                     </c:forEach>
                   </select></td>
@@ -103,7 +103,7 @@
 	      <input id="submit" class="button" type="submit" value="Custom"/>
 	    </form>
 	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="${domain}/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Prev"/></form>
-	    <form <c:if test="${page >= 9}">style="display:none;"</c:if> id="next-form" action="${domain}/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
+	    <form <c:if test="${page >= 4}">style="display:none;"</c:if> id="next-form" action="${domain}/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
       <div class="link-div">
         <span class="link-span">
           <p class="link"><a href="${domain}/polr/find">Search</a></p>

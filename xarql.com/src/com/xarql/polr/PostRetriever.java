@@ -29,7 +29,7 @@ public class PostRetriever
     public static final String DEFAULT_SORT            = "subbump";
     public static final String DEFAULT_FLOW            = "desc";
     private static final int   DEFAULT_POST_SKIP_COUNT = 0;
-    public static final int    DEFAULT_POST_COUNT      = 10;
+    public static final int    DEFAULT_POST_COUNT      = 20;
 
     private static final int FARTHEST_POST = 100;
 
@@ -106,7 +106,7 @@ public class PostRetriever
     // Return a specific set of posts
     public ArrayList<Post> execute(HttpServletResponse response)
     {
-        int page = postSkipCount / 10;
+        int page = postSkipCount / postCount;
         if(PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page) != null)
             return PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page);
         else

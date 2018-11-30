@@ -113,7 +113,7 @@ public class TextFormatter
             input = input.substring(1);
         }
         return output;
-    }
+    } // removeRepeats()
 
     /**
      * Adds HTML newlines according to the appearance of <code>`n`</code>
@@ -143,7 +143,7 @@ public class TextFormatter
 
     /**
      * Replace a backtick format marker, such as <code>`b`</code>, with its
-     * respective <code><span></span></code>
+     * respective span class
      * 
      * @param input A <code>String</code> from the user with formatting markers.
      * @param formatClass The CSS class of the formatting type.
@@ -234,9 +234,7 @@ public class TextFormatter
      * Strip potentially dangerous characters to prevent HTML injection.
      * 
      * @param input A <code>String</code> from the user.
-     * @return A <code>String</code> without "<" or ">" characters. These are
-     *         replaced with "&#60" and "&#60" which are the safe HTML
-     *         representations.
+     * @return A <code>String</code> without angle brackets representations.
      */
     private static String clean(String input)
     {
