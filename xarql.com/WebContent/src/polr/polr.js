@@ -117,7 +117,7 @@ $(document).ready(function () {
 				$("#flow").text(flow);
 				viewLinks();
 				if(page > 0) { $("#prev-form").show(); $("#prev-form").css("display", "inline");} else { $("#prev-form").hide(); }
-				if(page < 9) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
+				if(page < 4) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
