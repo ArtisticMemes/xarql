@@ -273,6 +273,24 @@ form textarea:focus {
   border-style: solid;
 }
 
+select {
+  border: 0px;
+  outline: 0px;
+  margin: .5em 0 .5em 0;
+  letter-spacing: .03125rem;
+  font-size: 0.875rem;
+  padding: 0.2rem;
+  border-radius: 0;
+  margin: 0;
+  font-weight: 400;
+}
+
+select:hover
+{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .link-card {
   position: relative;
 }
