@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 
@@ -19,6 +20,8 @@ import com.xarql.util.ServletUtilities;
 public class PolrEdit extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -90,7 +93,7 @@ public class PolrEdit extends HttpServlet
             if(Secrets.modList().contains(associatedGoogleID))
             {
                 String type = request.getParameter("type");
-                if(type == null || !(type.equals("remove") || type.equals("restore")))
+                if(type == null || !(type.equals("remove") || type.equals("restore") || type.equals("replace")))
                 {
                     response.sendError(400);
                     return;
@@ -116,15 +119,30 @@ public class PolrEdit extends HttpServlet
                 {
                     PostRemover pr = new PostRemover(id, response);
                     if(pr.execute())
-                        response.sendRedirect("http://xarql.com/polr/edit");
+                        response.sendRedirect(DOMAIN + "/polr/edit");
                     return;
                 }
                 else if(type.equals("restore"))
                 {
                     PostRestorer pr = new PostRestorer(id, response);
                     if(pr.execute())
-                        response.sendRedirect("http://xarql.com/polr/edit");
+                        response.sendRedirect(DOMAIN + "/polr/edit");
                     return;
+                }
+                else if(type.equals("replace"))
+                {
+                    if(request.getParameter("content") == null || request.getParameter("content").equals("") || request.getParameter("title") == null || request.getParameter("title").equals(""))
+                    {
+                        response.sendError(400);
+                        return;
+                    }
+                    else
+                    {
+                        PostEditor pe = new PostEditor(id, request.getParameter("title"), request.getParameter("content"), response);
+                        if(pe.execute())
+                            response.sendRedirect(DOMAIN + "/polr/edit");
+                        return;
+                    }
                 }
                 else
                     return;

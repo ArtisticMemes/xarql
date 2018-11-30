@@ -42,7 +42,7 @@ public class PostFinder
         PreparedStatement statement = null;
         ResultSet rs = null;
         ArrayList<Post> posts = new ArrayList<Post>();
-        String sql = "SELECT *, MATCH (title,content) AGAINST (? IN BOOLEAN MODE) as score FROM polr WHERE MATCH (title,content) AGAINST (? IN BOOLEAN MODE) > 0 ORDER BY score DESC LIMIT 0, ?";
+        String sql = "SELECT *, MATCH (title,content) AGAINST (? IN BOOLEAN MODE) as score FROM polr WHERE removed=0 AND MATCH (title,content) AGAINST (? IN BOOLEAN MODE) > 0 ORDER BY score DESC LIMIT 0, ?";
 
         try
         {

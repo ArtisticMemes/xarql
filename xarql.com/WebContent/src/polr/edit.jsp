@@ -24,6 +24,14 @@
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Restore"/>
         </form>
+        <form action="${domain}/polr/edit?type=replace" method="POST" id="post-form">
+          <br/>
+          ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          <input id="submit" class="button" type="submit" value="Replace"/>
+          <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;"/>
+          <br/>
+          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
+        </form>
       </div>
     </div>
   </div>
