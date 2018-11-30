@@ -99,7 +99,7 @@ public class PostProcessor extends HttpServlet
             PostCreator pc = new PostCreator(title, content, answers);
             if(pc.execute(response))
             {
-                IPTracker.logPolrPost(AuthTable.get(request.getRequestedSessionId()), request.getRemoteAddr(), pc.getDeterminedID());
+                IPTracker.logPolrPost(request, pc.getDeterminedID());
                 response.setStatus(200);
             }
             return;

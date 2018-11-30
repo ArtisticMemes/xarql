@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.xarql.util.DBManager;
 
 public class IPTracker
@@ -15,18 +17,36 @@ public class IPTracker
         // TODO Auto-generated constructor stub
     } // IPTracker()
 
-    public static void logPolrPost(AuthSession session, String ip, int postID)
+    public static void logPolrPost(HttpServletRequest request, int postID)
     {
-        log(session.getTomcatSession(), ip, postID, "polr/post");
+        log(request, postID, "polr/post");
     } // logPolrPost()
 
-    public static void logChatSend(AuthSession session, String ip, int sendID)
+    public static void logChatSend(HttpServletRequest request, int sendID)
     {
-        log(session.getTomcatSession(), ip, sendID, "chat/send");
+        log(request, sendID, "chat/send");
     } // logChatSend()
 
-    private static void log(String sessionCookie, String ip, int submissionID, String submissionType)
+    public static void logPolrEditRemove(HttpServletRequest request, int targetPostID)
     {
+        log(request, targetPostID, "polr/edit/remove");
+    } // logPolrEditRemoval()
+
+    public static void logPolrEditRestore(HttpServletRequest request, int targetPostID)
+    {
+        log(request, targetPostID, "polr/edit/restore");
+    } // logPolrEditRestore()
+
+    public static void logPolrEditReplace(HttpServletRequest request, int targetPostID)
+    {
+        log(request, targetPostID, "polr/edit/replace");
+    } // logPolrEditReplace()
+
+    private static void log(HttpServletRequest request, int submissionID, String submissionType)
+    {
+        String sessionCookie = AuthTable.get(request.getRequestedSessionId()).getTomcatSession();
+        String ip = request.getRemoteAddr();
+
         Connection connection = null;
         PreparedStatement statement = null;
         String query = "INSERT INTO ip_tracking (submission_id, submission_type, address, session_cookie, date) VALUES (?, ?, ?, ?, ?)";

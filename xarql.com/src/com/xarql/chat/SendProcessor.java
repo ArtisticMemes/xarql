@@ -80,7 +80,7 @@ public class SendProcessor extends HttpServlet
             MessageCreator mc = new MessageCreator(message, AuthTable.get(request.getRequestedSessionId()));
             if(mc.execute(response))
             {
-                IPTracker.logChatSend(AuthTable.get(request.getRequestedSessionId()), request.getRemoteAddr(), mc.getDeterminedID());
+                IPTracker.logChatSend(request, mc.getDeterminedID());
                 response.setStatus(200);
             }
             return;

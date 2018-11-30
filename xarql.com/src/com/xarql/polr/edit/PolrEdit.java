@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
+import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
@@ -119,14 +120,20 @@ public class PolrEdit extends HttpServlet
                 {
                     PostRemover pr = new PostRemover(id, response);
                     if(pr.execute())
+                    {
+                        IPTracker.logPolrEditRemove(request, id);
                         response.sendRedirect(DOMAIN + "/polr/edit");
+                    }
                     return;
                 }
                 else if(type.equals("restore"))
                 {
                     PostRestorer pr = new PostRestorer(id, response);
                     if(pr.execute())
+                    {
+                        IPTracker.logPolrEditRestore(request, id);
                         response.sendRedirect(DOMAIN + "/polr/edit");
+                    }
                     return;
                 }
                 else if(type.equals("replace"))
@@ -140,7 +147,10 @@ public class PolrEdit extends HttpServlet
                     {
                         PostEditor pe = new PostEditor(id, request.getParameter("title"), request.getParameter("content"), response);
                         if(pe.execute())
+                        {
+                            IPTracker.logPolrEditReplace(request, id);
                             response.sendRedirect(DOMAIN + "/polr/edit");
+                        }
                         return;
                     }
                 }
