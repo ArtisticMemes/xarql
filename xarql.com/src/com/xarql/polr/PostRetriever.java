@@ -198,9 +198,4 @@ public class PostRetriever
         return posts;
     } // ArrayList sqlQuery(String query, int id, HttpServletResponse response)
 
-    /*
-     * // Return everything in polr private ArrayList getALL() { return posts; } //
-     * getAll()
-     */
-
 } // PostRetriever
