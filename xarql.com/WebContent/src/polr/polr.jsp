@@ -25,6 +25,7 @@
 		    <p class="overline">Replies : <span id="reply-count">${post.getResponses()}</span> ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
+        <p><a href="${domain}/flag?id=${post.getId()}">Report</a></p>
 		  </div>
 		</c:forEach>
 		</div>

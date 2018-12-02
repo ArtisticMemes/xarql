@@ -11,12 +11,6 @@ import com.xarql.util.DBManager;
 
 public class IPTracker
 {
-
-    public IPTracker()
-    {
-        // TODO Auto-generated constructor stub
-    } // IPTracker()
-
     public static void logPolrPost(HttpServletRequest request, int postID)
     {
         log(request, postID, "polr/post");
@@ -41,6 +35,11 @@ public class IPTracker
     {
         log(request, targetPostID, "polr/edit/replace");
     } // logPolrEditReplace()
+
+    public static void logReport(HttpServletRequest request, int targetPostID)
+    {
+        log(request, targetPostID, "flag");
+    } // logReport()
 
     private static void log(HttpServletRequest request, int submissionID, String submissionType)
     {

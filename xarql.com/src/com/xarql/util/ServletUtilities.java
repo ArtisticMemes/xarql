@@ -1,9 +1,11 @@
 package com.xarql.util;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
@@ -30,6 +32,7 @@ public class ServletUtilities
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
+        request.setAttribute("auth", userIsAuth(request));
         setTheme(request);
         request.setCharacterEncoding("UTF-8");
     } // standardSetup()
@@ -44,7 +47,9 @@ public class ServletUtilities
      */
     public static boolean userIsMod(HttpServletRequest request)
     {
-        if(AuthTable.get(request.getRequestedSessionId()).isMod())
+        if(AuthTable.get(request.getRequestedSessionId()) == null)
+            return false;
+        else if(AuthTable.get(request.getRequestedSessionId()).isMod())
             return true;
         else
             return false;
@@ -93,5 +98,28 @@ public class ServletUtilities
         else
             request.setAttribute("theme", "light");
     } // setTheme()
+
+    public static void rejectGetMethod(HttpServletResponse response) throws IOException
+    {
+        response.sendError(400, "Can't use HTTP GET method for this URI");
+    } // rejectGetMethod()
+
+    public static boolean hasParameters(String[] parameters, HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        for(String param : parameters)
+        {
+            if(request.getParameter(param) == null || request.getParameter(param).equals(""))
+            {
+                response.sendError(400);
+                return false;
+            }
+        }
+        return true;
+    } // hasParameters()
+
+    public static boolean hasParameter(String parameter, HttpServletRequest request)
+    {
+        return !(request.getParameter(parameter) == null || request.getParameter(parameter).equals(""));
+    } // hasParamter()
 
 } // ServletUtilities

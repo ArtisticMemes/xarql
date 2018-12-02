@@ -297,7 +297,7 @@ public class PostCreator
         } // if(answers != 0)
     } // updateStatLoop()
 
-    private boolean postExists(int id, HttpServletResponse response)
+    public boolean postExists(int id, HttpServletResponse response)
     {
         Connection connection = null;
         PreparedStatement statement = null;

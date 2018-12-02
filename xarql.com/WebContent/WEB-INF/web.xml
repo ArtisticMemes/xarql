@@ -69,6 +69,26 @@
     <url-pattern>/auth/recaptcha</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Allows reporting of posts</description>
+    <display-name>ReportProcessor</display-name>
+    <servlet-name>ReportProcessor</servlet-name>
+    <servlet-class>com.xarql.flag.ReportProcessor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.flag.ReportProcessor</servlet-name>
+    <url-pattern>/flag/report</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Gives a form to report</description>
+    <display-name>ReportPage</display-name>
+    <servlet-name>ReportPage</servlet-name>
+    <servlet-class>com.xarql.flag.ReportPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.flag.ReportPage</servlet-name>
+    <url-pattern>/flag</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description>Blog</description>
     <display-name>Blog</display-name>
     <servlet-name>Blog</servlet-name>

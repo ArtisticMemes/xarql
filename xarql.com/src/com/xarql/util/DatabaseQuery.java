@@ -15,7 +15,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
         super(command, response);
     } // DatabaseQuery()
 
-    protected abstract void processResult(ResultSet rs);
+    protected abstract void processResult(ResultSet rs) throws SQLException;
 
     protected abstract RequestedDataClass getData();
 
