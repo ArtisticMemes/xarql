@@ -13,7 +13,7 @@
 <body>
 <div id="wrapper">
   <div id="column">
-    <div class="large-card">
+    <div class="large-card" style="width:30rem;">
       <h4 class="centered" id="error-title">Error</h5>
       <h1 class="centered" id="error-code">${code}</h1>
       <h5 class="centered">${type}</h4>

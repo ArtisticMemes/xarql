@@ -113,7 +113,7 @@ public class PostRetriever
         {
             ArrayList<Post> posts = new ArrayList<Post>();
             posts.addAll(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
-            posts.addAll(sqlQuery("SELECT * FROM polr WHERE answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount, id, response));
+            posts.addAll(sqlQuery("SELECT * FROM polr WHERE removed=0 AND answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount, id, response));
             PageCache pc = new PageCache(id, sort, flow, page, posts);
             return posts;
         }
