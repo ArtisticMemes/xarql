@@ -31,7 +31,7 @@
 		</div>
       <div class="large-card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
-       <form action="${domain}/polr/post" method="POST" id="post-form">
+       <form action="${domain}/polr/post" method="POST" id="post-form" accept-charset="UTF-8">
          <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;">
          <br/>
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>

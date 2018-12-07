@@ -17,7 +17,7 @@
     <div id="column">
       <div class="large-card">
         <h4>Categorize</h4>
-        <form action="${domain}/polr/hash" method="GET" id="tag-form">
+        <form action="${domain}/polr/hash" method="GET" id="tag-form" accept-charset="UTF-8">
            <input type="text" name="tag" placeholder="Hash Tag" maxlength="24" required="" style="width:100%;" tabindex="0">
            <br/>
            <input id="submit" class="button" type="submit" value="Find" tabindex="0"/> <span class="status"></span>

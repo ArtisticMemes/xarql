@@ -24,7 +24,7 @@
 	    </c:forEach>
 	  </div>
 	  <div class="large-card" style="x-overflow:hidden;">
-       <form action="${domain}/chat/send" method="POST" id="message-form">
+       <form action="${domain}/chat/send" method="POST" id="message-form" accept-charset="UTF-8">
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input class="button" id="submit" type="submit" value="Send"/>
        </form>

@@ -14,17 +14,17 @@
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <form action="${domain}/polr/edit?type=remove" method="POST" id="post-form">
+        <form action="${domain}/polr/edit?type=remove" method="POST" id="post-form" accept-charset="UTF-8">
           <br/>
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Remove"/>
         </form>
-        <form action="${domain}/polr/edit?type=restore" method="POST" id="post-form">
+        <form action="${domain}/polr/edit?type=restore" method="POST" id="post-form" accept-charset="UTF-8">
           <br/>
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Restore"/>
         </form>
-        <form action="${domain}/polr/edit?type=replace" method="POST" id="post-form">
+        <form action="${domain}/polr/edit?type=replace" method="POST" id="post-form" accept-charset="UTF-8">
           <br/>
           ID : <input type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Replace"/>

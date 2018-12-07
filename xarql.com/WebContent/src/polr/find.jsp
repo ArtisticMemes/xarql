@@ -18,7 +18,7 @@
   <div id="column">
     <div class="large-card" style="x-overflow:hidden;">
       <h4>Search</h4>
-      <form action="${domain}/polr/find" method="GET" id="find-form">
+      <form action="${domain}/polr/find" method="GET" id="find-form" accept-charset="UTF-8">
          <input type="text" name="q" placeholder="Phrase" maxlength="128" required="" style="width:100%;">
          <br/>
          <input id="submit" class="button" type="submit" value="Find"/> <span class="status"></span>
