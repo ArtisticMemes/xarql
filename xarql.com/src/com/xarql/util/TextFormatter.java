@@ -3,8 +3,11 @@
  */
 package com.xarql.util;
 
+import java.util.ArrayList;
+
 public class TextFormatter
 {
+
     /**
      * Informs a Servlet if it should accept a user's post.
      * 
@@ -32,6 +35,91 @@ public class TextFormatter
         return false;
     } // filter()
 
+    public static String clickableHashtags(String input)
+    {
+        input += " ";
+        String output = "";
+        String hash = "";
+        boolean pastHash = false;
+        for(int i = 0; i < input.length(); i++)
+        {
+            if(pastHash)
+            {
+                if(isAlphaNumeric(input.charAt(i)))
+                    hash += input.charAt(i);
+                else
+                {
+                    if(hash != null && !hash.equals(""))
+                    {
+                        output += ("<a href=\"{DOMAIN}/polr/hash?tag=" + hash.substring(1) + "\">" + hash + "</a>");
+                        output += input.charAt(i);
+                    }
+                    pastHash = false;
+                    hash = "";
+                }
+            }
+            else if(input.charAt(i) == '#')
+            {
+                pastHash = true;
+                hash += input.charAt(i);
+            }
+            else
+                output += input.charAt(i);
+        }
+        return output;
+    } // clickableHashtags
+
+    public static ArrayList<String> getHashtags(String input)
+    {
+        input += " ";
+        ArrayList<String> output = new ArrayList<String>();
+        String hash = "";
+        boolean pastHash = false;
+        for(int i = 0; i < input.length(); i++)
+        {
+            if(pastHash)
+            {
+                if(isAlphaNumeric(input.charAt(i)))
+                    hash += input.charAt(i);
+                else
+                {
+                    if(hash != null && !hash.equals("") && hash.length() <= 24 && !output.contains(hash))
+                        output.add(hash);
+                    pastHash = false;
+                    hash = "";
+                }
+            }
+            else if(input.charAt(i) == '#')
+            {
+                pastHash = true;
+            }
+        }
+        return output;
+    } // getHashtags()
+
+    public static boolean isAlphaNumeric(char input)
+    {
+        int num = input;
+        if(num >= 97 && num <= 122) // a --> z range
+            return true;
+        else if(num >= 48 && num <= 57) // 0 --> 9 range
+            return true;
+        else if(input == '_' || input == '-') // dashes and underscores are ok
+            return true;
+        else
+            return false;
+    } // isAlphaNumeric()
+
+    public static boolean isAlphaNumeric(String input)
+    {
+        for(int i = 0; i < input.length(); i++)
+        {
+            if(!isAlphaNumeric(input.charAt(i)))
+                return false;
+        }
+        return true;
+    } // isAlphaNumeric()
+
     /**
      * Prepares raw <code>Strings</code> from the user for displaying on a web page
      * 
@@ -45,6 +133,7 @@ public class TextFormatter
         output = clean(output);
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
         output = addLinks(output);
+        output = clickableHashtags(output);
         output = addFormat(output, "bold", 'b');
         output = addFormat(output, "code", 'c');
         output = addFormat(output, "italic", 'i');

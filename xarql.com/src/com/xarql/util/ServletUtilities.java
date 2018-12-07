@@ -1,3 +1,7 @@
+/*
+ * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
+ */
+
 package com.xarql.util;
 
 import java.io.IOException;
@@ -20,6 +24,33 @@ public class ServletUtilities
     private static final String DOMAIN        = DeveloperOptions.DOMAIN;
     private static final String RECAPTCHA_KEY = DeveloperOptions.getRecaptchaKey();
 
+    private HttpServletRequest request;
+
+    public ServletUtilities(HttpServletRequest request)
+    {
+        this.request = request;
+    } // ServletUtilities()
+
+    public String useParam(String param)
+    {
+        request.setAttribute(param, request.getParameter(param));
+        return request.getParameter(param);
+    } // useParam()
+
+    /**
+     * Object based version of standardSetup()
+     * 
+     * @throws UnsupportedEncodingException
+     */
+    public void standardSetup() throws UnsupportedEncodingException
+    {
+        request.setAttribute("domain", DOMAIN);
+        request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
+        request.setAttribute("auth", userIsAuth(request));
+        setTheme(request);
+        request.setCharacterEncoding("UTF-8");
+    } // standardSetup()
+
     /**
      * Sets the "domain", "recaptcha_key", and "theme" attributes. Sets the
      * Character Encoding to UTF-8
@@ -35,7 +66,7 @@ public class ServletUtilities
         request.setAttribute("auth", userIsAuth(request));
         setTheme(request);
         request.setCharacterEncoding("UTF-8");
-    } // standardSetup()
+    } // standardSetup(request)
 
     /**
      * Determines if the user that made a request is a moderator. Checks the
