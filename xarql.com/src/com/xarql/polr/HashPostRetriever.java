@@ -16,12 +16,13 @@ import com.xarql.util.DatabaseQuery;
 
 public class HashPostRetriever extends DatabaseQuery
 {
-    private String          hash;
-    private ArrayList<Post> posts;
+    private String           hash;
+    private ArrayList<Post>  posts;
+    private static final int DEFAULT_POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
 
     public HashPostRetriever(HttpServletResponse response, String hash)
     {
-        super("SELECT polr.* FROM polr INNER JOIN polr_tags_relations ON polr.id=polr_tags_relations.post_id WHERE polr_tags_relations.content=?", response);
+        super("SELECT polr.* FROM polr INNER JOIN polr_tags_relations ON polr.id=polr_tags_relations.post_id WHERE polr_tags_relations.content=? ORDER BY date desc LIMIT ?", response);
         this.hash = hash;
         posts = new ArrayList<Post>(PostRetriever.DEFAULT_POST_COUNT);
     } // HashPostRetriever
@@ -59,6 +60,7 @@ public class HashPostRetriever extends DatabaseQuery
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, hash);
+        statement.setInt(2, DEFAULT_POST_COUNT);
     } // setVariables()
 
 } // HashPostRetriever

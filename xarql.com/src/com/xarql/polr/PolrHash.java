@@ -55,7 +55,9 @@ public class PolrHash extends HttpServlet
         {
             HashPostRetriever hpr = new HashPostRetriever(response, tag);
             if(hpr.execute() && hpr.getData().size() > 0)
+            {
                 request.setAttribute("posts", hpr.getData());
+            }
             request.getRequestDispatcher(JSP_PATH).forward(request, response);
             return;
         }
