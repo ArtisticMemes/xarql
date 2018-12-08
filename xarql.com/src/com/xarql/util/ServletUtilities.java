@@ -26,11 +26,23 @@ public class ServletUtilities
 
     private HttpServletRequest request;
 
+    /**
+     * Allows for using static methods in an object to reduce typing
+     * 
+     * @param request The request to send to static methods
+     */
     public ServletUtilities(HttpServletRequest request)
     {
         this.request = request;
     } // ServletUtilities()
 
+    /**
+     * Tries to get a String from a parameter and add the parameter to the request
+     * as an attribute
+     * 
+     * @param param The parameter from the user
+     * @return The parameter's String
+     */
     public String useParam(String param)
     {
         request.setAttribute(param, request.getParameter(param));
@@ -130,11 +142,27 @@ public class ServletUtilities
             request.setAttribute("theme", "light");
     } // setTheme()
 
+    /**
+     * Used to prevent get methods on endpoints meant for submitting content
+     * 
+     * @param response Response to use for the error
+     * @throws IOException
+     */
     public static void rejectGetMethod(HttpServletResponse response) throws IOException
     {
         response.sendError(400, "Can't use HTTP GET method for this URI");
     } // rejectGetMethod()
 
+    /**
+     * Checks to see if the given parameters are not null and not empty
+     * 
+     * @param parameters The parameters from the client, often represented in the
+     *        URL
+     * @param request The request the parameters are in
+     * @param response Gives a 400 error
+     * @return true if the parameters are usable, false otherwise
+     * @throws IOException
+     */
     public static boolean hasParameters(String[] parameters, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
         for(String param : parameters)
@@ -148,6 +176,13 @@ public class ServletUtilities
         return true;
     } // hasParameters()
 
+    /**
+     * Checks to see if the given parameter is not null and not empty
+     * 
+     * @param parameter The parameter from the client, often represented in the URL
+     * @param request The request the parameter is in
+     * @return true if the parameter is usable, false otherwise
+     */
     public static boolean hasParameter(String parameter, HttpServletRequest request)
     {
         return !(request.getParameter(parameter) == null || request.getParameter(parameter).equals(""));
