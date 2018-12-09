@@ -3,17 +3,19 @@
  */
 package com.xarql.auth;
 
+import java.sql.Timestamp;
+
 import com.xarql.util.TrackedHashMap;
 
 public class AuthTable
 {
-    private static TrackedHashMap<String, AuthSession> sessions     = new TrackedHashMap<String, AuthSession>();
-    private static int                                 requestCount = 0;
+    private static TrackedHashMap<String, AuthSession> sessions = new TrackedHashMap<String, AuthSession>();
+    private static Timestamp                           lastTrimTime;
 
     public AuthTable()
     {
         sessions.clear();
-        requestCount = 0;
+        lastTrimTime = new Timestamp(System.currentTimeMillis());
     } // AuthTable()
 
     public static void add(AuthSession session)
@@ -23,12 +25,13 @@ public class AuthTable
             if(sessions.contains(session.getTomcatSession()))
                 sessions.remove(session.getTomcatSession());
             sessions.add(session.getTomcatSession(), session);
+
         }
-        requestCount++;
-        if(requestCount >= 8) // Trim after every 8 additions
+
+        if(lastTrimTime.compareTo(new Timestamp(System.currentTimeMillis())) < 10000) // Trim after every 10 seconds
         {
             trim();
-            requestCount = 0;
+            lastTrimTime = new Timestamp(System.currentTimeMillis());
         }
     } // add()
 
