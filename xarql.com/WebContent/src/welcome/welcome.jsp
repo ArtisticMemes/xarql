@@ -23,6 +23,14 @@
         <p><a href="${domain}/blog">blog</a></p>
         <p><a href="${domain}/help">help</a></p>
       </div>
+      <div class="large-card">
+        <h4>Statistics</h4>
+        <table>
+          <tr><td>Auth Sessions</td><td style="padding-left:1rem;">${auth_sessions}</td></tr>
+          <tr><td>Live Chats</td><td style="padding-left:1rem;">${live_chats}</td></tr>
+          <tr><td>Alive For</td><td style="padding-left:1rem;">${live_time}</td></tr>
+        </table>
+      </div>
     </div>
   </div>
 </body>

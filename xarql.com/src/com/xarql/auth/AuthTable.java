@@ -59,4 +59,10 @@ public class AuthTable
     {
         return sessions.get(session);
     } // get()
+
+    public static int size()
+    {
+        return sessions.size();
+    } // size()
+
 } // AuthTable
