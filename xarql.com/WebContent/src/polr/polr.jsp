@@ -123,7 +123,7 @@
           <p class="link"><a href="${domain}/polr/find">Search</a></p>
           <p class="link"><a href="${domain}/polr/flat">Browse</a></p>
           <span class="ajax-bar" style="display:none">
-            <p class="link"><a class="update-button" href="#">Update</a> <span class="status"></span></p>
+            <p class="link"><a class="update-button">Update</a> <span class="status"></span></p>
           </span>
         </span>
       </div>
