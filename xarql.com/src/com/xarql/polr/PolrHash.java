@@ -44,15 +44,16 @@ public class PolrHash extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         util.standardSetup();
         String tag = util.useParam("tag");
-        tag = tag.toLowerCase();
-        if(!TextFormatter.isAlphaNumeric(tag) || tag.length() > 24)
-        {
-            response.sendError(400);
-            return;
-        }
 
         if(tag != null)
         {
+            tag = tag.toLowerCase();
+            if(!TextFormatter.isAlphaNumeric(tag) || tag.length() > 24)
+            {
+                response.sendError(400);
+                return;
+            }
+
             HashPostRetriever hpr = new HashPostRetriever(response, tag);
             if(hpr.execute() && hpr.getData().size() > 0)
             {

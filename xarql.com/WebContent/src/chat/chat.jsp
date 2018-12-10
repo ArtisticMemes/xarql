@@ -11,6 +11,19 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/chat/chat.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">

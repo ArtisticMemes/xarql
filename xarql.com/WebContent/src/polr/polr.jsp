@@ -14,6 +14,19 @@
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/polr.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">

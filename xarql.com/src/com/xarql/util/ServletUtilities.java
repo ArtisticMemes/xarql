@@ -26,6 +26,10 @@ public class ServletUtilities
 
     private HttpServletRequest request;
 
+    private static final int    NORMAL_FONT_WEIGHT = 400;
+    private static final int    LIGHT_FONT_WEIGHT  = 200;
+    private static final String DEFAULT_FONT_SIZE  = "1rem";
+
     /**
      * Allows for using static methods in an object to reduce typing
      * 
@@ -56,11 +60,7 @@ public class ServletUtilities
      */
     public void standardSetup() throws UnsupportedEncodingException
     {
-        request.setAttribute("domain", DOMAIN);
-        request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
-        request.setAttribute("auth", userIsAuth(request));
-        setTheme(request);
-        request.setCharacterEncoding("UTF-8");
+        standardSetup(request);
     } // standardSetup()
 
     /**
@@ -77,8 +77,55 @@ public class ServletUtilities
         request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
         request.setAttribute("auth", userIsAuth(request));
         setTheme(request);
+        setFontWeight(request);
+        setFontSize(request);
         request.setCharacterEncoding("UTF-8");
     } // standardSetup(request)
+
+    private static void setFontWeight(HttpServletRequest request)
+    {
+        // Get font weight
+        int fontWeight = 0;
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null)
+        {
+            for(Cookie item : cookies)
+            {
+                if(item.getName().equals("font-weight"))
+                {
+                    if(item.getValue().equals("normal"))
+                        fontWeight = NORMAL_FONT_WEIGHT;
+                    else if(item.getValue().equals("light"))
+                        fontWeight = LIGHT_FONT_WEIGHT;
+                    request.setAttribute("font_weight", fontWeight);
+                    return;
+                }
+            }
+            request.setAttribute("font_weight", NORMAL_FONT_WEIGHT); // default
+        }
+        else
+            request.setAttribute("font_weight", NORMAL_FONT_WEIGHT);
+    } // setFontWeight
+
+    public static void setFontSize(HttpServletRequest request)
+    {
+        // Get font size
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null)
+        {
+            for(Cookie item : cookies)
+            {
+                if(item.getName().equals("font-size"))
+                {
+                    request.setAttribute("font_size", item.getValue());
+                    return;
+                }
+            }
+            request.setAttribute("font_size", DEFAULT_FONT_SIZE); // default
+        }
+        else
+            request.setAttribute("font_size", DEFAULT_FONT_SIZE);
+    } // setFontSize()
 
     /**
      * Determines if the user that made a request is a moderator. Checks the
