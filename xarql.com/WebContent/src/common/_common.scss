@@ -42,6 +42,10 @@ div .centered {
   font-weight: bold;
 }
 
+code {
+  @extend .code;
+}
+
 .code {
   font-family: monospace;
 }

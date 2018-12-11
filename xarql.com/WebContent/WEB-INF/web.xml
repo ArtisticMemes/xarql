@@ -238,6 +238,16 @@
     <servlet-name>com.xarql.main.Help</servlet-name>
     <url-pattern>/help</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Sends users to appropriate .jsp pages</description>
+    <display-name>HelpDispatcher</display-name>
+    <servlet-name>HelpDispatcher</servlet-name>
+    <servlet-class>com.xarql.help.HelpDispatcher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.help.HelpDispatcher</servlet-name>
+    <url-pattern>/help/*</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>410</error-code>
     <location>/error?code=410</location>

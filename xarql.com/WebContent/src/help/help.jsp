@@ -1,30 +1,39 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="//xarql.com/src/common/light-common.min.css">
-<title>Help | xarql.com</title>
-<link rel="shortcut icon" href="//xarql.com/logo.png" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>xarql</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta id="domain" value="${domain}">
+  <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
+  <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <!-- Inlcude .html here as hyperlink -->
+       <!-- Inlcude .html here as hyperlink -->
         <h3 class="centered">Help</h3>
-        <p>Click a link for more info</p>
-        <p><a href="//xarql.com/docs/xarql/polr.html">/polr</a></p>
-        <p><a href="//xarql.com/docs/xarql/chat.html">/chat</a></p>
-        <p><a href="//xarql.com/docs/xarql/formatting.html">Formatting</a></p>
-        <p><a href="//xarql.com/docs/xarql/external-links.html">External Links</a></p>
-        <p><a href="//xarql.com/docs/xarql/mission-statement.html">Mission Statement</a></p>
+        <p>First, Select A Host</p>
+        <p><a href="https://github.com/ArtisticMemes/xarql/wiki">GitHub</a> <span class="italic">Preferred</span></p>
+        <p><a href="${domain}/help/main">xarql.com</a></p>
       </div>
-      <div class="large-card">
-        <h4>Authenticate</h4>
-        <p><a href="http://xarql.com/auth">xarql.com/auth</a><p>
-        <p>To submit content on xarql.com you have to authenticate your session. This is to prevent bots/scripts from polluting the site. This will be a one click process for many users. You must turn on JavaScript and Cookies if you have turned them off.</p>
-      </div>
+      <div class="small-card"><p class="centered"><span class="italic">.txt Files Are Below | <a href="https://github.com/ArtisticMemes/xarql">View On GitHub</a></span></p></div>
       <!-- Include .txt here as text -->
       <div class="large-card">
         <h4>Disclaimer</h4>
@@ -53,7 +62,11 @@
         <p>(3) have recorded in written form at the time of this document's publication their desire to have their submission(s) make them designated and be recognized as a contributor.</p>
         <p><a href="http://xarql.com/docs/xarql/authors.txt">View</a> <a href="http://xarql.com/docs/xarql/authors.txt" download="authors">Download</a></p>
       </div>
+      <div class="small-card">
+        <a style="margin-top:0.5em;" class="centered" href="${domain}/help/main"><span class="italic">Main Help Page</span></a>
+      </div>
     </div>
   </div>
 </body>
 </html>
+
