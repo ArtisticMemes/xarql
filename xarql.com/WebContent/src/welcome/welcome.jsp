@@ -36,6 +36,10 @@
         <p><a href="${domain}/blog">blog</a></p>
         <p><a href="${domain}/help">help</a></p>
       </div>
+      <div class="small-card">
+        <h6>Wondering What's New?</h6>
+        <p>Check out <a href="https://twitter.com/xarql">xarql's official Twitter (@xarql)</a></p>
+      </div>
       <div class="large-card">
         <h4>Statistics</h4>
         <table>
