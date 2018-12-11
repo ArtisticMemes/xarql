@@ -56,6 +56,9 @@
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>
       </div>
+      <div class="small-card">
+        <p class="centered">Page Built In ~${build_timer.done()}ms</p>
+      </div>
     </div>
   </div>
 </body>

@@ -72,6 +72,9 @@
         <p id="sort">${sort}</p>
         <p id="flow">${flow}</p>
       </div>
+      <div class="small-card">
+        <p class="centered">Page Built In ~${build_timer.done()}ms</p>
+      </div>
     </div>
   </div>
 </body>

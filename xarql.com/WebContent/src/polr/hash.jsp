@@ -47,6 +47,9 @@
 		      </div>
 		    </c:forEach>
 	    </div>
+      <div class="small-card">
+        <p class="centered">Page Built In ~${build_timer.done()}ms</p>
+      </div>
     </div>
   </div>
 </body>
