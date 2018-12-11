@@ -77,7 +77,12 @@
         <table>
           <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
           <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button">Normal</a></p></td></tr>
-          <tr><td><p>Theme</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="light-theme-button">Light</a><a id="dark-theme-button">Dark</a></p></td></tr>
+          <tr><td><p>Theme</td><td><span style="letter-spacing:1rem">:</span></td>
+          <td>
+            <a class="theme-button" id="light-theme-button" data="light">Light</a>
+            <a class="theme-button" id="dark-theme-button" data="dark">Dark</a>
+            <a class="theme-button" id="purple-theme-button" data="purple">Purple</a>
+          </td></tr>
         </table>
         <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>
