@@ -6,9 +6,12 @@ package com.xarql.chat;
 import java.sql.Timestamp;
 
 import com.xarql.auth.AuthSession;
+import com.xarql.main.DeveloperOptions;
 
 public class Message
 {
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+
     // Attributes
     private int       id;
     private String    message;
@@ -58,7 +61,7 @@ public class Message
 
     public String getMessage()
     {
-        return message;
+        return message.replace("{DOMAIN}", DOMAIN);
     } // getMessage()
 
     public String textColor()

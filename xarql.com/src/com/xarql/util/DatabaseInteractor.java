@@ -18,6 +18,12 @@ public abstract class DatabaseInteractor
         this.response = response;
     } // DatabaseInteractor()
 
+    public DatabaseInteractor(HttpServletResponse response)
+    {
+        commandIndex = 0;
+        this.response = response;
+    } // DatabaseInteractor()
+
     public abstract boolean execute();
 
     protected abstract void setVariables(PreparedStatement statement) throws SQLException;

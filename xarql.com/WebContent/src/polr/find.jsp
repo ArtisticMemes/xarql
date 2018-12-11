@@ -12,14 +12,27 @@
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/find.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
 <div id="wrapper">
   <div id="column">
     <div class="large-card" style="x-overflow:hidden;">
       <h4>Search</h4>
-      <form action="${domain}/polr/find" method="GET" id="find-form">
-         <input type="text" name="q" placeholder="Phrase" maxlength="64" required="" style="width:100%;">
+      <form action="${domain}/polr/find" method="GET" id="find-form" accept-charset="UTF-8">
+         <input type="text" name="q" placeholder="Phrase" maxlength="128" required="" style="width:100%;">
          <br/>
          <input id="submit" class="button" type="submit" value="Find"/> <span class="status"></span>
        </form>
@@ -35,6 +48,9 @@
           <p><a href="${domain}/polr/${post.getId()}">View</a></p>
         </div>
       </c:forEach>
+    </div>
+    <div class="small-card">
+      <p class="centered">Page Built In ~${build_timer.done()}ms</p>
     </div>
   </div>
 </div>

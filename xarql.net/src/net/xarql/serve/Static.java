@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.xarql.util.DeveloperOptions;
+
 /**
  * Servlet implementation class StaticProvider
  */
@@ -28,8 +30,10 @@ public class Static extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String FILE_STORE  = "/home/pi/xarql.net";
-    private static final int    BUFFER_SIZE = 10240;               // 10KB
+    public static final int    BUFFER_SIZE = 10240;                                      // 10KB
+    public static final String FILE_STORE  = "C:/Users/Bryan Johnson/Pictures/xarql.net";
+
+    private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,8 +50,8 @@ public class Static extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // Get file path from the URI
-        String filePath = request.getRequestURI().substring(9, request.getRequestURI().length());
+        // Get file path from the URL
+        String filePath = request.getRequestURL().substring(DOMAIN.length() + 10);
         if(filePath == null || filePath.equals(""))
         {
             response.sendError(404);

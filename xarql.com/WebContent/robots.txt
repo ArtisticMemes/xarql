@@ -3,5 +3,8 @@ Disallow: /chat
 Disallow: /chat/
 Disallow: /polr/post
 Disallow: /polr/updt
+Disallow: /polr/find
+Disallow: /polr/hash
+Disallow: /polr/flat
 
-Sitemap: http://xarql.com/docs/xarql/sitemap.xml
+Sitemap: http://xarql.com/sitemap.xml

@@ -1,7 +1,7 @@
 /*
  * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
  */
-package net.xarql.serve;
+package net.xarql.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;

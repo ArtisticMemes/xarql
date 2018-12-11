@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.xarql.util.DeveloperOptions;
+
 /**
  * Servlet implementation class Source
  */
@@ -23,7 +25,8 @@ public class Source extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final int BUFFER_SIZE = 10240; // 10KB
+    private static final int    BUFFER_SIZE = 10240;                  // 10KB
+    private static final String DOMAIN      = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,7 +45,7 @@ public class Source extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         // Get file path from the URI
-        String filePath = request.getRequestURI().substring(6, request.getRequestURI().length());
+        String filePath = request.getRequestURL().substring(DOMAIN.length() + 7);
         if(filePath == null || filePath.equals(""))
         {
             response.sendError(404);

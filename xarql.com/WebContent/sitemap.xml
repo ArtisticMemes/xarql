@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://xarql.com/</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/0</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://xarql.com/docs/xarql/xarql.html</loc>
+  <lastmod>2018-12-02T17:38:56+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=0</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/14</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/3</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/97</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/2</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=meta</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/114</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/104</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/45</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/100</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/95</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/94</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/92</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/91</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/90</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/89</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/87</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/60</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/83</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/67</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/70</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/62</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/find</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/flat</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/docs/xarql/polr.html</loc>
+  <lastmod>2018-12-02T17:38:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/docs/xarql/chat.html</loc>
+  <lastmod>2018-12-02T17:39:16+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/docs/xarql/formatting.html</loc>
+  <lastmod>2018-12-02T17:38:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/docs/xarql/external-links.html</loc>
+  <lastmod>2018-12-02T17:39:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/docs/xarql/mission-statement.html</loc>
+  <lastmod>2018-12-02T17:38:48+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=14</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=colonoscopy</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/106</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/73</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=awesome</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/109</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/110</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/77</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/15</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/79</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/78</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/52</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/65</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/26</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=3</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=music</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/118</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/102</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/16</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/68</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/69</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/57</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/58</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/37</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/30</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/28</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/11</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/10</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/7</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/5</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=97</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=weather</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/116</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/105</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/99</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/98</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=2</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/115</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/86</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/63</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/51</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/12</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=114</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=104</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=45</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/103</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/54</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/48</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/46</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=100</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/101</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=95</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=94</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=92</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/93</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=91</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=90</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=89</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=87</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=60</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/84</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=83</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=67</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/81</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=70</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=62</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=test</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/108</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/119</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/117</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/74</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/113</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/hash?tag=</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/112</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/111</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/107</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=106</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=73</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/76</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/75</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=109</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=110</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=77</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/88</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=15</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/85</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/71</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=79</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=78</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=52</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/66</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=65</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=26</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/27</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=118</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=102</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=16</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/96</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/50</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/36</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/25</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/18</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/17</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=68</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/80</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=69</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=57</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=58</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=37</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=30</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/32</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/31</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=28</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=11</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=10</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=7</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=5</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=116</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=105</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=99</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=98</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=115</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=86</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=63</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=51</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=12</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=103</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=54</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=48</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=46</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=101</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=93</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=84</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=81</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=108</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=119</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=117</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=74</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=113</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=112</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=111</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=107</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=76</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=75</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=88</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=85</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=71</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/polr/72</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=66</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=27</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=96</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=50</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=36</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=25</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=18</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=17</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=80</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=32</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=31</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://xarql.com/flag?id=72</loc>
+  <lastmod>2018-12-10T01:12:49+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+
+
+</urlset>

@@ -6,7 +6,7 @@
   <div id="messages">
     <c:forEach begin="0" var="message" items="${messages}">
       <div class="small-card" style="background-color:${message.backgroundColor()}">
-        <p style="color:${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
+        <p style="color:${message.textColor()}">${message.getMessage()}</p>
       </div>
 	</c:forEach>
   </div>

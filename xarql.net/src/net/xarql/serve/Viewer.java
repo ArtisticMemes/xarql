@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.xarql.util.DeveloperOptions;
+
 /**
  * Servlet implementation class Viewer
  */
@@ -19,7 +21,7 @@ public class Viewer extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final String DOMAIN = "http://xarql.net";
+    public static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,14 +42,8 @@ public class Viewer extends HttpServlet
         String URI = request.getRequestURI();
         String[] pathParts = URI.split("/");
 
-        if(pathParts.length != 2)
-        {
-            response.sendError(400);
-            return;
-        }
-
-        String id = pathParts[1].substring(1);
-        String type = pathParts[1].substring(0, 1);
+        String id = pathParts[pathParts.length - 1].substring(1);
+        String type = pathParts[pathParts.length - 1].substring(0, 1);
 
         switch(type)
         {

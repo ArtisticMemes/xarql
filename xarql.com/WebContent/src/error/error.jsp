@@ -9,11 +9,24 @@
   <title>${code}</title>
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
 <div id="wrapper">
   <div id="column">
-    <div class="large-card">
+    <div class="large-card" style="width:30rem;">
       <h4 class="centered" id="error-title">Error</h5>
       <h1 class="centered" id="error-code">${code}</h1>
       <h5 class="centered">${type}</h4>

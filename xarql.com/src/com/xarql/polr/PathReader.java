@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
+import com.xarql.util.BuildTimer;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -49,6 +50,7 @@ public class PathReader extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        BuildTimer bt = new BuildTimer(request);
         ServletUtilities.standardSetup(request);
 
         String pathInfo = request.getPathInfo();

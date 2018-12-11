@@ -78,4 +78,9 @@ public class ChatRoom
             return messages.getFrom(0);
     } // getList()
 
+    public static int size()
+    {
+        return messages.size();
+    } // size()
+
 } // ChatRoom

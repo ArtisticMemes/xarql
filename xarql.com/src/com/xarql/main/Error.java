@@ -55,6 +55,9 @@ public class Error extends HttpServlet
         String type;
         switch(code)
         {
+            case "429" :
+                type = "Spam";
+                break;
             case "410" :
                 type = "Gone";
                 break;

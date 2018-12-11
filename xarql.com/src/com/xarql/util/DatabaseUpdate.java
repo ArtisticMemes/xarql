@@ -14,6 +14,11 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
         super(command, response);
     } // DatabaseUpdate()
 
+    public DatabaseUpdate(HttpServletResponse response)
+    {
+        super(response);
+    } // DatabaseUpdate()
+
     @Override
     protected boolean makeRequest()
     {

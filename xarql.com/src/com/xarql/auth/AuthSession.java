@@ -7,6 +7,7 @@ import java.security.GeneralSecurityException;
 import java.sql.Timestamp;
 import java.util.Random;
 
+import com.xarql.user.Account;
 import com.xarql.util.Secrets;
 
 public class AuthSession
@@ -18,6 +19,8 @@ public class AuthSession
     private String    color;
     private Timestamp creationTime;
     private String    googleId;
+    private Account   account;
+    private Timestamp lastSubmitTime;
 
     private static final int MAX_LIFETIME_MINUTES = 60;
 
@@ -34,7 +37,8 @@ public class AuthSession
         setCreationTime();
         randomizeColor();
         AuthTable.add(this);
-    } // AuthSession
+        setLastSubmitTime(new Timestamp(System.currentTimeMillis() - 60000));
+    } // AuthSession()
 
     protected AuthSession(AuthSession session)
     {
@@ -49,7 +53,7 @@ public class AuthSession
         {
             this.googleId = "";
         }
-    }
+    } // AuthSession()
 
     public boolean verified()
     {
@@ -81,6 +85,21 @@ public class AuthSession
     {
         creationTime = new Timestamp(System.currentTimeMillis());
     } // setCreationTime()
+
+    private void setLastSubmitTime(Timestamp lastSubmitTime)
+    {
+        this.lastSubmitTime = lastSubmitTime;
+    } // setLastSubmitTime()
+
+    public void updateLastSubmitTime()
+    {
+        this.lastSubmitTime = new Timestamp(System.currentTimeMillis());
+    } // updateLastSubmitTime()
+
+    public Timestamp getLastSubmitTime()
+    {
+        return lastSubmitTime;
+    } // getLastSubmitTime()
 
     public boolean expired() // Checks if older than 1 hour
     {
@@ -124,6 +143,24 @@ public class AuthSession
         else
             verified = false;
     } // verifyRecaptcha()
+
+    public boolean setAccount(String googleID)
+    {
+        try
+        {
+            this.account = new Account(googleID);
+            return true;
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+    } // attachAccount()
+
+    public Account getAccount()
+    {
+        return account;
+    } // getAccount()
 
     // Checks if this AuthSession belongs to a moderator
     public boolean isMod()

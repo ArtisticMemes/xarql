@@ -6,13 +6,26 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meat id="domain" value="${domain}">
+  <meta id="domain" value="${domain}">
   <title>Browsing /polr ~ xarql</title>
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/flat.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">
@@ -58,6 +71,9 @@
         <p id="page">${page}</p>
         <p id="sort">${sort}</p>
         <p id="flow">${flow}</p>
+      </div>
+      <div class="small-card">
+        <p class="centered">Page Built In ~${build_timer.done()}ms</p>
       </div>
     </div>
   </div>

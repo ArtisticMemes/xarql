@@ -34,8 +34,16 @@ div .centered {
   justify-content: center;
 }
 
+::selection {
+  background: rgba(0, 100, 255, 0.4);
+}
+
 .bold {
   font-weight: bold;
+}
+
+code {
+  @extend .code;
 }
 
 .code {
@@ -132,11 +140,6 @@ p {
   letter-spacing: .09375rem;
   text-transform: uppercase;
   font-weight: normal;
-}
-
-::selection {
-  color: #fff;
-  background: #49f;
 }
 
 html {
