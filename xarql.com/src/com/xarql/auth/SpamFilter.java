@@ -13,8 +13,6 @@ public class SpamFilter
         AuthSession as = AuthTable.get(request.getRequestedSessionId());
         Timestamp nextPossibleSubmitTime = new Timestamp(as.getLastSubmitTime().getTime() + BASE_COOL_DOWN);
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        System.out.println("It is now " + now);
-        System.out.println("Must wait until " + nextPossibleSubmitTime);
         if(now.compareTo(nextPossibleSubmitTime) < 0)
             return true;
         else

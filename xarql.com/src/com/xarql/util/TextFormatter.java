@@ -16,7 +16,8 @@ public class TextFormatter
         System.out.println(autoLinks(test));
     } // main()
 
-    public static final String URL_REGEX = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)*";
+    public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)*";
+    public static final int    HASHTAG_LIMIT = 5;
 
     public static String autoLinks(String input)
     {
@@ -115,7 +116,8 @@ public class TextFormatter
         ArrayList<String> output = new ArrayList<String>();
         String hash = "";
         boolean pastHash = false;
-        for(int i = 0; i < input.length(); i++)
+        int i = 0;
+        while(i < input.length() && output.size() < HASHTAG_LIMIT)
         {
             if(pastHash)
             {
@@ -133,6 +135,7 @@ public class TextFormatter
             {
                 pastHash = true;
             }
+            i++;
         }
         return output;
     } // getHashtags()
