@@ -33,7 +33,7 @@
         <p class="overline">Pages</p>
         <p><a href="${domain}/polr">polr</a></p>
         <p><a href="${domain}/chat">chat</a></p>
-        <p><a href="${domain}/blog">blog</a></p>
+        <p><a href="${domain}/auth">auth</a></p>
         <p><a href="${domain}/help">help</a></p>
       </div>
       <div class="small-card">
