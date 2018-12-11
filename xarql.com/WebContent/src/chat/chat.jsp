@@ -32,7 +32,7 @@
       <div id="messages">
         <c:forEach begin="0" var="message" items="${messages}">
           <div class="small-card" style="background-color:${message.backgroundColor()}">
-            <p style="color:${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
+            <p style="color:${message.textColor()}">${message.getMessage()}</p>
 		  </div>
 	    </c:forEach>
 	  </div>
@@ -51,7 +51,7 @@
          <script src="${domain}/src/auth/auth.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-       <p><a href="${domain}/help">Help</a> <span class="status"></span></p>
+       <p><a href="${domain}/help">Help</a> <span class="status" style="display:none;"></span></p>
       </div>
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>

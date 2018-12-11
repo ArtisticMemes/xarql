@@ -116,8 +116,8 @@
 	      </table>
 	      <input id="submit" class="button" type="submit" value="Custom"/>
 	    </form>
-	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="${domain}/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Prev"/></form>
-	    <form <c:if test="${page >= 4}">style="display:none;"</c:if> id="next-form" action="${domain}/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
+	    <form method="GET" <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="${domain}/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Prev"/></form>
+	    <form method="GET" <c:if test="${page >= 4}">style="display:none;"</c:if> id="next-form" action="${domain}/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
       <div class="link-div">
         <span class="link-span">
           <p class="link"><a href="${domain}/polr/find">Search</a></p>

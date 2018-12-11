@@ -4,9 +4,49 @@
 package com.xarql.util;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TextFormatter
 {
+    // Testing
+    public static void main(String[] args)
+    {
+        String test = "hello from https://www.google.com and the rest of https://xarql.com!Hurray for xarql.com.";
+        System.out.println(autoLinks(test));
+    } // main()
+
+    public static final String URL_REGEX = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)*";
+
+    public static String autoLinks(String input)
+    {
+        String output = "";
+        ArrayList<String> outputParts = new ArrayList<String>();
+        Pattern p = Pattern.compile(URL_REGEX); // the pattern to search for
+        Matcher m = p.matcher(input);
+
+        int start = 0;
+        int prevEnd = 0;
+        int end = 0;
+        // if we find a match, get the group
+        while(m.find())
+        {
+            String match = m.group();
+            start = m.start();
+            end = m.end();
+            outputParts.add(input.substring(prevEnd, start));
+            if(!match.startsWith("https://") && !match.startsWith("http://"))
+                match = "//" + match;
+            outputParts.add("<a href=\"" + match + "\">" + match + "</a>");
+            prevEnd = end;
+        }
+        outputParts.add(input.substring(end));
+
+        for(String item : outputParts)
+            output += item;
+
+        return output;
+    } // autoLinks()
 
     /**
      * Informs a Servlet if it should accept a user's post.
@@ -132,7 +172,7 @@ public class TextFormatter
         String output = input;
         output = clean(output);
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
-        output = addLinks(output);
+        output = autoLinks(output);
         output = clickableHashtags(output);
         output = addFormat(output, "bold", 'b');
         output = addFormat(output, "code", 'c');
