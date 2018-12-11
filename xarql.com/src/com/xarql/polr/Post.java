@@ -5,6 +5,8 @@ package com.xarql.polr;
 
 import java.sql.Timestamp;
 
+import com.xarql.main.DeveloperOptions;
+
 public class Post
 {
     // Attributes
@@ -29,6 +31,7 @@ public class Post
     public static final String DELETION_MESSAGE         = "<span class=\"warn\">[POST REMOVED]</span>";
     public static final String TITLE_DELETION_MESSAGE   = DELETION_MESSAGE;
     public static final String CONTENT_DELETION_MESSAGE = "<span class=\"warn\">CONTENT NOT AVAILABLE</span><br><span class=\"warn\">REPLYING NOT PERMITTED</span>";
+    public static final String DOMAIN                   = DeveloperOptions.DOMAIN;
 
     // Constructor
     public Post(int id, String title, String content, int answers, int removed, Timestamp date, Timestamp bump, Timestamp subbump, int responses, int subresponses)
@@ -128,7 +131,7 @@ public class Post
 
     public String getTitle()
     {
-        return title;
+        return title.replace("{DOMAIN}", DOMAIN);
     } // getTitle()
 
     public String getTitleText()
@@ -138,7 +141,7 @@ public class Post
 
     public String getContent()
     {
-        return content;
+        return content.replace("{DOMAIN}", DOMAIN);
     } // getContent()
 
     public String getContentText()

@@ -14,6 +14,19 @@
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/polr.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">
@@ -31,7 +44,7 @@
 		</div>
       <div class="large-card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
-       <form action="${domain}/polr/post" method="POST" id="post-form">
+       <form action="${domain}/polr/post" method="POST" id="post-form" accept-charset="UTF-8">
          <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;">
          <br/>
          <textarea name="content" cols="64" rows="8" tabindex="0" placeholder="Content (required)" wrap="soft" maxlength="4096" required style="width:100%;height:8rem;"></textarea>
@@ -39,6 +52,7 @@
          Replying To : <input type="number" id="replying-to-input" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
          <input id="submit" class="button" type="submit" value="Post"/>
        </form>
+       <p class="centered"><span class="italic">Please wait 20 seconds between posts</span></p>
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">
@@ -108,14 +122,14 @@
 	      </table>
 	      <input id="submit" class="button" type="submit" value="Custom"/>
 	    </form>
-	    <form <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="${domain}/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Prev"/></form>
-	    <form <c:if test="${page >= 4}">style="display:none;"</c:if> id="next-form" action="${domain}/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
+	    <form method="GET" <c:if test="${page <= 0}">style="display:none;"</c:if> id="prev-form" action="${domain}/polr/${id}?page=${page - 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Prev"/></form>
+	    <form method="GET" <c:if test="${page >= 4}">style="display:none;"</c:if> id="next-form" action="${domain}/polr/${id}?page=${page + 1}&sort=${sort}&flow=${flow}" style="display:inline;"><input id="submit" class="button" type="submit" value="Next"/></form>
       <div class="link-div">
         <span class="link-span">
           <p class="link"><a href="${domain}/polr/find">Search</a></p>
           <p class="link"><a href="${domain}/polr/flat">Browse</a></p>
           <span class="ajax-bar" style="display:none">
-            <p class="link"><a class="update-button" href="#">Update</a> <span class="status"></span></p>
+            <p class="link"><a class="update-button">Update</a> <span class="status"></span></p>
           </span>
         </span>
       </div>
@@ -125,6 +139,9 @@
 		  <p id="sort">${sort}</p>
 		  <p id="flow">${flow}</p>
 	  </div>
+    <div class="small-card">
+      <p class="centered">Page Built In ~${build_timer.done()}ms</p>
+    </div>
     </div>
   </div>
 </body>

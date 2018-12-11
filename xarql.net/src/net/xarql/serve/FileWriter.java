@@ -1,9 +1,12 @@
+/*
+ * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
+ */
 package net.xarql.serve;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -16,14 +19,18 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Upload
  */
 @WebServlet ("/Upload")
-public class Upload extends HttpServlet
+public class FileWriter extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final int    BUFFER_SIZE = Static.BUFFER_SIZE;
+    private static final String FILE_STORE  = Static.FILE_STORE;
+    // private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Upload()
+    public FileWriter()
     {
         super();
         // TODO Auto-generated constructor stub
@@ -55,7 +62,7 @@ public class Upload extends HttpServlet
         // Get file path from the URI
 
         // Locate and determine the file's existence
-        File file = new File(Static.FILE_STORE, "2/raw.jpg");
+        File file = new File(FILE_STORE, "2/raw.jpg");
         if(file.exists() || file.isDirectory())
         {
             response.sendError(400);
@@ -88,8 +95,8 @@ public class Upload extends HttpServlet
         try
         {
             // input is file from disk. output is this servlet's response
-            input = new BufferedInputStream(new FileInputStream(file), BUFFER_SIZE);
-            output = new BufferedOutputStream(response.getOutputStream(), BUFFER_SIZE);
+            input = new BufferedInputStream(request.getInputStream(), BUFFER_SIZE);
+            output = new BufferedOutputStream(new FileOutputStream(file), BUFFER_SIZE);
 
             // Stream input to output
             byte[] buffer = new byte[BUFFER_SIZE];
@@ -130,4 +137,4 @@ public class Upload extends HttpServlet
         doGet(request, response);
     } // doPost()
 
-} // Upload
+} // FileWriter

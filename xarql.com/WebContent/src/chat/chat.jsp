@@ -11,6 +11,19 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/chat/chat.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <style id="font-size">
+    html, body {
+      font-size: ${font_size}
+    }
+  </style>
+  <style id="font-weight">
+    p {
+      font-weight: ${font_weight}
+    }
+    h6, .bold {
+      font-weight: ${font_weight + 200}
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">
@@ -19,12 +32,12 @@
       <div id="messages">
         <c:forEach begin="0" var="message" items="${messages}">
           <div class="small-card" style="background-color:${message.backgroundColor()}">
-            <p style="color:${message.textColor()}">${message.getMessage()} <span class="overline" style="text-align:left;width:100%">${message.timeSince()}</span></p>
+            <p style="color:${message.textColor()}">${message.getMessage()}</p>
 		  </div>
 	    </c:forEach>
 	  </div>
 	  <div class="large-card" style="x-overflow:hidden;">
-       <form action="${domain}/chat/send" method="POST" id="message-form">
+       <form action="${domain}/chat/send" method="POST" id="message-form" accept-charset="UTF-8">
          <input type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input class="button" id="submit" type="submit" value="Send"/>
        </form>
@@ -38,10 +51,13 @@
          <script src="${domain}/src/auth/auth.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-       <p><a href="${domain}/help">Help</a> <span class="status"></span></p>
+       <p><a href="${domain}/help">Help</a> <span class="status" style="display:none;"></span></p>
       </div>
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>
+      </div>
+      <div class="small-card">
+        <p class="centered">Page Built In ~${build_timer.done()}ms</p>
       </div>
     </div>
   </div>

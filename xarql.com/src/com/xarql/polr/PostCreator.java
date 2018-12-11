@@ -113,6 +113,9 @@ public class PostCreator
             if(determinedID == 0)
                 return false;
 
+            HashLogger hl = new HashLogger(content, determinedID);
+            hl.execute();
+
             return true; // Will execute if neither of the above 2 return statements have
         }
         else

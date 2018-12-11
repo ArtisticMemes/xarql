@@ -3,17 +3,18 @@
  */
 package com.xarql.auth;
 
+import java.sql.Timestamp;
+
 import com.xarql.util.TrackedHashMap;
 
 public class AuthTable
 {
-    private static TrackedHashMap<String, AuthSession> sessions     = new TrackedHashMap<String, AuthSession>();
-    private static int                                 requestCount = 0;
+    private static TrackedHashMap<String, AuthSession> sessions = new TrackedHashMap<String, AuthSession>();
+    private static Timestamp                           lastTrimTime;
 
     public AuthTable()
     {
         sessions.clear();
-        requestCount = 0;
     } // AuthTable()
 
     public static void add(AuthSession session)
@@ -23,12 +24,14 @@ public class AuthTable
             if(sessions.contains(session.getTomcatSession()))
                 sessions.remove(session.getTomcatSession());
             sessions.add(session.getTomcatSession(), session);
+
         }
-        requestCount++;
-        if(requestCount >= 8) // Trim after every 8 additions
+
+        if(getLastTrimTime().compareTo(new Timestamp(System.currentTimeMillis())) < 10000) // Trim after every 10
+                                                                                           // seconds
         {
             trim();
-            requestCount = 0;
+            setLastTrimTime();
         }
     } // add()
 
@@ -59,4 +62,22 @@ public class AuthTable
     {
         return sessions.get(session);
     } // get()
+
+    public static int size()
+    {
+        return sessions.size();
+    } // size()
+
+    private static Timestamp getLastTrimTime()
+    {
+        if(lastTrimTime == null)
+            lastTrimTime = new Timestamp(System.currentTimeMillis());
+        return lastTrimTime;
+    } // getLastTrimTime()
+
+    private static void setLastTrimTime()
+    {
+        lastTrimTime = new Timestamp(System.currentTimeMillis());
+    } // setLastTrimTime()
+
 } // AuthTable
