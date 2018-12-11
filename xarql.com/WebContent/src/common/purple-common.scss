@@ -4,7 +4,7 @@
 #wrapper,
 html,
 body {
-  background-color: rgb(65, 10, 130); 
+  background-color: rgb(65, 10, 130);
 }
 
 .warn {
@@ -19,13 +19,13 @@ body {
 .card:nth-child(odd) {
   border-radius: 3px;
   color: #fff;
-  background-image: linear-gradient(to right bottom, 
-                                  rgba(190, 20, 230, .8), 
+  background-image: linear-gradient(to right bottom,
+                                  rgba(190, 20, 230, .8),
                                   rgba(100, 15, 185, .8));
   border-width: 3px;
   border-style: solid;
-  border-image: linear-gradient(to right, 
-                              rgba(55, 140, 220, .5), 
+  border-image: linear-gradient(to right,
+                              rgba(55, 140, 220, .5),
                               rgba(100, 15, 185, .5));
   -webkit-box-shadow: 0 .8rem 1rem rgba(0, 0, 0, .3);
   box-shadow: 0 .8rem 1rem rgba(0, 0, 0, .3);
@@ -34,13 +34,13 @@ body {
 .card:nth-child(even) {
   border-radius: 3px;
   color: #fff;
-  background-image: linear-gradient(to right bottom, 
-                                  rgba(55, 140, 220, .8), 
+  background-image: linear-gradient(to right bottom,
+                                  rgba(55, 140, 220, .8),
                                   rgba(115, 25, 240,.2));
   border-width: 3px;
   border-style: solid;
-  border-image: linear-gradient(to right, 
-                              rgba(55, 140, 220, .5), 
+  border-image: linear-gradient(to right,
+                              rgba(55, 140, 220, .5),
                               rgba(100, 15, 185, .5));
   -webkit-box-shadow: 0 .8rem 1rem rgba(0, 0, 0, .3);
   box-shadow: 0 .8rem 1rem rgba(0, 0, 0, .3);
@@ -48,7 +48,7 @@ body {
 
 .card h6 {
   color: #fff;
-  padding-top: 10px;  
+  padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 

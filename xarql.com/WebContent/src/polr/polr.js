@@ -214,30 +214,23 @@ $(document).ready(function () {
 
 
   function changeTheme(theme) {
-    if(theme === 'light') {
-      $("#theme-styles").attr("href", domain + "/src/common/light-common.min.css");
-      Cookies.set('theme', 'light');
-      $("#light-theme-button").hide();
-      $("#dark-theme-button").show();
-    }
-    else if(theme === 'dark') {
-      $("#theme-styles").attr("href", domain + "/src/common/dark-common.min.css");
-      Cookies.set('theme', 'dark');
-      $("#light-theme-button").show();
-      $("#dark-theme-button").hide();
+    if(theme === 'light' || theme === 'dark' || theme === 'purple') {
     }
     else {
-      $("#light-theme-button").hide();
-      $("#dark-theme-button").show();
+      theme = "light";
     }
+    $("#theme-styles").attr("href", domain + "/src/common/" + theme + "-common.min.css");
+    Cookies.set('theme', theme);
+    $(".theme-button").show();
+    $("#" + theme + "-theme-button").hide();
   }
   changeTheme(Cookies.get("theme"));
-  $("#dark-theme-button").on('click', function() {
-    changeTheme('dark');
-  });
-  $("#light-theme-button").on('click', function() {
-    changeTheme('light');
-  });
+  $(".theme-button").each(function () {
+		var $this = $(this);
+		$this.on("click", function () {
+			changeTheme($this.attr("data"));
+		});
+	});
 
   // Option Pane
   function fontWeight(weight)
@@ -261,7 +254,6 @@ $(document).ready(function () {
   $("#font-light-button").on('click', function() {
 	  fontWeight('light');
   });
-
   $("#font-normal-button").on('click', function() {
 	  fontWeight('normal');
   });
