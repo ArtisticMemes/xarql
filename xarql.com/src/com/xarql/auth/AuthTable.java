@@ -15,7 +15,6 @@ public class AuthTable
     public AuthTable()
     {
         sessions.clear();
-        lastTrimTime = new Timestamp(System.currentTimeMillis());
     } // AuthTable()
 
     public static void add(AuthSession session)
@@ -28,10 +27,11 @@ public class AuthTable
 
         }
 
-        if(lastTrimTime.compareTo(new Timestamp(System.currentTimeMillis())) < 10000) // Trim after every 10 seconds
+        if(getLastTrimTime().compareTo(new Timestamp(System.currentTimeMillis())) < 10000) // Trim after every 10
+                                                                                           // seconds
         {
             trim();
-            lastTrimTime = new Timestamp(System.currentTimeMillis());
+            setLastTrimTime();
         }
     } // add()
 
@@ -67,5 +67,17 @@ public class AuthTable
     {
         return sessions.size();
     } // size()
+
+    private static Timestamp getLastTrimTime()
+    {
+        if(lastTrimTime == null)
+            lastTrimTime = new Timestamp(System.currentTimeMillis());
+        return lastTrimTime;
+    } // getLastTrimTime()
+
+    private static void setLastTrimTime()
+    {
+        lastTrimTime = new Timestamp(System.currentTimeMillis());
+    } // setLastTrimTime()
 
 } // AuthTable

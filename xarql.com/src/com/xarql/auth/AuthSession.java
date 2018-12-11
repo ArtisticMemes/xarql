@@ -20,6 +20,7 @@ public class AuthSession
     private Timestamp creationTime;
     private String    googleId;
     private Account   account;
+    private Timestamp lastSubmitTime;
 
     private static final int MAX_LIFETIME_MINUTES = 60;
 
@@ -36,6 +37,7 @@ public class AuthSession
         setCreationTime();
         randomizeColor();
         AuthTable.add(this);
+        setLastSubmitTime(new Timestamp(System.currentTimeMillis() - 60000));
     } // AuthSession()
 
     protected AuthSession(AuthSession session)
@@ -83,6 +85,21 @@ public class AuthSession
     {
         creationTime = new Timestamp(System.currentTimeMillis());
     } // setCreationTime()
+
+    private void setLastSubmitTime(Timestamp lastSubmitTime)
+    {
+        this.lastSubmitTime = lastSubmitTime;
+    } // setLastSubmitTime()
+
+    public void updateLastSubmitTime()
+    {
+        this.lastSubmitTime = new Timestamp(System.currentTimeMillis());
+    } // updateLastSubmitTime()
+
+    public Timestamp getLastSubmitTime()
+    {
+        return lastSubmitTime;
+    } // getLastSubmitTime()
 
     public boolean expired() // Checks if older than 1 hour
     {
