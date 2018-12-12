@@ -4,8 +4,11 @@
 package com.xarql.main;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 import java.sql.Timestamp;
 
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +30,7 @@ public class Welcome extends HttpServlet
 
     private static final long      serialVersionUID = 1L;
     private static final Timestamp startTime        = new Timestamp(System.currentTimeMillis());
+    private static final String    CONTEXT          = DeveloperOptions.CONTEXT;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -49,6 +53,21 @@ public class Welcome extends HttpServlet
         request.setAttribute("auth_sessions", AuthTable.size());
         request.setAttribute("live_chats", ChatRoom.size());
         request.setAttribute("live_time", timeSinceStart());
+
+        int activeSessions = 0;
+        MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+        ObjectName objectName;
+        try
+        {
+            objectName = new ObjectName("Catalina:type=Manager,context=/" + CONTEXT + ",host=localhost");
+            activeSessions = (Integer) mBeanServer.getAttribute(objectName, "activeSessions");
+        }
+        catch(Exception e)
+        {
+            // Do nothing
+        }
+
+        request.setAttribute("total_sessions", activeSessions);
         request.getRequestDispatcher("/src/welcome/welcome.jsp").forward(request, response);
     } // doGet()
 
