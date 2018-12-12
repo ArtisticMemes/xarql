@@ -33,6 +33,9 @@
         <form id="jott-form" action="${domain}/jott" method="POST" accept-charset="UTF-8">
           <textarea id="jott-text" autofocus autocomplete="off" spellcheck="true" name="content" cols="64" rows="16" tabindex="0" placeholder="Start typing..." wrap="soft"></textarea>
           <input id="submit" class="button" type="submit" value="Process"/>
+          <p style="margin-left:1rem;display:inline;">
+            <a href="${domain}/help/textformatter" target="_blank">Formatting-Guide</a>
+          </p>
         </form>
       </div>
       <c:if test="${not empty output}">
