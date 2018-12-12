@@ -248,6 +248,16 @@
     <servlet-name>com.xarql.help.HelpDispatcher</servlet-name>
     <url-pattern>/help/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Jott it down</description>
+    <display-name>Jott</display-name>
+    <servlet-name>Jott</servlet-name>
+    <servlet-class>com.xarql.main.Jott</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Jott</servlet-name>
+    <url-pattern>/jott</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>410</error-code>
     <location>/error?code=410</location>

@@ -6,7 +6,7 @@
 <html id="html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Report a post ~ xarql</title>
+  <title>Flag A Post From /polr ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" id="theme-styles" href="${domain}/src/common/${theme}-common.min.css">
@@ -37,8 +37,8 @@
            <option value="Hate Speech">Hate Speech</option>
            <option value="Spam">Spam</option>
          </select>
-         Post ID : <input type="number" id="report-id-input" name="id" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
-         <textarea name="description" cols="64" rows="8" tabindex="0" placeholder="Description (required)" wrap="soft" maxlength="512" required style="width:100%;height:8rem;"></textarea>
+         <label>Post ID : </label><input type="number" id="report-id-input" name="id" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
+         <textarea autofocus spellcheck="true" autocomplete="off" name="description" cols="64" rows="8" tabindex="0" placeholder="Description (required)" wrap="soft" maxlength="512" required style="width:100%;height:8rem;"></textarea>
          <input id="submit" class="button" type="submit" value="Report"/>
        </form>
        <c:if test="${not auth}">

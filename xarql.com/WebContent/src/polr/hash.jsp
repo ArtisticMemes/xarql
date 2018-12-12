@@ -6,7 +6,7 @@
 <html id="html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>${posts.get(0).getTitleText()} ~ xarql</title>
+  <title>Hashtags ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" id="theme-styles" href="${domain}/src/common/${theme}-common.min.css">
@@ -31,7 +31,7 @@
       <div class="large-card">
         <h4>Categorize</h4>
         <form action="${domain}/polr/hash" method="GET" id="tag-form" accept-charset="UTF-8">
-           <input type="text" name="tag" placeholder="Hash Tag" maxlength="24" required="" style="width:100%;" tabindex="0">
+           <input autofocus spellcheck="true" autocomplete="off" type="text" name="tag" placeholder="Hash Tag" maxlength="24" required="" style="width:100%;" tabindex="0">
            <br/>
            <input id="submit" class="button" type="submit" value="Find" tabindex="0"/> <span class="status"></span>
          </form>

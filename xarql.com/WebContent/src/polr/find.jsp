@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>${query} ~ xarql</title>
+  <title>Find : ${query} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
@@ -32,7 +32,7 @@
     <div class="large-card" style="x-overflow:hidden;">
       <h4>Search</h4>
       <form action="${domain}/polr/find" method="GET" id="find-form" accept-charset="UTF-8">
-         <input type="text" name="q" placeholder="Phrase" maxlength="128" required="" style="width:100%;">
+         <input autofocus spellcheck="true" autocomplete="off" type="text" name="q" placeholder="Phrase" maxlength="128" required="" style="width:100%;">
          <br/>
          <input id="submit" class="button" type="submit" value="Find"/> <span class="status"></span>
        </form>

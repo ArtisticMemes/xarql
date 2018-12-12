@@ -294,6 +294,12 @@ select:hover
   cursor: pointer;
 }
 
+xmp {
+  word-break: normal;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
 .link-card {
   position: relative;
 }
@@ -345,4 +351,17 @@ select:hover
 {
   height: 5rem;
   width: 1rem;
+}
+
+#jott-card {
+  @extend .large-card;
+  padding: 0.2rem;
+}
+
+#jott-text {
+  width: 100%;
+  height: 24rem;
+  resize: vertical;
+  font-family: monospace;
+  border-radius: 0.1rem;
 }
