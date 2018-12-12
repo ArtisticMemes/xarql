@@ -28,7 +28,7 @@
     <div id="column">
       <div class="large-card">
         <h4>Authors</h4>
-        <p>All legally recognized names of all contributors to this repository as of September 9, 2018 are listed below.</p>
+        <p>All legally recognized names of all contributors to this repository as of December 11, 2018 are listed below.</p>
         <ul>
           <li>Bryan Christopher Johnson</li>
           <li>Chowdhury Md. Sami Al Muntahi</li>

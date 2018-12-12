@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html id="html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <title>Chat</title>
-  <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
+  <link rel="stylesheet" type="text/css" id="theme-styles" href="${domain}/src/common/${theme}-common.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
+  <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/chat/chat.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
   <style id="font-size">
@@ -51,7 +52,26 @@
          <script src="${domain}/src/auth/auth.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-       <p><a href="${domain}/help">Help</a> <span class="status" style="display:none;"></span></p>
+      <p>
+        <a href="${domain}/help">Help</a>
+        <span class="status" style="display:none;"></span>
+        <span class="ajax-bar" style="display:none">
+          <a id="option-pane-open-button" style="margin-left:1em;">Options</a>
+        </span>
+      </p>
+      </div>
+      <div class="large-card" id="option-pane" style="display:none;position:relative;">
+        <table>
+          <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
+          <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button">Normal</a></p></td></tr>
+          <tr><td><p>Theme</td><td><span style="letter-spacing:1rem">:</span></td>
+          <td>
+            <a class="theme-button" id="light-theme-button" data="light">Light</a>
+            <a class="theme-button" id="dark-theme-button" data="dark">Dark</a>
+            <a class="theme-button" id="purple-theme-button" data="purple">Purple</a>
+          </td></tr>
+        </table>
+        <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>
