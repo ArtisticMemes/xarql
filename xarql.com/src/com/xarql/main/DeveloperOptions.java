@@ -24,6 +24,8 @@ public class DeveloperOptions
     private static final String TEST_RECAPTCHA_KEY    = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
     private static final String TEST_RECAPTCHA_SECRET = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
 
+    public static final String GOOGLE_ANALYTICS_ID = "UA-131023139-1";
+
     public static String getRecaptchaKey()
     {
         if(TESTING)

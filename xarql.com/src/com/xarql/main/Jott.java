@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.jott.JottFile;
 import com.xarql.util.BuildTimer;
 import com.xarql.util.ServletUtilities;
-import com.xarql.util.TextFormatter;
 
 /**
  * Servlet implementation class Jott
@@ -42,11 +42,14 @@ public class Jott extends HttpServlet
         try
         {
             String input = request.getParameter("content");
-            String output = TextFormatter.full(input);
+            request.setAttribute("input", input);
+            JottFile jf = new JottFile(input);
+            String output = jf.getContent();
             request.setAttribute("output", output);
         }
         catch(NullPointerException npe)
         {
+            request.setAttribute("input", "");
             request.setAttribute("output", "");
         }
 

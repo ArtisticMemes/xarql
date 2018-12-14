@@ -21,8 +21,9 @@ import com.xarql.main.DeveloperOptions;
  */
 public class ServletUtilities
 {
-    private static final String DOMAIN        = DeveloperOptions.DOMAIN;
-    private static final String RECAPTCHA_KEY = DeveloperOptions.getRecaptchaKey();
+    private static final String DOMAIN              = DeveloperOptions.DOMAIN;
+    private static final String GOOGLE_ANALYTICS_ID = DeveloperOptions.GOOGLE_ANALYTICS_ID;
+    private static final String RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
 
     private HttpServletRequest request;
 
@@ -74,6 +75,7 @@ public class ServletUtilities
     public static void standardSetup(HttpServletRequest request) throws UnsupportedEncodingException
     {
         request.setAttribute("domain", DOMAIN);
+        request.setAttribute("google_analytics_id", GOOGLE_ANALYTICS_ID);
         request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
         request.setAttribute("auth", userIsAuth(request));
         setTheme(request);

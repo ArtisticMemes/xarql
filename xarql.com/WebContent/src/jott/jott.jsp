@@ -4,6 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html id="html">
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${google_analytics_id}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${google_analytics_id}');
+  </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
@@ -31,7 +39,7 @@
     <div id="column">
       <div id="jott-card">
         <form id="jott-form" action="${domain}/jott" method="POST" accept-charset="UTF-8">
-          <textarea id="jott-text" autofocus autocomplete="off" spellcheck="true" name="content" cols="64" rows="16" tabindex="0" placeholder="Start typing..." wrap="soft"></textarea>
+          <textarea id="jott-text" autofocus autocomplete="off" spellcheck="true" name="content" cols="64" rows="16" tabindex="0" placeholder="Start typing..." wrap="soft">${input}</textarea>
           <input id="submit" class="button" type="submit" value="Process"/>
           <p style="margin-left:1rem;display:inline;">
             <a href="${domain}/help/textformatter" target="_blank">Formatting-Guide</a>
