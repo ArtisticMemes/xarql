@@ -26,6 +26,14 @@ public class DeveloperOptions
 
     public static final String GOOGLE_ANALYTICS_ID = "UA-131023139-1";
 
+    public static String getGoogleAnalyticsID()
+    {
+        if(TESTING)
+            return "";
+        else
+            return GOOGLE_ANALYTICS_ID;
+    } // getGoogleAnalyticsID()
+
     public static String getRecaptchaKey()
     {
         if(TESTING)

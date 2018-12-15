@@ -22,7 +22,7 @@ import com.xarql.main.DeveloperOptions;
 public class ServletUtilities
 {
     private static final String DOMAIN              = DeveloperOptions.DOMAIN;
-    private static final String GOOGLE_ANALYTICS_ID = DeveloperOptions.GOOGLE_ANALYTICS_ID;
+    private static final String GOOGLE_ANALYTICS_ID = DeveloperOptions.getGoogleAnalyticsID();
     private static final String RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
 
     private HttpServletRequest request;

@@ -15,7 +15,6 @@ import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
-import com.xarql.util.TextFormatter;
 
 /**
  * Servlet implementation class SendProcessor
@@ -64,12 +63,10 @@ public class SendProcessor extends HttpServlet
 
         if(ServletUtilities.userIsAuth(request))
         {
-            // Censor bad words; send "forbidden" error
-            if(TextFormatter.shouldCensor(message))
-            {
-                response.sendError(403);
-                return;
-            }
+            /*
+             * // Censor bad words; send "forbidden" error
+             * if(TextFormatter.shouldCensor(message)) { response.sendError(403); return; }
+             */
 
             if(message.contains(Secrets.MOD_SIGNATURE) && AuthTable.get(request.getRequestedSessionId()).isMod() == false)
             {
