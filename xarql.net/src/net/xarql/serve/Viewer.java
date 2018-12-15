@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.xarql.util.DeveloperOptions;
+import net.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class Viewer
@@ -39,6 +40,9 @@ public class Viewer extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+
         String URI = request.getRequestURI();
         String[] pathParts = URI.split("/");
 
@@ -63,7 +67,6 @@ public class Viewer extends HttpServlet
 
         request.setAttribute("id", id);
         request.setAttribute("type", type);
-        request.setAttribute("domain", DOMAIN);
         request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
         return;
     } // doGet()

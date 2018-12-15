@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.xarql.util.ServletUtilities;
+
 /**
  * Servlet implementation class Error
  */
@@ -19,8 +21,7 @@ public class Error extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    HttpServletRequest  currentRequest  = null;
-    HttpServletResponse currentResponse = null;
+    private HttpServletRequest currentRequest = null;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,8 +39,10 @@ public class Error extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+
         currentRequest = request;
-        currentResponse = response;
         request.setAttribute("code", request.getParameter("code"));
         if(attributeEmpty("code"))
         {

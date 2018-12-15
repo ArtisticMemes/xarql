@@ -3,6 +3,26 @@
   <display-name>xarql.net</display-name>
   <servlet>
     <description></description>
+    <display-name>UploadPage</display-name>
+    <servlet-name>UploadPage</servlet-name>
+    <servlet-class>net.xarql.serve.UploadPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>net.xarql.serve.UploadPage</servlet-name>
+    <url-pattern>/-/upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadProcessor</display-name>
+    <servlet-name>UploadProcessor</servlet-name>
+    <servlet-class>net.xarql.serve.UploadProcessor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>net.xarql.serve.UploadProcessor</servlet-name>
+    <url-pattern>/-/upload_endpoint</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Viewer</display-name>
     <servlet-name>Viewer</servlet-name>
     <servlet-class>net.xarql.serve.Viewer</servlet-class>

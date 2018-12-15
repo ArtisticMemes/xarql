@@ -13,17 +13,22 @@
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" id="theme-styles" href="https://xarql.com/src/common/light-common.min.css">
   <link rel="shortcut icon" href="https://xarql.com/logo.png" type="image/x-icon">
-  <title>Image Viewer ~ xarql.net</title>
-  <style>
-#wrapper,html,body{border:0px;padding:0px;margin:0px;overflow-x:hidden;display:flex;justify-content:center;background-color:#000000;visibility:visible}html,body{width:100vw;height:100vh}html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}#wrapper{width:100%;height:100%}a{text-decoration:none;color:#0000ff;max-width:100%;max-height:100%;display:block}a:hover{text-decoration:underline}a:active{position:relative;top:0.05em}a:visited{color:#0000ff}img{max-width:100vw;max-height:100vh;object-fit:scale-down}
-  </style>
+  <title>Upload An Image ~ xarql</title>
 </head>
 <body>
-  <div id="wrapper">
-    <a href="${domain}/-/static/${id}/raw.${type}">
-      <img src="${domain}/-/static/${id}/raw.${type}">
-    </a>
+<div id="wrapper">
+  <div id="column">
+    <div class="large-card">
+      <h4>Upload An Image</h4>
+      <form id="file-form" action="${domain}/-/upload_endpoint" method="POST" enctype="multipart/form-data">
+        <label>Image : <input type="file" required accept="image/jpeg,image/x-png" multiple="false" class="button" name="file"></label>
+        <input type="submit" value="Sumbit" id="submit" class="button">
+      </form>
+      <p><a href="https://xarql.com/help/net" target="_blank">About</a></p>
+    </div>
   </div>
+</div>
 </body>
 </html>
