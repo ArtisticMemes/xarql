@@ -258,6 +258,16 @@
     <servlet-name>com.xarql.main.Jott</servlet-name>
     <url-pattern>/jott</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Sign in page</description>
+    <display-name>AccountPage</display-name>
+    <servlet-name>AccountPage</servlet-name>
+    <servlet-class>com.xarql.user.AccountPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.AccountPage</servlet-name>
+    <url-pattern>/user</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>410</error-code>
     <location>/error?code=410</location>

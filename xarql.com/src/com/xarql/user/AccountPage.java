@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.util.BuildTimer;
+import com.xarql.util.ServletUtilities;
+
 /**
  * Servlet implementation class AccountPage
  */
@@ -32,7 +35,10 @@ public class AccountPage extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
+        BuildTimer bt = new BuildTimer(request);
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+        request.getRequestDispatcher("/src/user/login.jsp").forward(request, response);
     } // doGet()
 
     /**
@@ -42,7 +48,6 @@ public class AccountPage extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 
