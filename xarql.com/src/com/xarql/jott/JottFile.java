@@ -1,5 +1,7 @@
 package com.xarql.jott;
 
+import com.xarql.util.TextFormatter;
+
 public class JottFile
 {
     private static final String SCRIPT_START_MARKER = "<";
@@ -10,7 +12,7 @@ public class JottFile
 
     public JottFile(String input)
     {
-        setContent(input);
+        setContent(TextFormatter.full(input));
         // parseScripts(input);
     } // JottFile()
 
