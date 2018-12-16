@@ -35,9 +35,9 @@
 <div id="wrapper">
   <div id="column">
     <div class="large-card" style="width:30rem;">
-      <h4 class="centered" id="error-title">Error</h5>
+      <h4 class="centered" id="error-title">Error</h4>
       <h1 class="centered" id="error-code">${code}</h1>
-      <h5 class="centered">${type}</h4>
+      <h5 class="centered">${type}</h5>
       <div class="link-div">
         <span class="link-span">
           <p class="link"><a href="${domain}/help">Help</a></p>

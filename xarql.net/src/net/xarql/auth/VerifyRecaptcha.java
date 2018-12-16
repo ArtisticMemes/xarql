@@ -1,7 +1,7 @@
 /*
  * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
  */
-package com.xarql.auth;
+package net.xarql.auth;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.json.JSONObject;
 
-import com.xarql.main.DeveloperOptions;
+import net.xarql.util.DeveloperOptions;
 
 public class VerifyRecaptcha
 {

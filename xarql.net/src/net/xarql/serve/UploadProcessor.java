@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import net.xarql.util.DeveloperOptions;
+import net.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class Upload
@@ -65,32 +66,38 @@ public class UploadProcessor extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        File fileStore = new File(FILE_STORE);
-        if(!fileStore.exists())
-            fileStore.mkdir();
-
-        String exportedFileType = "";
-        for(Part part : request.getParts())
+        ServletUtilities util = new ServletUtilities(request);
+        if(util.isAuth())
         {
-            String fileType = getFileType(part);
-            if(fileType != null && !fileType.equals(""))
-                exportedFileType = fileType;
-            File dir = new File(FILE_STORE + File.separator + (getHighestImageID() + 1));
-            if(!dir.exists())
-                dir.mkdirs();
-            part.write(FILE_STORE + File.separator + (getHighestImageID() + 1) + File.separator + "raw" + fileType);
-            setHighestImageID(getHighestImageID() + 1);
+            File fileStore = new File(FILE_STORE);
+            if(!fileStore.exists())
+                fileStore.mkdir();
+
+            String exportedFileType = "";
+            for(Part part : request.getParts())
+            {
+                String fileType = getFileType(part);
+                if(fileType != null && !fileType.equals(""))
+                    exportedFileType = fileType;
+                File dir = new File(FILE_STORE + File.separator + (getHighestImageID() + 1));
+                if(!dir.exists())
+                    dir.mkdirs();
+                part.write(FILE_STORE + File.separator + (getHighestImageID() + 1) + File.separator + "raw" + fileType);
+                setHighestImageID(getHighestImageID() + 1);
+            }
+
+            int typeID;
+            if(exportedFileType.equals(".jpg"))
+                typeID = 0;
+            else if(exportedFileType.equals(".png"))
+                typeID = 1;
+            else
+                typeID = 0;
+
+            response.sendRedirect(DOMAIN + "/" + typeID + getHighestImageID());
         }
-
-        int typeID;
-        if(exportedFileType.equals(".jpg"))
-            typeID = 0;
-        else if(exportedFileType.equals(".png"))
-            typeID = 1;
         else
-            typeID = 0;
-
-        response.sendRedirect(DOMAIN + "/" + typeID + getHighestImageID());
+            response.sendError(401);
     } // doPost()
 
     private String getFileType(Part part)

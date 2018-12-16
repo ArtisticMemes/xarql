@@ -51,6 +51,24 @@
     <url-pattern>/-/src/*</url-pattern>
   </servlet-mapping>
   <servlet>
+    <display-name>RecaptchaHandler</display-name>
+    <servlet-name>RecaptchaHandler</servlet-name>
+    <servlet-class>net.xarql.auth.RecaptchaHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>net.xarql.auth.RecaptchaHandler</servlet-name>
+    <url-pattern>/-/auth/recaptcha</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>AuthStatus</display-name>
+    <servlet-name>AuthStatus</servlet-name>
+    <servlet-class>net.xarql.auth.AuthStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>net.xarql.auth.AuthStatus</servlet-name>
+    <url-pattern>/-/auth/status</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Error</display-name>
     <servlet-name>Error</servlet-name>

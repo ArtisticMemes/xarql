@@ -46,29 +46,34 @@ public class Viewer extends HttpServlet
         String URI = request.getRequestURI();
         String[] pathParts = URI.split("/");
 
-        String id = pathParts[pathParts.length - 1].substring(1);
-        String type = pathParts[pathParts.length - 1].substring(0, 1);
-
-        switch(type)
+        if(pathParts.length == 0)
+            response.sendRedirect("https://xarql.com");
+        else
         {
-            case "0" :
-                type = "jpg";
-                break;
-            case "1" :
-                type = "svg";
-                break;
-            case "2" :
-                type = "png";
-                break;
-            default : // Should never occur
-                type = "";
-                break;
-        }
 
-        request.setAttribute("id", id);
-        request.setAttribute("type", type);
-        request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
-        return;
+            String id = pathParts[pathParts.length - 1].substring(1);
+            String type = pathParts[pathParts.length - 1].substring(0, 1);
+
+            switch(type)
+            {
+                case "0" :
+                    type = "jpg";
+                    break;
+                case "1" :
+                    type = "svg";
+                    break;
+                case "2" :
+                    type = "png";
+                    break;
+                default : // Should never occur
+                    type = "";
+                    break;
+            }
+
+            request.setAttribute("id", id);
+            request.setAttribute("type", type);
+            request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
+        }
     } // doGet()
 
     /**

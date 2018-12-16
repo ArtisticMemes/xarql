@@ -35,9 +35,6 @@ public class UploadPage extends HttpServlet
     {
         ServletUtilities util = new ServletUtilities(request);
         util.standardSetup();
-        String last = request.getParameter("last");
-        if(last != null && !last.equals(""))
-            request.setAttribute("last", last);
         request.getRequestDispatcher("/src/upload/form.jsp").forward(request, response);
     } // doGet()
 
