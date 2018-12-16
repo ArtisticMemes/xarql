@@ -35,7 +35,7 @@ public class UploadProcessor extends HttpServlet
 
     private static int highestImageID = getHighestImageID();
 
-    private static final String FILE_STORE = Static.FILE_STORE;
+    private static final String FILE_STORE = DeveloperOptions.FILE_STORE;
     private static final String DOMAIN     = DeveloperOptions.DOMAIN;
 
     /**
@@ -77,7 +77,7 @@ public class UploadProcessor extends HttpServlet
                 exportedFileType = fileType;
             File dir = new File(FILE_STORE + File.separator + (getHighestImageID() + 1));
             if(!dir.exists())
-                dir.mkdir();
+                dir.mkdirs();
             part.write(FILE_STORE + File.separator + (getHighestImageID() + 1) + File.separator + "raw" + fileType);
             setHighestImageID(getHighestImageID() + 1);
         }

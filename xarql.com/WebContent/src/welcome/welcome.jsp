@@ -43,6 +43,8 @@
         <p><a href="${domain}/chat">chat</a></p>
         <p><a href="${domain}/jott">jott</a></p>
         <p><a href="${domain}/help">help</a></p>
+        <br />
+        <p>Upload images on <a href="http://xarql.net/-/upload">xarql.net</a></p>
       </div>
       <div class="small-card">
         <h6>Wondering What's New?</h6>
