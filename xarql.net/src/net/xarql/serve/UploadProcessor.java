@@ -77,6 +77,11 @@ public class UploadProcessor extends HttpServlet
             for(Part part : request.getParts())
             {
                 String fileType = getFileType(part);
+                if(!fileType.equals(".jpg") && !fileType.equals(".png"))
+                {
+                    response.sendError(400);
+                    return;
+                }
                 if(fileType != null && !fileType.equals(""))
                     exportedFileType = fileType;
                 File dir = new File(FILE_STORE + File.separator + (getHighestImageID() + 1));
