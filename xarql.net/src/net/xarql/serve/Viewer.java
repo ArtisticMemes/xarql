@@ -60,10 +60,10 @@ public class Viewer extends HttpServlet
                     type = "jpg";
                     break;
                 case "1" :
-                    type = "svg";
+                    type = "png";
                     break;
                 case "2" :
-                    type = "png";
+                    type = "svg";
                     break;
                 default : // Should never occur
                     type = "";
