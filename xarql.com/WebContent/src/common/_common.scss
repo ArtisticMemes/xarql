@@ -157,7 +157,7 @@ html {
 #column {
   display: block;
   max-width: 100%;
-  padding: 4vh .5rem 0 .5rem;
+  padding: 4vh 0.4vw 0px 0.4vw;
 }
 
 .card {
@@ -174,14 +174,14 @@ html {
   @extend .card;
   min-height: 3rem;
   margin: 0 0 1rem 0;
-  padding: 0.4rem 1rem 0.2rem 1rem;
+  padding: 0.4rem 0.8rem 0.2rem 0.8rem;
 }
 
 .large-card {
   @extend .card;
   min-height: 12rem;
-  margin: 0 0 1.3rem 0;
-  padding: 1rem 4% 1.5rem 4%;
+  margin: 0 0 1.2rem 0;
+  padding: 1rem 3% 1.5rem 3%;
 }
 
 .spacer::after {
