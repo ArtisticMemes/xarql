@@ -5,6 +5,7 @@ package net.xarql.serve;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,8 +26,8 @@ public class Source extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final int    BUFFER_SIZE = 10240;                  // 10KB
-    private static final String DOMAIN      = DeveloperOptions.DOMAIN;
+    private static final int    INPUT_BUFFER = 65536;                  // 64KB
+    private static final String DOMAIN       = DeveloperOptions.DOMAIN;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -72,7 +73,7 @@ public class Source extends HttpServlet
 
         // Set up response with file specs
         response.reset();
-        response.setBufferSize(BUFFER_SIZE);
+        response.setBufferSize(INPUT_BUFFER);
         response.setContentType(contentType);
         response.setHeader("Content-Length", String.valueOf(file.length()));
         response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\""); // Tells browser
@@ -81,21 +82,26 @@ public class Source extends HttpServlet
 
         // Allocate space for file/response streams
         BufferedInputStream input = null;
+        ByteArrayOutputStream image = null;
         BufferedOutputStream output = null;
 
         try
         {
             // input is file from disk. output is this servlet's response
-            input = new BufferedInputStream(new FileInputStream(file), BUFFER_SIZE);
-            output = new BufferedOutputStream(response.getOutputStream(), BUFFER_SIZE);
-
-            // Stream input to output
-            byte[] buffer = new byte[BUFFER_SIZE];
+            input = new BufferedInputStream(new FileInputStream(file), INPUT_BUFFER);
+            image = new ByteArrayOutputStream(INPUT_BUFFER);
+            // Stream input to image
+            byte[] buffer = new byte[INPUT_BUFFER];
             int length;
             while((length = input.read(buffer)) > 0)
             {
-                output.write(buffer, 0, length);
+                image.write(buffer, 0, length);
             }
+
+            output = new BufferedOutputStream(response.getOutputStream());
+
+            // Stream image to output
+            output.write(image.toByteArray());
         }
         finally
         {
