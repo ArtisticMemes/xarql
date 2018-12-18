@@ -55,7 +55,10 @@ public class HelpDispatcher extends HttpServlet
             File doc = new File(getServletContext().getRealPath("/src/help/docs/").replace('\\', '/') + pathParts[1] + ".jsp");
             String docName = pathParts[1];
             if(doc.exists())
+            {
+                response.setHeader("Cache-Control", "public, max-age=86400");
                 request.getRequestDispatcher("/src/help/docs/" + docName + ".jsp").forward(request, response);
+            }
             else
                 response.sendError(404);
             return;

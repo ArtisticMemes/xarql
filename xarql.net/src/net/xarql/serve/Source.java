@@ -76,9 +76,7 @@ public class Source extends HttpServlet
         response.setBufferSize(INPUT_BUFFER);
         response.setContentType(contentType);
         response.setHeader("Content-Length", String.valueOf(file.length()));
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\""); // Tells browser
-                                                                                                      // to give user
-                                                                                                      // save prompt
+        response.setHeader("Cache-Control", "public, max-age=86400");
 
         // Allocate space for file/response streams
         BufferedInputStream input = null;

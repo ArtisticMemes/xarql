@@ -72,6 +72,7 @@ public class Viewer extends HttpServlet
 
             request.setAttribute("id", id);
             request.setAttribute("type", type);
+            response.setHeader("Cache-Control", "public, max-age=86400");
             request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
         }
     } // doGet()

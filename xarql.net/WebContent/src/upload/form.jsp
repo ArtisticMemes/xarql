@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,7 +25,7 @@
     <div class="large-card">
       <h4>Upload An Image</h4>
       <form id="file-form" action="${domain}/-/upload_endpoint" method="POST" enctype="multipart/form-data">
-        <label>Image : <input type="file" required accept="image/jpeg,image/x-png" multiple="false" class="button" name="file"></label>
+        <input type="file" required accept="image/jpeg,image/x-png" multiple="false" name="file" id="file-browser">
         <input type="submit" value="Sumbit" id="submit" class="button">
       </form>
       <c:if test="${not authenticated}">

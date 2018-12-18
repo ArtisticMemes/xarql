@@ -81,6 +81,7 @@ public class Static extends HttpServlet
         response.setBufferSize(BUFFER_SIZE);
         response.setContentType(contentType);
         response.setHeader("Content-Length", String.valueOf(file.length()));
+        response.setHeader("Cache-Control", "public, max-age=86400");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\""); // Tells browser
                                                                                                       // to give user
                                                                                                       // save prompt
