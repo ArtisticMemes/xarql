@@ -10,9 +10,9 @@ public class Base62Converter
 {
     public static HashMap<Integer, Character> charValues = new HashMap<Integer, Character>();
 
-    public static long from(String input) throws IllegalArgumentException
+    public static int from(String input) throws IllegalArgumentException
     {
-        long output = 0;
+        int output = 0;
         for(int i = 0; i < input.length(); i++)
         {
             int charValue;
@@ -30,11 +30,11 @@ public class Base62Converter
         return output;
     } // fromBase62()
 
-    private static long pow(int number, int power)
+    private static int pow(int number, int power)
     {
         if(power == 0 || number == 0)
             return 1;
-        long output = number;
+        int output = number;
         while(power > 1)
         {
             output *= number;
@@ -60,7 +60,7 @@ public class Base62Converter
         charValues = builtValues;
     } // buildCharacterMap()
 
-    public static String to(long input)
+    public static String to(int input)
     {
         String output = "";
         if(charValues.isEmpty())
@@ -69,7 +69,7 @@ public class Base62Converter
         ArrayList<Integer> digits = new ArrayList<Integer>();
         do
         {
-            digits.add((int) (input % 62));
+            digits.add(input % 62);
             input = (input - (input % 62)) / 62;
         }
         while(input > 0);

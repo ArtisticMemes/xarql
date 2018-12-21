@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import net.xarql.util.Base62Converter;
 import net.xarql.util.DeveloperOptions;
 import net.xarql.util.ServletUtilities;
 
@@ -84,10 +85,10 @@ public class UploadProcessor extends HttpServlet
                 }
                 if(fileType != null && !fileType.equals(""))
                     exportedFileType = fileType;
-                File dir = new File(FILE_STORE + File.separator + (getHighestImageID() + 1));
+                File dir = new File(FILE_STORE + File.separator + (Base62Converter.to(getHighestImageID() + 1)));
                 if(!dir.exists())
                     dir.mkdirs();
-                part.write(FILE_STORE + File.separator + (getHighestImageID() + 1) + File.separator + "raw" + fileType);
+                part.write(FILE_STORE + File.separator + (Base62Converter.to(getHighestImageID() + 1)) + File.separator + "raw" + fileType);
                 setHighestImageID(getHighestImageID() + 1);
             }
 
@@ -99,7 +100,7 @@ public class UploadProcessor extends HttpServlet
             else
                 typeID = 0;
 
-            response.sendRedirect(DOMAIN + "/" + typeID + getHighestImageID());
+            response.sendRedirect(DOMAIN + "/" + typeID + Base62Converter.to(getHighestImageID()));
         }
         else
             response.sendError(401);
@@ -115,7 +116,7 @@ public class UploadProcessor extends HttpServlet
                 return name.substring(name.indexOf('.'));
             }
         }
-        return ".jpg";
+        return ".none";
     } // getFileType
 
     private static int getHighestImageID()
@@ -125,7 +126,7 @@ public class UploadProcessor extends HttpServlet
 
     private static int getHighestImageID(boolean trustingFile)
     {
-        if(highestImageID == 0)
+        if(highestImageID == 0 || !trustingFile)
         {
             int maxFolderID = 0;
             File infoFile = new File(FILE_STORE + "/info.txt");
@@ -135,7 +136,7 @@ public class UploadProcessor extends HttpServlet
                 try
                 {
                     scan = new Scanner(infoFile);
-                    maxFolderID = Integer.parseInt(scan.nextLine());
+                    maxFolderID = Base62Converter.from(scan.nextLine());
                     scan.close();
                 }
                 catch(FileNotFoundException fnfe)
@@ -146,12 +147,12 @@ public class UploadProcessor extends HttpServlet
             else
             {
                 File dir = new File(FILE_STORE);
-                final Pattern pattern = Pattern.compile("\\d+");
+                final Pattern pattern = Pattern.compile("\\V");
                 try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir.getAbsolutePath()), entry -> pattern.matcher(entry.getFileName().toString()).matches()))
                 {
                     for(Path path : stream)
                     {
-                        int folderID = Integer.parseInt(path.getFileName().toString());
+                        int folderID = Base62Converter.from(path.getFileName().toString());
                         if(folderID > maxFolderID)
                         {
                             maxFolderID = folderID;
@@ -166,7 +167,7 @@ public class UploadProcessor extends HttpServlet
                 try
                 {
                     FileWriter fw = new FileWriter(infoFile);
-                    String id = Integer.toString(maxFolderID);
+                    String id = Base62Converter.to(maxFolderID);
                     fw.write(id);
                     fw.close();
                 }
@@ -188,7 +189,7 @@ public class UploadProcessor extends HttpServlet
         try
         {
             FileWriter fw = new FileWriter(infoFile);
-            String id = Integer.toString(input);
+            String id = Base62Converter.to(input);
             fw.write(id);
             fw.close();
         }
