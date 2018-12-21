@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" id="theme-styles" href="https://xarql.com/src/common/light-common.min.css">
   <link rel="shortcut icon" href="https://xarql.com/logo.png" type="image/x-icon">
-  <title>${code}</title>
+  <title>${code} Error ~ xarql</title>
 </head>
 <body>
 <div id="wrapper">

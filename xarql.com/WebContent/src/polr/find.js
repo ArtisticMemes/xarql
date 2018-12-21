@@ -16,7 +16,7 @@ $(document).ready(function () {
 	    	else {
 				$("#results").html(updt.find("#results").html());
 				history.pushState("xarql", "xarql", window.location.pathname + "?" + query);
-				$("title").text(queryText + " ~ xarql");
+				$("title").text("Find : " + queryText + " ~ xarql");
 				$("#find-form").trigger("reset");
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
