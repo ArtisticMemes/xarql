@@ -67,7 +67,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"http://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"https://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
