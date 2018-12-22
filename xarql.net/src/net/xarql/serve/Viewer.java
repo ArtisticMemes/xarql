@@ -47,7 +47,7 @@ public class Viewer extends HttpServlet
         String[] pathParts = URI.split("/");
 
         if(pathParts.length == 0)
-            response.sendRedirect("https://xarql.com");
+            response.sendRedirect(DOMAIN + "/-/upload");
         else
         {
 

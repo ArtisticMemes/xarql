@@ -3,7 +3,7 @@ package net.xarql.util;
 public class DeveloperOptions
 {
     // Without get() methods
-    public static final String  DOMAIN     = "http://xarql.net";
+    public static final String  DOMAIN     = "https://xarql.net";
     public static final boolean TESTING    = false;
     public static final String  FILE_STORE = "/var/lib/tomcat8/webapps/file-store";
     // /var/lib/tomcat8/webapps/file-store
