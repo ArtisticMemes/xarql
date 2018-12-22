@@ -28,3 +28,4 @@ hs_err_pid*
 /build/
 xarql.com/WebContent/src/common/_common.min.css
 xarql.net/WebContent/src/viewer/image.min.css
+xarql.net/WebContent/src/viewer/audio.min.css

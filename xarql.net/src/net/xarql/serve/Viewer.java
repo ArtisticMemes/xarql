@@ -65,6 +65,9 @@ public class Viewer extends HttpServlet
                 case "2" :
                     type = "svg";
                     break;
+                case "3" :
+                    type = "mp3";
+                    break;
                 default : // Should never occur
                     type = "";
                     break;
@@ -73,7 +76,10 @@ public class Viewer extends HttpServlet
             request.setAttribute("id", id);
             request.setAttribute("type", type);
             response.setHeader("Cache-Control", "public, max-age=86400");
-            request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
+            if(type.equals("mp3"))
+                request.getRequestDispatcher("/src/viewer/audio.jsp").forward(request, response);
+            else
+                request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
         }
     } // doGet()
 
