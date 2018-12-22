@@ -78,7 +78,7 @@ public class UploadProcessor extends HttpServlet
             for(Part part : request.getParts())
             {
                 String fileType = getFileType(part);
-                if(!fileType.equals(".jpg") && !fileType.equals(".png") && !fileType.equals(".mp3"))
+                if(!fileType.equals(".jpg") && !fileType.equals(".png"))
                 {
                     response.sendError(400);
                     return;
@@ -97,8 +97,6 @@ public class UploadProcessor extends HttpServlet
                 typeID = 0;
             else if(exportedFileType.equals(".png"))
                 typeID = 1;
-            else if(exportedFileType.equals(".mp3"))
-                typeID = 3;
             else
                 typeID = 0;
 

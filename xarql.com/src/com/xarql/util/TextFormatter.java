@@ -18,7 +18,7 @@ public class TextFormatter
 
     public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)*";
     public static final int    HASHTAG_LIMIT = 5;
-    public static final String PHOTO_REGEX   = "\\$[0-3][0-9a-zA-Z]+";
+    public static final String PHOTO_REGEX   = "\\$[0-1][0-9a-zA-Z]+";
 
     public static String autoLinks(String input)
     {
@@ -67,7 +67,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"https://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"http://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
