@@ -1,7 +1,9 @@
 package com.xarql.help;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,13 +56,23 @@ public class HelpDispatcher extends HttpServlet
         {
             File doc = new File(getServletContext().getRealPath("/src/help/docs/").replace('\\', '/') + pathParts[1] + ".jsp");
             String docName = pathParts[1];
-            if(doc.exists())
+            if(doc.exists() == false)
             {
-                response.setHeader("Cache-Control", "public, max-age=86400");
-                request.getRequestDispatcher("/src/help/docs/" + docName + ".jsp").forward(request, response);
+                File md = new File(getServletContext().getRealPath("/src/help/docs/").replace("\\", "/") + pathParts[1] + ".md");
+                Scanner scan = new Scanner(md);
+                String mdContent = "";
+                while(scan.hasNextLine())
+                {
+                    mdContent += scan.nextLine();
+                }
+                scan.close();
+                doc.createNewFile();
+                FileWriter fw = new FileWriter(doc);
+                fw.write(mdContent);
+                fw.close();
             }
-            else
-                response.sendError(404);
+            response.setHeader("Cache-Control", "public, max-age=86400");
+            request.getRequestDispatcher("/src/help/docs/" + docName + ".jsp").forward(request, response);
             return;
         }
         else if(pathParts.length > 2)

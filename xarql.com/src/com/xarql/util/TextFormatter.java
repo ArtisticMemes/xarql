@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.github.rjeschke.txtmark.Processor;
+
 public class TextFormatter
 {
     // Testing
@@ -19,6 +21,11 @@ public class TextFormatter
     public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)*";
     public static final int    HASHTAG_LIMIT = 5;
     public static final String PHOTO_REGEX   = "\\$[0-1][0-9a-zA-Z]+";
+
+    public static String processMarkdown(String input)
+    {
+        return Processor.process(input);
+    } // processMarkdown()
 
     public static String autoLinks(String input)
     {
