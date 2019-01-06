@@ -32,7 +32,7 @@ public class PathReader extends HttpServlet
 
     public static final int POSTS_PER_PAGE = PostRetriever.DEFAULT_POST_COUNT;
 
-    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+    public static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

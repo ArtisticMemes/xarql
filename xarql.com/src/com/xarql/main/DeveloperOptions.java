@@ -10,8 +10,8 @@ import com.xarql.util.Secrets;
  */
 public class DeveloperOptions
 {
-    public static final String   DOMAIN  = "https://xarql.com";
-    public static final String   CONTEXT = "";
+    private static final String  DOMAIN  = "https://xarql.com";
+    private static final String  CONTEXT = "";
     private static final boolean TESTING = false;
     /*
      * TESTING must equal true if you're trying to test something due to the
@@ -23,6 +23,10 @@ public class DeveloperOptions
 
     private static final String TEST_RECAPTCHA_KEY    = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
     private static final String TEST_RECAPTCHA_SECRET = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+
+    // Assumed; may need to be changed
+    private static final String TEST_DOMAIN  = "http://localhost:8080/xarql.com";
+    private static final String TEST_CONTEXT = "/xarql.com";
 
     public static final String GOOGLE_ANALYTICS_ID = "UA-131023139-1";
 
@@ -49,5 +53,26 @@ public class DeveloperOptions
         else
             return Secrets.RECAPTCHA_SECRET;
     } // getRecaptchaSecret()
+
+    public static String getDomain()
+    {
+        if(TESTING)
+            return TEST_DOMAIN;
+        else
+            return DOMAIN;
+    } // getDomain()
+
+    public static String getContext()
+    {
+        if(TESTING)
+            return TEST_CONTEXT;
+        else
+            return CONTEXT;
+    } // getContext()
+
+    public static boolean getTesting()
+    {
+        return TESTING;
+    } // getTesting()
 
 } // DeveloperOptions

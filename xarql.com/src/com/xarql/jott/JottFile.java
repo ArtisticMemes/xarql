@@ -12,6 +12,7 @@ public class JottFile
 
     public JottFile(String input)
     {
+        // setContent(Processor.process(input));
         setContent(TextFormatter.full(input));
         // parseScripts(input);
     } // JottFile()

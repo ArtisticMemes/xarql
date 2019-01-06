@@ -59,9 +59,6 @@
           <tr><td>Online For</td><td style="padding-left:1rem;">${live_time}</td></tr>
         </table>
       </div>
-      <div class="small-card">
-        <p class="centered">Page Built In ~${build_timer.done()}ms</p>
-      </div>
     </div>
   </div>
 </body>

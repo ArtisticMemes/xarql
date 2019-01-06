@@ -25,9 +25,9 @@ public class Conf extends HttpServlet
     private static final long serialVersionUID = 1L;
 
     public static final String POLR_ROOT_POST_TITLE   = "ROOT POST";
-    public static final String POLR_ROOT_POST_CONTENT = "Additional information available at <a href=\"http://xarql.com/help\">xarql.com/help</a>";
+    public static final String POLR_ROOT_POST_CONTENT = "Additional information available at <a href=\"https://xarql.com/help\">xarql.com/help</a>";
 
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

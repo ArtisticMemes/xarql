@@ -28,7 +28,7 @@ public class Polr extends HttpServlet
     public static final String DEFAULT_SORT = "subbump";
     public static final String DEFAULT_FLOW = "desc";
 
-    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+    public static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

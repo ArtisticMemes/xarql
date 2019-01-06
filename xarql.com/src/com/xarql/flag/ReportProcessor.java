@@ -21,7 +21,7 @@ public class ReportProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+    public static final String DOMAIN = DeveloperOptions.getDomain();
 
     private static final String[] REQUIRED_PARAMS = {
             "type", "description", "id"

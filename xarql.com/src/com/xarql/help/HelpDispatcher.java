@@ -22,7 +22,7 @@ public class HelpDispatcher extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String DOMAIN    = DeveloperOptions.DOMAIN;
+    private static final String DOMAIN    = DeveloperOptions.getDomain();
     private static final String ROOT_PATH = DOMAIN + "/help/main";
 
     /**

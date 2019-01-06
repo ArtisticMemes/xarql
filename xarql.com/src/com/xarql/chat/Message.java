@@ -10,7 +10,7 @@ import com.xarql.main.DeveloperOptions;
 
 public class Message
 {
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     // Attributes
     private int       id;

@@ -28,7 +28,7 @@ public class Updt extends HttpServlet
     public static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
     public static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

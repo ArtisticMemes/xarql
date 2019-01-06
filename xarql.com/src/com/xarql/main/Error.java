@@ -24,7 +24,7 @@ public class Error extends HttpServlet
     HttpServletRequest  currentRequest  = null;
     HttpServletResponse currentResponse = null;
 
-    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+    public static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

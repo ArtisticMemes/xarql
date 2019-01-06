@@ -26,11 +26,10 @@ import com.xarql.util.ServletUtilities;
 @WebServlet ("/Welcome")
 public class Welcome extends HttpServlet
 {
-    public static final String DOMAIN = DeveloperOptions.DOMAIN;
-
+    public static final String     DOMAIN           = DeveloperOptions.getDomain();
     private static final long      serialVersionUID = 1L;
     private static final Timestamp startTime        = new Timestamp(System.currentTimeMillis());
-    private static final String    CONTEXT          = DeveloperOptions.CONTEXT;
+    private static final String    CONTEXT          = DeveloperOptions.getContext();
 
     /**
      * @see HttpServlet#HttpServlet()

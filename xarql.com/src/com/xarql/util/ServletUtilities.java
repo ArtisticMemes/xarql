@@ -21,9 +21,10 @@ import com.xarql.main.DeveloperOptions;
  */
 public class ServletUtilities
 {
-    private static final String DOMAIN              = DeveloperOptions.DOMAIN;
-    private static final String GOOGLE_ANALYTICS_ID = DeveloperOptions.getGoogleAnalyticsID();
-    private static final String RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
+    private static final String  DOMAIN              = DeveloperOptions.getDomain();
+    private static final String  GOOGLE_ANALYTICS_ID = DeveloperOptions.getGoogleAnalyticsID();
+    private static final String  RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
+    private static final boolean TESTING             = DeveloperOptions.getTesting();
 
     private HttpServletRequest request;
 
@@ -82,6 +83,7 @@ public class ServletUtilities
         setFontWeight(request);
         setFontSize(request);
         request.setCharacterEncoding("UTF-8");
+        request.setAttribute("testing", TESTING);
     } // standardSetup(request)
 
     private static void setFontWeight(HttpServletRequest request)
