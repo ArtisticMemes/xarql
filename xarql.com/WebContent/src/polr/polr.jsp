@@ -59,7 +59,7 @@
          <br/>
          <label>Replying To : </label><input type="number" id="replying-to-input" name="answers" value="${id}" min="0" size="4" required="" style="width:4rem;"/>
          <input id="submit" class="button" type="submit" value="Post"/>
-         <p style="display:inline;margin-left:1rem;"><a href="${domain}/jott" target="_blank">jott</a></p>
+         <p style="display:inline;margin-left:1rem;"><a href="${domain}/jott" target="_blank">Test</a></p>
        </form>
        <p class="centered"><span class="italic">Please wait 20 seconds between posts</span></p>
        <c:if test="${not authenticated}">

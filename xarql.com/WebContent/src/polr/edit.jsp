@@ -39,7 +39,7 @@
         </form>
         <form action="${domain}/polr/edit?type=replace" method="POST" id="post-form" accept-charset="UTF-8">
           <br/>
-          <label>ID : </label><input autocomplete="off"type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          <label>ID : </label><input autocomplete="off"type="number" name="id" value="${id}" min="0" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Replace"/>
           <input type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;"/>
           <br/>
