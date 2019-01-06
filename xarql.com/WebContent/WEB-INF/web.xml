@@ -259,6 +259,16 @@
     <url-pattern>/jott</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Jott with markdown</description>
+    <display-name>JottMarkDown</display-name>
+    <servlet-name>JottMarkDown</servlet-name>
+    <servlet-class>com.xarql.jott.JottMarkDown</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.jott.JottMarkDown</servlet-name>
+    <url-pattern>/jott/md</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description>Sign in page</description>
     <display-name>AccountPage</display-name>
     <servlet-name>AccountPage</servlet-name>
@@ -295,10 +305,9 @@
       <param-name>ExpiresByType image</param-name>
       <param-value>access plus 1 day</param-value>
     </init-param>
-    <!-- Let everything else expire nearly immediately -->
     <init-param>
-        <param-name>ExpiresDefault</param-name>
-        <param-value>access plus 2 seconds</param-value>
+      <param-name>ExpiresDefault</param-name>
+      <param-value>access plus 2 seconds</param-value>
     </init-param>
   </filter>
   <filter-mapping>
@@ -309,7 +318,7 @@
   <filter>
     <filter-name>SourceCache</filter-name>
     <filter-class>com.xarql.util.CacheController</filter-class>
-  </filter>                       
+  </filter>
   <filter-mapping>
     <filter-name>SourceCache</filter-name>
     <url-pattern>/src/*</url-pattern>

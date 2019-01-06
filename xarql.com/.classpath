@@ -26,6 +26,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jdo2-api-2.3-eb.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsr305-3.0.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/transaction-api-1.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/txtmark-0.13.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/txtmark-0.10.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

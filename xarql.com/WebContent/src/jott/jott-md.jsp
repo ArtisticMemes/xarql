@@ -34,7 +34,7 @@
     }
   </style>
   <style>
-    #md-link {
+    #tf-link {
       margin-left: 2rem;
     }
   </style>
@@ -43,12 +43,12 @@
   <div id="wrapper">
     <div id="column">
       <div id="jott-card">
-        <form id="jott-form" action="${domain}/jott" method="POST" accept-charset="UTF-8">
+        <form id="jott-form" action="${domain}/jott/md" method="POST" accept-charset="UTF-8">
           <textarea id="jott-text" autofocus autocomplete="off" spellcheck="true" name="content" cols="64" rows="16" tabindex="0" placeholder="Start typing..." wrap="soft">${input}</textarea>
           <input id="submit" class="button" type="submit" value="Process"/>
           <p style="margin-left:1rem;display:inline;">
-            <a href="${domain}/help/textformatter" target="_blank">Formatting Guide</a>
-            <a href="${domain}/jott/md" id="md-link">Use Markdown</a>
+            <a id="markdown" href="${domain}/help/markdown" target="_blank">Markdown Guide</a>
+            <a href="${domain}/jott" id="tf-link">Use TextFormatter</a>
           </p>
         </form>
       </div>

@@ -1,4 +1,4 @@
-package com.xarql.main;
+package com.xarql.jott;
 
 import java.io.IOException;
 
@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.util.BuildTimer;
 import com.xarql.util.ServletUtilities;
-import com.xarql.util.TextFormatter;
 
 /**
- * Servlet implementation class Jott
+ * Servlet implementation class JottMarkDown
  */
-@WebServlet ("/Jott")
-public class Jott extends HttpServlet
+@WebServlet ("/JottMarkDown")
+public class JottMarkDown extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Jott()
+    public JottMarkDown()
     {
         super();
-    } // Jott()
+    } // JottMarkDown()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -43,7 +42,9 @@ public class Jott extends HttpServlet
         {
             String input = request.getParameter("content");
             request.setAttribute("input", input);
-            request.setAttribute("output", TextFormatter.full(input));
+            JottFile jf = new JottFile(input);
+            String output = jf.getContent();
+            request.setAttribute("output", output);
         }
         catch(NullPointerException npe)
         {
@@ -51,7 +52,7 @@ public class Jott extends HttpServlet
             request.setAttribute("output", "");
         }
 
-        request.getRequestDispatcher("/src/jott/jott.jsp").forward(request, response);
+        request.getRequestDispatcher("/src/jott/jott-md.jsp").forward(request, response);
     } // doGet()
 
     /**
@@ -64,4 +65,4 @@ public class Jott extends HttpServlet
         doGet(request, response);
     } // doPost()
 
-} // Jott
+} // JottMarkDown

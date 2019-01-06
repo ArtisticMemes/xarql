@@ -1,6 +1,6 @@
 package com.xarql.jott;
 
-import com.xarql.util.TextFormatter;
+import com.github.rjeschke.txtmark.Processor;
 
 public class JottFile
 {
@@ -12,8 +12,8 @@ public class JottFile
 
     public JottFile(String input)
     {
-        // setContent(Processor.process(input));
-        setContent(TextFormatter.full(input));
+        setContent(Processor.process(input));
+        // setContent(TextFormatter.full(input));
         // parseScripts(input);
     } // JottFile()
 
