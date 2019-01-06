@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.rjeschke.txtmark.Processor;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
@@ -24,6 +25,9 @@ public class HelpDispatcher extends HttpServlet
 
     private static final String DOMAIN    = DeveloperOptions.getDomain();
     private static final String ROOT_PATH = DOMAIN + "/help/main";
+
+    private static final String TEMPLATE_1 = HelpPageTemplate.TEMPLATE_1;
+    private static final String TEMPLATE_2 = HelpPageTemplate.TEMPLATE_2;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,14 +68,19 @@ public class HelpDispatcher extends HttpServlet
                 while(scan.hasNextLine())
                 {
                     mdContent += scan.nextLine();
+                    mdContent += '\n';
                 }
                 scan.close();
+
+                mdContent = TEMPLATE_1 + Processor.process(mdContent) + TEMPLATE_2;
+
                 doc.createNewFile();
                 FileWriter fw = new FileWriter(doc);
                 fw.write(mdContent);
                 fw.close();
             }
             response.setHeader("Cache-Control", "public, max-age=86400");
+            request.setAttribute("topic", docName);
             request.getRequestDispatcher("/src/help/docs/" + docName + ".jsp").forward(request, response);
             return;
         }

@@ -36,9 +36,9 @@
     <div id="column">
       <div class="large-card">
         <h4>Log In</h4>
-        <form>
-          <input type="text"></input>
-          <input type="password"></input>
+        <form action="https://xarql.net/user/login/native">
+          <input type="text" placeholder="Username"></input>
+          <input type="password" placeholder="Password"></input>
         </form>
       </div>
     </div>
