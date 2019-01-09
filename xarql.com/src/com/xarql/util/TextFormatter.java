@@ -17,12 +17,16 @@ public class TextFormatter
         String test = "Don't put hashes on these >>> or these <<<. But do on #test< or #tes>ttag";
         System.out.println(full(test));
         System.out.println(getHashtags(test));
+
+        test = "Lemme know if you can #tag people with @hello";
+        System.out.println(full(test));
     } // main()
 
     public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_+]+)*";
     public static final int    HASHTAG_LIMIT = 5;
     public static final String PHOTO_REGEX   = "\\$[0-1][0-9a-zA-Z]+";
     public static final String HASHTAG_REGEX = "(?>#[a-z0-9-_]+)(?!;)";
+    public static final String USER_REGEX    = "(?>@[a-z0-9-_]+)";
 
     public static String processMarkdown(String input)
     {
@@ -114,6 +118,34 @@ public class TextFormatter
         return false;
     } // filter()
 
+    public static String clickableUsers(String input)
+    {
+        String output = "";
+        ArrayList<String> outputParts = new ArrayList<String>();
+        Pattern p = Pattern.compile(USER_REGEX); // the pattern to search for
+        Matcher m = p.matcher(input);
+        int start = 0;
+        int prevEnd = 0;
+        int end = 0;
+        // if we find a match, get the group
+        while(m.find())
+        {
+            String match = m.group();
+            start = m.start();
+            end = m.end();
+            outputParts.add(input.substring(prevEnd, start));
+
+            outputParts.add("<a href=\"{DOMAIN}/user/view?name=" + match.substring(1) + "\">" + match + "</a>");
+            prevEnd = end;
+        }
+        outputParts.add(input.substring(end));
+
+        for(String item : outputParts)
+            output += item;
+
+        return output;
+    } // clickableHashtags
+
     public static String clickableHashtags(String input)
     {
         String output = "";
@@ -131,7 +163,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"${DOMAIN}/" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"{DOMAIN}/polr/hash?tag=" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -209,6 +241,7 @@ public class TextFormatter
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
         output = autoLinks(output);
         output = clickableHashtags(output);
+        output = clickableUsers(output);
         output = quickPic(output);
         output = addFormat(output, "bold", 'b');
         output = addFormat(output, "code", 'c');

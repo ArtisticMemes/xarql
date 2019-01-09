@@ -54,7 +54,7 @@ public class LogInHandler extends HttpServlet
         {
             try
             {
-                new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username"), request.getParameter("password")));
+                new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
                 response.sendRedirect(DOMAIN + "/polr");
             }
             catch(Exception e)

@@ -53,7 +53,7 @@ public class SignUpHandler extends HttpServlet
         {
             try
             {
-                new AccountProcessor(response, request.getParameter("username"), request.getParameter("password"));
+                new AccountProcessor(response, request.getParameter("username").trim().toLowerCase(), request.getParameter("password"));
                 response.sendRedirect(DOMAIN + "/user/login?prefill=" + request.getParameter("username"));
             }
             catch(Exception e)

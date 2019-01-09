@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.auth.SpamFilter;
+import com.xarql.user.Account;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 
@@ -97,7 +98,10 @@ public class PostProcessor extends HttpServlet
                     return;
                 }
 
-                String author = AuthTable.get(request.getRequestedSessionId()).getAccount().getUsername();
+                String author = PostCreator.DEFAULT_AUTHOR;
+                Account account = AuthTable.get(request.getRequestedSessionId()).getAccount();
+                if(account != null)
+                    author = account.getUsername();
 
                 PostCreator pc = new PostCreator(title, content, answers, author);
                 if(pc.execute(response))

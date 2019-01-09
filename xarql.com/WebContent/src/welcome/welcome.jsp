@@ -41,7 +41,7 @@
         <p class="overline">Pages</p>
         <p><a href="${domain}/polr">polr</a></p>
         <p><a href="${domain}/chat">chat</a></p>
-        <p><a href="${domain}/jott">jott</a></p>
+        <p><a href="${domain}/user">user</a></p>
         <p><a href="${domain}/help">help</a></p>
         <br />
         <p>Upload images on <a href="https://xarql.net/-/upload">xarql.net</a></p>
