@@ -23,6 +23,7 @@ public class PostCreator
     private String  title;
     private String  content;
     private int     answers;
+    private String  author;
     private boolean goodParameters;
 
     private int determinedID;
@@ -33,12 +34,16 @@ public class PostCreator
     public static final int MIN_CONTENT_LENGTH = 1;
     public static final int MIN_ID             = 0;
 
-    public PostCreator(String title, String content, int answers)
+    // Defaults
+    public static final String DEFAULT_AUTHOR = "Unknown";
+
+    public PostCreator(String title, String content, int answers, String author)
     {
         goodParameters = true;
         setTitle(title);
         setContent(content);
         setAnswers(answers);
+        setAuthor(author);
     } // PostCreator(String title, String content, int answers)
 
     private void setTitle(String title)
@@ -84,6 +89,14 @@ public class PostCreator
             this.answers = answers;
     } // setAnswers()
 
+    private void setAuthor(String author)
+    {
+        if(author != null && !author.equals(""))
+            this.author = author;
+        else
+            this.author = DEFAULT_AUTHOR;
+    } // setAuthor()
+
     public int getAnswers()
     {
         return answers;
@@ -101,7 +114,7 @@ public class PostCreator
         {
             // These should only return false if the sql connection is faulty, as the
             // conditions in which they fail were tested for in the above if statement
-            if(createPost("INSERT INTO polr (title, content, answers) VALUES (?, ?, ?)", title, content, answers, response) == false)
+            if(createPost("INSERT INTO polr (title, content, answers, author) VALUES (?, ?, ?, ?)", title, content, answers, author, response) == false)
                 return false;
             // System.out.println("updating stats next");
             if(updateStats(answers, response) == false)
@@ -378,7 +391,7 @@ public class PostCreator
         }
     } // postExists()
 
-    private boolean createPost(String query, String title, String content, int answers, HttpServletResponse response)
+    private boolean createPost(String query, String title, String content, int answers, String author, HttpServletResponse response)
     {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -393,6 +406,7 @@ public class PostCreator
             statement.setString(1, title);
             statement.setString(2, content);
             statement.setInt(3, answers);
+            statement.setString(4, author);
 
             result = statement.executeUpdate();
             return true;

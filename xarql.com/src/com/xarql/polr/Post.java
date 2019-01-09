@@ -15,6 +15,7 @@ public class Post
     private String  content;
     private int     answers;
     private boolean removed;
+    private String  author;
     // Attributes For Sorting
     private Timestamp date;
     private Timestamp bump;
@@ -32,9 +33,10 @@ public class Post
     public static final String TITLE_DELETION_MESSAGE   = DELETION_MESSAGE;
     public static final String CONTENT_DELETION_MESSAGE = "<span class=\"warn\">CONTENT NOT AVAILABLE</span><br><span class=\"warn\">REPLYING NOT PERMITTED</span>";
     public static final String DOMAIN                   = DeveloperOptions.getDomain();
+    public static final String DEFAULT_AUTHOR           = PostCreator.DEFAULT_AUTHOR;
 
     // Constructor
-    public Post(int id, String title, String content, int answers, int removed, Timestamp date, Timestamp bump, Timestamp subbump, int responses, int subresponses)
+    public Post(int id, String title, String content, int answers, int removed, Timestamp date, Timestamp bump, Timestamp subbump, int responses, int subresponses, String author)
     {
         setId(id);
         setTitle(title);
@@ -46,6 +48,7 @@ public class Post
         setSubbump(subbump);
         setResponses(responses);
         setSubresponses(subresponses);
+        setAuthor(author);
     } // Post(all)
 
     // Mutators (All private)
@@ -121,6 +124,14 @@ public class Post
         else
             this.subresponses = MIN_SUBRESPONSES;
     } // setSubresponses(int subresponses)
+
+    private void setAuthor(String author)
+    {
+        if(author != null && !author.equals(""))
+            this.author = author;
+        else
+            this.author = DEFAULT_AUTHOR;
+    } // setAuthor()
 
     // Selectors (All public)
 
@@ -214,6 +225,11 @@ public class Post
     {
         return subresponses;
     } // getSubresponses()
+
+    public String getAuthor()
+    {
+        return author;
+    } // getAuthor()
 
     @Override
     public String toString()

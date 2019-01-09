@@ -11,7 +11,7 @@
           <p class="overline">Replies : <span id="reply-count">${post.getResponses()}</span> ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
           <h6 id="main-post-title">${post.getTitle()}</h6>
           <p>${post.getContent()}</p>
-          <p><a href="${domain}/flag?id=${post.getId()}">Report</a></p>
+          <p><a class="report-link" href="${domain}/flag?id=${post.getId()}">Report</a><c:if test="${post.getAuthor() != 'Unknown'}">⤷${post.getAuthor()}</c:if></p>
         </div>
       </c:forEach>
     </div>
@@ -24,7 +24,7 @@
           <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
           <h6>${post.getTitle()}</h6>
           <p>${post.getContent()}</p>
-          <p><a href="${domain}/polr/${post.getId()}" class="view-link" post-id="${post.getId()}">View</a></p>
+          <p><a href="${domain}/polr/${post.getId()}" class="view-link" post-id="${post.getId()}">View</a><c:if test="${post.getAuthor() != 'Unknown'}">⤷${post.getAuthor()}</c:if></p>
         </div>
       </c:forEach>
     </div>

@@ -97,7 +97,9 @@ public class PostProcessor extends HttpServlet
                     return;
                 }
 
-                PostCreator pc = new PostCreator(title, content, answers);
+                String author = AuthTable.get(request.getRequestedSessionId()).getAccount().getUsername();
+
+                PostCreator pc = new PostCreator(title, content, answers, author);
                 if(pc.execute(response))
                 {
                     IPTracker.logPolrPost(request, pc.getDeterminedID());

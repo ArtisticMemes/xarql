@@ -40,7 +40,8 @@ public class HashPostRetriever extends DatabaseQuery
         Timestamp rsSubbump = rs.getTimestamp("subbump");
         int rsResponses = rs.getInt("responses");
         int rsSubresponses = rs.getInt("subresponses");
-        Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses);
+        String rsAuthor = rs.getString("author");
+        Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor);
         posts.add(currentPost);
     } // processResult()
 
