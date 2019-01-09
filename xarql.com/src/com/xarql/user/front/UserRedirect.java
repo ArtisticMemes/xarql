@@ -35,7 +35,7 @@ public class UserRedirect extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.sendRedirect(DOMAIN + "/user/login");
+        response.sendRedirect(DOMAIN + "/user/log_in");
     } // doGet()
 
     /**

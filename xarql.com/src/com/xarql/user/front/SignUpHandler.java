@@ -54,11 +54,11 @@ public class SignUpHandler extends HttpServlet
             try
             {
                 new AccountProcessor(response, request.getParameter("username").trim().toLowerCase(), request.getParameter("password"));
-                response.sendRedirect(DOMAIN + "/user/login?prefill=" + request.getParameter("username"));
+                response.sendRedirect(DOMAIN + "/user/log_in?prefill=" + request.getParameter("username"));
             }
             catch(Exception e)
             {
-                response.sendRedirect(DOMAIN + "/user/signup?fail=" + e.getMessage());
+                response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
             }
         }
         else

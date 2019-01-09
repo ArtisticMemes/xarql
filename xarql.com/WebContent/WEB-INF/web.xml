@@ -296,7 +296,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>com.xarql.user.front.LogInPage</servlet-name>
-    <url-pattern>/user/login</url-pattern>
+    <url-pattern>/user/log_in</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Log in handler</description>
@@ -306,7 +306,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>com.xarql.user.front.LogInHandler</servlet-name>
-    <url-pattern>/user/login/form</url-pattern>
+    <url-pattern>/user/log_in/form</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Sign up page</description>
@@ -316,7 +316,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>com.xarql.user.front.SignUpPage</servlet-name>
-    <url-pattern>/user/signup</url-pattern>
+    <url-pattern>/user/sign_up</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Sign up handler</description>
@@ -326,7 +326,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>com.xarql.user.front.SignUpHandler</servlet-name>
-    <url-pattern>/user/signup/form</url-pattern>
+    <url-pattern>/user/sign_up/form</url-pattern>
   </servlet-mapping>
   <error-page>
     <error-code>410</error-code>

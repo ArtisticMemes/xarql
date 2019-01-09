@@ -38,7 +38,7 @@ public class SignUpPage extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         util.standardSetup();
         request.setAttribute("fail", request.getParameter("fail"));
-        request.getRequestDispatcher("/src/user/signup.jsp").forward(request, response);
+        request.getRequestDispatcher("/src/user/sign_up.jsp").forward(request, response);
     } // doGet()
 
     /**

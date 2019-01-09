@@ -40,7 +40,7 @@ public class LogInPage extends HttpServlet
         util.standardSetup();
         request.setAttribute("fail", request.getParameter("fail"));
         request.setAttribute("prefill", request.getParameter("prefill"));
-        request.getRequestDispatcher("/src/user/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/src/user/log_in.jsp").forward(request, response);
     } // doGet()
 
     /**
