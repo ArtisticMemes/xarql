@@ -220,7 +220,6 @@ public class ServletUtilities
         {
             if(request.getParameter(param) == null || request.getParameter(param).equals(""))
             {
-                response.sendError(400);
                 return false;
             }
         }

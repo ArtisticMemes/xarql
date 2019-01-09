@@ -13,7 +13,7 @@
     gtag('config', '${google_analytics_id}');
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Log In ~ xarql</title>
+  <title>Sign Up ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
@@ -32,7 +32,7 @@
     }
   </style>
   <style>
-    #login input
+    #signup input
     {
       display: block;
       margin-bottom: 0.5rem;
@@ -43,13 +43,14 @@
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <h4>Log In</h4>
-        <form id="login" action="${domain}/user/login/form" method="POST" accept-charset="UTF-8" spellcheck="false">
-          <input type="text" name="username" placeholder="Username" required value="${prefill}">
-          <input id="password" type="password" name="password" placeholder="Password" required>
-          <input type="submit" class="button" value="Log In">
+        <h4>Sign Up</h4>
+        <form id="signup" action="${domain}/user/signup/form" method="POST" accept-charset="UTF-8" spellcheck="false">
+          <input type="text" name="username" placeholder="Username" minlength="1" maxlength="128" required>
+          <input id="password" type="password" name="password" placeholder="Password" minlength="6" maxlength="128" required>
+          <input id="password_confirmation" type="password" placeholder="Retype Password" required>
+          <input type="submit" class="button" value="Sign Up">
         </form>
-        <p>Need to register an account? <a href="${domain}/user/signup">Sign Up</a></p>
+        <p>Want to log in to an account? <a href="${domain}/user/login">Log In</a></p>
       </div>
       <c:if test="${not empty fail}">
         <div class="small-card">
@@ -59,5 +60,20 @@
       </c:if>
     </div>
   </div>
+  <script>
+  var password = document.getElementById("password"), confirm_password = document.getElementById("password_confirmation");
+
+  function validatePassword() {
+    if(password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    }
+    else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+  </script>
 </body>
 </html>

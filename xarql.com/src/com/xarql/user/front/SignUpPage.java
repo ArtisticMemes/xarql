@@ -1,4 +1,4 @@
-package com.xarql.user;
+package com.xarql.user.front;
 
 import java.io.IOException;
 
@@ -12,21 +12,20 @@ import com.xarql.util.BuildTimer;
 import com.xarql.util.ServletUtilities;
 
 /**
- * Servlet implementation class AccountPage
+ * Servlet implementation class SignUpPage
  */
-@WebServlet ("/AccountPage")
-public class AccountPage extends HttpServlet
+@WebServlet ("/SignUpPage")
+public class SignUpPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccountPage()
+    public SignUpPage()
     {
         super();
-        // TODO Auto-generated constructor stub
-    } // AccountPage()
+    } // SignUpPage()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -38,7 +37,8 @@ public class AccountPage extends HttpServlet
         BuildTimer bt = new BuildTimer(request);
         ServletUtilities util = new ServletUtilities(request);
         util.standardSetup();
-        request.getRequestDispatcher("/src/user/login.jsp").forward(request, response);
+        request.setAttribute("fail", request.getParameter("fail"));
+        request.getRequestDispatcher("/src/user/signup.jsp").forward(request, response);
     } // doGet()
 
     /**
@@ -51,4 +51,4 @@ public class AccountPage extends HttpServlet
         doGet(request, response);
     } // doPost()
 
-} // AccountPage
+} // SignUpPage

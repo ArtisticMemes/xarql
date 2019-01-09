@@ -167,7 +167,7 @@ public class TextFormatter
             return true;
         else
             return false;
-    } // isAlphaNumeric()
+    } // isAlphaNumeric(char)
 
     public static boolean isAlphaNumeric(String input)
     {
@@ -177,7 +177,23 @@ public class TextFormatter
                 return false;
         }
         return true;
-    } // isAlphaNumeric()
+    } // isAlphaNumeric(String)
+
+    public static boolean isStandardSet(char input)
+    {
+        int num = input;
+        return num >= 33 && num <= 126;
+    } // isStandardSet(char)
+
+    public static boolean isStandardSet(String input)
+    {
+        for(int i = 0; i < input.length(); i++)
+        {
+            if(!isStandardSet(input.charAt(i)))
+                return false;
+        }
+        return true;
+    } // isStandardSet(String)
 
     /**
      * Prepares raw <code>Strings</code> from the user for displaying on a web page

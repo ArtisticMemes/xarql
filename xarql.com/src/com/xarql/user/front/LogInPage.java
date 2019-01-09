@@ -1,4 +1,4 @@
-package com.xarql.user;
+package com.xarql.user.front;
 
 import java.io.IOException;
 
@@ -8,22 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.util.BuildTimer;
+import com.xarql.util.ServletUtilities;
+
 /**
- * Servlet implementation class ProfilePage
+ * Servlet implementation class AccountPage
  */
-@WebServlet ("/ProfilePage")
-public class ProfilePage extends HttpServlet
+@WebServlet ("/AccountPage")
+public class LogInPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfilePage()
+    public LogInPage()
     {
         super();
         // TODO Auto-generated constructor stub
-    } // ProfilePage()
+    } // AccountPage()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -32,8 +35,12 @@ public class ProfilePage extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        BuildTimer bt = new BuildTimer(request);
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+        request.setAttribute("fail", request.getParameter("fail"));
+        request.setAttribute("prefill", request.getParameter("prefill"));
+        request.getRequestDispatcher("/src/user/login.jsp").forward(request, response);
     } // doGet()
 
     /**
@@ -43,8 +50,7 @@ public class ProfilePage extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 
-} // ProfilePage
+} // AccountPage

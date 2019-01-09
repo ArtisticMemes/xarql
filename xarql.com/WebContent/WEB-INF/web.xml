@@ -269,14 +269,54 @@
     <url-pattern>/jott/md</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Sign in page</description>
-    <display-name>AccountPage</display-name>
-    <servlet-name>AccountPage</servlet-name>
-    <servlet-class>com.xarql.user.AccountPage</servlet-class>
+    <description>Redirect clients to log in page</description>
+    <display-name>UserRedirect</display-name>
+    <servlet-name>UserRedirect</servlet-name>
+    <servlet-class>com.xarql.user.front.UserRedirect</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.user.AccountPage</servlet-name>
+    <servlet-name>com.xarql.user.front.UserRedirect</servlet-name>
     <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Log in page</description>
+    <display-name>LogInPage</display-name>
+    <servlet-name>LogInPage</servlet-name>
+    <servlet-class>com.xarql.user.front.LogInPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.front.LogInPage</servlet-name>
+    <url-pattern>/user/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Log in handler</description>
+    <display-name>LogInHandler</display-name>
+    <servlet-name>LogInHandler</servlet-name>
+    <servlet-class>com.xarql.user.front.LogInHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.front.LogInHandler</servlet-name>
+    <url-pattern>/user/login/form</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Sign up page</description>
+    <display-name>SignUpPage</display-name>
+    <servlet-name>SignUpPage</servlet-name>
+    <servlet-class>com.xarql.user.front.SignUpPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.front.SignUpPage</servlet-name>
+    <url-pattern>/user/signup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Sign up handler</description>
+    <display-name>SignUpHandler</display-name>
+    <servlet-name>SignUpHandler</servlet-name>
+    <servlet-class>com.xarql.user.front.SignUpHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.front.SignUpHandler</servlet-name>
+    <url-pattern>/user/signup/form</url-pattern>
   </servlet-mapping>
   <error-page>
     <error-code>410</error-code>

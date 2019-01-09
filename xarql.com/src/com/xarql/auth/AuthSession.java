@@ -30,6 +30,8 @@ public class AuthSession
             verifyGoogleId(input);
         else if(inputType.equals("recaptcha"))
             verifyRecaptcha(input);
+        else if(inputType.equals("account"))
+            verified = true;
         else
             verified = false;
 
@@ -39,6 +41,12 @@ public class AuthSession
         AuthTable.add(this);
         setLastSubmitTime(new Timestamp(System.currentTimeMillis() - 60000));
     } // AuthSession()
+
+    public AuthSession(String tomcatSession, Account account)
+    {
+        this(tomcatSession, "", "account");
+        setAccount(account);
+    } // AuthSession(String, Account)
 
     protected AuthSession(AuthSession session)
     {
@@ -144,23 +152,15 @@ public class AuthSession
             verified = false;
     } // verifyRecaptcha()
 
-    public boolean setAccount(String googleID)
-    {
-        try
-        {
-            this.account = new Account(googleID);
-            return true;
-        }
-        catch(Exception e)
-        {
-            return false;
-        }
-    } // attachAccount()
-
     public Account getAccount()
     {
         return account;
     } // getAccount()
+
+    public void setAccount(Account account)
+    {
+        this.account = account;
+    } // setAccount()
 
     // Checks if this AuthSession belongs to a moderator
     public boolean isMod()

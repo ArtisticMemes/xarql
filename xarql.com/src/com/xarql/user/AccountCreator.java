@@ -1,35 +1,78 @@
 package com.xarql.user;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletResponse;
+import com.xarql.util.DBManager;
 
-import com.xarql.util.DatabaseUpdate;
-
-public class AccountCreator extends DatabaseUpdate
+public class AccountCreator
 {
-    private String googleID;
-    private String username;
+    private static final String COMMAND = "INSERT INTO user_secure (username, hash) VALUES (?, ?)";
 
-    public AccountCreator(HttpServletResponse response, String googleID, String username)
+    private String username;
+    private String password;
+
+    public AccountCreator(String username, String password)
     {
-        super(response);
-        this.googleID = googleID;
         this.username = username;
+        this.password = password;
     } // AccountCreator()
 
-    @Override
-    public boolean execute()
+    private String getCommand()
     {
-        return super.makeRequest();
+        return COMMAND;
+    } // getCommand()
+
+    public boolean execute() throws Exception
+    {
+        return makeRequest();
     } // execute()
 
-    @Override
+    private boolean makeRequest() throws Exception
+    {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = getCommand();
+
+        try
+        {
+            connection = DBManager.getConnection();
+            statement = connection.prepareStatement(query);
+            setVariables(statement);
+            statement.executeUpdate();
+            return true;
+        }
+        catch(SQLException s)
+        {
+            throw s;
+        }
+        finally
+        {
+            // Close in reversed order.
+            if(statement != null)
+                try
+                {
+                    statement.close();
+                }
+                catch(SQLException s)
+                {
+                }
+            if(connection != null)
+                try
+                {
+                    connection.close();
+                }
+                catch(SQLException s)
+                {
+                }
+        }
+    } // makeRequest()
+
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
-        statement.setString(1, googleID);
-        statement.setString(2, username);
+        statement.setString(1, username);
+        statement.setString(2, password);
     } // setVariables()
 
 } // AccountCreator

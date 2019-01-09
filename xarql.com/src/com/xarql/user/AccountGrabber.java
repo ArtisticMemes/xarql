@@ -9,24 +9,49 @@ import com.xarql.util.DBManager;
 
 public class AccountGrabber
 {
-    private String googleID;
-    private String username;
-    private String command;
+    private static final String ACCOUNT_QUERY = "SELECT * FROM user_secure WHERE username=?";
 
-    public AccountGrabber(String googleID)
+    private int    id;
+    private String username;
+    private String hash;
+
+    public AccountGrabber(String username)
     {
-        this.command = googleID;
+        this.username = username;
+        id = -1;
     } // AccountGrabber()
 
     protected void processResult(ResultSet rs) throws SQLException
     {
         username = rs.getString("username");
+        if(username != null && username.length() > 0)
+        {
+            id = rs.getInt("id");
+            hash = rs.getString("hash");
+        }
+        else
+            id = -1;
     } // processResult()
 
     protected String getData()
     {
         return username;
     } // getData()
+
+    public int getID()
+    {
+        return id;
+    } // getID()
+
+    public String getUsername()
+    {
+        return username;
+    } // getUsername()
+
+    public String getHash()
+    {
+        return hash;
+    } // getHash()
 
     public boolean execute()
     {
@@ -35,7 +60,7 @@ public class AccountGrabber
 
     private String getCommand()
     {
-        return command;
+        return ACCOUNT_QUERY;
     } // getCommand()
 
     public boolean makeRequest()
@@ -91,7 +116,7 @@ public class AccountGrabber
 
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
-        statement.setString(1, googleID);
+        statement.setString(1, username);
     } // setVariables()
 
 } // AccountGrabber

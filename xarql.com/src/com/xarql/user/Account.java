@@ -2,16 +2,55 @@ package com.xarql.user;
 
 public class Account
 {
+    private int    id;
     private String username;
 
-    public Account(String googleID) throws Exception
+    public Account(String username, String password) throws Exception
     {
-        AccountGrabber ag = new AccountGrabber(googleID);
+        AccountGrabber ag = new AccountGrabber(username);
         if(ag.execute())
-            username = ag.getData();
+        {
+            if(ag.getID() == -1)
+            {
+                throw new Exception("This username is not associated with an account");
+            }
+            else
+            {
+                try
+                {
+                    if(Password.checkPassword(password, ag.getHash()))
+                    {
+                        setID(ag.getID());
+                        setUsername(username);
+                    }
+                    else
+                        throw new Exception("The given password is incorrect");
+                }
+                catch(IllegalArgumentException iae)
+                {
+                    throw new Exception("The stored hash for this account's password is malformed.");
+                }
+            }
+
+        }
         else
-            throw new Exception("Couldn't grab account");
+            throw new Exception("Account couldn't be retrieved. Please try again");
     } // Account()
+
+    private void setID(int id)
+    {
+        this.id = id;
+    } // setID()
+
+    public int getID()
+    {
+        return id;
+    } // getID()
+
+    private void setUsername(String username)
+    {
+        this.username = username;
+    } // setUsername()
 
     public String getUsername()
     {
