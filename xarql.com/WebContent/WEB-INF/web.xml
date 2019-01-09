@@ -279,6 +279,16 @@
     <url-pattern>/user</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Show activity related to a username</description>
+    <display-name>ProfilePage</display-name>
+    <servlet-name>ProfilePage</servlet-name>
+    <servlet-class>com.xarql.user.front.ProfilePage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.front.ProfilePage</servlet-name>
+    <url-pattern>/user/view</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description>Log in page</description>
     <display-name>LogInPage</display-name>
     <servlet-name>LogInPage</servlet-name>
