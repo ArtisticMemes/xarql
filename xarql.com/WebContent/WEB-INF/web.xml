@@ -269,14 +269,24 @@
     <url-pattern>/jott/md</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Redirect clients to log in page</description>
-    <display-name>UserRedirect</display-name>
-    <servlet-name>UserRedirect</servlet-name>
-    <servlet-class>com.xarql.user.front.UserRedirect</servlet-class>
+    <description>Show users their account details</description>
+    <display-name>AccountPage</display-name>
+    <servlet-name>AccountPage</servlet-name>
+    <servlet-class>com.xarql.user.front.AccountPage</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.user.front.UserRedirect</servlet-name>
+    <servlet-name>com.xarql.user.front.AccountPage</servlet-name>
     <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Process account edits</description>
+    <display-name>AccountActions</display-name>
+    <servlet-name>AccountActions</servlet-name>
+    <servlet-class>com.xarql.user.front.AccountActions</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.user.front.AccountActions</servlet-name>
+    <url-pattern>/user/act</url-pattern>
   </servlet-mapping>
   <servlet>
     <description>Show activity related to a username</description>

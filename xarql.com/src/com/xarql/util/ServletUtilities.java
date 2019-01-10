@@ -11,8 +11,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthSession;
 import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
+import com.xarql.user.Account;
 
 /**
  * Helper class for servlets.
@@ -166,6 +168,46 @@ public class ServletUtilities
         else
             return false;
     } // userIsAuth()
+
+    public AuthSession getAuthSession()
+    {
+        if(request.getRequestedSessionId() == null) // NullPointerException protection
+            return null;
+        else if(AuthTable.contains(request.getRequestedSessionId()))
+            return AuthTable.get(request.getRequestedSessionId());
+        else
+            return null;
+    } // getAuthSession()
+
+    public static boolean userHasAccount(HttpServletRequest request)
+    {
+        if(request.getRequestedSessionId() == null) // NullPointerException protection
+            return false;
+        else if(AuthTable.get(request.getRequestedSessionId()) != null && AuthTable.get(request.getRequestedSessionId()).getAccount() != null)
+            return true;
+        else
+            return false;
+    } // userHasAccount(HttpServletRequest)
+
+    public boolean userHasAccount()
+    {
+        if(request.getRequestedSessionId() == null) // NullPointerException protection
+            return false;
+        else if(AuthTable.get(request.getRequestedSessionId()) != null && AuthTable.get(request.getRequestedSessionId()).getAccount() != null)
+            return true;
+        else
+            return false;
+    } // userHasAccount()
+
+    public Account getAccount(HttpServletRequest request)
+    {
+        return AuthTable.get(request.getRequestedSessionId()).getAccount();
+    } // getAccount(HttpServletRequest)
+
+    public Account getAccount()
+    {
+        return AuthTable.get(request.getRequestedSessionId()).getAccount();
+    } // getAccount()
 
     /**
      * Adds a "theme" attribute to the request. This is used to chose a style sheet

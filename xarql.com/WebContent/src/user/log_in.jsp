@@ -31,20 +31,13 @@
       font-weight: ${font_weight + 200}
     }
   </style>
-  <style>
-    #log_in input
-    {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-  </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
         <h4>Log In</h4>
-        <form id="log_in" action="${domain}/user/log_in/form" method="POST" accept-charset="UTF-8" spellcheck="false">
+        <form class="user-form" action="${domain}/user/log_in/form" method="POST" accept-charset="UTF-8" spellcheck="false">
           <input type="text" name="username" placeholder="Username" required value="${prefill}">
           <input id="password" type="password" name="password" placeholder="Password" required>
           <input type="submit" class="button" value="Log In">

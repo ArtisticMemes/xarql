@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
+import com.xarql.util.ServletUtilities;
 
 /**
- * Servlet implementation class UserRedirect
+ * Servlet implementation class AccountPage
  */
-@WebServlet ("/UserRedirect")
-public class UserRedirect extends HttpServlet
+@WebServlet ("/AccountPage")
+public class AccountPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
@@ -23,10 +24,10 @@ public class UserRedirect extends HttpServlet
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserRedirect()
+    public AccountPage()
     {
         super();
-    } // UserRedirect()
+    } // AccountPage()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -35,7 +36,16 @@ public class UserRedirect extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.sendRedirect(DOMAIN + "/user/log_in");
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+        if(util.userHasAccount())
+        {
+            request.setAttribute("fail", request.getParameter("fail"));
+            request.setAttribute("username", util.getAccount().getUsername());
+            request.getRequestDispatcher("/src/user/account.jsp").forward(request, response);
+        }
+        else
+            response.sendRedirect(DOMAIN + "/user/log_in");
     } // doGet()
 
     /**
@@ -48,4 +58,4 @@ public class UserRedirect extends HttpServlet
         doGet(request, response);
     } // doPost()
 
-} // UserRedirect
+} // AccountPage

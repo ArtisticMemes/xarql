@@ -58,6 +58,11 @@ public class AuthTable
         }
     } // trim()
 
+    public static void remove(String session)
+    {
+        sessions.remove(session);
+    } // remove()
+
     public static AuthSession get(String session)
     {
         return sessions.get(session);

@@ -31,23 +31,16 @@
       font-weight: ${font_weight + 200}
     }
   </style>
-  <style>
-    #sign_up input
-    {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-  </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
         <h4>Sign Up</h4>
-        <form id="sign_up" action="${domain}/user/sign_up/form" method="POST" accept-charset="UTF-8" spellcheck="false">
+        <form class="user-form" action="${domain}/user/sign_up/form" method="POST" accept-charset="UTF-8" spellcheck="false">
           <input type="text" name="username" placeholder="Username" minlength="1" maxlength="128" required>
           <input id="password" type="password" name="password" placeholder="Password" minlength="6" maxlength="128" required>
-          <input id="password_confirmation" type="password" placeholder="Retype Password" required>
+          <input id="password_confirmation" type="password" name="retype" placeholder="Retype Password" required>
           <input type="submit" class="button" value="Sign Up">
         </form>
         <p>Want to log in to an account? <a href="${domain}/user/log_in">Log In</a></p>

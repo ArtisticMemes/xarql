@@ -6,9 +6,9 @@ import com.xarql.util.TextFormatter;
 
 public class AccountProcessor
 {
-    private static final int MIN_USERNAME_LENGTH = 1;
-    private static final int MIN_PASSWORD_LENGTH = 6;
-    private static final int MAX_VARIABLE_LENGTH = 128;
+    public static final int MIN_USERNAME_LENGTH = 1;
+    public static final int MIN_PASSWORD_LENGTH = 6;
+    public static final int MAX_VARIABLE_LENGTH = 128;
 
     private String username;
     private String password;

@@ -17,10 +17,11 @@ public class AuthSession
     private boolean   verified;
     private String    tomcatSession;
     private String    color;
-    private Timestamp creationTime;
+    private Timestamp updateTime;
     private String    googleId;
     private Account   account;
     private Timestamp lastSubmitTime;
+    private boolean   killed;
 
     private static final int MAX_LIFETIME_MINUTES = 60;
 
@@ -36,10 +37,11 @@ public class AuthSession
             verified = false;
 
         setTomcatSession(tomcatSession);
-        setCreationTime();
+        setUpdateTime();
         randomizeColor();
         AuthTable.add(this);
         setLastSubmitTime(new Timestamp(System.currentTimeMillis() - 60000));
+        setKilled(false);
     } // AuthSession()
 
     public AuthSession(String tomcatSession, Account account)
@@ -52,7 +54,8 @@ public class AuthSession
     {
         this.verified = session.verified;
         this.tomcatSession = session.tomcatSession;
-        this.creationTime = session.creationTime;
+        this.updateTime = session.updateTime;
+        setKilled(false);
         try
         {
             this.googleId = session.getGoogleId();
@@ -89,9 +92,9 @@ public class AuthSession
         return color;
     } // getColor()
 
-    private void setCreationTime()
+    private void setUpdateTime()
     {
-        creationTime = new Timestamp(System.currentTimeMillis());
+        updateTime = new Timestamp(System.currentTimeMillis());
     } // setCreationTime()
 
     private void setLastSubmitTime(Timestamp lastSubmitTime)
@@ -99,8 +102,20 @@ public class AuthSession
         this.lastSubmitTime = lastSubmitTime;
     } // setLastSubmitTime()
 
+    private void setKilled(boolean killed)
+    {
+        this.killed = killed;
+    } // setKilled()
+
+    public void kill()
+    {
+        setKilled(true);
+        AuthTable.remove(getTomcatSession());
+    } // kill()
+
     public void updateLastSubmitTime()
     {
+        setUpdateTime();
         this.lastSubmitTime = new Timestamp(System.currentTimeMillis());
     } // updateLastSubmitTime()
 
@@ -112,7 +127,7 @@ public class AuthSession
     public boolean expired() // Checks if older than 1 hour
     {
         Timestamp eldestPossible = new Timestamp(System.currentTimeMillis() - (60000 * MAX_LIFETIME_MINUTES));
-        if(creationTime.before(eldestPossible))
+        if(updateTime.before(eldestPossible) || killed)
             return true;
         else
             return false;
