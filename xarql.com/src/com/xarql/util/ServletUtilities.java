@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthSession;
 import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
+import com.xarql.polr.Post;
 import com.xarql.user.Account;
 
 /**
@@ -86,6 +87,10 @@ public class ServletUtilities
         setFontSize(request);
         request.setCharacterEncoding("UTF-8");
         request.setAttribute("testing", TESTING);
+        if(userHasAccount(request))
+            request.setAttribute("account_name", getAccount(request).getUsername());
+        else
+            request.setAttribute("account_name", Post.DEFAULT_AUTHOR);
     } // standardSetup(request)
 
     private static void setFontWeight(HttpServletRequest request)
@@ -199,7 +204,7 @@ public class ServletUtilities
             return false;
     } // userHasAccount()
 
-    public Account getAccount(HttpServletRequest request)
+    public static Account getAccount(HttpServletRequest request)
     {
         return AuthTable.get(request.getRequestedSessionId()).getAccount();
     } // getAccount(HttpServletRequest)

@@ -52,6 +52,9 @@
 		</div>
       <div class="large-card" style="x-overflow:hidden;">
        <h4>Create Post</h4>
+       <c:if test="${account_name != 'Unknown'}">
+         <p>Logged in as <a href="${domain}/user">@${account_name}</a></p>
+       </c:if>
        <form action="${domain}/polr/post" method="POST" id="post-form" accept-charset="UTF-8">
          <input autocomplete="off" spellcheck="true" type="text" name="title" placeholder="Title (optional)" maxlength="64" style="width:100%;">
          <br/>
@@ -61,7 +64,7 @@
          <input id="submit" class="button" type="submit" value="Post"/>
          <p style="display:inline;margin-left:1rem;"><a href="${domain}/jott" target="_blank">Test</a></p>
        </form>
-       <p class="centered"><span class="italic">Please wait 20 seconds between posts</span></p>
+       <p id="advisory" style="display:none;"></p>
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">

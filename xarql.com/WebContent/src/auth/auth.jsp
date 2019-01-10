@@ -57,6 +57,11 @@
             </span>
           </div>
       </div>
+      <c:if test="${account_name != 'Unknown'}">
+        <div class="small-card">
+          <p>Currently logged in as @${account_name}</p>
+        </div>
+      </c:if>
     </div>
   </div>
   <script src="${domain}/src/auth/auth.min.js" defer=""></script>

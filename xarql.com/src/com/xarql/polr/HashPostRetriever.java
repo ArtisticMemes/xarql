@@ -23,7 +23,7 @@ public class HashPostRetriever extends DatabaseQuery
     public HashPostRetriever(HttpServletResponse response, String hash)
     {
         super("SELECT polr.* FROM polr INNER JOIN polr_tags_relations ON polr.id=polr_tags_relations.post_id WHERE polr_tags_relations.content=? ORDER BY date desc LIMIT ?", response);
-        this.hash = hash;
+        this.hash = hash.toLowerCase();
         posts = new ArrayList<Post>(PostRetriever.DEFAULT_POST_COUNT);
     } // HashPostRetriever
 

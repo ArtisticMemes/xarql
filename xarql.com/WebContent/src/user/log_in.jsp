@@ -46,8 +46,13 @@
       </div>
       <c:if test="${not empty fail}">
         <div class="small-card">
-          <h5>Error:</h5>
+          <h5 class="warn">Error:</h5>
           <p>${fail}</p>
+        </div>
+      </c:if>
+      <c:if test="${account_name != 'Unknown'}">
+        <div class="small-card">
+          <p>Currently logged in as @${account_name}</p>
         </div>
       </c:if>
     </div>

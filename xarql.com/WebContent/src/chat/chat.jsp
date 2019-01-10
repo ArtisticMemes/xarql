@@ -50,6 +50,9 @@
          <input autofocus spellcheck="true" autocomplete="off" type="text" name="message" placeholder="Message" maxlength="256" style="width:100%;">
          <input class="button" id="submit" type="submit" value="Send"/>
        </form>
+       <c:if test="${account_name != 'Unknown'}">
+         <p>Currently logged in as <a href="${domain}/user">@${account_name}</a></p>
+       </c:if>
        <c:if test="${not authenticated}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">

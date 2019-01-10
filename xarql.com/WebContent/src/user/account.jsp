@@ -43,12 +43,12 @@
     <div id="column">
       <div class="large-card">
         <h4>${username}</h4>
-        <p>Account controls are below</p>
         <p><a href="${domain}/user/view?name=${username}">Public Profile</a></p>
+        <p><a href="${domain}">Home</a></p>
       </div>
       <c:if test="${not empty fail}">
         <div class="small-card">
-          <h5>Error:</h5>
+          <h5 class="warn">Error:</h5>
           <p>${fail}</p>
         </div>
       </c:if>

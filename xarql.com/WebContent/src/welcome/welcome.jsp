@@ -43,12 +43,14 @@
         <p><a href="${domain}/chat">chat</a></p>
         <p><a href="${domain}/user">user</a></p>
         <p><a href="${domain}/help">help</a></p>
-        <br />
-        <p>Upload images on <a href="https://xarql.net/-/upload">xarql.net</a></p>
       </div>
       <div class="small-card">
         <h6>Wondering What's New?</h6>
-        <p>Check out <a href="https://twitter.com/xarql">xarql's official Twitter (@xarql)</a></p>
+        <p>Follow <a href="https://twitter.com/xarql">xarql's official Twitter</a> (@xarql)</p>
+      </div>
+      <div class="small-card">
+        <h6>Upload An Image</h6>
+        <p><a href="${domain}/help/net">Guide</a> 🠖 <a href="https://xarql.net/-/upload">xarql.net</a></p>
       </div>
       <div class="large-card">
         <h4>Statistics</h4>
@@ -56,7 +58,6 @@
           <tr><td>Total Sessions</td><td style="padding-left:1rem;">${total_sessions}</td></tr>
           <tr><td>Auth Sessions</td><td style="padding-left:1rem;">${auth_sessions}</td></tr>
           <tr><td>Live Chats</td><td style="padding-left:1rem;">${live_chats}</td></tr>
-          <tr><td>Online For</td><td style="padding-left:1rem;">${live_time}</td></tr>
         </table>
       </div>
     </div>

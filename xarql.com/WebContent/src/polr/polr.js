@@ -80,6 +80,8 @@ $(document).ready(function () {
     	}).done(function(){
     		$(".status").each(function() {
     			$(this).text("success");
+          $("#advisory").text("Wait 20 seconds between posts");
+          $("#advisory").show();
     		});
     	}).fail(function(){
     		$(".status").each(function() {
@@ -87,6 +89,8 @@ $(document).ready(function () {
           $form.find("textarea[name='content']").val(content);
           $form.find("input[name='answers']").val(answers);
     			$(this).text("error");
+          $("#advisory").text("Try reloading if posting fails. Remember to solve the Recaptcha.");
+          $("#advisory").show();
     		});
     	}).always(function(){
     		window.setTimeout(update, 500); // wait .5 seconds

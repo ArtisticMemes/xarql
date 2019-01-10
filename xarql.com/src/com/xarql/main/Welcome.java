@@ -51,7 +51,6 @@ public class Welcome extends HttpServlet
         ServletUtilities.standardSetup(request);
         request.setAttribute("auth_sessions", AuthTable.size());
         request.setAttribute("live_chats", ChatRoom.size());
-        request.setAttribute("live_time", timeSinceStart());
         response.setHeader("Cache-Control", "public, max-age=86400");
 
         int activeSessions = 0;
