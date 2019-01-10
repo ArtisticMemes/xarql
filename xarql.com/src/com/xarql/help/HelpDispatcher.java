@@ -1,6 +1,7 @@
 package com.xarql.help;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -63,21 +64,29 @@ public class HelpDispatcher extends HttpServlet
             if(doc.exists() == false)
             {
                 File md = new File(getServletContext().getRealPath("/src/help/docs/").replace("\\", "/") + pathParts[1] + ".md");
-                Scanner scan = new Scanner(md);
-                String mdContent = "";
-                while(scan.hasNextLine())
+                try
                 {
-                    mdContent += scan.nextLine();
-                    mdContent += '\n';
+                    Scanner scan = new Scanner(md);
+                    String mdContent = "";
+                    while(scan.hasNextLine())
+                    {
+                        mdContent += scan.nextLine();
+                        mdContent += '\n';
+                    }
+                    scan.close();
+
+                    mdContent = TEMPLATE_1 + Processor.process(mdContent) + TEMPLATE_2;
+
+                    doc.createNewFile();
+                    FileWriter fw = new FileWriter(doc);
+                    fw.write(mdContent);
+                    fw.close();
                 }
-                scan.close();
-
-                mdContent = TEMPLATE_1 + Processor.process(mdContent) + TEMPLATE_2;
-
-                doc.createNewFile();
-                FileWriter fw = new FileWriter(doc);
-                fw.write(mdContent);
-                fw.close();
+                catch(FileNotFoundException fnfe)
+                {
+                    response.sendError(404);
+                    return;
+                }
             }
             response.setHeader("Cache-Control", "public, max-age=86400");
             request.setAttribute("topic", docName);
