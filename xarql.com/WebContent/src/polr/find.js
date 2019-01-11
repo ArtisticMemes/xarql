@@ -18,6 +18,7 @@ $(document).ready(function () {
 				history.pushState("xarql", "xarql", window.location.pathname + "?" + query);
 				$("title").text("Find : " + queryText + " ~ xarql");
 				$("#find-form").trigger("reset");
+        revealLinks();
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -46,4 +47,28 @@ $(document).ready(function () {
   }
   fontWeight(Cookies.get('font-weight'));
   $('html').css('font-size', Cookies.get('font-size'));
+
+  // Enables links for viewing censored content
+  function reveal(id) {
+    $('#post-inner-' + id).show();
+    $('#post-warning-' + id).hide();
+  } // reveal()
+
+  // Enables links for viewing censored content
+  function reveal(id) {
+    $('#post-inner-' + id).show();
+    $('#post-warning-' + id).hide();
+  } // reveal()
+
+  function revealLinks() {
+    $(".reveal-link").each(function () {
+  		var $this = $(this);
+	  	$this.on("click", function () {
+	  		reveal($this.attr('data'));
+        $this.hide();
+		  });
+	  });
+  }
+  revealLinks();
+
 });

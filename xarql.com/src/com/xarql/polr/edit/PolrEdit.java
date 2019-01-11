@@ -94,7 +94,7 @@ public class PolrEdit extends HttpServlet
             if(Secrets.modList().contains(associatedGoogleID))
             {
                 String type = request.getParameter("type");
-                if(type == null || !(type.equals("remove") || type.equals("restore") || type.equals("replace")))
+                if(type == null || !(type.equals("remove") || type.equals("restore") || type.equals("replace") || type.equals("censor")))
                 {
                     response.sendError(400);
                     return;
@@ -149,6 +149,24 @@ public class PolrEdit extends HttpServlet
                         if(pe.execute())
                         {
                             IPTracker.logPolrEditReplace(request, id);
+                            response.sendRedirect(DOMAIN + "/polr/edit");
+                        }
+                        return;
+                    }
+                }
+                else if(type.equals("censor"))
+                {
+                    if(request.getParameter("warning") == null || request.getParameter("warning").equals(""))
+                    {
+                        response.sendError(400);
+                        return;
+                    }
+                    else
+                    {
+                        PostCensor pc = new PostCensor(id, request.getParameter("warning"), response);
+                        if(pc.execute())
+                        {
+                            IPTracker.logPolrEditCensor(request, id);
                             response.sendRedirect(DOMAIN + "/polr/edit");
                         }
                         return;

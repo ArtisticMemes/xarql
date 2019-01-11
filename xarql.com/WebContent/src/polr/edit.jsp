@@ -27,14 +27,25 @@
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
+        <form action="${domain}/polr/edit?type=censor" method="POST" id="post-form" accept-charset="UTF-8">
+          <br/>
+          <label>ID : </label><input autocomplete="off" type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          <select name="warning">
+            <option value="Offensive">Offensive</option>
+            <option value="Sexual">Sexual</option>
+            <option value="Violent">Violent</option>
+            <option value="None">None</option>
+          </select>
+          <input id="submit" class="button" type="submit" value="Censor"/>
+        </form>
         <form action="${domain}/polr/edit?type=remove" method="POST" id="post-form" accept-charset="UTF-8">
           <br/>
-          <label>ID : </label><input autocomplete="off"type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          <label>ID : </label><input autocomplete="off" type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Remove"/>
         </form>
         <form action="${domain}/polr/edit?type=restore" method="POST" id="post-form" accept-charset="UTF-8">
           <br/>
-          <label>ID : </label><input autocomplete="off"type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
+          <label>ID : </label><input autocomplete="off" type="number" name="id" value="${id}" min="1" size="9" required="" style="width:4rem;"/>
           <input id="submit" class="button" type="submit" value="Restore"/>
         </form>
         <form action="${domain}/polr/edit?type=replace" method="POST" id="post-form" accept-charset="UTF-8">

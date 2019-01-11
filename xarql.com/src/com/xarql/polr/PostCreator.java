@@ -35,7 +35,8 @@ public class PostCreator
     public static final int MIN_ID             = 0;
 
     // Defaults
-    public static final String DEFAULT_AUTHOR = "Unknown";
+    public static final String DEFAULT_AUTHOR  = "Unknown";
+    public static final String DEFAULT_WARNING = "None";
 
     public PostCreator(String title, String content, int answers, String author)
     {

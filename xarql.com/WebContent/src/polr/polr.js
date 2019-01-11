@@ -32,6 +32,7 @@ $(document).ready(function () {
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
 				viewLinks();
+        revealLinks();
 				$(".status").each(function() {
 					$(this).text(xhr.statusText);
 				});
@@ -120,6 +121,7 @@ $(document).ready(function () {
 				$("#sort").text(sort);
 				$("#flow").text(flow);
 				viewLinks();
+        revealLinks();
 				if(page > 0) { $("#prev-form").show(); $("#prev-form").css("display", "inline");} else { $("#prev-form").hide(); }
 				if(page < 4) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
 				$(".status").each(function() {
@@ -193,6 +195,7 @@ $(document).ready(function () {
 				$("#next-form").show();
 				$("#next-form").css("display", "inline");
 				viewLinks();
+        revealLinks();
 	    	}
 	    });
 	}
@@ -280,6 +283,23 @@ $(document).ready(function () {
 	  $("#option-pane-open-button").show();
 	  $(this).hide();
   });
+
+  // Enables links for viewing censored content
+  function reveal(id) {
+    $('#post-inner-' + id).show();
+    $('#post-warning-' + id).hide();
+  } // reveal()
+
+  function revealLinks() {
+    $(".reveal-link").each(function () {
+  		var $this = $(this);
+	  	$this.on("click", function () {
+	  		reveal($this.attr('data'));
+        $this.hide();
+		  });
+	  });
+  }
+  revealLinks();
 
   /* Auto update page to reflect options set on another page
   function autoOption() {

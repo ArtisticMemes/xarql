@@ -147,7 +147,8 @@ public class PostRetriever
                 int rsResponses = rs.getInt("responses");
                 int rsSubresponses = rs.getInt("subresponses");
                 String rsAuthor = rs.getString("author");
-                Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor);
+                String rsWarning = rs.getString("warning");
+                Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
                 posts.add(currentPost);
             }
 

@@ -36,6 +36,11 @@ public class IPTracker
         log(request, targetPostID, "polr/edit/replace");
     } // logPolrEditReplace()
 
+    public static void logPolrEditCensor(HttpServletRequest request, int targetPostID)
+    {
+        log(request, targetPostID, "polr/edit/censor");
+    } // logPolrEditCensor()
+
     public static void logReport(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "flag");
