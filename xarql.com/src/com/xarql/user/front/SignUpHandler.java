@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthSession;
 import com.xarql.main.DeveloperOptions;
+import com.xarql.user.Account;
 import com.xarql.user.AccountProcessor;
 import com.xarql.util.ServletUtilities;
 
@@ -53,8 +55,11 @@ public class SignUpHandler extends HttpServlet
         {
             try
             {
-                new AccountProcessor(response, request.getParameter("username").trim().toLowerCase(), request.getParameter("password"));
-                response.sendRedirect(DOMAIN + "/user/log_in?prefill=" + request.getParameter("username"));
+                String username = request.getParameter("username").trim().toLowerCase();
+                String password = request.getParameter("password");
+                new AccountProcessor(username, password);
+                new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
+                response.sendRedirect(DOMAIN + "/user?msg=Account Created");
             }
             catch(Exception e)
             {

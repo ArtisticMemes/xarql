@@ -40,6 +40,7 @@ public class AccountPage extends HttpServlet
         util.standardSetup();
         if(util.userHasAccount())
         {
+            request.setAttribute("msg", request.getParameter("msg"));
             request.setAttribute("fail", request.getParameter("fail"));
             request.setAttribute("username", util.getAccount().getUsername());
             request.getRequestDispatcher("/src/user/account.jsp").forward(request, response);

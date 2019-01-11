@@ -46,6 +46,11 @@
         <p><a href="${domain}/user/view?name=${username}">Public Profile</a></p>
         <p><a href="${domain}">Home</a></p>
       </div>
+      <c:if test="${not empty msg}">
+        <div class="small-card">
+          <p class="centered">${msg}</p>
+        </div>
+      </c:if>
       <c:if test="${not empty fail}">
         <div class="small-card">
           <h5 class="warn">Error:</h5>

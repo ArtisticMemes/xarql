@@ -1,7 +1,5 @@
 package com.xarql.user;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.TextFormatter;
 
 public class AccountProcessor
@@ -10,10 +8,11 @@ public class AccountProcessor
     public static final int MIN_PASSWORD_LENGTH = 6;
     public static final int MAX_VARIABLE_LENGTH = 128;
 
+    // Only used to validate variables
     private String username;
     private String password;
 
-    public AccountProcessor(HttpServletResponse response, String username, String password) throws Exception
+    public AccountProcessor(String username, String password) throws Exception
     {
         setUsername(username);
         setPassword(password);
