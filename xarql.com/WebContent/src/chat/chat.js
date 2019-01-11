@@ -55,6 +55,7 @@ $(document).ready(function () {
 	    	}).fail(function(){
 	    		$(".status").each(function() {
 					$(this).text("error");
+          location.reload();
 				});
 	    	});
 	});
