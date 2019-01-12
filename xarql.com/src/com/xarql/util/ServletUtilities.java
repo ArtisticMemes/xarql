@@ -31,6 +31,7 @@ public class ServletUtilities
     private static final int    NORMAL_FONT_WEIGHT = 400;
     private static final int    LIGHT_FONT_WEIGHT  = 200;
     private static final String DEFAULT_FONT_SIZE  = "1rem";
+    private static final String DEFAULT_THEME      = "dark";
 
     /**
      * Allows for using static methods in an object to reduce typing
@@ -187,10 +188,10 @@ public class ServletUtilities
                     return;
                 }
             }
-            request.setAttribute("theme", "light"); // default
+            request.setAttribute("theme", DEFAULT_THEME); // default
         }
         else
-            request.setAttribute("theme", "light");
+            request.setAttribute("theme", DEFAULT_THEME);
     } // setTheme()
 
     /**

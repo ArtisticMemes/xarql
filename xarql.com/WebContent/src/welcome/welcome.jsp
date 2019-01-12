@@ -34,10 +34,10 @@
 </head>
 <body>
 
-  <div id="welcome-wrapper">
+  <div class="welcome-wrapper">
 
       <div class="welcome-top">
-        
+
         <div class="welcome-top-left">
           <svg class="welcome-logo" width="636" height="220" viewBox="0 0 636 220" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d)">
@@ -66,14 +66,14 @@
             <ul class="navigation-list">
               <li><a href="${domain}/polr" class="navigation-button">polr</a></li>
               <li><a href="${domain}/chat" class="navigation-button">chat</a></li>
-              <li><a href="${domain}/jott" class="navigation-button">jott</a></li>
+              <li><a href="${domain}/user" class="navigation-button">user</a></li>
               <li><a href="${domain}/help" class="navigation-button">help</a></li>
             </ul>
             <div class="navigation-bg">&nbsp;</div>
           </div>
         </div>
       </div>
-      
+
       <div class="welcome-bottom">
 
         <div class="welcome-stats">
@@ -83,7 +83,6 @@
                 <tr><td>Total Sessions</td><td>${total_sessions}</td></tr>
                 <tr><td>Auth Sessions</td><td>${auth_sessions}</td></tr>
                 <tr><td>Live Chats</td><td>${live_chats}</td></tr>
-                <tr><td>Online For</td><td>${live_time}</td></tr>
               </table>
             </div>
         </div>
@@ -91,15 +90,17 @@
         <div class="welcome-update">
             <div class="welcome-update-text">
               <h6><span>Wondering</span> what's new?</h6>
-              <p>Check out <a href="https://twitter.com/xarql" class="welcome-link">xarql's official 
-                <svg>
-                  <use xlink:href="sprite.svg#icon-twitter"></use>
-                </svg>
-              </a></p>
-              <p>Upload images on <a href="http://xarql.net/-/upload" class="welcome-link">xarql.net</a></p>
+              <p><svg>
+                <use xlink:href="${domain}/src/common/twitter.svg#icon-twitter"></use>
+              </svg>
+              Follow <a href="https://twitter.com/xarql" class="welcome-link">@xarql</a> on Twitter
+              </p>
+              <br />
+              <h6>Upload Images</h6>
+              <p><a href="${domain}/help/net">Guide</a> 🠖 <a href="http://xarql.net/-/upload" class="welcome-link">xarql.net</a></p>
             </div>
         </div>
-      </div>  
+      </div>
 
   </div>
 </body>
