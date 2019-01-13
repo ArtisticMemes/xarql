@@ -179,6 +179,16 @@
     <url-pattern>/polr/hash</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description>Get posts from a user</description>
+    <display-name>PolrUser</display-name>
+    <servlet-name>PolrUser</servlet-name>
+    <servlet-class>com.xarql.polr.PolrUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.polr.PolrUser</servlet-name>
+    <url-pattern>/polr/user</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Chat</display-name>
     <servlet-name>Chat</servlet-name>

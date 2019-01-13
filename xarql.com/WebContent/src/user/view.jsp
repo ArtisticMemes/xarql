@@ -37,7 +37,8 @@
     <div id="column">
       <div class="large-card">
         <h4>${username}</h4>
-        <p>Recent activity is below</p>
+        <c:if test="${is_mod}"><p>This user is a moderator. They can censor, remove, and restore posts.</p></c:if>
+        <p><a href="${domain}/polr/user?name=${username}">Posts</a></p>
       </div>
       <div class="small-card">
         <p class="warn">[PLACEHOLDER]</p>

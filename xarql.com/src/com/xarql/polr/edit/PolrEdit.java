@@ -8,10 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
-import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -60,102 +58,87 @@ public class PolrEdit extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String tomcatSession = request.getRequestedSessionId();
-        if(tomcatSession != null)
+        ServletUtilities util = new ServletUtilities(request);
+        if(util.userIsMod())
         {
-            String associatedGoogleID;
-            try
+            String type = request.getParameter("type");
+            if(type == null || !(type.equals("remove") || type.equals("restore") || type.equals("replace") || type.equals("censor")))
             {
-                associatedGoogleID = AuthTable.get(tomcatSession).getGoogleId();
-            }
-            catch(Exception e)
-            {
-                response.sendError(401);
+                response.sendError(400);
                 return;
             }
-            if(Secrets.modList().contains(associatedGoogleID))
+
+            int id;
+            try
             {
-                String type = request.getParameter("type");
-                if(type == null || !(type.equals("remove") || type.equals("restore") || type.equals("replace") || type.equals("censor")))
+                id = Integer.parseInt(request.getParameter("id"));
+            }
+            catch(NumberFormatException nfe)
+            {
+                response.sendError(400);
+                return;
+            }
+            if(id == 0 && !type.equals("replace"))
+            {
+                response.sendError(403);
+                return;
+            }
+
+            if(type.equals("remove"))
+            {
+                PostRemover pr = new PostRemover(id, response);
+                if(pr.execute())
+                {
+                    IPTracker.logPolrEditRemove(request, id);
+                    response.sendRedirect(DOMAIN + "/polr/edit");
+                }
+                return;
+            }
+            else if(type.equals("restore"))
+            {
+                PostRestorer pr = new PostRestorer(id, response);
+                if(pr.execute())
+                {
+                    IPTracker.logPolrEditRestore(request, id);
+                    response.sendRedirect(DOMAIN + "/polr/edit");
+                }
+                return;
+            }
+            else if(type.equals("replace"))
+            {
+                if(request.getParameter("content") == null || request.getParameter("content").equals("") || request.getParameter("title") == null || request.getParameter("title").equals(""))
                 {
                     response.sendError(400);
                     return;
-                }
-
-                int id;
-                try
-                {
-                    id = Integer.parseInt(request.getParameter("id"));
-                }
-                catch(NumberFormatException nfe)
-                {
-                    response.sendError(400);
-                    return;
-                }
-                if(id == 0 && !type.equals("replace"))
-                {
-                    response.sendError(403);
-                    return;
-                }
-
-                if(type.equals("remove"))
-                {
-                    PostRemover pr = new PostRemover(id, response);
-                    if(pr.execute())
-                    {
-                        IPTracker.logPolrEditRemove(request, id);
-                        response.sendRedirect(DOMAIN + "/polr/edit");
-                    }
-                    return;
-                }
-                else if(type.equals("restore"))
-                {
-                    PostRestorer pr = new PostRestorer(id, response);
-                    if(pr.execute())
-                    {
-                        IPTracker.logPolrEditRestore(request, id);
-                        response.sendRedirect(DOMAIN + "/polr/edit");
-                    }
-                    return;
-                }
-                else if(type.equals("replace"))
-                {
-                    if(request.getParameter("content") == null || request.getParameter("content").equals("") || request.getParameter("title") == null || request.getParameter("title").equals(""))
-                    {
-                        response.sendError(400);
-                        return;
-                    }
-                    else
-                    {
-                        PostEditor pe = new PostEditor(id, request.getParameter("title"), request.getParameter("content"), response);
-                        if(pe.execute())
-                        {
-                            IPTracker.logPolrEditReplace(request, id);
-                            response.sendRedirect(DOMAIN + "/polr/edit");
-                        }
-                        return;
-                    }
-                }
-                else if(type.equals("censor"))
-                {
-                    if(request.getParameter("warning") == null || request.getParameter("warning").equals(""))
-                    {
-                        response.sendError(400);
-                        return;
-                    }
-                    else
-                    {
-                        PostCensor pc = new PostCensor(id, request.getParameter("warning"), response);
-                        if(pc.execute())
-                        {
-                            IPTracker.logPolrEditCensor(request, id);
-                            response.sendRedirect(DOMAIN + "/polr/edit");
-                        }
-                        return;
-                    }
                 }
                 else
+                {
+                    PostEditor pe = new PostEditor(id, request.getParameter("title"), request.getParameter("content"), response);
+                    if(pe.execute())
+                    {
+                        IPTracker.logPolrEditReplace(request, id);
+                        response.sendRedirect(DOMAIN + "/polr/edit");
+                    }
                     return;
+                }
+            }
+            else if(type.equals("censor"))
+            {
+                if(request.getParameter("warning") == null || request.getParameter("warning").equals(""))
+                {
+                    response.sendError(400);
+                    return;
+                }
+                else
+                {
+                    PostCensor pc = new PostCensor(id, request.getParameter("warning"), response);
+                    if(pc.execute())
+                    {
+                        IPTracker.logPolrEditCensor(request, id);
+                        response.sendRedirect(DOMAIN + "/polr/edit");
+                    }
+                    return;
+                }
             }
         }
         else

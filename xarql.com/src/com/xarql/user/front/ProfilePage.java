@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
 import com.xarql.user.AccountGrabber;
+import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -53,6 +54,7 @@ public class ProfilePage extends HttpServlet
                     // NotificationHandler nh = new NotificationHandler(true, username);
                     // request.setAttribute("notifications", nh.getList());
                     request.setAttribute("username", username);
+                    request.setAttribute("is_mod", Secrets.modList().contains(username));
                     request.getRequestDispatcher("/src/user/view.jsp").forward(request, response);
                 }
             }

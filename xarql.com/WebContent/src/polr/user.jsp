@@ -14,7 +14,7 @@
     gtag('config', '${google_analytics_id}');
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Hashtag : ${tag} ~ xarql</title>
+  <title>Posts from @${name} ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" id="theme-styles" href="${domain}/src/common/${theme}-common.min.css">
@@ -37,13 +37,18 @@
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <h4>Categorize</h4>
-        <form action="${domain}/polr/hash" method="GET" id="tag-form" accept-charset="UTF-8">
-           <input autofocus spellcheck="true" autocomplete="off" type="text" name="tag" placeholder="Hash Tag" maxlength="24" required="" style="width:100%;" tabindex="0">
+        <h4>@${name}</h4>
+        <form action="${domain}/polr/user" method="GET" id="name-form" accept-charset="UTF-8">
+           <input autofocus spellcheck="true" autocomplete="off" type="text" name="name" placeholder="@username" maxlength="128" required="" style="width:100%;" tabindex="0">
            <br/>
-           <input id="submit" class="button" type="submit" value="Find" tabindex="0"/> <span class="status"></span>
+           <input id="submit" class="button" type="submit" value="Grab" tabindex="0"/> <span class="status"></span>
          </form>
       </div>
+      <c:if test="${posts.size() == 0}">
+        <div class="small-card">
+          <p>No posts were made by this user</p>
+        </div>
+      </c:if>
       <div id="posts">
         <c:forEach begin="0" var="post" items="${posts}">
     		  <div class="large-card">

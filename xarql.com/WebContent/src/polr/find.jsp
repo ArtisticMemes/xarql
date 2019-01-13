@@ -60,7 +60,9 @@
           </c:if>
   		    <p>
             <a href="${domain}/polr/${post.getId()}" class="view-link" post-id="${post.getId()}">View</a>
-            <c:if test="${post.getAuthor() != 'Unknown'}">⤷${post.getAuthor()}</c:if>
+            <c:if test="${post.getAuthor() != 'Unknown'}">
+              ⤷<a href="${domain}/user/view?name=${post.getAuthor()}">${post.getAuthor()}</a>
+            </c:if>
             <c:if test="${post.getWarning() != 'None'}"><a class="reveal-link" data="${post.getId()}">Reveal</a></c:if>
           </p>
   		  </div>
