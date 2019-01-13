@@ -39,30 +39,12 @@ public class PolrEdit extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
-        String tomcatSession = request.getRequestedSessionId();
-        if(tomcatSession != null)
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+        if(util.userIsMod())
         {
-            String associatedGoogleID;
-            try
-            {
-                associatedGoogleID = AuthTable.get(tomcatSession).getGoogleId();
-            }
-            catch(Exception e)
-            {
-                response.sendError(401);
-                return;
-            }
-            if(Secrets.modList().contains(associatedGoogleID))
-            {
-                request.getRequestDispatcher("/src/polr/edit.jsp").forward(request, response);
-                return;
-            }
-            else
-            {
-                response.sendError(401);
-                return;
-            }
+            request.getRequestDispatcher("/src/polr/edit.jsp").forward(request, response);
+            return;
         }
         else
         {

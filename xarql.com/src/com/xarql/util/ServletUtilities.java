@@ -174,6 +174,11 @@ public class ServletUtilities
             return false;
     } // userIsAuth()
 
+    public boolean userIsMod()
+    {
+        return userIsMod(request);
+    } // userIsMod()
+
     public AuthSession getAuthSession()
     {
         if(request.getRequestedSessionId() == null) // NullPointerException protection

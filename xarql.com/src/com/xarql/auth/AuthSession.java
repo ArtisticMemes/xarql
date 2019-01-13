@@ -180,7 +180,7 @@ public class AuthSession
     // Checks if this AuthSession belongs to a moderator
     public boolean isMod()
     {
-        if(Secrets.modList().contains(googleId))
+        if(account != null && Secrets.modList().contains(account.getUsername()))
             return true;
         else
             return false;
