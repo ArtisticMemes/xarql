@@ -38,7 +38,7 @@
        <!-- Inlcude .html here as hyperlink -->
         <h3 class="centered">Help</h3>
         <p>First, Select A Host</p>
-        <p><a href="https://github.com/ArtisticMemes/xarql/wiki">GitHub</a> <span class="italic">Preferred</span></p>
+        <p><a href="https://github.com/ArtisticMemes/xarql/wiki">GitHub</a></p>
         <p><a href="${domain}/help/main">xarql.com</a></p>
       </div>
       <div class="small-card"><p class="centered"><span class="italic">.txt Files Are Below | <a href="https://github.com/ArtisticMemes/xarql">View On GitHub</a></span></p></div>

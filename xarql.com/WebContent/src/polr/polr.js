@@ -1,20 +1,6 @@
 /* After editing, manually rename the nav() function in the .min.js file to stay as nav() */
 $(document).ready(function () {
   var domain = document.getElementById('domain').getAttribute('value');
-	function getUrlParameter(sParam) {
-	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-	        sURLVariables = sPageURL.split('&'),
-	        sParameterName,
-	        i;
-
-	    for (i = 0; i < sURLVariables.length; i++) {
-	        sParameterName = sURLVariables[i].split('=');
-
-	        if (sParameterName[0] === sParam) {
-	            return sParameterName[1] === undefined ? true : sParameterName[1];
-	        }
-	    }
-	}
 
 	// Update page contents
 	function update() {
@@ -39,12 +25,7 @@ $(document).ready(function () {
 	    	}
 	    });
 	}
-	// Refresh on page load
-	var refresh = getUrlParameter('refresh');
-	if(typeof refresh != 'undefined' && refresh === 'true') {
-		update();
-		history.pushState("xarql", "xarql", window.location.pathname); // Remove parameters in URL
-	}
+
   $(".update-button").each(function () {
 		var $this = $(this);
 		$this.on("click", function () {
@@ -166,7 +147,7 @@ $(document).ready(function () {
   });
 
   var nav = false;
-  function view(id) {
+  function view(id, popstate) {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
@@ -180,7 +161,7 @@ $(document).ready(function () {
 				$("#main-post").replaceWith(updt.find("#main-post-container").html());
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
-        if(nav) {
+        if(popstate) {
           // Do nothing
         } else {
           history.pushState("xarql", "xarql", domain + "/polr/" + id);
@@ -206,7 +187,7 @@ $(document).ready(function () {
 		  $(this).unbind("click");
 		  $(this).on("click", function () {
 			  var id = $(this).attr("post-id");
-			  view(id);
+			  view(id, false);
 			  return false;
 		});
 	});
@@ -215,10 +196,13 @@ $(document).ready(function () {
 
   window.addEventListener('popstate', function(event) {
       var pieces = window.location.href.split('/');
-      var currentID = pieces[pieces.length - 1];
-      nav = true;
-      view(currentID);
-      nav = false;
+      if(pieces.length > 2) {
+        window.location.href = window.location.href;
+      }
+      else {
+        var currentID = pieces[pieces.length - 1];
+        view(currentID, true);
+      }
   }, false);
 
 

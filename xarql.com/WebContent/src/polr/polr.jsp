@@ -21,6 +21,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
   <script src="${domain}/src/common/jscookie.js" defer=""></script>
   <script src="${domain}/src/polr/polr.min.js" defer=""></script>
+  <script src="${domain}/src/common/load.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
   <style id="font-size">
     html, body {

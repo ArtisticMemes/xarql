@@ -40,7 +40,12 @@
       <div class="large-card">
         <h3>Topics</h3>
         <p><a href="${domain}/help/polr">/polr</a></p>
+        <p><a href="${domain}/help/account">/user</a></p>
+        <p><a href="${domain}/help/chat">/chat</a></p>
+        <p><a href="${domain}/help/net">.net</a></p>
+        <p><a href="${domain}/help/markdown">MarkDown</a></p>
         <p><a href="${domain}/help/textformatter">TextFormatter</a></p>
+        <p><a href="${domain}/help/parameters">HTML Parameters</a></p>
       </div>
     </div>
   </div>
