@@ -49,10 +49,15 @@ public class AccountProcessor
     {
         if(password.length() <= MAX_VARIABLE_LENGTH && password.length() >= MIN_PASSWORD_LENGTH)
         {
-            if(TextFormatter.isStandardSet(password))
-                this.password = password;
+            if(!password.equals(username))
+            {
+                if(TextFormatter.isStandardSet(password))
+                    this.password = password;
+                else
+                    throw new IllegalArgumentException("Password contains non-standard characters. Please only use characters that can be seen on a QWERTY keyboard");
+            }
             else
-                throw new IllegalArgumentException("Password contains non-standard characters. Please only use characters that can be seen on a QWERTY keyboard");
+                throw new IllegalArgumentException("Password was the same as the username. Please use a password that is NOT your username.");
         }
         else
             throw new IllegalArgumentException("Password is " + password.length() + " characters long. It must be between " + MIN_PASSWORD_LENGTH + " and " + MAX_VARIABLE_LENGTH + " long.");

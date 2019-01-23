@@ -236,7 +236,7 @@ public class TextFormatter
      */
     public static String full(String input)
     {
-        String output = input;
+        String output = input.trim();
         output = clean(output);
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
         output = autoLinks(output);
