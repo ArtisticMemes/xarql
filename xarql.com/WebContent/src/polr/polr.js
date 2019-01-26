@@ -196,12 +196,17 @@ $(document).ready(function () {
 
   window.addEventListener('popstate', function(event) {
       var pieces = window.location.href.split('/');
-      if(pieces.length > 2) {
-        window.location.href = window.location.href;
+      if(pieces[pieces.length - 2] == 'polr') {
+        var currentID = pieces[pieces.length - 1];
+        if(currentID.includes('?')) {
+          window.location.href = window.location.href;
+        }
+        else {
+          view(currentID, true);
+        }
       }
       else {
-        var currentID = pieces[pieces.length - 1];
-        view(currentID, true);
+        window.location.href = window.location.href;
       }
   }, false);
 
