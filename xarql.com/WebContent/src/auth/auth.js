@@ -18,6 +18,7 @@ function onSignIn(googleUser)
 }
 function checkStatus()
 {
+  document.getElementById('notice').innerHTML = 'Checking...';
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', domain + '/auth/status');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

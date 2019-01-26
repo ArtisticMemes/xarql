@@ -49,16 +49,6 @@
     <url-pattern>/auth/status</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Google Authentication</description>
-    <display-name>GoogleHandler</display-name>
-    <servlet-name>GoogleHandler</servlet-name>
-    <servlet-class>com.xarql.auth.GoogleHandler</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>com.xarql.auth.GoogleHandler</servlet-name>
-    <url-pattern>/auth/google</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description>Recaptcha Authentication</description>
     <display-name>RecaptchaHandler</display-name>
     <servlet-name>RecaptchaHandler</servlet-name>

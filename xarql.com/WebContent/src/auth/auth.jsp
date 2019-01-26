@@ -15,7 +15,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
-  <meta name="google-signin-client_id" id="google-signin-client_id" content="541616841401-iqluj8gqbu0qvsn3kh7bl93e9mskoff3.apps.googleusercontent.com">
   <title>Authentication ~ xarql</title>
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
@@ -39,9 +38,7 @@
       <c:if test="${authorized == true}"><div class="small-card"><h4 class="centered" id="notice">You Are Authorized</h4></div></c:if>
       <c:if test="${authorized == false}"><div class="small-card"><h4 class="centered" id="notice">You Are Not Authorized</h4></div></c:if>
       <div class="large-card">
-        <div class="centered"><div data-theme="dark" class="g-signin2" data-onsuccess="onSignIn"></div></div>
-        <p class="centered" id="google-p"><a href="#" id="google-sign-out" onclick="signOut();">Sign out</a></p>
-        <br><br>
+        <br>
         <form action="${domain}/auth/recaptcha" method="POST">
           <div class="centered">
            	<div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
@@ -65,7 +62,6 @@
     </div>
   </div>
   <script src="${domain}/src/auth/auth.min.js" defer=""></script>
-  <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
   <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
 </body>
 </html>
