@@ -61,6 +61,9 @@ public class Error extends HttpServlet
             case "410" :
                 type = "Gone";
                 break;
+            case "405" :
+                type = "Bad Method";
+                break;
             case "404" :
                 type = "Not Found";
                 break;

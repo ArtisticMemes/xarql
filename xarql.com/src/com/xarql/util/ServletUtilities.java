@@ -253,8 +253,13 @@ public class ServletUtilities
      */
     public static void rejectGetMethod(HttpServletResponse response) throws IOException
     {
-        response.sendError(400, "Can't use HTTP GET method for this URI");
+        response.sendError(405, "Can't use HTTP GET method for this URI");
     } // rejectGetMethod()
+
+    public static void rejectPostMethod(HttpServletResponse response) throws IOException
+    {
+        response.sendError(405, "Can't use HTTP POST method for this URI");
+    } // rejectPostMethod()
 
     /**
      * Checks to see if the given parameters are not null and not empty

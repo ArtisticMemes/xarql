@@ -19,6 +19,19 @@
     <url-pattern></url-pattern>
   </servlet-mapping>
   <servlet>
+    <display-name>Source</display-name>
+    <servlet-name>Source</servlet-name>
+    <servlet-class>com.xarql.main.Source</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Source</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>com.xarql.main.Source</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Error</display-name>
     <servlet-name>Error</servlet-name>
@@ -357,6 +370,10 @@
   <error-page>
     <error-code>400</error-code>
     <location>/error?code=400</location>
+  </error-page>
+  <error-page>
+    <error-code>405</error-code>
+    <location>/error?code=405</location>
   </error-page>
   <filter>
     <filter-name>ExpiresFilter</filter-name>
