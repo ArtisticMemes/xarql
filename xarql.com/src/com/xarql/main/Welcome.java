@@ -5,7 +5,6 @@ package com.xarql.main;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
-import java.sql.Timestamp;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -26,10 +25,9 @@ import com.xarql.util.ServletUtilities;
 @WebServlet ("/Welcome")
 public class Welcome extends HttpServlet
 {
-    public static final String     DOMAIN           = DeveloperOptions.getDomain();
-    private static final long      serialVersionUID = 1L;
-    private static final Timestamp startTime        = new Timestamp(System.currentTimeMillis());
-    private static final String    CONTEXT          = DeveloperOptions.getContext();
+    private static final long serialVersionUID = 1L;
+
+    private static final String CONTEXT = DeveloperOptions.getContext();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,7 +49,6 @@ public class Welcome extends HttpServlet
         ServletUtilities.standardSetup(request);
         request.setAttribute("auth_sessions", AuthTable.size());
         request.setAttribute("live_chats", ChatRoom.size());
-        response.setHeader("Cache-Control", "public, max-age=86400");
 
         int activeSessions = 0;
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
@@ -80,18 +77,5 @@ public class Welcome extends HttpServlet
         // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
-
-    public String timeSinceStart()
-    {
-        long timeSince = System.currentTimeMillis() - startTime.getTime();
-        int days = (int) timeSince / 86400000;
-        timeSince %= 86400000;
-        int hours = (int) timeSince / 3600000;
-        timeSince %= 3600000;
-        int minutes = (int) timeSince / 60000;
-        timeSince %= 60000;
-        int seconds = (int) timeSince / 1000;
-        return(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
-    } // timeSinceStart()
 
 } // Welcome

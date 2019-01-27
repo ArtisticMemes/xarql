@@ -9,6 +9,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,13 +32,17 @@ public class Source extends HttpServlet
     private static final int    INPUT_BUFFER = 65536;                       // 64KB
     private static final String DOMAIN       = DeveloperOptions.getDomain();
 
+    private static String lastModified;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Source()
     {
         super();
-        // TODO Auto-generated constructor stub
+        SimpleDateFormat gmt = new SimpleDateFormat("EEE, MMM d, yyyy hh:mm:ss z");
+        gmt.setTimeZone(TimeZone.getTimeZone("GMT"));
+        lastModified = gmt.format(new Date());
     } // Source()
 
     /**
@@ -74,12 +81,12 @@ public class Source extends HttpServlet
         // Set up response with file specs
         response.reset();
         response.setBufferSize(INPUT_BUFFER);
-        response.setContentType(contentType + "; charset=utf-8"); // The source code had better be in UTF-8 !
-        response.setHeader("Content-Length", String.valueOf(file.length()));
+        response.setContentType(contentType + "; charset=UTF-8"); // The source code had better be in UTF-8 !
+        response.setContentLength((int) file.length());
         response.setHeader("Cache-Control", "public, max-age=86400");
         response.setHeader("Keep-Alive", "timeout=10, max=100");
-        response.setHeader("Connection", "keep alive");
-        response.setHeader("Allow", "GET");
+        response.setHeader("Last-Modified", lastModified);
+        response.setHeader("Vary", "Accept-Encoding");
 
         // Allocate space for file/response streams
         BufferedInputStream input = null;
