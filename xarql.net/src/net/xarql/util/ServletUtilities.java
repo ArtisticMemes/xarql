@@ -46,4 +46,16 @@ public class ServletUtilities
             return false;
     } // isAuth()
 
+    public void revokeAuth()
+    {
+        revokeAuth(request);
+    } // revokeAuth()
+
+    public static void revokeAuth(HttpServletRequest request)
+    {
+        String tomcatID = request.getRequestedSessionId();
+        if(tomcatID != null && AuthTable.contains(tomcatID))
+            AuthTable.remove(tomcatID);
+    } // revokeAuth()
+
 } // ServletUtilities

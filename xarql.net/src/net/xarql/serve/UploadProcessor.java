@@ -11,6 +11,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -35,7 +36,8 @@ public class UploadProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static int highestImageID = getHighestImageID();
+    private static HashMap<String, Integer> highestImageID = new HashMap<String, Integer>();
+    private static boolean                  firstRun       = true;
 
     private static final String FILE_STORE = DeveloperOptions.FILE_STORE;
     private static final String DOMAIN     = DeveloperOptions.DOMAIN;
@@ -46,8 +48,8 @@ public class UploadProcessor extends HttpServlet
     public UploadProcessor()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+        ensureInit();
+    } // UploadProcessor()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -67,6 +69,9 @@ public class UploadProcessor extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        ensureInit();
+
+        String fileType = "";
         ServletUtilities util = new ServletUtilities(request);
         if(util.isAuth())
         {
@@ -77,7 +82,7 @@ public class UploadProcessor extends HttpServlet
             String exportedFileType = "";
             for(Part part : request.getParts())
             {
-                String fileType = getFileType(part);
+                fileType = getFileType(part);
                 if(!fileType.equals(".jpg") && !fileType.equals(".png"))
                 {
                     response.sendError(400);
@@ -85,11 +90,11 @@ public class UploadProcessor extends HttpServlet
                 }
                 if(fileType != null && !fileType.equals(""))
                     exportedFileType = fileType;
-                File dir = new File(FILE_STORE + File.separator + (Base62Converter.to(getHighestImageID() + 1)));
+                File dir = new File(FILE_STORE + File.separator + fileType.substring(1) + File.separator + (Base62Converter.to(getHighestImageID(fileType.substring(1)) + 1)));
                 if(!dir.exists())
                     dir.mkdirs();
-                part.write(FILE_STORE + File.separator + (Base62Converter.to(getHighestImageID() + 1)) + File.separator + "raw" + fileType);
-                setHighestImageID(getHighestImageID() + 1);
+                part.write(FILE_STORE + File.separator + fileType.substring(1) + File.separator + (Base62Converter.to(getHighestImageID(fileType.substring(1)) + 1)) + File.separator + "raw" + fileType);
+                setHighestImageID(getHighestImageID(fileType.substring(1)) + 1, fileType.substring(1));
             }
 
             int typeID;
@@ -100,13 +105,31 @@ public class UploadProcessor extends HttpServlet
             else
                 typeID = 0;
 
-            response.sendRedirect(DOMAIN + "/" + typeID + Base62Converter.to(getHighestImageID()));
+            response.sendRedirect(DOMAIN + "/" + typeID + Base62Converter.to(getHighestImageID(fileType.substring(1))));
+            util.revokeAuth();
         }
         else
             response.sendError(401);
     } // doPost()
 
-    private String getFileType(Part part)
+    // Make sure that accurate image counts were gotten at some point
+    private static void ensureInit()
+    {
+        if(firstRun)
+        {
+            initialize();
+            firstRun = false;
+        }
+    } // ensureInit()
+
+    // Get accurate image counts
+    private static void initialize()
+    {
+        setHighestImageID(getHighestImageID(false, "jpg"), "jpg");
+        setHighestImageID(getHighestImageID(false, "png"), "png");
+    } // init()
+
+    private static String getFileType(Part part)
     {
         for(String content : part.getHeader("content-disposition").split(";"))
         {
@@ -119,17 +142,18 @@ public class UploadProcessor extends HttpServlet
         return ".none";
     } // getFileType
 
-    private static int getHighestImageID()
+    private static int getHighestImageID(String fileType)
     {
-        return getHighestImageID(true);
+        return getHighestImageID(true, fileType);
     } // getHighestImageID()
 
-    private static int getHighestImageID(boolean trustingFile)
+    private static int getHighestImageID(boolean trustingFile, String fileType)
     {
-        if(highestImageID == 0 || !trustingFile)
+        if(highestImageID.get(fileType) == null || !trustingFile)
         {
+            //
             int maxFolderID = 0;
-            File infoFile = new File(FILE_STORE + "/info.txt");
+            File infoFile = new File(FILE_STORE + "/" + fileType + "/info.txt");
             if(infoFile.exists() && trustingFile)
             {
                 Scanner scan;
@@ -146,7 +170,7 @@ public class UploadProcessor extends HttpServlet
             }
             else
             {
-                File dir = new File(FILE_STORE);
+                File dir = new File(FILE_STORE + "/" + fileType);
                 final Pattern pattern = Pattern.compile("\\V");
                 try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir.getAbsolutePath()), entry -> pattern.matcher(entry.getFileName().toString()).matches()))
                 {
@@ -179,13 +203,13 @@ public class UploadProcessor extends HttpServlet
             return maxFolderID;
         }
         else
-            return highestImageID;
+            return highestImageID.get(fileType);
     } // getHighestImageID()
 
-    private static void setHighestImageID(int input)
+    private static void setHighestImageID(int input, String fileType)
     {
-        highestImageID = input;
-        File infoFile = new File(FILE_STORE + "/info.txt");
+        highestImageID.put(fileType, input);
+        File infoFile = new File(FILE_STORE + "/" + fileType + "/info.txt");
         try
         {
             FileWriter fw = new FileWriter(infoFile);
@@ -195,7 +219,7 @@ public class UploadProcessor extends HttpServlet
         }
         catch(IOException ioe)
         {
-            highestImageID = getHighestImageID(false);
+            highestImageID.put(fileType, getHighestImageID(false, fileType));
         }
     } // setHighestImageID()
 

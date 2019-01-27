@@ -79,4 +79,9 @@ public class AuthTable
         lastTrimTime = new Timestamp(System.currentTimeMillis());
     } // setLastTrimTime()
 
+    public static void remove(String session)
+    {
+        sessions.remove(session);
+    } // remove()
+
 } // AuthTable

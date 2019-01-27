@@ -21,8 +21,8 @@
 </head>
 <body>
   <div id="wrapper">
-    <a href="${domain}/-/static/${id}/raw.${type}">
-      <img src="${domain}/-/static/${id}/raw.${type}">
+    <a href="${domain}/-/static/${type}/${id}/raw.${type}">
+      <img src="${domain}/-/static/${type}/${id}/raw.${type}">
     </a>
   </div>
 </body>

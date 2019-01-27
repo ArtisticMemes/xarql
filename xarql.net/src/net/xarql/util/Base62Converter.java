@@ -8,7 +8,13 @@ import java.util.HashMap;
 
 public class Base62Converter
 {
-    public static HashMap<Integer, Character> charValues = new HashMap<Integer, Character>();
+    public static void main(String[] args)
+    {
+        System.out.println(to(873));
+        System.out.println(from("E5"));
+    } // main()
+
+    private static HashMap<Integer, Character> charValues = new HashMap<Integer, Character>();
 
     public static int from(String input) throws IllegalArgumentException
     {
@@ -43,7 +49,7 @@ public class Base62Converter
         return output;
     } // pow
 
-    public static void buildCharacterMap()
+    private static void buildCharacterMap()
     {
         HashMap<Integer, Character> builtValues = new HashMap<Integer, Character>(); // This could be kept in memory
         int i = 0;
