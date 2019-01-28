@@ -80,13 +80,16 @@ public class Source extends HttpServlet
 
         // Set up response with file specs
         response.reset();
-        response.setBufferSize(INPUT_BUFFER);
-        response.setContentType(contentType + "; charset=UTF-8"); // The source code had better be in UTF-8 !
+
+        response.setContentType(contentType + "; charset=UTF-8");
         response.setContentLength((int) file.length());
         response.setHeader("Cache-Control", "public, max-age=86400");
-        response.setHeader("Keep-Alive", "timeout=10, max=100");
         response.setHeader("Last-Modified", lastModified);
+        response.setHeader("Server", "Tomcat 8.5.14");
         response.setHeader("Vary", "Accept-Encoding");
+        response.setHeader("Allow", "GET");
+
+        response.setBufferSize(INPUT_BUFFER);
 
         // Allocate space for file/response streams
         BufferedInputStream input = null;
