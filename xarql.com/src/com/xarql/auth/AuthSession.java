@@ -27,9 +27,7 @@ public class AuthSession
 
     public AuthSession(String tomcatSession, String input, String inputType)
     {
-        if(inputType.equals("google"))
-            verifyGoogleId(input);
-        else if(inputType.equals("recaptcha"))
+        if(inputType.equals("recaptcha"))
             verifyRecaptcha(input);
         else if(inputType.equals("account"))
             verified = true;
@@ -132,19 +130,6 @@ public class AuthSession
         else
             return false;
     } // expired()
-
-    private void verifyGoogleId(String googleIdToken)
-    {
-        try
-        {
-            googleId = VerifyGoogle.verify(googleIdToken);
-            verified = true;
-        }
-        catch(GeneralSecurityException gse)
-        {
-            verified = false;
-        }
-    } // verifyGoogleId()
 
     public String getGoogleId() throws NullPointerException, GeneralSecurityException
     {
