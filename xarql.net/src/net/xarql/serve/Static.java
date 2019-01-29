@@ -30,8 +30,9 @@ public class Static extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final int     BUFFER_SIZE = 5120;                       // 5KB
-    private static final String FILE_STORE  = DeveloperOptions.FILE_STORE;
+    public static final int     BUFFER_SIZE        = 5120;                       // 5KB
+    private static final String FILE_STORE         = DeveloperOptions.FILE_STORE;
+    private static final String NOT_FOUND_FILENAME = "not_found";
 
     private static final String DOMAIN = DeveloperOptions.DOMAIN;
 
@@ -60,20 +61,23 @@ public class Static extends HttpServlet
 
         // Locate and determine the file's existence
         File file = new File(FILE_STORE, filePath);
-        if(!file.exists() || file.isDirectory())
-        {
-            response.sendError(404);
-            return;
-        }
 
         // Used for the MIME type of the response
         String contentType = request.getServletContext().getMimeType(file.getName());
 
-        // Unsupported file type
-        if(contentType == null)
+        if(!file.exists() || file.isDirectory() || contentType == null)
         {
-            response.sendError(500);
-            return;
+            contentType = request.getServletContext().getMimeType(filePath);
+            if(contentType != null && contentType.equals("image/png"))
+            {
+                file = new File(getServletContext().getRealPath("/src").replace('\\', '/'), "/icon/not_found.png");
+                contentType = "image/png";
+            }
+            else
+            {
+                file = new File(getServletContext().getRealPath("/src").replace('\\', '/'), "/icon/not_found.jpg");
+                contentType = "image/jpeg";
+            }
         }
 
         // Set up response with file specs
@@ -82,9 +86,7 @@ public class Static extends HttpServlet
         response.setContentType(contentType);
         response.setHeader("Content-Length", String.valueOf(file.length()));
         response.setHeader("Cache-Control", "public, max-age=86400");
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\""); // Tells browser
-                                                                                                      // to give user
-                                                                                                      // save prompt
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
 
         // Allocate space for file/response streams
         BufferedInputStream input = null;
