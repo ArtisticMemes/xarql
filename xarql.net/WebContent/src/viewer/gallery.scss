@@ -53,6 +53,9 @@ a:visited {
 
 .box {
   margin: 0.5rem;
+  border-color: #333333;
+  border-width: 0.1rem;
+  border-style: solid;
   flex-shrink: 1;
   flex-basis: 30rem;
   max-width: 20vw;
