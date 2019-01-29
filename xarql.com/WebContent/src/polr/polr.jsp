@@ -162,7 +162,14 @@
         </span>
       </div>
 	  </div>
-	    <div id="data" class="card" style="visibility:hidden;display:none;">
+    <div class="small-card">
+      <p class="centered">
+        <c:if test="${account_name == 'Unknown'}"><a class="spacey-link"href="${domain}/user/log_in">Log In</a></c:if>
+        <a class="spacey-link" href="https://xarql.net/-/upload">Upload An Image</a>
+        <a class="spacey-link" href="https://twitter.com/xarql">@xarql Twitter</a>
+      </p>
+    </div>
+	  <div id="data" class="card" style="visibility:hidden;display:none;">
 		  <p id="page">${page}</p>
 		  <p id="sort">${sort}</p>
 		  <p id="flow">${flow}</p>
