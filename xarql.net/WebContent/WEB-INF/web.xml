@@ -69,6 +69,15 @@
     <url-pattern>/-/auth/status</url-pattern>
   </servlet-mapping>
   <servlet>
+    <display-name>Gallery</display-name>
+    <servlet-name>Gallery</servlet-name>
+    <servlet-class>net.xarql.serve.Gallery</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>net.xarql.serve.Gallery</servlet-name>
+    <url-pattern>/-/gallery</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>Error</display-name>
     <servlet-name>Error</servlet-name>
@@ -109,10 +118,9 @@
       <param-name>ExpiresByType application/javascript</param-name>
       <param-value>access plus 1 day</param-value>
     </init-param>
-    <!-- Let everything else expire nearly immediately -->
     <init-param>
-        <param-name>ExpiresDefault</param-name>
-        <param-value>access plus 2 seconds</param-value>
+      <param-name>ExpiresDefault</param-name>
+      <param-value>access plus 2 seconds</param-value>
     </init-param>
   </filter>
   <filter-mapping>

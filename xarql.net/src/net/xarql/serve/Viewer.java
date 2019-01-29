@@ -30,8 +30,7 @@ public class Viewer extends HttpServlet
     public Viewer()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+    } // Viewer()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

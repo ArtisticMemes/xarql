@@ -142,7 +142,7 @@ public class UploadProcessor extends HttpServlet
         return ".none";
     } // getFileType
 
-    private static int getHighestImageID(String fileType)
+    public static int getHighestImageID(String fileType)
     {
         return getHighestImageID(true, fileType);
     } // getHighestImageID()
