@@ -38,7 +38,7 @@
          <script src="${domain}/-/src/auth/recaptcha.min.js" defer=""></script>
          <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
        </c:if>
-      <p><a href="https://xarql.com/help/net" target="_blank">About</a></p>
+      <p><a href="https://xarql.com/help/net" class="view-link">Help</a> <a href="${domain}/-/gallery">Gallery</a></p>
     </div>
   </div>
 </div>
