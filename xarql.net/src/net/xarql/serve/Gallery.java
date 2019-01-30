@@ -43,33 +43,42 @@ public class Gallery extends HttpServlet
         util.standardSetup();
 
         // Try to get the newest images based on the highest image id
-        int init = DEFAULT_INIT;
-        if(UploadProcessor.getHighestImageID("jpg") < UploadProcessor.getHighestImageID("png"))
-            init = UploadProcessor.getHighestImageID("jpg") - IMAGE_COUNT;
-        else
-            init = UploadProcessor.getHighestImageID("png") - IMAGE_COUNT;
+        int JPGinit = DEFAULT_INIT;
+        int PNGinit = DEFAULT_INIT;
+        JPGinit = UploadProcessor.getHighestImageID("jpg") - IMAGE_COUNT;
+        PNGinit = UploadProcessor.getHighestImageID("png") - IMAGE_COUNT;
 
         // If the user has specified a starting id (initial id), use that instead
         if(request.getParameter("init") != null && !request.getParameter("init").equals(""))
         {
             try
             {
-                init = Integer.parseInt(request.getParameter("init"));
+                JPGinit = Integer.parseInt(request.getParameter("init"));
+                PNGinit = Integer.parseInt(request.getParameter("init"));
             }
             catch(NumberFormatException nfe)
             {
-                init = DEFAULT_INIT;
+                JPGinit = DEFAULT_INIT;
+                PNGinit = DEFAULT_INIT;
             }
         }
-        if(init < MIN_INIT) // Prevent errors where init is too low
-            init = DEFAULT_INIT;
+
+        // Prevent errors where init is too low
+        if(JPGinit < MIN_INIT)
+        {
+            JPGinit = DEFAULT_INIT;
+        }
+        if(PNGinit < MIN_INIT)
+        {
+            PNGinit = DEFAULT_INIT;
+        }
 
         // Determine valid IDs of images and add them to a list
         ArrayList<Image> images = new ArrayList<Image>();
-        for(int i = init; i <= UploadProcessor.getHighestImageID("jpg") && i < init + IMAGE_COUNT; i++)
+        for(int i = JPGinit; i <= UploadProcessor.getHighestImageID("jpg") && i < JPGinit + IMAGE_COUNT; i++)
             images.add(new Image(Base62Converter.to(i), 0));
 
-        for(int i = init; i <= UploadProcessor.getHighestImageID("png") && i < init + IMAGE_COUNT; i++)
+        for(int i = PNGinit; i <= UploadProcessor.getHighestImageID("png") && i < PNGinit + IMAGE_COUNT; i++)
             images.add(new Image(Base62Converter.to(i), 1));
 
         request.setAttribute("images", images);

@@ -136,7 +136,10 @@ public class UploadProcessor extends HttpServlet
             if(content.trim().startsWith("filename"))
             {
                 String name = content.substring(content.indexOf("=") + 2, content.length() - 1);
-                return name.substring(name.indexOf('.'));
+                name = name.substring(name.indexOf('.')).toLowerCase();
+                if(name == ".jpeg")
+                    name = ".jpg";
+                return name;
             }
         }
         return ".none";
