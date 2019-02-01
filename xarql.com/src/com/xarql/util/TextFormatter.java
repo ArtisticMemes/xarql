@@ -52,7 +52,7 @@ public class TextFormatter
             outputParts.add(input.substring(prevEnd, start));
             if(!match.startsWith("https://") && !match.startsWith("http://"))
                 match = "//" + match;
-            outputParts.add("<a href=\"" + match + "\">" + match + "</a>");
+            outputParts.add("<a class=\"out-link\" href=\"" + match + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -80,7 +80,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"https://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a class=\"photo-link\" href=\"https://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -135,7 +135,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"{DOMAIN}/user/view?name=" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a class=\"user-link\" href=\"{DOMAIN}/user/view?name=" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -163,7 +163,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"{DOMAIN}/polr/hash?tag=" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a class=\"hash-link\" href=\"{DOMAIN}/polr/hash?tag=" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -397,6 +397,7 @@ public class TextFormatter
      * @param input A <code>String</code> fro the user.
      * @return A <code>String</code> with clickable links; determined by user.
      */
+    @Deprecated
     private static String addLinks(String input)
     {
         // Enable links with ~
