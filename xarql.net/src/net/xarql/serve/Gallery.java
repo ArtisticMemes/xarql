@@ -75,10 +75,10 @@ public class Gallery extends HttpServlet
 
         // Determine valid IDs of images and add them to a list
         ArrayList<Image> images = new ArrayList<Image>();
-        for(int i = JPGinit; i <= UploadProcessor.getHighestImageID("jpg") && i < JPGinit + IMAGE_COUNT; i++)
+        for(int i = JPGinit; i <= UploadProcessor.getHighestImageID("jpg") && i <= JPGinit + IMAGE_COUNT; i++)
             images.add(new Image(Base62Converter.to(i), 0));
 
-        for(int i = PNGinit; i <= UploadProcessor.getHighestImageID("png") && i < PNGinit + IMAGE_COUNT; i++)
+        for(int i = PNGinit; i <= UploadProcessor.getHighestImageID("png") && i <= PNGinit + IMAGE_COUNT; i++)
             images.add(new Image(Base62Converter.to(i), 1));
 
         request.setAttribute("images", images);
