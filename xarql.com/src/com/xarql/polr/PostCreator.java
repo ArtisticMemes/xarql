@@ -34,6 +34,8 @@ public class PostCreator
     public static final int MIN_CONTENT_LENGTH = 1;
     public static final int MIN_ID             = 0;
 
+    private static final long ONE_WEEK_MILLIS = 604800000;
+
     // Defaults
     public static final String DEFAULT_AUTHOR  = "Unknown";
     public static final String DEFAULT_WARNING = "None";
@@ -331,7 +333,8 @@ public class PostCreator
             statement.setInt(1, answers);
 
             rs = statement.executeQuery();
-            if(rs.next())
+            Timestamp lastWeek = new Timestamp(System.currentTimeMillis() - ONE_WEEK_MILLIS);
+            if(rs.next() && (lastWeek.compareTo(rs.getTimestamp("subbump")) < 0 || id == 0))
             {
                 return true;
             }

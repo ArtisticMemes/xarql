@@ -95,20 +95,20 @@ $(document).ready(function () {
 	    	}
 	    	else {
 	    		$("#main-post").replaceWith(updt.find("#main-post-container").html());
-				$("#replies").replaceWith(updt.find("#replies-container").html());
-				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
-				history.pushState("xarql", "xarql", window.location.pathname + "?page=" + page + "&sort=" + sort + "&flow=" + flow);
-				$("#page").text(page);
-				$("#sort").text(sort);
-				$("#flow").text(flow);
-				viewLinks();
-        revealLinks();
-				if(page > 0) { $("#prev-form").show(); $("#prev-form").css("display", "inline");} else { $("#prev-form").hide(); }
-				if(page < 4) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
-				$(".status").each(function() {
-					$(this).text(xhr.statusText);
-				});
-				$("html, body").animate({scrollTop: 0}, "fast");
+				  $("#replies").replaceWith(updt.find("#replies-container").html());
+				  $("title").text(updt.find("#main-post-title").text() + " ~ xarql");
+				  history.pushState("xarql", "xarql", window.location.pathname + "?page=" + page + "&sort=" + sort + "&flow=" + flow);
+				  $("#page").text(page);
+				  $("#sort").text(sort);
+				  $("#flow").text(flow);
+				  viewLinks();
+          revealLinks();
+				  if(page > 0) { $("#prev-form").show(); $("#prev-form").css("display", "inline");} else { $("#prev-form").hide(); }
+				  if(page < 4) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
+				  $(".status").each(function() {
+					  $(this).text(xhr.statusText);
+				  });
+				  $("html, body").animate({scrollTop: 0}, "fast");
 	    	}
 	    });
 	}
@@ -177,6 +177,8 @@ $(document).ready(function () {
 				$("#next-form").css("display", "inline");
 				viewLinks();
         revealLinks();
+        ga('set', 'page', '/polr/' + id);
+        ga('send', 'pageview');
 	    	}
 	    });
 	}
