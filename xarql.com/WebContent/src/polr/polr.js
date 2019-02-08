@@ -177,8 +177,6 @@ $(document).ready(function () {
 				$("#next-form").css("display", "inline");
 				viewLinks();
         revealLinks();
-        ga('set', 'page', '/polr/' + id);
-        ga('send', 'pageview');
 	    	}
 	    });
 	}
