@@ -212,7 +212,7 @@ $(document).ready(function () {
 
 
   function changeTheme(theme) {
-    if(theme === 'light' || theme === 'dark' || theme === 'purple') {
+    if(theme === 'light' || theme === 'dark' || theme === 'rainbow') {
     }
     else {
       theme = "light";

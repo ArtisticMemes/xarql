@@ -35,6 +35,14 @@
       font-weight: ${font_weight + 200}
     }
   </style>
+  <!-- rich embed tags using OpenGraph -->
+  <meta property="og:title" content="${posts.get(0).getTitleText()}">
+  <meta property="og:description" content="${posts.get(0).getContentPreview()}">
+  <meta property="og:url" content="${domain}/polr/${posts.get(0).getId()}">
+  <meta property="og:site_name" content="xarql">
+  <meta name="twitter:site" content="@xarql">
+  <meta name="theme-color" content="#f2f2f2">
+  <link type="application/json+oembed" href="${domain}/src/common/embed-options.json">
 </head>
 <body>
   <div id="wrapper">
@@ -98,7 +106,7 @@
           <td>
             <a class="theme-button" id="light-theme-button" data="light">Light</a>
             <a class="theme-button" id="dark-theme-button" data="dark">Dark</a>
-            <a class="theme-button" id="purple-theme-button" data="purple">Purple</a>
+            <a class="theme-button" id="rainbow-theme-button" data="rainbow">Rainbow</a>
           </td></tr>
         </table>
         <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>

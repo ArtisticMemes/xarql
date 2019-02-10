@@ -79,7 +79,7 @@
           <td>
             <a class="theme-button" id="light-theme-button" data="light">Light</a>
             <a class="theme-button" id="dark-theme-button" data="dark">Dark</a>
-            <a class="theme-button" id="purple-theme-button" data="purple">Purple</a>
+            <a class="theme-button" id="rainbow-theme-button" data="rainbow">Rainbow</a>
           </td></tr>
         </table>
         <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>

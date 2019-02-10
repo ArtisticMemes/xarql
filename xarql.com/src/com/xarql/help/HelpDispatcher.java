@@ -88,7 +88,6 @@ public class HelpDispatcher extends HttpServlet
                     return;
                 }
             }
-            response.setHeader("Cache-Control", "public, max-age=86400");
             request.setAttribute("topic", docName);
             request.getRequestDispatcher("/src/help/docs/" + docName + ".jsp").forward(request, response);
             return;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.xarql.util.Base62Converter;
 import net.xarql.util.DeveloperOptions;
 import net.xarql.util.ServletUtilities;
 
@@ -52,6 +53,7 @@ public class Viewer extends HttpServlet
 
             String id = pathParts[pathParts.length - 1].substring(1);
             String type = pathParts[pathParts.length - 1].substring(0, 1);
+            request.setAttribute("loc", type + id); // locator
 
             switch(type)
             {
@@ -61,12 +63,27 @@ public class Viewer extends HttpServlet
                 case "1" :
                     type = "png";
                     break;
-                case "2" :
-                    type = "svg";
-                    break;
-                default : // Should never occur
-                    type = "";
-                    break;
+                default :
+                    response.sendError(400);
+                    return;
+            }
+
+            if(id == null || id.length() == 0)
+            {
+                response.sendError(400);
+                return;
+            }
+            else
+            {
+                try
+                {
+                    Base62Converter.from(id);
+                }
+                catch(IllegalArgumentException e)
+                {
+                    response.sendError(400);
+                    return;
+                }
             }
 
             request.setAttribute("id", id);

@@ -15,8 +15,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="https://xarql.com/logo.png" type="image/x-icon">
   <title>Image Viewer ~ xarql</title>
+  <!-- rich embed tags -->
   <meta property="og:title" content="View This Image">
   <meta property="og:image" content="${domain}/-/static/${type}/${id}/raw.${type}">
+  <meta property="og:url" content="${domain}/${loc}">
+  <meta property="og:site_name" content="xarql">
+  <meta name="twitter:site" content="@xarql">
   <meta name="theme-color" content="#f2f2f2">
   <link type="application/json+oembed" href="${domain}/-/src/viewer/embed-options.json">
   <style>

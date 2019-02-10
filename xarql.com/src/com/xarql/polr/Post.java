@@ -25,9 +25,10 @@ public class Post
     private int       subresponses;
 
     // Limits
-    public static final int MIN_ID           = 0;
-    public static final int MIN_RESPONSES    = 0;
-    public static final int MIN_SUBRESPONSES = 0;
+    public static final int MIN_ID               = 0;
+    public static final int MIN_RESPONSES        = 0;
+    public static final int MIN_SUBRESPONSES     = 0;
+    public static final int PREVIEW_LENGTH_LIMIT = 512;
 
     // Constants
     public static final String DELETION_MESSAGE         = "<span class=\"warn\">[POST REMOVED]</span>";
@@ -170,6 +171,16 @@ public class Post
     {
         return content.replaceAll("<[^>]*>", "");
     } // getContentText()
+
+    public String getContentPreview()
+    {
+        int limit;
+        if(getContentText().length() < PREVIEW_LENGTH_LIMIT)
+            limit = getContentText().length();
+        else
+            limit = PREVIEW_LENGTH_LIMIT;
+        return getContentText().substring(0, limit - 1);
+    } // getContentPreview()
 
     public int getAnswers()
     {
