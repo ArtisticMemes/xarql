@@ -18,6 +18,7 @@
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="${domain}/logo-circle.png">
   <style id="font-size">
     html, body {
       font-size: ${font_size}
