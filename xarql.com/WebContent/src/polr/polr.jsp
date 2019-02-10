@@ -101,9 +101,9 @@
       </div>
       <div class="large-card" id="option-pane" style="display:none;position:relative;">
         <table>
-          <tr><td><p>Size</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="text-up">↑</a><span style="letter-spacing:1rem"> </span><a id="text-dn">↓</a></p></td></tr>
-          <tr><td><p>Font</td><td><span style="letter-spacing:1rem">:</span></td><td><a id="font-light-button">Light</a><a id="font-normal-button">Normal</a></p></td></tr>
-          <tr><td><p>Theme</td><td><span style="letter-spacing:1rem">:</span></td>
+          <tr><td><p>Size</td><td><span style="letter-spacing:1em">:</span></td><td><a class="spacey-link" id="text-up">↑</a><a class="spacey-link" id="text-dn">↓</a></p></td></tr>
+          <tr><td><p>Font</td><td>:</td><td><a class="spacey-link" id="font-light-button">Light</a><a class="spacey-link" id="font-normal-button">Normal</a></p></td></tr>
+          <tr><td><p>Theme</td><td>:</td>
           <td>
             <a class="theme-button" id="light-theme-button" data="light">Light</a>
             <a class="theme-button" id="dark-theme-button" data="dark">Dark</a>
