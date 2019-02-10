@@ -332,6 +332,10 @@ xmp {
   margin-left: 1em;
 }
 
+.theme-button {
+  @extend .spacey-link;
+}
+
 .report-link {
   margin-right: 1em;
 }
