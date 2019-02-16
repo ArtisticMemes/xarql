@@ -38,8 +38,8 @@
       <div class="large-card">
         <form>
           <input id="message" type="text">
-          <input onclick="wsSendMessage();" value="Echo" type="button">
-          <input onclick="wsCloseConnection();" value="Disconnect" type="button">
+          <input onclick="wsSendMessage();" value="Send" type="button" class="button">
+          <input onclick="wsCloseConnection();" value="Close" type="button" class="button">
         </form>
         <br>
         <textarea id="echoText" rows="5" cols="30"></textarea>
@@ -52,40 +52,30 @@
         webSocket.onmessage = function(message){ wsGetMessage(message);};
         webSocket.onclose = function(message){ wsClose(message);};
         webSocket.onerror = function(message){ wsError(message);};
-        function wsOpen(message){
-            echoText.value += "Connected ... \n";
+        function wsSendMessage() {
+          webSocket.send(message.value);
+          echoText.value += "↑ " + message.value + "\n";
+          message.value = "";
         }
-        function wsSendMessage(){
-            webSocket.send(message.value);
-            echoText.value += "↑ " + message.value + "\n";
-            message.value = "";
+        function wsGetMessage(message) {
+          echoText.value += "↓ " + message.data + "\n";
         }
-        function wsCloseConnection(){
-            webSocket.close();
+        function wsOpen(message) {
+          echoText.value += "Connected ... \n";
         }
-        function wsGetMessage(message){
-            echoText.value += "↓ " + message.data + "\n";
+        function wsCloseConnection() {
+          webSocket.close();
         }
-        function wsClose(message){
-            echoText.value += "Disconnect ... \n";
+        function wsClose(message) {
+          echoText.value += "Disconnected ... \n";
+          window.setTimeout(location.reload(), 3000);
         }
-
-        function wserror(message){
-            echoText.value += "Error ... \n";
+        function wsError(message) {
+          echoText.value += "Error ... \n";
         }
       </script>
       <c:if test="${account_name != 'Unknown'}">
         <p>Currently logged in as <a href="${domain}/user">@${account_name}</a></p>
-      </c:if>
-      <c:if test="${not authenticated}">
-        <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
-          <div style="position:relative;">
-           <div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
-           <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
-          </div>
-        </form>
-        <script src="${domain}/src/auth/auth.min.js" defer=""></script>
-        <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
       </c:if>
       <p>
         <a href="${domain}/help">Help</a>

@@ -4,7 +4,6 @@
 package com.xarql.main;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.chat.Message;
-import com.xarql.chat.MessageRetriever;
 import com.xarql.util.BuildTimer;
 import com.xarql.util.ServletUtilities;
 
@@ -46,16 +43,6 @@ public class Chat extends HttpServlet
         BuildTimer bt = new BuildTimer(request);
         ServletUtilities.standardSetup(request);
         request.setAttribute("authenticated", ServletUtilities.userIsAuth(request));
-
-        MessageRetriever mr = new MessageRetriever(response);
-        ArrayList<Message> messages = mr.execute();
-        request.setAttribute("messages", messages);
-        if(messages.size() > 0)
-        {
-            request.setAttribute("lastID", messages.get(messages.size() - 1).getId());
-        }
-        else
-            request.setAttribute("lastID", 0);
         request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
         return;
 

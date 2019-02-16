@@ -8,8 +8,9 @@ import com.xarql.util.TrackedHashMap;
 public class WebsocketPackage
 {
     // Standard Headers
-    private static final String            DIRECT_DISPLAY   = "direct-display";
-    private static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
+    public static final String            DIRECT_DISPLAY   = "direct-display";
+    public static final String            CLIENT_NAME      = "client-name";
+    public static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
 
     // Data
     private TrackedHashMap<String, String> headers = new TrackedHashMap<String, String>();
@@ -21,12 +22,12 @@ public class WebsocketPackage
         setContent(content);
     } // WebsocketPackage
 
-    private void setHeader(String name, boolean value)
+    protected void setHeader(String name, boolean value)
     {
         setHeader(name, String.valueOf(value));
     } // setHeader(String, boolean)
 
-    private void setHeader(String name, Object value) throws IllegalArgumentException
+    protected void setHeader(String name, Object value) throws IllegalArgumentException
     {
         if(VALID_PARAMETERS.contains(name))
         {
@@ -76,6 +77,7 @@ public class WebsocketPackage
         ArrayList<String> output = new ArrayList<String>(1);
 
         output.add(DIRECT_DISPLAY);
+        output.add(CLIENT_NAME);
 
         for(String names : output)
             if(!TextFormatter.isAlphaNumeric(names))

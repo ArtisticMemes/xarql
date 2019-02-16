@@ -15,24 +15,24 @@ public class ChatWebsocket
     private static ArrayList<Session> clients = new ArrayList<Session>();
 
     @OnOpen
-    public void onOpen(Session peer)
+    public void onOpen(Session client)
     {
-        clients.add(peer);
+        clients.add(client);
         broadcast(stat());
     } // onOpen()
 
     @OnClose
-    public void onClose(Session peer)
+    public void onClose(Session client)
     {
-        clients.remove(peer);
+        clients.remove(client);
         broadcast(stat());
     } // onClose()
 
     @OnMessage
-    public String onMessage(Session peer, String message)
+    public void onMessage(Session client, String message)
     {
-        broadcast(message);
-        return "Message sent";
+        Message msg = new Message(message, client);
+        broadcast(msg);
     } // onMessage()
 
     @OnError
@@ -41,18 +41,18 @@ public class ChatWebsocket
         e.printStackTrace();
     } // onError()
 
-    private static void broadcast(String message)
+    private static void broadcast(WebsocketPackage pkg)
     {
         for(Session client : clients)
         {
-            client.getAsyncRemote().sendText(message);
+            client.getAsyncRemote().sendText(pkg.toString());
             client.getAsyncRemote().setSendTimeout(1000);
         }
     } // broadcast()
 
-    private static String stat()
+    private static WebsocketPackage stat()
     {
-        return "Connection count - " + connectionCount();
+        return new WebsocketPackage(false, "connections : " + clients.size());
     } // stat()
 
     public static int connectionCount()

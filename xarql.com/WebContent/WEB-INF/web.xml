@@ -202,26 +202,6 @@
     <url-pattern>/chat</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>SendProcessor</display-name>
-    <servlet-name>SendProcessor</servlet-name>
-    <servlet-class>com.xarql.chat.SendProcessor</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>com.xarql.chat.SendProcessor</servlet-name>
-    <url-pattern>/chat/send</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ChatUpdt</display-name>
-    <servlet-name>ChatUpdt</servlet-name>
-    <servlet-class>com.xarql.chat.ChatUpdt</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>com.xarql.chat.ChatUpdt</servlet-name>
-    <url-pattern>/chat/updt</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description>A canvas of pixels that can be edited one at a time</description>
     <display-name>Pexl</display-name>
     <servlet-name>Pexl</servlet-name>
