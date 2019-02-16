@@ -39,6 +39,7 @@
       <div class="large-card">
         <h3 id="xarql" class="centered">XARQL</h3>
         <p id="moto" class="centered">zärˈkəl</p>
+        <p class="centered" id="tagline">An experimental open source online forum centered on freedom through anonymity.</p>
         <div id="breaker"></div>
         <p class="overline">Pages</p>
         <p><a href="${domain}/polr">polr</a></p>
