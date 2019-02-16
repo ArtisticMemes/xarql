@@ -14,7 +14,7 @@ $(document).ready(function () {
   });
 
   $('#messages').append('<div class="small-card"><p class="status">Connecting...</p></div>');
-  var webSocket = new WebSocket("ws://" + domain.substr(domain.indexOf("//")) + "/chat/websocket");
+  var webSocket = new WebSocket("wss://" + domain.substr(domain.indexOf("//") + 2) + "/chat/websocket");
   var message = document.getElementById("message");
   webSocket.onopen = function(message){ wsOpen(message);};
   webSocket.onmessage = function(message){ wsGetMessage(message);};

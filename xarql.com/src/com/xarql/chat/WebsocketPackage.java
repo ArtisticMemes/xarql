@@ -1,5 +1,6 @@
 package com.xarql.chat;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.xarql.util.TextFormatter;
@@ -15,11 +16,13 @@ public class WebsocketPackage
     // Data
     private TrackedHashMap<String, String> headers = new TrackedHashMap<String, String>();
     private String                         content;
+    private Timestamp                      creationDate;
 
     public WebsocketPackage(boolean directDisplay, String content) throws IllegalArgumentException
     {
         setHeader(DIRECT_DISPLAY, directDisplay);
         setContent(content);
+        setCreationDate();
     } // WebsocketPackage
 
     protected void setHeader(String name, boolean value)
@@ -54,6 +57,16 @@ public class WebsocketPackage
     {
         return content;
     } // getContent()
+
+    private void setCreationDate()
+    {
+        creationDate = new Timestamp(System.currentTimeMillis());
+    } // setCreationDate()
+
+    public Timestamp getCreationDate()
+    {
+        return creationDate;
+    } // getCreationDate()
 
     @Override
     public String toString()

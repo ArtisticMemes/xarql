@@ -1,5 +1,6 @@
 package com.xarql.chat;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.websocket.OnClose;
@@ -14,14 +15,19 @@ import com.xarql.util.TrackedHashMap;
 @ServerEndpoint ("/chat/websocket")
 public class ChatWebsocket
 {
-    private static TrackedHashMap<String, Client> clients  = new TrackedHashMap<String, Client>();
-    private static ArrayList<Message>             messages = new ArrayList<Message>();
+    private static final long MESSAGE_LIFESPAN = 3600000;
+    private static final long CHECK_INTERVAL   = 60000;
+
+    private static TrackedHashMap<String, Client> clients   = new TrackedHashMap<String, Client>();
+    private static ArrayList<Message>             messages  = new ArrayList<Message>();
+    private static Timestamp                      lastCheck = new Timestamp(System.currentTimeMillis());
 
     @OnOpen
     public void onOpen(Session session)
     {
         Client c = new Client(session);
         clients.add(session.getId(), c);
+        removeOldMessages();
         for(Message msg : messages)
             c.send(msg);
         broadcast(stat());
@@ -65,5 +71,18 @@ public class ChatWebsocket
     {
         return clients.size();
     } // connectionCount()
+
+    private static void removeOldMessages()
+    {
+        // See if the last check was
+        if(lastCheck.compareTo(new Timestamp(System.currentTimeMillis() - CHECK_INTERVAL)) < 0)
+        {
+            Timestamp expiryTime = new Timestamp(System.currentTimeMillis() - MESSAGE_LIFESPAN);
+            for(Message msg : messages)
+                if(msg.getCreationDate().compareTo(expiryTime) < 0)
+                    messages.remove(msg);
+            lastCheck = new Timestamp(System.currentTimeMillis());
+        }
+    } // removeOldMessages()
 
 } // ChatWebsocket
