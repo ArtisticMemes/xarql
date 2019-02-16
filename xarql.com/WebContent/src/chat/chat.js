@@ -1,64 +1,72 @@
 $(document).ready(function () {
 	// Update Messages
   var domain = document.getElementById('domain').getAttribute('value');
-	var lastID = $("#last-id").text();
-	function update() {
-		$(".status").each(function() {
-			$(this).text("trying");
-		});
-	    var updt = $("<div></div>").load(domain + "/chat/updt?last=" + $("#last-id").text(), function(response, status, xhr) {
-	    	if(status == "error") {
-	    		$(".status").each(function() {
-	    			$(this).text(xhr.statusText);
-	    		});
-	    	}
-	    	else {
-				$("#messages").append(updt.find("#messages").html());
-				if(updt.find("#last-id").text() == 0) {} else
-					$("#last-id").text(updt.find("#last-id").text());
-				$(".status").each(function() {
-					$(this).text(xhr.statusText);
-				});
-	    	}
-	    	lastID = $("#last-id").text();
-	    });
-	}
-	$(".update-button").each(function () {
-		$(this).on("click", function () {
-			update();
-		});
-	});
+
 	// AJAX posting
-	$( "#message-form" ).submit(function(event) {
+	$("#message-form" ).submit(function(event) {
 		// Stop form from submitting normally
 		event.preventDefault();
-		$(".status").each(function() {
-			$(this).text("trying");
-		});
-
-	    // Get some values from elements on the page:
-	    var $form = $(this),
-	      message = $form.find("input[name='message']").val(),
-	      url = $form.attr("action");
-	    $form.trigger('reset');
-	    // Send the data using AJAX POST
-	    $.ajax({
-	    	type: "POST",
-	    	url: url,
-	    	data : {
-	    		message: message
-	    	}
-	    	}).done(function(){
-	    		$(".status").each(function() {
-					$(this).text("success");
-				});
-	    	}).fail(function(){
-	    		$(".status").each(function() {
-					$(this).text("error");
-          location.reload();
-				});
-	    	});
+    wsSendMessage();
 	});
+
+  $("#send-button").on("click", function() {
+    wsSendMessage();
+  });
+
+  $('#messages').append('<div class="small-card"><p class="status">Connecting...</p></div>');
+  var webSocket = new WebSocket("ws://" + domain.substr(domain.indexOf("//")) + "/chat/websocket");
+  var message = document.getElementById("message");
+  webSocket.onopen = function(message){ wsOpen(message);};
+  webSocket.onmessage = function(message){ wsGetMessage(message);};
+  webSocket.onclose = function(message){ wsClose(message);};
+  webSocket.onerror = function(message){ wsError(message);};
+  function wsSendMessage() {
+    webSocket.send(message.value);
+    message.value = "";
+  }
+  function wsGetMessage(message) {
+    var data = message.data;
+    var headers = new Map();
+    // Repeat until all key:value,key:value pairs are consumed and | terminates them
+    while(data.indexOf(':') != -1 && data.indexOf(':') < data.indexOf('|'))
+    {
+      // Get key from key:value pair
+      var param = data.substr(0, data.indexOf(':'));
+      // Remove the key from the start of data
+      data = data.substr(data.indexOf(':') + 1);
+      // Get the index of , or | --> whichever comes first
+      var stop = 0;
+      if(data.indexOf(',') != -1 && data.indexOf(',') < data.indexOf('|'))
+        stop = data.indexOf(',');
+      else
+        stop = data.indexOf('|');
+      // Get value from key:value pair
+      var value = data.substr(0, stop);
+      // Trim the value and , or | from data
+      data = data.substr(stop + 1);
+      // Add the key:value pair to the map
+      headers.set(param, value);
+    }
+    if(headers.get('direct-display') === 'false')
+      $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
+    else {
+      var color = headers.get('client-name');
+      $('#messages').append('<div class="small-card" style="background-color:#' + color + '"><p>' + data + '</p></div>');
+    }
+  }
+  function wsOpen(message) {
+    $('#messages').append('<div class="small-card"><p class="status">Connected!</p></div>');
+  }
+  function wsClose(message) {
+    $('#messages').append('<div class="small-card"><p class="warn">Disconnected</p></div>');
+    window.setTimeout(function () {
+      $('#messages').append('<div class="small-card"><p class="status">Reloading...</p></div>');
+      location.reload();
+    }, 3000);
+  }
+  function wsError(message) {
+    $('#messages').append('<div class="small-card"><p class="warn">Error!</p></div>');
+  }
 
   // Change font size
   $('html').css('font-size', Cookies.get('font-size'));
@@ -137,13 +145,4 @@ $(document).ready(function () {
 	  $("#option-pane-open-button").show();
 	  $(this).hide();
   });
-
-  // update loop. Grabs new messages
-	function updateLoop() {
-		if($(".status").text() === "trying") {} else {
-			update();
-		}
-		window.setTimeout(updateLoop, 700); // 1.5 seconds
-	}
-	updateLoop();
 });

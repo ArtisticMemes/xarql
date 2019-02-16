@@ -57,7 +57,7 @@ public class Client
 
     private void randomizeColor()
     {
-        color = AuthSession.generateColor();
+        color = AuthSession.generateColor().substring(1);
     } // randomizeColor()
 
 } // Client

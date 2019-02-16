@@ -17,6 +17,9 @@
   <meta id="domain" value="${domain}">
   <title>Chat ~ xarql</title>
   <link rel="stylesheet" type="text/css" id="theme-styles" href="${domain}/src/common/${theme}-common.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
+  <script src="${domain}/src/common/jscookie.js" defer=""></script>
+  <script src="${domain}/src/chat/chat.min.js" defer=""></script>
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
   <style id="font-size">
     html, body {
@@ -35,45 +38,13 @@
 <body>
   <div id="wrapper">
     <div id="column">
+      <div id="messages">
+      </div>
       <div class="large-card">
-        <form>
-          <input id="message" type="text">
-          <input onclick="wsSendMessage();" value="Send" type="button" class="button">
-          <input onclick="wsCloseConnection();" value="Close" type="button" class="button">
+        <form id="message-form">
+          <input id="message" autocomplete="off" spellcheck="true" type="text" name="message" placeholder="Message" maxlength="128" style="width:100%;">
+          <input id="send-button" value="Send" type="button" class="button">
         </form>
-        <br>
-        <textarea id="echoText" rows="5" cols="30"></textarea>
-      <script type="text/javascript">
-        var webSocket = new WebSocket("ws://localhost:8080/xarql.com/chat/websocket");
-        var echoText = document.getElementById("echoText");
-        echoText.value = "";
-        var message = document.getElementById("message");
-        webSocket.onopen = function(message){ wsOpen(message);};
-        webSocket.onmessage = function(message){ wsGetMessage(message);};
-        webSocket.onclose = function(message){ wsClose(message);};
-        webSocket.onerror = function(message){ wsError(message);};
-        function wsSendMessage() {
-          webSocket.send(message.value);
-          echoText.value += "↑ " + message.value + "\n";
-          message.value = "";
-        }
-        function wsGetMessage(message) {
-          echoText.value += "↓ " + message.data + "\n";
-        }
-        function wsOpen(message) {
-          echoText.value += "Connected ... \n";
-        }
-        function wsCloseConnection() {
-          webSocket.close();
-        }
-        function wsClose(message) {
-          echoText.value += "Disconnected ... \n";
-          window.setTimeout(location.reload(), 3000);
-        }
-        function wsError(message) {
-          echoText.value += "Error ... \n";
-        }
-      </script>
       <c:if test="${account_name != 'Unknown'}">
         <p>Currently logged in as <a href="${domain}/user">@${account_name}</a></p>
       </c:if>

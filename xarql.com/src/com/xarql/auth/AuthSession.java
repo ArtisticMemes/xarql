@@ -88,7 +88,7 @@ public class AuthSession
     public static String generateColor()
     {
         int colorValue = r.nextInt(0xffffff + 1);
-        return String.format("#%06x", colorValue);
+        return String.format("#%06x", colorValue).toLowerCase();
     } // generateColor()
 
     public String getColor()

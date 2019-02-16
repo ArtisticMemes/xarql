@@ -37,7 +37,7 @@ public class ChatWebsocket
     @OnMessage
     public void onMessage(Session session, String message)
     {
-        Message msg = new Message(message, session);
+        Message msg = new Message(message, clients.get(session.getId()));
         messages.add(msg);
         broadcast(msg);
     } // onMessage()

@@ -34,7 +34,7 @@ public class WebsocketPackage
             if(TextFormatter.isAlphaNumeric(value.toString()))
                 headers.add(name, value.toString());
             else
-                throw new IllegalArgumentException("Parameter value has non alpha numeric characters");
+                throw new IllegalArgumentException("Parameter value has non alpha numeric characters" + value.toString());
         }
         else
             throw new IllegalArgumentException("Invalid parameter name. Please use a const and not a magic string.");
