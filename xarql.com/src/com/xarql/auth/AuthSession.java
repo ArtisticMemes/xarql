@@ -81,9 +81,15 @@ public class AuthSession
 
     private void randomizeColor()
     {
-        int colorValue = r.nextInt(0xffffff + 1);
-        color = String.format("#%06x", colorValue);
+        color = generateColor();
     } // randomizeColor()
+
+    // Useful for other parts of xarql
+    public static String generateColor()
+    {
+        int colorValue = r.nextInt(0xffffff + 1);
+        return String.format("#%06x", colorValue);
+    } // generateColor()
 
     public String getColor()
     {
