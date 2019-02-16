@@ -64,6 +64,11 @@ public class TrackedHashMap<K, E> // Made to fit caching requirements, not for g
         return container.get(key);
     } // get(K key)
 
+    public E get(int i)
+    {
+        return container.get(key(i));
+    } // get(int i)
+
     public E getRandom()
     {
         return container.get(randomKey());
