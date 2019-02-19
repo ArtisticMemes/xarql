@@ -11,6 +11,7 @@ public class WebsocketPackage
     // Standard Headers
     public static final String            DIRECT_DISPLAY   = "direct-display";
     public static final String            CLIENT_NAME      = "client-name";
+    private static final String           CREATION_DATE    = "creation-date";
     public static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
 
     // Data
@@ -61,6 +62,7 @@ public class WebsocketPackage
     private void setCreationDate()
     {
         creationDate = new Timestamp(System.currentTimeMillis());
+        setHeader(CREATION_DATE, creationDate);
     } // setCreationDate()
 
     public Timestamp getCreationDate()
@@ -91,6 +93,7 @@ public class WebsocketPackage
 
         output.add(DIRECT_DISPLAY);
         output.add(CLIENT_NAME);
+        output.add(CREATION_DATE);
 
         for(String names : output)
             if(!TextFormatter.isAlphaNumeric(names))

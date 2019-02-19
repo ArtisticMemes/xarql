@@ -37,7 +37,7 @@
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <h3 id="xarql" class="centered">XARQL</h3>
+        <h1 id="xarql" class="centered">XARQL</h1>
         <p id="moto" class="centered">zärˈkəl</p>
         <p class="centered" id="tagline">An experimental open source online forum centered on freedom through anonymity.</p>
         <div id="breaker"></div>
