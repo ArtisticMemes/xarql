@@ -40,8 +40,8 @@ public class ChatWebsocket
         clients.add(session.getId(), c);
         c.send(new UsersReport(clients));
         broadcast(new UserJoin(c.getColor()));
-        removeOldMessages();
-        c.send(messages);
+        refresh();
+        c.sendList(messages);
     } // onOpen()
 
     @OnClose
@@ -80,15 +80,24 @@ public class ChatWebsocket
         return clients.size();
     } // connectionCount()
 
-    private static void removeOldMessages()
+    private static void refresh()
     {
         // See if the last check was
         if(lastCheck.compareTo(new Timestamp(System.currentTimeMillis() - CHECK_INTERVAL)) < 0)
         {
+            // Remove old messages
             Timestamp expiryTime = new Timestamp(System.currentTimeMillis() - MESSAGE_LIFESPAN);
             for(Message msg : messages)
                 if(msg.getCreationDate().compareTo(expiryTime) < 0)
                     messages.remove(msg);
+
+            // Remove closed sessions / dead clients
+            for(int i = 0; i < clients.size(); i++)
+            {
+                if(!clients.get(i).isOpen())
+                    clients.remove(clients.key(i));
+            }
+
             lastCheck = new Timestamp(System.currentTimeMillis());
         }
     } // removeOldMessages()

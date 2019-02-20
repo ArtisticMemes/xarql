@@ -57,7 +57,8 @@ $(document).ready(function () {
       $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
     else {
       var color = headers.get('client-name');
-      $('#messages').append('<div class="small-card" style="background-color:#' + color + '"><p>' + data + '</p></div>');
+      var textColor = headers.get('text-color');
+      $('#messages').append('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + data + '</p></div>');
     }
   }
   function wsOpen(message) {

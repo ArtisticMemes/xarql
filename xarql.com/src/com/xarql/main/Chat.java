@@ -44,10 +44,13 @@ public class Chat extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         util.standardSetup();
         boolean idDone = false;
-        for(Cookie cookie : request.getCookies())
+        if(request.getCookies() != null)
         {
-            if(cookie.getName().equals("chat-id"))
-                idDone = true;
+            for(Cookie cookie : request.getCookies())
+            {
+                if(cookie.getName().equals("chat-id"))
+                    idDone = true;
+            }
         }
         if(!idDone)
             response.addCookie(new Cookie("chat-id", AuthSession.generateColor()));

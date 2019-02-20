@@ -49,10 +49,10 @@ public class Client
         }
     } // send()
 
-    public void send(ArrayList<Message> messages)
+    public void sendList(ArrayList<? extends WebsocketPackage> packages)
     {
-        for(WebsocketPackage msg : messages)
-            queue.add(msg.toString());
+        for(WebsocketPackage pkg : packages)
+            queue.add(pkg.toString());
         try
         {
             sendQueue();
@@ -95,5 +95,10 @@ public class Client
     {
         return AuthSession.generateColor().substring(1);
     } // randomizeColor()
+
+    public boolean isOpen()
+    {
+        return session.isOpen();
+    } // isOpen()
 
 } // Client

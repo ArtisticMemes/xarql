@@ -4,12 +4,40 @@ import com.xarql.util.TextFormatter;
 
 public class Message extends WebsocketPackage
 {
+    // Headers used
     private static final String CLIENT_NAME = WebsocketPackage.CLIENT_NAME;
+    private static final String TEXT_COLOR  = WebsocketPackage.TEXT_COLOR;
+
+    private Client client;
 
     public Message(String content, Client client) throws IllegalArgumentException
     {
         super(true, TextFormatter.full(content));
-        setHeader(CLIENT_NAME, client.getColor());
+        setClient(client);
+        setHeader(CLIENT_NAME, mainColor());
+        setHeader(TEXT_COLOR, textColor());
     } // Message()
+
+    private void setClient(Client client)
+    {
+        this.client = client;
+    } // setClient()
+
+    private String mainColor()
+    {
+        return client.getColor();
+    } // getColor()
+
+    private String textColor()
+    {
+        int r = Integer.parseInt(client.getColor().substring(0, 2), 16);
+        int g = Integer.parseInt(client.getColor().substring(2, 4), 16);
+        int b = Integer.parseInt(client.getColor().substring(4, 6), 16);
+        double luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Adjust for human eyes
+        if(luma > 80)
+            return "000";
+        else
+            return "FFF";
+    } // textColor()
 
 } // Message

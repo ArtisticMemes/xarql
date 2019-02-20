@@ -11,7 +11,8 @@ public class WebsocketPackage
     // Standard Headers
     public static final String            DIRECT_DISPLAY   = "direct-display";
     public static final String            CLIENT_NAME      = "client-name";
-    private static final String           CREATION_DATE    = "creation-date";
+    public static final String            CREATION_DATE    = "creation-date";
+    public static final String            TEXT_COLOR       = "text-color";
     public static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
 
     // Data
@@ -90,6 +91,7 @@ public class WebsocketPackage
         output.add(DIRECT_DISPLAY);
         output.add(CLIENT_NAME);
         output.add(CREATION_DATE);
+        output.add(TEXT_COLOR);
 
         for(String names : output)
             if(!TextFormatter.isAlphaNumeric(names))
