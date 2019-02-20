@@ -26,19 +26,15 @@ public class WebsocketPackage
         setCreationDate();
     } // WebsocketPackage
 
-    protected void setHeader(String name, boolean value)
-    {
-        setHeader(name, String.valueOf(value));
-    } // setHeader(String, boolean)
-
     protected void setHeader(String name, Object value) throws IllegalArgumentException
     {
         if(VALID_PARAMETERS.contains(name))
         {
-            if(TextFormatter.isAlphaNumeric(value.toString()))
-                headers.add(name, value.toString());
+            String insert = value.toString().replace(':', ';');
+            if(insert.contains(",") || insert.contains("|"))
+                throw new IllegalArgumentException("Parameter value has illegal characters " + insert);
             else
-                throw new IllegalArgumentException("Parameter value has non alpha numeric characters" + value.toString());
+                headers.add(name, insert);
         }
         else
             throw new IllegalArgumentException("Invalid parameter name. Please use a const and not a magic string.");

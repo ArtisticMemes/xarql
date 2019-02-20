@@ -8,36 +8,47 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.TrackedHashMap;
 
-@ServerEndpoint ("/chat/websocket")
+@ServerEndpoint ("/chat/websocket/{id}")
 public class ChatWebsocket
 {
-    private static final long MESSAGE_LIFESPAN = 3600000;
-    private static final long CHECK_INTERVAL   = 60000;
+    private static final long    MESSAGE_LIFESPAN = 3600000;
+    private static final long    CHECK_INTERVAL   = 60000;
+    private static final boolean TESTING          = DeveloperOptions.getTesting();
 
     private static TrackedHashMap<String, Client> clients   = new TrackedHashMap<String, Client>();
     private static ArrayList<Message>             messages  = new ArrayList<Message>();
     private static Timestamp                      lastCheck = new Timestamp(System.currentTimeMillis());
 
     @OnOpen
-    public void onOpen(Session session)
+    public void onOpen(@PathParam ("id") String id, Session session)
     {
-        Client c = new Client(session);
+        Client c;
+        try
+        {
+            c = new Client(session, id);
+        }
+        catch(Exception e)
+        {
+            c = new Client(session);
+        }
         clients.add(session.getId(), c);
+        c.send(new UsersReport(clients));
+        broadcast(new UserJoin(c.getColor()));
         removeOldMessages();
-        for(Message msg : messages)
-            c.send(msg);
-        broadcast(stat());
+        c.send(messages);
     } // onOpen()
 
     @OnClose
     public void onClose(Session session)
     {
+        broadcast(new UserExit(clients.get(session.getId()).getColor()));
         clients.remove(session.getId());
-        broadcast(stat());
     } // onClose()
 
     @OnMessage
@@ -51,7 +62,9 @@ public class ChatWebsocket
     @OnError
     public void onError(Session session, Throwable e)
     {
-        e.printStackTrace();
+        if(TESTING)
+            e.printStackTrace();
+        clients.get(session.getId()).send(new ErrorReport(e));
     } // onError()
 
     private static void broadcast(WebsocketPackage pkg)
@@ -61,11 +74,6 @@ public class ChatWebsocket
             clients.get(i).send(pkg);
         }
     } // broadcast()
-
-    private static WebsocketPackage stat()
-    {
-        return new WebsocketPackage(false, "connections : " + clients.size());
-    } // stat()
 
     public static int connectionCount()
     {

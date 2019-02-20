@@ -7,10 +7,12 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.auth.AuthSession;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -39,8 +41,16 @@ public class Chat extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
-        request.setAttribute("authenticated", ServletUtilities.userIsAuth(request));
+        ServletUtilities util = new ServletUtilities(request);
+        util.standardSetup();
+        boolean idDone = false;
+        for(Cookie cookie : request.getCookies())
+        {
+            if(cookie.getName().equals("chat-id"))
+                idDone = true;
+        }
+        if(!idDone)
+            response.addCookie(new Cookie("chat-id", AuthSession.generateColor()));
         request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
     } // doGet()
 

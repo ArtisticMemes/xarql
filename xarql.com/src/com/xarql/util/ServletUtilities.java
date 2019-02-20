@@ -174,6 +174,11 @@ public class ServletUtilities
             return false;
     } // userIsAuth()
 
+    public boolean userIsAuth()
+    {
+        return userIsAuth(request);
+    } // userIsAuth()
+
     public boolean userIsMod()
     {
         return userIsMod(request);

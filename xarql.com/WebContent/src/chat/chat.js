@@ -20,7 +20,7 @@ $(document).ready(function () {
     protocol = "wss";
   else
     protocol = "ws";
-  webSocket = new WebSocket(protocol + domain.substr(domain.indexOf("://")) + "/chat/websocket");
+  webSocket = new WebSocket(protocol + domain.substr(domain.indexOf("://")) + "/chat/websocket/" + Cookies.get('chat-id').substr(1));
   var message = document.getElementById("message");
   webSocket.onopen = function(message){ wsOpen(message);};
   webSocket.onmessage = function(message){ wsGetMessage(message);};
