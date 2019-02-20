@@ -11,6 +11,9 @@
           <p class="overline">Replies : <span id="reply-count">${post.getResponses()}</span> ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
           <h6 id="main-post-title">${post.getTitle()}</h6>
           <p>${post.getContent()}</p>
+          <c:if test="${post.isExpired()}">
+            <p class="warn">This post has expired. You can not reply to it.</p>
+          </c:if>
           <p>
             <a class="report-link" href="${domain}/flag?id=${post.getId()}">Report</a>
             <c:if test="${post.getAuthor() != 'Unknown'}">
@@ -27,6 +30,7 @@
   		  <div class="large-card">
   		    <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
   		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+          <c:if test="${post.isExpired()}"><p class="overline"><span class="warn">Expired</span></p></c:if>
           <div id="post-inner-${post.getId()}"<c:if test="${post.getWarning() != 'None'}">style="display:none;"</c:if>>
             <h6>${post.getTitle()}</h6>
             <p>${post.getContent()}</p>

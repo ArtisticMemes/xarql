@@ -37,6 +37,7 @@ public class Post
     public static final String DOMAIN                   = DeveloperOptions.getDomain();
     public static final String DEFAULT_AUTHOR           = PostCreator.DEFAULT_AUTHOR;
     public static final String DEFAULT_WARNING          = PostCreator.DEFAULT_WARNING;
+    private static final long  ONE_WEEK_MILLIS          = 604800000;
 
     // Constructor
     public Post(int id, String title, String content, int answers, int removed, Timestamp date, Timestamp bump, Timestamp subbump, int responses, int subresponses, String author, String warning)
@@ -257,6 +258,15 @@ public class Post
     {
         return warning;
     } // getWarning()
+
+    public boolean isExpired()
+    {
+        Timestamp lastWeek = new Timestamp(System.currentTimeMillis() - ONE_WEEK_MILLIS);
+        if(subbump.compareTo(lastWeek) > 0 || getId() == 0)
+            return false;
+        else
+            return true;
+    } // isExpired()
 
     @Override
     public String toString()
