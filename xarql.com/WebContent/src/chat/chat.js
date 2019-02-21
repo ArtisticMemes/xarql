@@ -9,11 +9,19 @@ $(document).ready(function () {
     wsSendMessage();
 	});
 
+  function addUser(color) {
+    $('#users').append('<div class="user-icon" id="user-' + color + '" style="background-color:#' + color + '"></div>');
+  }
+
+  function removeUser(color) {
+    $('#user-' + color).remove();
+  }
+
   $("#send-button").on("click", function() {
     wsSendMessage();
   });
 
-  $('#messages').append('<div class="small-card"><p class="status">Connecting...</p></div>');
+  $('#messages').append('<div class="small-card" id="status"><p class="status">Connecting...</p></div>');
   var webSocket;
   var protocol;
   if(domain.includes('https://'))
@@ -54,7 +62,29 @@ $(document).ready(function () {
       headers.set(param, value);
     }
     if(headers.get('direct-display') === 'false')
-      $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
+    {
+      if(data.substr(0, 9) === 'user-join') {
+        addUser(data.substr(10, 6));
+      }
+      else if(data.substr(0, 9) === 'user-exit') {
+        removeUser(data.substr(10, 6));
+      }
+      else if(data.substr(0, 7) === 'clients') {
+        data = data.substr(7);
+        if(data.length > 1)
+        {
+          while(data.length > 0)
+          {
+            var client = data.substr(1, 6);
+            addUser(client);
+            data = data.substr(7);
+          }
+        }
+      }
+      else {
+        $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
+      }
+    }
     else {
       var color = headers.get('client-name');
       var textColor = headers.get('text-color');
@@ -62,7 +92,10 @@ $(document).ready(function () {
     }
   }
   function wsOpen(message) {
-    $('#messages').append('<div class="small-card"><p class="status">Connected!</p></div>');
+    $('#status').replaceWith('<div class="small-card" id="status"><p class="status">Connected!</p>');
+    window.setTimeout(function () {
+      $('#status').remove();
+    }, 3000);
   }
   function wsClose(message) {
     $('#messages').append('<div class="small-card"><p class="warn">Disconnected</p></div>');

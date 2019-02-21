@@ -402,3 +402,15 @@ xmp {
   font-family: monospace;
   border-radius: 0.1rem;
 }
+
+#users {
+  margin-bottom: .5rem;
+}
+
+.user-icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  margin: 0 .5rem 0 0;
+  display: inline-block;
+}

@@ -37,9 +37,9 @@ public class ChatWebsocket
         {
             c = new Client(session);
         }
-        clients.add(session.getId(), c);
         c.send(new UsersReport(clients));
-        broadcast(new UserJoin(c.getColor()));
+        clients.add(session.getId(), c);
+        ripple(new UserJoin(c.getColor()), c);
         refresh();
         c.sendList(messages);
     } // onOpen()
@@ -72,6 +72,15 @@ public class ChatWebsocket
         for(int i = 0; i < clients.size(); i++)
         {
             clients.get(i).send(pkg);
+        }
+    } // broadcast()
+
+    private static void ripple(WebsocketPackage pkg, Client client)
+    {
+        for(int i = 0; i < clients.size(); i++)
+        {
+            if(!clients.get(i).equals(client))
+                clients.get(i).send(pkg);
         }
     } // broadcast()
 

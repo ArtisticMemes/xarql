@@ -41,6 +41,8 @@
       <div id="messages">
       </div>
       <div class="large-card">
+        <div id="users">
+        </div>
         <form id="message-form">
           <input id="message" autocomplete="off" spellcheck="true" type="text" name="message" placeholder="Message" maxlength="128" style="width:100%;">
           <input id="send-button" value="Send" type="button" class="button">
