@@ -40,7 +40,7 @@
     <div id="column">
       <div id="messages">
       </div>
-      <div class="large-card">
+      <div class="small-card">
         <div id="users">
         </div>
         <form id="message-form">
@@ -71,14 +71,6 @@
         </table>
         <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>
-      <div id="data" class="card" style="display:none;">
-        <p id="last-id">${lastID}</p>
-      </div>
-      <c:if test="${testing}">
-        <div class="small-card">
-          <p class="centered">Page Built In ~${build_timer.done()}ms</p>
-        </div>
-      </c:if>
     </div>
   </div>
 </body>
