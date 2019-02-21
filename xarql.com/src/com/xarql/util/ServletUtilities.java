@@ -61,7 +61,8 @@ public class ServletUtilities
     /**
      * Object based version of standardSetup()
      * 
-     * @throws UnsupportedEncodingException
+     * @throws UnsupportedEncodingException If the client refuses or server can't
+     *         supply an encoding
      */
     public void standardSetup() throws UnsupportedEncodingException
     {
@@ -254,7 +255,7 @@ public class ServletUtilities
      * Used to prevent get methods on endpoints meant for submitting content
      * 
      * @param response Response to use for the error
-     * @throws IOException
+     * @throws IOException Something went wrong with http
      */
     public static void rejectGetMethod(HttpServletResponse response) throws IOException
     {
@@ -274,7 +275,7 @@ public class ServletUtilities
      * @param request The request the parameters are in
      * @param response Gives a 400 error
      * @return true if the parameters are usable, false otherwise
-     * @throws IOException
+     * @throws IOException Something went wrong with http
      */
     public static boolean hasParameters(String[] parameters, HttpServletRequest request, HttpServletResponse response) throws IOException
     {

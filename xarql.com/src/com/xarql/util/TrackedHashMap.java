@@ -36,7 +36,6 @@ public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
      * 
      * @return size
      */
-    @Override
     public int size()
     {
         return tracker.size();
@@ -45,7 +44,7 @@ public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
     /**
      * Specifies if this TrackedHashMap contains the given key. The key's existence
      * is determined in the container. Specifically,
-     * <code>container.containsKey(key)<code>
+     * <code>container.containsKey(key)</code>
      * 
      * @param key The key whose existence is in question
      * @return Existence of the key
@@ -72,7 +71,7 @@ public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
      * Grabs a key from a random index in the tracker. Specifically,
      * <code>key(r.nextInt(size()))</code>
      * 
-     * @return
+     * @return A random key
      */
     public K randomKey()
     {
@@ -94,7 +93,7 @@ public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
      * Grabs the first key that was added to this TrackedHashMap. The key is grabbed
      * from the tracker. Specifically, <code>key(0)</code>
      * 
-     * @return
+     * @return The first key
      */
     public K firstKey()
     {
@@ -229,8 +228,8 @@ public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
     /**
      * Adds the key to the tracker. Adds the key and the element to the container.
      * 
-     * @param key
-     * @param element
+     * @param key A key
+     * @param element An element
      */
     public void add(K key, E element)
     {
@@ -331,10 +330,10 @@ public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
 
     /**
      * Determines equity between this TrackedHashMap and another one with similar
-     * key and element types <K, E>. Checks if each key and element are equal across
-     * maps and are in sequence.
+     * key and element types. Checks if each key and element are equal across maps
+     * and are in sequence.
      * 
-     * @param input A TrackedHashMap with like key and element types <K, E>.
+     * @param input A TrackedHashMap with like key and element types
      * @return Equity of this and the input
      */
     public boolean equals(TrackedHashMap<K, E> input)

@@ -3,7 +3,7 @@ package com.xarql.user;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * Author: Ian Gallagher <igallagher@securityinnovation.com> This code utilizes
+ * Author: Ian Gallagher igallagher@securityinnovation.com This code utilizes
  * jBCrypt, which you need installed to use. jBCrypt:
  * http://www.mindrot.org/projects/jBCrypt/
  */
@@ -63,6 +63,8 @@ public class Password
      * A simple test case for the main method, verify that a pre-generated test hash
      * verifies successfully for the password it represents, and also generate a new
      * hash and ensure that the new hash verifies just the same.
+     * 
+     * @param args Does nothing
      */
     public static void main(String[] args)
     {
