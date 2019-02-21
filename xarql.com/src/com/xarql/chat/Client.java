@@ -101,4 +101,9 @@ public class Client
         return session.isOpen();
     } // isOpen()
 
+    public String getID()
+    {
+        return session.getId();
+    } // getID()
+
 } // Client

@@ -69,20 +69,18 @@ public class ChatWebsocket
 
     private static void broadcast(WebsocketPackage pkg)
     {
-        for(int i = 0; i < clients.size(); i++)
-        {
-            clients.get(i).send(pkg);
-        }
+        for(Client c : clients)
+            c.send(pkg);
     } // broadcast()
 
     private static void ripple(WebsocketPackage pkg, Client client)
     {
-        for(int i = 0; i < clients.size(); i++)
+        for(Client c : clients)
         {
-            if(!clients.get(i).equals(client))
-                clients.get(i).send(pkg);
+            if(!c.equals(client))
+                c.send(pkg);
         }
-    } // broadcast()
+    } // ripple()
 
     public static int connectionCount()
     {
@@ -101,14 +99,14 @@ public class ChatWebsocket
                     messages.remove(msg);
 
             // Remove closed sessions / dead clients
-            for(int i = 0; i < clients.size(); i++)
+            for(Client c : clients)
             {
-                if(!clients.get(i).isOpen())
-                    clients.remove(clients.key(i));
+                if(!c.isOpen())
+                    clients.remove(c.getID());
             }
 
             lastCheck = new Timestamp(System.currentTimeMillis());
         }
-    } // removeOldMessages()
+    } // refresh()
 
 } // ChatWebsocket

@@ -21,7 +21,7 @@ $(document).ready(function () {
     wsSendMessage();
   });
 
-  $('#messages').append('<div class="small-card" id="status"><p class="status">Connecting...</p></div>');
+  $('#updates').append('<div class="small-card" id="status"><p class="status">Connecting...</p></div>');
   var webSocket;
   var protocol;
   if(domain.includes('https://'))
@@ -98,14 +98,14 @@ $(document).ready(function () {
     }, 3000);
   }
   function wsClose(message) {
-    $('#messages').append('<div class="small-card"><p class="warn">Disconnected</p></div>');
+    $('#updates').append('<div class="small-card"><p class="warn">Disconnected</p></div>');
     window.setTimeout(function () {
-      $('#messages').append('<div class="small-card"><p class="status">Reloading...</p></div>');
+      $('#updates').append('<div class="small-card"><p class="status">Reloading...</p></div>');
       location.reload();
     }, 3000);
   }
   function wsError(message) {
-    $('#messages').append('<div class="small-card"><p class="warn">Error!</p></div>');
+    $('#updates').append('<div class="small-card"><p class="warn">Error!</p></div>');
   }
 
   // Change font size

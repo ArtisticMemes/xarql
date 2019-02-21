@@ -34,13 +34,25 @@
       font-weight: ${font_weight + 200}
     }
   </style>
+  <style>
+    #column {
+      height: 100vh;
+      max-height: 100vh;
+    }
+    #text-entry {
+      position: sticky;
+      bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="column">
       <div id="messages">
       </div>
-      <div class="small-card">
+      <div id="updates">
+      </div>
+      <div class="small-card" id="text-entry">
         <div id="users">
         </div>
         <form id="message-form">
