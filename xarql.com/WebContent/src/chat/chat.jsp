@@ -71,10 +71,6 @@
         </table>
         <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
       </div>
-      <div class="small-card">
-        <p class="centered"><a href="https://discordapp.com/invite/HjEfxk7">Discord Server</a></p>
-        <p class="centered">This chat is still a work in progress. Visit the server above if you need a more stable place to chat with this site's users and admininstrators.</p>
-      </div>
       <div id="data" class="card" style="display:none;">
         <p id="last-id">${lastID}</p>
       </div>
