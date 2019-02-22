@@ -70,8 +70,11 @@ public class ChatWebsocket
         if(pkg.getClass().getSimpleName().equals("Message"))
         {
             Message msg = (Message) pkg;
-            messages.add(msg);
-            broadcast(msg);
+            if(!msg.getContent().trim().equals(""))
+            {
+                messages.add(msg);
+                broadcast(msg);
+            }
         }
         else
             ripple(pkg, clients.get(session.getId()));

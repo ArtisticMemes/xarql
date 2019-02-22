@@ -49,7 +49,7 @@ public class WebsocketPackage
 
     private void setContent(String content)
     {
-        this.content = content;
+        this.content = content.trim();
     } // setContent()
 
     public String getContent()

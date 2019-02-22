@@ -46,7 +46,8 @@ $(document).ready(function () {
   webSocket.onclose = function(message){ wsClose(message);};
   webSocket.onerror = function(message){ wsError(message);};
   function wsSendMessage() {
-    webSocket.send("type:message|" + message.value);
+    if(message.value.length !== 0 && message.value.trim() !== "")
+      webSocket.send("type:message|" + message.value);
     message.value = "";
   }
   function wsGetMessage(message) {
