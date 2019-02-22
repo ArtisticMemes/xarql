@@ -13,6 +13,7 @@ public class WebsocketPackage
     public static final String            CLIENT_NAME      = "client-name";
     public static final String            CREATION_DATE    = "creation-date";
     public static final String            TEXT_COLOR       = "text-color";
+    public static final String            TYPING           = "typing";
     public static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
 
     // Data
@@ -92,6 +93,7 @@ public class WebsocketPackage
         output.add(CLIENT_NAME);
         output.add(CREATION_DATE);
         output.add(TEXT_COLOR);
+        output.add(TYPING);
 
         for(String names : output)
             if(!TextFormatter.isAlphaNumeric(names))

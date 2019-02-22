@@ -2,6 +2,7 @@ package com.xarql.chat;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -24,6 +25,17 @@ public class ChatWebsocket
     private static TrackedHashMap<String, Client> clients   = new TrackedHashMap<String, Client>();
     private static ArrayList<Message>             messages  = new ArrayList<Message>();
     private static Timestamp                      lastCheck = new Timestamp(System.currentTimeMillis());
+
+    public static void main(String[] args)
+    {
+        // Testing getNameValuePairs()
+        String input = "hello:no,type:message,hi:hello|";
+        System.out.println("length: " + input.length());
+        HashMap map = getHeaders(input);
+        System.out.println(map.get("hello"));
+        System.out.println(map.get("type"));
+        System.out.println(map.get("hi"));
+    } // main()
 
     @OnOpen
     public void onOpen(@PathParam ("id") String id, Session session)
@@ -54,9 +66,15 @@ public class ChatWebsocket
     @OnMessage
     public void onMessage(Session session, String message)
     {
-        Message msg = new Message(message, clients.get(session.getId()));
-        messages.add(msg);
-        broadcast(msg);
+        WebsocketPackage pkg = parseMessage(session, message);
+        if(pkg.getClass().getSimpleName().equals("Message"))
+        {
+            Message msg = (Message) pkg;
+            messages.add(msg);
+            broadcast(msg);
+        }
+        else
+            ripple(pkg, clients.get(session.getId()));
     } // onMessage()
 
     @OnError
@@ -108,5 +126,64 @@ public class ChatWebsocket
             lastCheck = new Timestamp(System.currentTimeMillis());
         }
     } // refresh()
+
+    private WebsocketPackage parseMessage(Session session, String message)
+    {
+        HashMap<String, String> headers = getHeaders(message);
+        String content = getContent(message);
+        String type = headers.get("type");
+        if(type.equals("message"))
+        {
+            return new Message(getContent(message), clients.get(session.getId()));
+        }
+        else if(type.equals("typing"))
+        {
+            return new TypingStatus(headers.get("typing"), clients.get(session.getId()));
+        }
+        else
+            return new ErrorReport(null);
+    } // parseMessage()
+
+    private static HashMap<String, String> getHeaders(String input)
+    {
+        HashMap map = new HashMap<String, String>();
+        int i = 0;
+        boolean a = true; // Represents being at name in name:value pair
+        String name = "";
+        String value = "";
+        while(input.charAt(i) != '|')
+        {
+            if(a)
+            {
+                name = "";
+                value = "";
+                while(input.charAt(i) != ':')
+                {
+                    name += input.charAt(i);
+                    i++;
+                }
+                i++;
+                a = false;
+            }
+            else
+            {
+                while(input.charAt(i) != ',' && input.charAt(i) != '|')
+                {
+                    value += input.charAt(i);
+                    i++;
+                }
+                if(input.charAt(i) == ',')
+                    i++;
+                map.put(name, value);
+                a = true;
+            }
+        }
+        return map;
+    } // getNameValuePairs
+
+    private static String getContent(String input)
+    {
+        return input.substring(input.indexOf('|') + 1);
+    } // getContent()
 
 } // ChatWebsocket

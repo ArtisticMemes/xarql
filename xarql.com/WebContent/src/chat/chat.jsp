@@ -38,8 +38,10 @@
     #column {
       height: 100vh;
       max-height: 100vh;
+      overflow: auto;
     }
     #text-entry {
+      position: -webkit-sticky;
       position: sticky;
       bottom: 1rem;
     }

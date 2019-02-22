@@ -13,6 +13,7 @@ public class Client
     private Session           session;
     private ArrayList<String> queue;
     private boolean           sending;
+    private boolean           typing;
 
     public Client(Session session)
     {

@@ -17,6 +17,14 @@ $(document).ready(function () {
     $('#user-' + color).remove();
   }
 
+  function userTyping(color) {
+    $('#user-' + color).css('box-shadow', '0px 5px 5px #999');
+  }
+
+  function userNotTyping(color) {
+    $('#user-' + color).css('box-shadow', 'none');
+  }
+
   $("#send-button").on("click", function() {
     wsSendMessage();
   });
@@ -35,7 +43,7 @@ $(document).ready(function () {
   webSocket.onclose = function(message){ wsClose(message);};
   webSocket.onerror = function(message){ wsError(message);};
   function wsSendMessage() {
-    webSocket.send(message.value);
+    webSocket.send("type:message|" + message.value);
     message.value = "";
   }
   function wsGetMessage(message) {
@@ -81,7 +89,16 @@ $(document).ready(function () {
           }
         }
       }
+      else if(data === 'typing') {
+        if(headers.get('typing') === 'true') {
+          userTyping(headers.get('client-name'));
+        }
+        else if(headers.get('typing') === 'false') {
+          userNotTyping(headers.get('client-name'));
+        }
+      }
       else {
+        console.log(headers.get('type'));
         $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
       }
     }
@@ -107,6 +124,27 @@ $(document).ready(function () {
   function wsError(message) {
     $('#updates').append('<div class="small-card"><p class="warn">Error!</p></div>');
   }
+
+  var canSend = true;
+  var typing = false;
+  $("#message").on("change keyup keydown paste", function() {
+    if(canSend) {
+      if(typing == false) {
+        typing = true;
+        webSocket.send("type:typing,typing:true|true");
+      }
+      canSend = false;
+      setTimeout(function() {
+        canSend = true;
+        setTimeout(function() {
+          if(canSend) {
+            webSocket.send("type:typing,typing:false|false");
+            typing = false;
+          }
+        }, 300);
+      }, 1000);
+    }
+  });
 
   // Change font size
   $('html').css('font-size', Cookies.get('font-size'));
