@@ -18,7 +18,10 @@ $(document).ready(function () {
   }
 
   function userTyping(color) {
-    $('#user-' + color).css('box-shadow', '0px 5px 5px #999');
+    if(Cookies.get('theme') === 'dark')
+      $('#user-' + color).css('box-shadow', '0px 5px 5px #000');
+    else
+      $('#user-' + color).css('box-shadow', '0px 5px 5px #999');
   }
 
   function userNotTyping(color) {
