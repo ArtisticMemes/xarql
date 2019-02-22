@@ -1,5 +1,7 @@
 package com.xarql.chat;
 
+import java.sql.Timestamp;
+
 import com.xarql.util.TextFormatter;
 
 public class Message extends WebsocketPackage
@@ -7,6 +9,8 @@ public class Message extends WebsocketPackage
     // Headers used
     private static final String CLIENT_NAME = WebsocketPackage.CLIENT_NAME;
     private static final String TEXT_COLOR  = WebsocketPackage.TEXT_COLOR;
+
+    private static final long MESSAGE_LIFESPAN = 3600000;
 
     private Client client;
 
@@ -39,5 +43,14 @@ public class Message extends WebsocketPackage
         else
             return "FFF";
     } // textColor()
+
+    public boolean isExpired()
+    {
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        if(getCreationDate().compareTo(now) - MESSAGE_LIFESPAN < 0)
+            return true;
+        else
+            return false;
+    } // isExpired()
 
 } // Message
