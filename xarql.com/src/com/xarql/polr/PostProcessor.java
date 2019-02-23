@@ -15,7 +15,6 @@ import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.auth.SpamFilter;
 import com.xarql.user.Account;
-import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -74,15 +73,9 @@ public class PostProcessor extends HttpServlet
                 String title = request.getAttribute("title").toString();
                 String content = request.getAttribute("content").toString();
 
-                /*
-                 * // Censor bad words; send "forbidden" error
-                 * if(TextFormatter.shouldCensor(title) || TextFormatter.shouldCensor(content))
-                 * { response.sendError(403); return; }
-                 */
-
-                if((content.contains(Secrets.MOD_SIGNATURE) || title.contains(Secrets.MOD_SIGNATURE)) && AuthTable.get(request.getRequestedSessionId()).isMod() == false)
+                if(content.trim().equals(""))
                 {
-                    response.sendError(401);
+                    response.sendError(400);
                     return;
                 }
 

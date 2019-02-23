@@ -67,8 +67,8 @@ $(document).ready(function () {
     		});
     	}).fail(function(){
     		$(".status").each(function() {
-          $form.find("input[name='title']").val(title);
-          $form.find("textarea[name='content']").val(content);
+          $form.find("input[name='title']").val(title.trim());
+          $form.find("textarea[name='content']").val(content.trim());
           $form.find("input[name='answers']").val(answers);
     			$(this).text("error");
           $("#advisory").text("Try reloading if posting fails. Remember to solve the Recaptcha.");

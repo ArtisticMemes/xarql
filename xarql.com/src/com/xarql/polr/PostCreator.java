@@ -51,8 +51,6 @@ public class PostCreator
 
     private void setTitle(String title)
     {
-        // TODO: Create word filter
-        // title = wordFilter(title);
         if(title.length() > MAX_TITLE_LENGTH)
         {
             this.title = "[TITLE TOO LONG]";
@@ -64,8 +62,6 @@ public class PostCreator
 
     private void setContent(String content)
     {
-        // TODO: Create word filter
-        // content = wordFilter(content);
         if(content.length() > MAX_CONTENT_LENGTH)
         {
             this.content = "[CONTENT TOO LONG]";
@@ -82,7 +78,6 @@ public class PostCreator
 
     private void setAnswers(int answers)
     {
-        // TODO: Add existence check
         if(answers < MIN_ID)
         {
             answers = MIN_ID;
