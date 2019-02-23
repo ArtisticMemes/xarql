@@ -13,7 +13,7 @@ public class Message extends WebsocketPackage
 
     private static final String DOMAIN = DeveloperOptions.getDomain();
     // half of an hour
-    private static final long MESSAGE_LIFESPAN = 1800000;
+    private static final long MESSAGE_LIFESPAN = 3600000;
 
     private Client client;
 
@@ -50,7 +50,7 @@ public class Message extends WebsocketPackage
     public boolean isExpired()
     {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        if(getCreationDate().compareTo(now) - MESSAGE_LIFESPAN < 0)
+        if(getCreationDate().compareTo(now) + MESSAGE_LIFESPAN < 0)
             return true;
         else
             return false;

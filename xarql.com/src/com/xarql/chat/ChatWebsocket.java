@@ -115,7 +115,7 @@ public class ChatWebsocket
         {
             checking = true;
             // See if the last check was
-            if(lastCheck.compareTo(now()) - CHECK_INTERVAL < 0)
+            if(lastCheck.compareTo(now()) + CHECK_INTERVAL < 0)
             {
                 // Remove old messages
                 for(Message msg : messages)
