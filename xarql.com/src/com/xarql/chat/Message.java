@@ -2,6 +2,7 @@ package com.xarql.chat;
 
 import java.sql.Timestamp;
 
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.TextFormatter;
 
 public class Message extends WebsocketPackage
@@ -10,13 +11,14 @@ public class Message extends WebsocketPackage
     private static final String CLIENT_NAME = WebsocketPackage.CLIENT_NAME;
     private static final String TEXT_COLOR  = WebsocketPackage.TEXT_COLOR;
 
-    private static final long MESSAGE_LIFESPAN = 3600000;
+    private static final String DOMAIN           = DeveloperOptions.getDomain();
+    private static final long   MESSAGE_LIFESPAN = 3600000;
 
     private Client client;
 
     public Message(String content, Client client) throws IllegalArgumentException
     {
-        super(true, TextFormatter.full(content));
+        super(true, TextFormatter.full(content).replace("{DOMAIN}", DOMAIN));
         setClient(client);
         setHeader(CLIENT_NAME, mainColor());
         setHeader(TEXT_COLOR, textColor());
