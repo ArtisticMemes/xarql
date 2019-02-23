@@ -2,6 +2,7 @@ package com.xarql.chat;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.websocket.Session;
 
@@ -50,7 +51,7 @@ public class Client
         }
     } // send()
 
-    public void sendList(ArrayList<? extends WebsocketPackage> packages)
+    public void sendList(List<? extends WebsocketPackage> packages)
     {
         for(WebsocketPackage pkg : packages)
             queue.add(pkg.toString());

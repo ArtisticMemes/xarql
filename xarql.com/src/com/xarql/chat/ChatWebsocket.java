@@ -1,8 +1,8 @@
 package com.xarql.chat;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -18,11 +18,12 @@ import com.xarql.util.TrackedHashMap;
 @ServerEndpoint ("/chat/websocket/{id}")
 public class ChatWebsocket
 {
-    private static final long    CHECK_INTERVAL = 60000;
+    // 3 minutes
+    private static final long    CHECK_INTERVAL = 180000;
     private static final boolean TESTING        = DeveloperOptions.getTesting();
 
     private static TrackedHashMap<String, Client> clients   = new TrackedHashMap<String, Client>();
-    private static ArrayList<Message>             messages  = new ArrayList<Message>();
+    private static CopyOnWriteArrayList<Message>  messages  = new CopyOnWriteArrayList<Message>();
     private static Timestamp                      lastCheck = new Timestamp(System.currentTimeMillis());
     private static boolean                        checking  = false;
 

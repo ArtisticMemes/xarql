@@ -11,8 +11,9 @@ public class Message extends WebsocketPackage
     private static final String CLIENT_NAME = WebsocketPackage.CLIENT_NAME;
     private static final String TEXT_COLOR  = WebsocketPackage.TEXT_COLOR;
 
-    private static final String DOMAIN           = DeveloperOptions.getDomain();
-    private static final long   MESSAGE_LIFESPAN = 3600000;
+    private static final String DOMAIN = DeveloperOptions.getDomain();
+    // half of an hour
+    private static final long MESSAGE_LIFESPAN = 1800000;
 
     private Client client;
 
