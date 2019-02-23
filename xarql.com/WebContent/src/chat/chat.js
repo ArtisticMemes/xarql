@@ -28,6 +28,15 @@ $(document).ready(function () {
     $('#user-' + color).css('box-shadow', 'none');
   }
 
+  function userBuffered(color) {
+    $('#user-' + color).css('border-radius', '100%');
+
+  }
+
+  function userNotBuffered(color) {
+    $('#user-' + color).css('border-radius', '25%');
+  }
+
   $("#send-button").on("click", function() {
     wsSendMessage();
   });
@@ -73,15 +82,15 @@ $(document).ready(function () {
       // Add the key:value pair to the map
       headers.set(param, value);
     }
-    if(headers.get('direct-display') === 'false')
+    if(headers.get('type') !== 'message')
     {
-      if(data.substr(0, 9) === 'user-join') {
-        addUser(data.substr(10, 6));
+      if(headers.get('type') === 'user-join') {
+        addUser(headers.get('client-color'));
       }
-      else if(data.substr(0, 9) === 'user-exit') {
-        removeUser(data.substr(10, 6));
+      else if(headers.get('type') === 'user-exit') {
+        removeUser(headers.get('client-color'));
       }
-      else if(data.substr(0, 7) === 'clients') {
+      else if(headers.get('type') === 'users-report') {
         data = data.substr(7);
         if(data.length > 1)
         {
@@ -93,21 +102,28 @@ $(document).ready(function () {
           }
         }
       }
-      else if(data === 'typing') {
+      else if(headers.get('type') === 'typing-status') {
         if(headers.get('typing') === 'true') {
-          userTyping(headers.get('client-name'));
+          userTyping(headers.get('client-color'));
         }
         else if(headers.get('typing') === 'false') {
-          userNotTyping(headers.get('client-name'));
+          userNotTyping(headers.get('client-color'));
+        }
+      }
+      else if(headers.get('type') === 'buffer-status') {
+        if(headers.get('buffer') === 'true') {
+          userBuffered(headers.get('client-color'));
+        }
+        else if(headers.get('buffer') === 'false') {
+          userNotBuffered(headers.get('client-color'));
         }
       }
       else {
-        console.log(headers.get('type'));
         $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
       }
     }
     else {
-      var color = headers.get('client-name');
+      var color = headers.get('client-color');
       var textColor = headers.get('text-color');
       $('#messages').append('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + data + '</p></div>');
     }
@@ -129,24 +145,42 @@ $(document).ready(function () {
     $('#updates').append('<div class="small-card"><p class="warn">Error!</p></div>');
   }
 
-  var canSend = true;
+  var canSendTyping = true;
   var typing = false;
+  var buffered = false;
   $("#message").on("change keyup keydown paste", function() {
-    if(canSend) {
-      if(typing == false) {
-        typing = true;
-        webSocket.send("type:typing,typing:true|true");
+    if(message.value.trim() !== "") {
+      if(!buffered) {
+        webSocket.send("type:buffer,buffer:true|true");
+        buffered = true;
       }
-      canSend = false;
-      setTimeout(function() {
-        canSend = true;
+    }
+    else {
+      if(buffered)
+      {
+        webSocket.send("type:buffer,buffer:false|false");
+        buffered = false;
+      }
+    }
+
+    console.log(event.which);
+    if(event.which !== 13 && event.which !== 8 && typeof event.which !== "undefined") {
+      if(canSendTyping) {
+        if(typing == false) {
+          typing = true;
+          webSocket.send("type:typing,typing:true|true");
+        }
+        canSendTyping = false;
         setTimeout(function() {
-          if(canSend) {
-            webSocket.send("type:typing,typing:false|false");
-            typing = false;
-          }
-        }, 300);
-      }, 1000);
+          canSendTyping = true;
+          setTimeout(function() {
+            if(canSendTyping) {
+              webSocket.send("type:typing,typing:false|false");
+              typing = false;
+            }
+          }, 300);
+        }, 1000);
+      }
     }
   });
 

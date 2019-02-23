@@ -52,7 +52,7 @@ public class ChatWebsocket
         }
         c.send(new UsersReport(clients));
         clients.add(session.getId(), c);
-        ripple(new UserJoin(c.getColor()), c);
+        ripple(new UserJoin(c), c);
         refresh();
         c.sendList(messages);
     } // onOpen()
@@ -60,7 +60,8 @@ public class ChatWebsocket
     @OnClose
     public void onClose(Session session)
     {
-        broadcast(new UserExit(clients.get(session.getId()).getColor()));
+        Client c = clients.get(session.getId());
+        ripple(new UserExit(c), c);
         clients.remove(session.getId());
     } // onClose()
 
@@ -144,11 +145,29 @@ public class ChatWebsocket
         }
         else if(type.equals("typing"))
         {
-            return new TypingStatus(headers.get("typing"), clients.get(session.getId()));
+            return new TypingStatus(booleanize(headers.get("typing")), clients.get(session.getId()));
+        }
+        else if(type.equals("buffer"))
+        {
+            return new BufferStatus(booleanize(headers.get("buffer")), clients.get(session.getId()));
         }
         else
             return new ErrorReport(null);
     } // parseMessage()
+
+    private static boolean booleanize(String value)
+    {
+        if(value == null)
+            return false;
+        else
+        {
+            value = value.trim().toLowerCase();
+            if(value.equals("true"))
+                return true;
+            else
+                return false;
+        }
+    } // booleanize()
 
     private static HashMap<String, String> getHeaders(String input)
     {

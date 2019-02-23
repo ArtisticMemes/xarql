@@ -7,7 +7,7 @@ public class UsersReport extends WebsocketPackage
 
     public UsersReport(TrackedHashMap<String, Client> clients) throws IllegalArgumentException
     {
-        super(false, genReport(clients));
+        super(genReport(clients));
     } // UsersReport()
 
     private static String genReport(TrackedHashMap<String, Client> clients)

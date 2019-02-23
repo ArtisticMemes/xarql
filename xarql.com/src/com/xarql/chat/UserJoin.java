@@ -3,9 +3,9 @@ package com.xarql.chat;
 public class UserJoin extends WebsocketPackage
 {
 
-    public UserJoin(String id) throws IllegalArgumentException
+    public UserJoin(Client user) throws IllegalArgumentException
     {
-        super(false, "user-join:" + id);
+        super(user);
     } // UserJoin
 
 } // UserJoin

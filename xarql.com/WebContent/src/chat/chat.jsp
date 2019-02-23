@@ -65,7 +65,7 @@
         <p>Currently logged in as <a href="${domain}/user">@${account_name}</a></p>
       </c:if>
       <p>
-        <a href="${domain}/help">Help</a>
+        <a href="${domain}/help/chat">Help</a>
         <span class="status" style="display:none;"></span>
         <span class="ajax-bar" style="display:none">
           <a id="option-pane-open-button" style="margin-left:1em;">Options</a>

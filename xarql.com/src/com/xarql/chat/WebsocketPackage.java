@@ -3,30 +3,44 @@ package com.xarql.chat;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.TextFormatter;
 import com.xarql.util.TrackedHashMap;
 
 public class WebsocketPackage
 {
     // Standard Headers
-    public static final String            DIRECT_DISPLAY   = "direct-display";
-    public static final String            CLIENT_NAME      = "client-name";
+    public static final String            TYPE             = "type";
+    public static final String            CLIENT_COLOR     = "client-color";
     public static final String            CREATION_DATE    = "creation-date";
     public static final String            TEXT_COLOR       = "text-color";
-    public static final String            TYPING           = "typing";
     public static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
+
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     // Data
     private TrackedHashMap<String, String> headers = new TrackedHashMap<String, String>();
+    private Client                         source;
     private String                         content;
     private Timestamp                      creationDate;
 
-    public WebsocketPackage(boolean directDisplay, String content) throws IllegalArgumentException
+    public WebsocketPackage(String content, Client source)
     {
-        setHeader(DIRECT_DISPLAY, directDisplay);
+        setHeader(TYPE, determineType());
+        setSource(source);
         setContent(content);
         setCreationDate();
-    } // WebsocketPackage
+    } // WebsocketPackage(String, Client)
+
+    public WebsocketPackage(String content)
+    {
+        this(content, null);
+    } // Websocket(String)
+
+    public WebsocketPackage(Client source)
+    {
+        this(null, source);
+    } // WebsocketPackage(Client)
 
     protected void setHeader(String name, Object value) throws IllegalArgumentException
     {
@@ -49,7 +63,10 @@ public class WebsocketPackage
 
     private void setContent(String content)
     {
-        this.content = content.trim();
+        if(content == null)
+            this.content = "";
+        else
+            this.content = TextFormatter.full(content.trim().replace("{DOMAIN}", DOMAIN));
     } // setContent()
 
     public String getContent()
@@ -67,6 +84,48 @@ public class WebsocketPackage
     {
         return creationDate;
     } // getCreationDate()
+
+    private void setSource(Client source)
+    {
+        if(source != null)
+        {
+            setHeader(CLIENT_COLOR, source.getColor());
+            setHeader(TEXT_COLOR, textColor(source));
+            this.source = source;
+        }
+    } // setSource()
+
+    public Client getSource()
+    {
+        return source;
+    } // getSource()
+
+    private static String textColor(Client client)
+    {
+        int r = Integer.parseInt(client.getColor().substring(0, 2), 16);
+        int g = Integer.parseInt(client.getColor().substring(2, 4), 16);
+        int b = Integer.parseInt(client.getColor().substring(4, 6), 16);
+        double luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Adjust for human eyes
+        if(luma > 80)
+            return "000";
+        else
+            return "FFF";
+    } // textColor()
+
+    private String determineType()
+    {
+        String type = super.getClass().getSimpleName();
+        for(int i = 0; i < type.length(); i++)
+        {
+            if(i != 0 && type.charAt(i) != type.toLowerCase().charAt(i))
+            {
+                type = type.substring(0, i) + "-" + type.substring(i);
+                i++;
+            }
+        }
+        type = type.toLowerCase();
+        return type;
+    } // determineType()
 
     @Override
     public String toString()
@@ -89,11 +148,12 @@ public class WebsocketPackage
     {
         ArrayList<String> output = new ArrayList<String>(1);
 
-        output.add(DIRECT_DISPLAY);
-        output.add(CLIENT_NAME);
+        output.add(TYPE);
+        output.add(CLIENT_COLOR);
         output.add(CREATION_DATE);
         output.add(TEXT_COLOR);
-        output.add(TYPING);
+        output.add(TypingStatus.TYPING);
+        output.add(BufferStatus.BUFFER);
 
         for(String names : output)
             if(!TextFormatter.isAlphaNumeric(names))
