@@ -148,7 +148,7 @@ $(document).ready(function () {
   var canSendTyping = true;
   var typing = false;
   var buffered = false;
-  $("#message").on("change keyup keydown paste", function() {
+  $("#message").on("change keyup keydown paste", function(event) {
     if(message.value.trim() !== "") {
       if(!buffered) {
         webSocket.send("type:buffer,buffer:true|true");
@@ -163,7 +163,6 @@ $(document).ready(function () {
       }
     }
 
-    console.log(event.which);
     if(event.which !== 13 && event.which !== 8 && typeof event.which !== "undefined") {
       if(canSendTyping) {
         if(typing == false) {
