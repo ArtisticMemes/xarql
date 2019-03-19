@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.user.Account;
 import com.xarql.user.AccountDeleter;
+import com.xarql.user.EmailAttacher;
 import com.xarql.user.PasswordChanger;
 import com.xarql.util.ServletUtilities;
 
@@ -30,7 +31,6 @@ public class AccountActions extends HttpServlet
     public AccountActions()
     {
         super();
-        // TODO Auto-generated constructor stub
     } // AccountActions()
 
     /**
@@ -59,14 +59,21 @@ public class AccountActions extends HttpServlet
 
             try
             {
-                if(type.equals("log_out"))
-                    util.getAuthSession().kill();
-                else if(type.equals("password_change"))
-                    changePassword(request, util.getAccount());
-                else if(type.equals("delete"))
+                switch(type)
                 {
-                    deleteAccount(request, util.getAccount());
-                    util.getAuthSession().kill();
+                    case "log_out" :
+                        util.getAuthSession().kill();
+                        break;
+                    case "attach_email" :
+                        attachEmail(request, util.getAccount());
+                        break;
+                    case "password_change" :
+                        changePassword(request, util.getAccount());
+                        break;
+                    case "delete" :
+                        deleteAccount(request, util.getAccount());
+                        util.getAuthSession().kill();
+                        break;
                 }
                 response.sendRedirect(DOMAIN + "/user");
             }
@@ -109,5 +116,15 @@ public class AccountActions extends HttpServlet
         new Account(account.getUsername(), password); // Check password validity
         AccountDeleter ad = new AccountDeleter(account.getUsername()); // Delete account from database
     } // deleteAccount()
+
+    private static void attachEmail(HttpServletRequest request, Account account) throws Exception
+    {
+        String email = request.getParameter("email");
+
+        if(email == null)
+            throw new IllegalArgumentException("A parameter was null");
+
+        EmailAttacher ae = new EmailAttacher(account, email);
+    } // attachEmail()
 
 } // AccountActions

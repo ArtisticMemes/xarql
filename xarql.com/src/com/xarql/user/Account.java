@@ -4,6 +4,7 @@ public class Account
 {
     private int    id;
     private String username;
+    private String email;
 
     public Account(String username, String password) throws Exception
     {
@@ -22,6 +23,7 @@ public class Account
                     {
                         setID(ag.getID());
                         setUsername(username);
+                        setEmail(ag.getEmail());
                     }
                     else
                         throw new Exception("The given password is incorrect");
@@ -56,5 +58,18 @@ public class Account
     {
         return username;
     } // getUsername()
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    } // setEmail()
+
+    public String getEmail()
+    {
+        if(email == null)
+            return "No email";
+        else
+            return email;
+    } // getEmail()
 
 } // Account

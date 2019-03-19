@@ -44,6 +44,7 @@
     <div id="column">
       <div class="large-card">
         <h4>${username}</h4>
+        <p>${email}</p>
         <p><a href="${domain}/user/view?name=${username}">Public Profile</a></p>
         <p><a href="${domain}">Home</a></p>
       </div>
@@ -63,6 +64,14 @@
         <p>This will remove your session from the server. Use a recaptcha or log in again to post.</p>
         <form action="${domain}/user/act?type=log_out" method="POST" accept-charset="UTF-8">
           <input type="submit" class="button" value="Log Out">
+        </form>
+      </div>
+      <div class="large-card">
+        <h6>Attach Email</h6>
+        <p>Attach an email to your account for future recovery or id</p>
+        <form action="${domain}/user/act?type=attach_email" method="POST" accept-charset="UTF-8" spellcheck="false">
+          <input type="email" name="email" placeholder="Email" maxlength="512" required>
+          <input type="submit" class="button" value="Attach">
         </form>
       </div>
       <div class="large-card">

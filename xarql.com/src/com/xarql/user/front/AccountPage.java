@@ -43,6 +43,7 @@ public class AccountPage extends HttpServlet
             request.setAttribute("msg", request.getParameter("msg"));
             request.setAttribute("fail", request.getParameter("fail"));
             request.setAttribute("username", util.getAccount().getUsername());
+            request.setAttribute("email", util.getAccount().getEmail());
             request.getRequestDispatcher("/src/user/account.jsp").forward(request, response);
         }
         else

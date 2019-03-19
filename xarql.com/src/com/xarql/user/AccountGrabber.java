@@ -14,6 +14,7 @@ public class AccountGrabber
     private int    id;
     private String username;
     private String hash;
+    private String email;
 
     public AccountGrabber(String username)
     {
@@ -28,6 +29,7 @@ public class AccountGrabber
         {
             id = rs.getInt("id");
             hash = rs.getString("hash");
+            email = rs.getString("email");
         }
         else
             id = -1;
@@ -52,6 +54,11 @@ public class AccountGrabber
     {
         return hash;
     } // getHash()
+
+    public String getEmail()
+    {
+        return email;
+    } // getEmail()
 
     public boolean execute()
     {

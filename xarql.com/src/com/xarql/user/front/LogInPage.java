@@ -14,7 +14,7 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class AccountPage
  */
-@WebServlet ("/AccountPage")
+@WebServlet ("/LogInPage")
 public class LogInPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
