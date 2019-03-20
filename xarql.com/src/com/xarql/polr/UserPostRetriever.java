@@ -45,7 +45,7 @@ public class UserPostRetriever
         PreparedStatement statement = null;
         ResultSet rs = null;
         ArrayList<Post> posts = new ArrayList<Post>();
-        String sql = "SELECT * FROM polr WHERE author=? ORDER BY date LIMIT ?";
+        String sql = "SELECT * FROM polr WHERE author=? ORDER BY date DESC LIMIT ?";
 
         try
         {
