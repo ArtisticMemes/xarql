@@ -39,7 +39,7 @@
       <div class="large-card">
         <h4>Sign Up</h4>
         <form class="user-form" action="${domain}/user/sign_up/form" method="POST" accept-charset="UTF-8" spellcheck="false">
-          <input type="text" name="username" placeholder="Username" minlength="1" maxlength="128" required>
+          <input type="text" name="username" placeholder="Username" minlength="1" maxlength="128" required value="${prefill}">
           <input id="password" type="password" name="password" placeholder="Password" minlength="6" maxlength="128" required>
           <input id="password_confirmation" type="password" name="retype" placeholder="Retype Password" required>
           <input type="submit" class="button" value="Sign Up">

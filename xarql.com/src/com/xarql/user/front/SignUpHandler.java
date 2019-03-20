@@ -63,7 +63,11 @@ public class SignUpHandler extends HttpServlet
             }
             catch(Exception e)
             {
-                response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
+                String username = request.getParameter("username");
+                if(username != null && !username.equals(""))
+                    response.sendRedirect(DOMAIN + "/user/sign_up?prefill=" + username + "&fail=" + e.getMessage());
+                else
+                    response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
             }
         }
         else

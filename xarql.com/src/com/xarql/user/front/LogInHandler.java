@@ -59,7 +59,11 @@ public class LogInHandler extends HttpServlet
             }
             catch(Exception e)
             {
-                response.sendRedirect(DOMAIN + "/user/log_in?fail=" + e.getMessage());
+                String username = request.getParameter("username");
+                if(username != null && !username.equals(""))
+                    response.sendRedirect(DOMAIN + "/user/log_in?prefill=" + username + "&fail=" + e.getMessage());
+                else
+                    response.sendRedirect(DOMAIN + "/user/log_in?fail=" + e.getMessage());
             }
         }
         else

@@ -38,6 +38,7 @@ public class SignUpPage extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         util.standardSetup();
         request.setAttribute("fail", request.getParameter("fail"));
+        request.setAttribute("prefill", request.getParameter("prefill"));
         request.getRequestDispatcher("/src/user/sign_up.jsp").forward(request, response);
     } // doGet()
 
