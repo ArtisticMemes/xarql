@@ -187,11 +187,6 @@
 		  <p id="sort">${sort}</p>
 		  <p id="flow">${flow}</p>
 	  </div>
-      <c:if test="${testing}">
-        <div class="small-card">
-          <p class="centered">Page Built In ~${build_timer.done()}ms</p>
-        </div>
-      </c:if>
     </div>
   </div>
 </body>

@@ -27,7 +27,9 @@ public class PostFinder extends DatabaseQuery<ArrayList<Post>>
 
     private void setQuery(String query)
     {
-        this.query = query + "*";
+        query += "*";
+        query = query.toLowerCase();
+        this.query = query;
     } // setQuery()
 
     @Override

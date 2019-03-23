@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.BuildTimer;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -38,7 +37,6 @@ public class PolrFind extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        BuildTimer bt = new BuildTimer(request);
         ServletUtilities.standardSetup(request);
 
         // use query parameter
