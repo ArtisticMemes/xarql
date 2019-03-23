@@ -11,17 +11,13 @@ public class ReportFiler extends DatabaseUpdate
 {
     private Report report;
 
+    private static final String COMMAND = "INSERT INTO flag (post_id, type, content) VALUES (?, ?, ?)";
+
     public ReportFiler(HttpServletResponse response, Report report)
     {
-        super("INSERT INTO flag (post_id, type, content) VALUES (?, ?, ?)", response);
+        super(COMMAND);
         this.report = report;
-    } //
-
-    @Override
-    public boolean execute()
-    {
-        return super.makeRequest();
-    } // execute()
+    } // ReportFiler
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException

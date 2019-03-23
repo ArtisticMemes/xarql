@@ -52,7 +52,7 @@ public class ReportPage extends HttpServlet
 
         if(ServletUtilities.userIsMod(request))
         {
-            ReportGrabber rg = new ReportGrabber(response);
+            ReportGrabber rg = new ReportGrabber();
             if(rg.execute())
             {
                 ArrayList<Report> reports = rg.getData();
@@ -72,7 +72,6 @@ public class ReportPage extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 

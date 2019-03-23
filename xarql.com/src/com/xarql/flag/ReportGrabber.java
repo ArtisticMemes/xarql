@@ -5,17 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.DatabaseQuery;
 
-public class ReportGrabber extends DatabaseQuery
+public class ReportGrabber extends DatabaseQuery<ArrayList<Report>>
 {
     private ArrayList<Report> reports = new ArrayList<Report>(25);
 
-    public ReportGrabber(HttpServletResponse response)
+    private static final String REPORT_GRAB = "SELECT * FROM flag LIMIT 25";
+
+    public ReportGrabber()
     {
-        super("SELECT * FROM flag LIMIT 25", response);
+        super(REPORT_GRAB);
     } // ReportGrabber()
 
     @Override
@@ -33,12 +33,6 @@ public class ReportGrabber extends DatabaseQuery
     {
         return reports;
     } // getData();
-
-    @Override
-    public boolean execute()
-    {
-        return super.makeRequest();
-    } // execute()
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
