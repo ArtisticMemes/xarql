@@ -6,7 +6,6 @@ package com.xarql.polr;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.xarql.util.DatabaseQuery;
@@ -71,20 +70,7 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
-        int rsId = rs.getInt("id");
-        String rsTitle = rs.getString("title");
-        String rsContent = rs.getString("content");
-        int rsAnswers = rs.getInt("answers");
-        int rsRemoved = rs.getInt("removed");
-        Timestamp rsDate = rs.getTimestamp("date");
-        Timestamp rsBump = rs.getTimestamp("bump");
-        Timestamp rsSubbump = rs.getTimestamp("subbump");
-        int rsResponses = rs.getInt("responses");
-        int rsSubresponses = rs.getInt("subresponses");
-        String rsAuthor = rs.getString("author");
-        String rsWarning = rs.getString("warning");
-        Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
-        posts.add(currentPost);
+        posts.add(Post.interperetPost(rs));
     } // processResult()
 
     @Override
