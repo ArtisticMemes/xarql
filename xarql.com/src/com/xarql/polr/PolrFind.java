@@ -29,8 +29,7 @@ public class PolrFind extends HttpServlet
     public PolrFind()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+    } // PolrFind()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -59,14 +58,18 @@ public class PolrFind extends HttpServlet
         else
             ajax = Boolean.parseBoolean(request.getAttribute("ajax").toString());
 
-        PostFinder pf = new PostFinder(response, query);
-        ArrayList<Post> posts = pf.execute();
-        request.setAttribute("posts", posts);
-        if(ajax)
-            request.getRequestDispatcher("/src/polr/find-ajax.jsp").forward(request, response);
+        PostFinder pf = new PostFinder(query);
+        if(pf.execute())
+        {
+            ArrayList<Post> posts = pf.getData();
+            request.setAttribute("posts", posts);
+            if(ajax)
+                request.getRequestDispatcher("/src/polr/find-ajax.jsp").forward(request, response);
+            else
+                request.getRequestDispatcher("/src/polr/find.jsp").forward(request, response);
+        }
         else
-            request.getRequestDispatcher("/src/polr/find.jsp").forward(request, response);
-
+            response.sendError(500, "The search couldn't be completed");
     } // doGet()
 
     /**
@@ -76,7 +79,6 @@ public class PolrFind extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 

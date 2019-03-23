@@ -3,6 +3,8 @@
  */
 package com.xarql.polr;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import com.xarql.main.DeveloperOptions;
@@ -273,5 +275,12 @@ public class Post
     {
         return getTitleText() + " ~ " + getContentText();
     } // toString()
+
+    /* Static Methods Below */
+
+    public static Post interperetPost(ResultSet rs) throws SQLException
+    {
+        return new Post(rs.getInt("id"), rs.getString("title"), rs.getString("content"), rs.getInt("answers"), rs.getInt("removed"), rs.getTimestamp("date"), rs.getTimestamp("bump"), rs.getTimestamp("subbump"), rs.getInt("responses"), rs.getInt("subresponses"), rs.getString("author"), rs.getString("warning"));
+    } // interperetPost()
 
 } // Post

@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.xarql.main.DeveloperOptions;
+
 public abstract class DatabaseUpdate extends DatabaseInteractor
 {
+    private static final boolean TESTING = DeveloperOptions.getTesting();
+
     public DatabaseUpdate(String command)
     {
         super(command);
@@ -34,6 +38,8 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
         }
         catch(SQLException s)
         {
+            if(TESTING)
+                System.out.println(s);
             return false;
         }
         finally

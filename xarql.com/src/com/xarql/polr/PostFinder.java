@@ -3,29 +3,25 @@
  */
 package com.xarql.polr;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletResponse;
+import com.xarql.util.DatabaseQuery;
 
-import com.xarql.util.ConnectionManager;
-
-public class PostFinder
+public class PostFinder extends DatabaseQuery<ArrayList<Post>>
 {
-    private HttpServletResponse response;
-    private String              query;
+    private String          query;
+    private ArrayList<Post> posts;
 
-    // Defaults & Limits
-    private static final int POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
+    private static final int    POST_COUNT     = PostRetriever.DEFAULT_POST_COUNT;
+    private static final String SEARCH_COMMAND = "SELECT *, MATCH (title,content) AGAINST (? IN BOOLEAN MODE) as score FROM polr WHERE removed=0 AND MATCH (title,content) AGAINST (? IN BOOLEAN MODE) > 0 ORDER BY score DESC LIMIT 0, ?";
 
-    public PostFinder(HttpServletResponse response, String query)
+    public PostFinder(String query)
     {
-        this.response = response;
+        super(SEARCH_COMMAND);
+        posts = new ArrayList<Post>(POST_COUNT);
         setQuery(query);
     } // PostFinder(response, query)
 
@@ -34,82 +30,33 @@ public class PostFinder
         this.query = query + "*";
     } // setQuery()
 
-    public ArrayList<Post> execute()
+    @Override
+    public boolean execute()
     {
-        if(query.equals("*"))
-            return new ArrayList<Post>();
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        ArrayList<Post> posts = new ArrayList<Post>();
-        String sql = "SELECT *, MATCH (title,content) AGAINST (? IN BOOLEAN MODE) as score FROM polr WHERE removed=0 AND MATCH (title,content) AGAINST (? IN BOOLEAN MODE) > 0 ORDER BY score DESC LIMIT 0, ?";
-
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(sql);
-
-            statement.setString(1, query);
-            statement.setString(2, query);
-            statement.setInt(3, POST_COUNT);
-
-            rs = statement.executeQuery();
-            while(rs.next())
-            {
-                int rsId = rs.getInt("id");
-                String rsTitle = rs.getString("title");
-                String rsContent = rs.getString("content");
-                int rsAnswers = rs.getInt("answers");
-                int rsRemoved = rs.getInt("removed");
-                Timestamp rsDate = rs.getTimestamp("date");
-                Timestamp rsBump = rs.getTimestamp("bump");
-                Timestamp rsSubbump = rs.getTimestamp("subbump");
-                int rsResponses = rs.getInt("responses");
-                int rsSubresponses = rs.getInt("subresponses");
-                String rsAuthor = rs.getString("author");
-                String rsWarning = rs.getString("warning");
-                Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
-                posts.add(currentPost);
-            }
-
-        }
-        catch(SQLException s)
-        {
-            posts.clear();
-            try
-            {
-                response.sendError(500);
-                return posts;
-            }
-            catch(IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return posts;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(statement != null)
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-        }
-
-        return posts;
+        if(!query.equals("*"))
+            return makeRequest();
+        else
+            return true;
     } // execute()
+
+    @Override
+    protected void processResult(ResultSet rs) throws SQLException
+    {
+        posts.add(Post.interperetPost(rs));
+    } // processResult()
+
+    @Override
+    protected ArrayList<Post> getData()
+    {
+        return posts;
+    } // getData()
+
+    @Override
+    protected void setVariables(PreparedStatement statement) throws SQLException
+    {
+        statement.setString(1, query);
+        statement.setString(2, query);
+        statement.setInt(3, POST_COUNT);
+    } // setVariables()
 
 } // PostFinder
