@@ -1,13 +1,12 @@
 package com.xarql.user;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.xarql.util.ConnectionManager;
+import com.xarql.util.DatabaseQuery;
 
-public class AccountGrabber
+public class AccountGrabber extends DatabaseQuery<String>
 {
     private static final String ACCOUNT_QUERY = "SELECT * FROM user_secure WHERE username=?";
 
@@ -18,10 +17,12 @@ public class AccountGrabber
 
     public AccountGrabber(String username)
     {
+        super(ACCOUNT_QUERY);
         this.username = username;
         id = -1;
     } // AccountGrabber()
 
+    @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
         username = rs.getString("username");
@@ -35,6 +36,7 @@ public class AccountGrabber
             id = -1;
     } // processResult()
 
+    @Override
     protected String getData()
     {
         return username;
@@ -60,63 +62,7 @@ public class AccountGrabber
         return email;
     } // getEmail()
 
-    public boolean execute()
-    {
-        return makeRequest();
-    } // execute()
-
-    private String getCommand()
-    {
-        return ACCOUNT_QUERY;
-    } // getCommand()
-
-    public boolean makeRequest()
-    {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        String query = getCommand();
-
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(query);
-            setVariables(statement);
-            rs = statement.executeQuery();
-            while(rs.next())
-                processResult(rs);
-            return true;
-        }
-        catch(SQLException s)
-        {
-            return false;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-            {
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            }
-            if(statement != null)
-            {
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            }
-        }
-    } // makeRequest()
-
+    @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, username);

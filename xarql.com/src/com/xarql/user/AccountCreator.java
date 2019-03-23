@@ -20,12 +20,6 @@ public class AccountCreator extends DatabaseUpdate
     } // AccountCreator()
 
     @Override
-    public boolean execute()
-    {
-        return makeRequest();
-    } // execute()
-
-    @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, username);
