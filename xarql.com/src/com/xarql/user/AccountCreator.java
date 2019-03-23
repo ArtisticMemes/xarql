@@ -1,12 +1,11 @@
 package com.xarql.user;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.xarql.util.ConnectionManager;
+import com.xarql.util.DatabaseUpdate;
 
-public class AccountCreator
+public class AccountCreator extends DatabaseUpdate
 {
     private static final String COMMAND = "INSERT INTO user_secure (username, hash) VALUES (?, ?)";
 
@@ -15,54 +14,18 @@ public class AccountCreator
 
     public AccountCreator(String username, String password)
     {
+        super(COMMAND);
         this.username = username;
         this.password = password;
     } // AccountCreator()
 
-    private String getCommand()
-    {
-        return COMMAND;
-    } // getCommand()
-
-    public boolean execute() throws Exception
+    @Override
+    public boolean execute()
     {
         return makeRequest();
     } // execute()
 
-    private boolean makeRequest() throws Exception
-    {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        String query = getCommand();
-
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(query);
-            setVariables(statement);
-            statement.executeUpdate();
-            return true;
-        }
-        catch(SQLException s)
-        {
-            throw s;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(statement != null)
-            {
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            }
-        }
-    } // makeRequest()
-
+    @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, username);

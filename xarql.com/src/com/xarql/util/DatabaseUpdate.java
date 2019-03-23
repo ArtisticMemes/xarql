@@ -1,28 +1,25 @@
 package com.xarql.util;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletResponse;
-
 public abstract class DatabaseUpdate extends DatabaseInteractor
 {
-    public DatabaseUpdate(String command, HttpServletResponse response)
+    public DatabaseUpdate(String command)
     {
-        super(command, response);
+        super(command);
     } // DatabaseUpdate()
 
-    public DatabaseUpdate(HttpServletResponse response)
+    public DatabaseUpdate()
     {
-        super(response);
+        super();
     } // DatabaseUpdate()
 
     @Override
     protected boolean makeRequest()
     {
-        commandIndex++;
+        nextIndex();
         Connection connection = null;
         PreparedStatement statement = null;
         String query = getCommand();
@@ -37,15 +34,6 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
         }
         catch(SQLException s)
         {
-            try
-            {
-                response.sendError(500);
-                return false;
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
             return false;
         }
         finally
@@ -59,6 +47,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
                 }
                 catch(SQLException s)
                 {
+                    // do nothing
                 }
             }
         }

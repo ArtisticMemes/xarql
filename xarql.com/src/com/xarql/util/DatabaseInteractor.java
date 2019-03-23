@@ -3,28 +3,26 @@ package com.xarql.util;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletResponse;
-
 public abstract class DatabaseInteractor
 {
-    protected String              command  = null;
-    protected int                 commandIndex;
-    protected HttpServletResponse response = null;
+    private String command = null;
+    private int    index;
 
-    public DatabaseInteractor(String command, HttpServletResponse response)
+    public DatabaseInteractor(String command)
     {
-        commandIndex = 0;
+        index = 0;
         this.command = command;
-        this.response = response;
     } // DatabaseInteractor()
 
-    public DatabaseInteractor(HttpServletResponse response)
+    public DatabaseInteractor()
     {
-        commandIndex = 0;
-        this.response = response;
+        this(null);
     } // DatabaseInteractor()
 
-    public abstract boolean execute();
+    public boolean execute()
+    {
+        return makeRequest();
+    } // execute()
 
     protected abstract void setVariables(PreparedStatement statement) throws SQLException;
 
@@ -34,5 +32,20 @@ public abstract class DatabaseInteractor
     {
         return command;
     } // getCommand()
+
+    protected void setCommand(String command)
+    {
+        this.command = command;
+    } // setCommand()
+
+    public int getIndex()
+    {
+        return index;
+    } // getIndex()
+
+    protected void nextIndex()
+    {
+        index++;
+    } // nextIndex()
 
 } // DatabaseInteractor

@@ -1,18 +1,20 @@
 package com.xarql.util;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletResponse;
-
 public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteractor
 {
-    public DatabaseQuery(String command, HttpServletResponse response)
+    public DatabaseQuery(String command)
     {
-        super(command, response);
+        super(command);
+    } // DatabaseQuery()
+
+    public DatabaseQuery()
+    {
+        super();
     } // DatabaseQuery()
 
     protected abstract void processResult(ResultSet rs) throws SQLException;
@@ -22,7 +24,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
     @Override
     protected boolean makeRequest()
     {
-        commandIndex++;
+        nextIndex();
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -40,15 +42,6 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
         }
         catch(SQLException s)
         {
-            try
-            {
-                response.sendError(500);
-                return false;
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
             return false;
         }
         finally
@@ -62,6 +55,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
                 }
                 catch(SQLException s)
                 {
+                    // do nothing
                 }
             }
             if(statement != null)
@@ -72,6 +66,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
                 }
                 catch(SQLException s)
                 {
+                    // do nothing
                 }
             }
         }
