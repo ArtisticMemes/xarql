@@ -14,15 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.util.DatabaseQuery;
 
-public class HashPostRetriever extends DatabaseQuery
+public class HashPostRetriever extends DatabaseQuery<ArrayList<Post>>
 {
-    private String           hash;
-    private ArrayList<Post>  posts;
-    private static final int DEFAULT_POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
+    private static final int    DEFAULT_POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
+    private static final String HASHTAG_RETRIEVAL  = "SELECT polr.* FROM polr INNER JOIN polr_tags_relations ON polr.id=polr_tags_relations.post_id WHERE polr_tags_relations.content=? ORDER BY date desc LIMIT ?";
+
+    private String          hash;
+    private ArrayList<Post> posts;
 
     public HashPostRetriever(HttpServletResponse response, String hash)
     {
-        super("SELECT polr.* FROM polr INNER JOIN polr_tags_relations ON polr.id=polr_tags_relations.post_id WHERE polr_tags_relations.content=? ORDER BY date desc LIMIT ?", response);
+        super(HASHTAG_RETRIEVAL);
         this.hash = hash.toLowerCase();
         posts = new ArrayList<Post>(PostRetriever.DEFAULT_POST_COUNT);
     } // HashPostRetriever
@@ -51,12 +53,6 @@ public class HashPostRetriever extends DatabaseQuery
     {
         return posts;
     } // getData()
-
-    @Override
-    public boolean execute()
-    {
-        return super.makeRequest();
-    } // execute()
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
