@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 import com.xarql.util.TextFormatter;
 
 public class EmailAttacher
@@ -39,7 +39,7 @@ public class EmailAttacher
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             setVariables(statement);
             statement.executeUpdate();
@@ -53,6 +53,7 @@ public class EmailAttacher
         {
             // Close in reversed order.
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -60,14 +61,7 @@ public class EmailAttacher
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
+            }
         }
     } // execute()
 

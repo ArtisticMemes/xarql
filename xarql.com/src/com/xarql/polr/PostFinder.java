@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class PostFinder
 {
@@ -46,7 +46,7 @@ public class PostFinder
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(sql);
 
             statement.setString(1, query);
@@ -103,14 +103,6 @@ public class PostFinder
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {

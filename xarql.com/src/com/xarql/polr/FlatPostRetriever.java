@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class FlatPostRetriever
 {
@@ -78,7 +78,7 @@ public class FlatPostRetriever
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(sql);
 
             statement.setInt(1, page * POST_COUNT);
@@ -134,14 +134,6 @@ public class FlatPostRetriever
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {

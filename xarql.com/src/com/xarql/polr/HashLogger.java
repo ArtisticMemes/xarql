@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 import com.xarql.util.TextFormatter;
 
 public class HashLogger
@@ -81,14 +81,6 @@ public class HashLogger
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
         }
 
         return true;
@@ -97,7 +89,7 @@ public class HashLogger
 
     public int getIDFor(String tag) throws SQLException
     {
-        connection = DBManager.getConnection();
+        connection = ConnectionManager.get();
         statement = connection.prepareStatement("SELECT id FROM polr_tags WHERE content=?");
 
         statement.setString(1, tag);
@@ -111,7 +103,7 @@ public class HashLogger
 
     public void addToRelations(String tag, int tagID) throws SQLException
     {
-        connection = DBManager.getConnection();
+        connection = ConnectionManager.get();
         statement = connection.prepareStatement("INSERT INTO polr_tags_relations (tag, post_id, content) VALUES (?, ?, ?)");
 
         statement.setInt(1, tagID);
@@ -123,7 +115,7 @@ public class HashLogger
 
     public void makeNewTag(String tag) throws SQLException
     {
-        connection = DBManager.getConnection();
+        connection = ConnectionManager.get();
         statement = connection.prepareStatement("INSERT INTO polr_tags (content, count) VALUES (?, 0)");
 
         statement.setString(1, tag);
@@ -134,7 +126,7 @@ public class HashLogger
     public void updateCount(String tag) throws SQLException
     {
 
-        connection = DBManager.getConnection();
+        connection = ConnectionManager.get();
         statement = connection.prepareStatement("UPDATE polr_tags SET count=count+1 WHERE content=?");
 
         statement.setString(1, tag);
@@ -146,7 +138,7 @@ public class HashLogger
     public boolean tagExists(String tag) throws SQLException
     {
 
-        connection = DBManager.getConnection();
+        connection = ConnectionManager.get();
         statement = connection.prepareStatement("SELECT id FROM polr_tags WHERE content=?");
 
         statement.setString(1, tag);

@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class AccountGrabber
 {
@@ -79,7 +79,7 @@ public class AccountGrabber
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             setVariables(statement);
             rs = statement.executeQuery();
@@ -95,6 +95,7 @@ public class AccountGrabber
         {
             // Close in reversed order.
             if(rs != null)
+            {
                 try
                 {
                     rs.close();
@@ -102,7 +103,9 @@ public class AccountGrabber
                 catch(SQLException s)
                 {
                 }
+            }
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -110,14 +113,7 @@ public class AccountGrabber
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
+            }
         }
     } // makeRequest()
 

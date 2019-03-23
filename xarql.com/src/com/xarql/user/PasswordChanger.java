@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 import com.xarql.util.TextFormatter;
 
 public class PasswordChanger
@@ -38,7 +38,7 @@ public class PasswordChanger
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             setVariables(statement);
             statement.executeUpdate();
@@ -52,6 +52,7 @@ public class PasswordChanger
         {
             // Close in reversed order.
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -59,14 +60,7 @@ public class PasswordChanger
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
+            }
         }
     } // makeRequest()
 

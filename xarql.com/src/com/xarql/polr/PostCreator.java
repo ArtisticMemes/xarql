@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 import com.xarql.util.TextFormatter;
 
 public class PostCreator
@@ -145,7 +145,7 @@ public class PostCreator
         // System.out.println("Parameters = good");
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
 
             rs = statement.executeQuery();
@@ -186,14 +186,6 @@ public class PostCreator
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
         }
     } // determineID()
 
@@ -206,7 +198,7 @@ public class PostCreator
         // System.out.println("Parameters = good");
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             updateStatLoop(startingId, true, connection, statement, rs);
             return true;
         }
@@ -240,14 +232,6 @@ public class PostCreator
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {
@@ -322,7 +306,7 @@ public class PostCreator
         // System.out.println("Parameters = good");
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement("SELECT * FROM polr WHERE id=? AND removed=0");
 
             statement.setInt(1, answers);
@@ -381,14 +365,6 @@ public class PostCreator
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
         }
     } // postExists()
 
@@ -401,7 +377,7 @@ public class PostCreator
         // System.out.println("Parameters = good");
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
 
             statement.setString(1, title);
@@ -434,14 +410,6 @@ public class PostCreator
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {

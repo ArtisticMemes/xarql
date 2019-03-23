@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class PostRetriever
 {
@@ -128,7 +128,7 @@ public class PostRetriever
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
 
             statement.setInt(1, id);
@@ -183,14 +183,6 @@ public class PostRetriever
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {

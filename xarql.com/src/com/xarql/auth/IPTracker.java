@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class IPTracker
 {
@@ -57,7 +57,7 @@ public class IPTracker
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             statement.setInt(1, submissionID);
             statement.setString(2, submissionType);
@@ -74,8 +74,8 @@ public class IPTracker
         finally
         {
             // Close in reversed order.
-            // if (rs != null) try { rs.close(); } catch (SQLException s) {}
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -83,14 +83,7 @@ public class IPTracker
                 catch(SQLException s)
                 { // do nothing
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                { // do nothing
-                }
+            }
         }
     } // log()
 

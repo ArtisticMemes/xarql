@@ -30,7 +30,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             setVariables(statement);
             rs = statement.executeQuery();
@@ -55,6 +55,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
         {
             // Close in reversed order.
             if(rs != null)
+            {
                 try
                 {
                     rs.close();
@@ -62,7 +63,9 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
                 catch(SQLException s)
                 {
                 }
+            }
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -70,14 +73,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
+            }
         }
     } // makeRequest()
 

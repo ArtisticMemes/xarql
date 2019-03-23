@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class PolrReset
 {
@@ -30,7 +30,7 @@ public class PolrReset
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
 
             // Create chat table if it doesn't exist
             DatabaseMetaData dbmd = connection.getMetaData();
@@ -85,14 +85,6 @@ public class PolrReset
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {

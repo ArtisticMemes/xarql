@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 import com.xarql.util.TextFormatter;
 
 public class UserPostRetriever
@@ -49,7 +49,7 @@ public class UserPostRetriever
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(sql);
 
             statement.setString(1, username);
@@ -85,7 +85,6 @@ public class UserPostRetriever
             }
             catch(IOException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return posts;
@@ -105,14 +104,6 @@ public class UserPostRetriever
                 try
                 {
                     statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(connection != null)
-                try
-                {
-                    connection.close();
                 }
                 catch(SQLException s)
                 {

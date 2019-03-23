@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.xarql.util.DBManager;
+import com.xarql.util.ConnectionManager;
 
 public class AccountCreator
 {
@@ -37,7 +37,7 @@ public class AccountCreator
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             setVariables(statement);
             statement.executeUpdate();
@@ -51,6 +51,7 @@ public class AccountCreator
         {
             // Close in reversed order.
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -58,14 +59,7 @@ public class AccountCreator
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
+            }
         }
     } // makeRequest()
 

@@ -29,7 +29,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
 
         try
         {
-            connection = DBManager.getConnection();
+            connection = ConnectionManager.get();
             statement = connection.prepareStatement(query);
             setVariables(statement);
             statement.executeUpdate();
@@ -44,7 +44,6 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
             }
             catch(IOException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return false;
@@ -53,6 +52,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
         {
             // Close in reversed order.
             if(statement != null)
+            {
                 try
                 {
                     statement.close();
@@ -60,14 +60,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
                 catch(SQLException s)
                 {
                 }
-            if(connection != null)
-                try
-                {
-                    connection.close();
-                }
-                catch(SQLException s)
-                {
-                }
+            }
         }
     } // makeRequest()
 
