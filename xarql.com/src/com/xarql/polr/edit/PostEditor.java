@@ -17,7 +17,7 @@ public class PostEditor extends DatabaseUpdate
 
     public PostEditor(int id, String newTitle, String newContent, HttpServletResponse response)
     {
-        super("", response);
+        super(null);
         setId(id);
         setTitle(newTitle);
         setContent(newContent);
@@ -41,9 +41,9 @@ public class PostEditor extends DatabaseUpdate
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
-        if(commandIndex == 1)
+        if(getIndex() == 1)
             statement.setString(1, title);
-        else if(commandIndex == 2)
+        else if(getIndex() == 2)
             statement.setString(1, content);
         statement.setInt(2, id);
     } // setVariables()
@@ -51,9 +51,9 @@ public class PostEditor extends DatabaseUpdate
     @Override
     public boolean execute()
     {
-        this.command = "UPDATE polr SET title=? WHERE id=?";
+        setCommand("UPDATE polr SET title=? WHERE id=?");
         makeRequest();
-        this.command = "UPDATE polr SET content=? WHERE id=?";
+        setCommand("UPDATE polr SET content=? WHERE id=?");
         makeRequest();
         PageCache.clear();
         return true;

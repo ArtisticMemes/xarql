@@ -131,7 +131,7 @@ public class PolrEdit extends HttpServlet
                 }
                 else
                 {
-                    PostCensor pc = new PostCensor(id, request.getParameter("warning"), response);
+                    PostCensor pc = new PostCensor(id, request.getParameter("warning"));
                     if(pc.execute())
                     {
                         IPTracker.logPolrEditCensor(request, id);

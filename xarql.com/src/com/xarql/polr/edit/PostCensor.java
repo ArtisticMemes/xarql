@@ -3,8 +3,6 @@ package com.xarql.polr.edit;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.polr.PageCache;
 import com.xarql.util.DatabaseUpdate;
 
@@ -15,12 +13,14 @@ public class PostCensor extends DatabaseUpdate
     };
     private static final String   DEFAULT_WARNING = "None";
 
+    private static final String COMMAND = "UPDATE polr SET warning=? WHERE id=?";
+
     private int    id;
     private String warning;
 
-    public PostCensor(int id, String warning, HttpServletResponse response)
+    public PostCensor(int id, String warning)
     {
-        super("UPDATE polr SET warning=? WHERE id=?", response);
+        super(COMMAND);
         this.id = id;
         setWarning(warning);
     } // PostRemover()
@@ -48,7 +48,7 @@ public class PostCensor extends DatabaseUpdate
     @Override
     public boolean execute()
     {
-        boolean output = super.makeRequest();
+        boolean output = makeRequest();
         PageCache.clear();
         return output;
     } // execute()

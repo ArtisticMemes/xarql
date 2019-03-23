@@ -12,9 +12,11 @@ public class PostRemover extends DatabaseUpdate
 {
     private int id;
 
+    private static final String COMMAND = "UPDATE polr SET removed=1 WHERE id=?";
+
     public PostRemover(int id, HttpServletResponse response)
     {
-        super("UPDATE polr SET removed=1 WHERE id=?", response);
+        super(COMMAND);
         this.id = id;
     } // PostRemover()
 
@@ -27,7 +29,7 @@ public class PostRemover extends DatabaseUpdate
     @Override
     public boolean execute()
     {
-        boolean output = super.makeRequest();
+        boolean output = makeRequest();
         PageCache.clear();
         return output;
     } // execute()
