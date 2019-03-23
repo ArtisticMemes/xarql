@@ -20,7 +20,7 @@ public class AccountDeleter extends DatabaseUpdate
         super(COMMAND);
         setUsername(username);
         execute();
-    } // PasswordChanger()
+    } // AccountDeleter()
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException

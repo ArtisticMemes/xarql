@@ -30,7 +30,7 @@ public class AccountProcessor
         }
         else
             throw new IllegalArgumentException("Existing usernames couldn't be checked. Please try again");
-    } // AccountCreator()
+    } // AccountProcessor()
 
     private void setUsername(String username) throws IllegalArgumentException
     {
@@ -43,7 +43,7 @@ public class AccountProcessor
         }
         else
             throw new IllegalArgumentException("Username is " + username.length() + " characters long. It must be between " + MIN_USERNAME_LENGTH + " and " + MAX_VARIABLE_LENGTH + " long.");
-    } // setUsername
+    } // setUsername()
 
     private void setPassword(String password) throws IllegalArgumentException
     {

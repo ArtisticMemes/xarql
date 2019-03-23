@@ -58,4 +58,4 @@ public class PasswordChanger extends DatabaseUpdate
             throw new IllegalArgumentException("Password is " + password.length() + " characters long. It must be between " + MIN_PASSWORD_LENGTH + " and " + MAX_VARIABLE_LENGTH + " long.");
     } // setHash()
 
-} // PasswordChaner
+} // PasswordChanger
