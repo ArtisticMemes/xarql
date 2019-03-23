@@ -3,32 +3,30 @@
  */
 package com.xarql.polr;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletResponse;
+import com.xarql.util.DatabaseQuery;
 
-import com.xarql.util.ConnectionManager;
-
-public class FlatPostRetriever
+public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
 {
-    private HttpServletResponse response;
-    private String              sort;
-    private String              flow;
-    private int                 page;
+    private String sort;
+    private String flow;
+    private int    page;
 
-    private static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
-    private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
-    private static final int    POST_COUNT   = PostRetriever.DEFAULT_POST_COUNT;
+    private ArrayList<Post> posts;
 
-    public FlatPostRetriever(HttpServletResponse response, String sort, String flow, int page)
+    private static final String DEFAULT_SORT        = PostRetriever.DEFAULT_SORT;
+    private static final String DEFAULT_FLOW        = PostRetriever.DEFAULT_FLOW;
+    private static final int    POST_COUNT          = PostRetriever.DEFAULT_POST_COUNT;
+    private static final String FLAT_POST_RETRIEVAL = "SELECT * FROM polr ORDER BY ? ? LIMIT ?, ?";
+
+    public FlatPostRetriever(String sort, String flow, int page)
     {
-        this.response = response;
+        super(FLAT_POST_RETRIEVAL);
         setSort(sort);
         setFlow(flow);
         setPage(page);
@@ -68,79 +66,41 @@ public class FlatPostRetriever
             this.page = 0;
     } // setPage()
 
-    public ArrayList<Post> execute()
+    @Override
+    protected void processResult(ResultSet rs) throws SQLException
     {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        ArrayList<Post> posts = new ArrayList<Post>();
-        String sql = "SELECT * FROM polr ORDER BY " + sort + " " + flow + " LIMIT ?, ?";
-
-        try
+        while(rs.next())
         {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(sql);
-
-            statement.setInt(1, page * POST_COUNT);
-            statement.setInt(2, POST_COUNT);
-
-            rs = statement.executeQuery();
-            while(rs.next())
-            {
-                int rsId = rs.getInt("id");
-                String rsTitle = rs.getString("title");
-                String rsContent = rs.getString("content");
-                int rsAnswers = rs.getInt("answers");
-                int rsRemoved = rs.getInt("removed");
-                Timestamp rsDate = rs.getTimestamp("date");
-                Timestamp rsBump = rs.getTimestamp("bump");
-                Timestamp rsSubbump = rs.getTimestamp("subbump");
-                int rsResponses = rs.getInt("responses");
-                int rsSubresponses = rs.getInt("subresponses");
-                String rsAuthor = rs.getString("author");
-                String rsWarning = rs.getString("warning");
-                Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
-                posts.add(currentPost);
-            }
-
+            int rsId = rs.getInt("id");
+            String rsTitle = rs.getString("title");
+            String rsContent = rs.getString("content");
+            int rsAnswers = rs.getInt("answers");
+            int rsRemoved = rs.getInt("removed");
+            Timestamp rsDate = rs.getTimestamp("date");
+            Timestamp rsBump = rs.getTimestamp("bump");
+            Timestamp rsSubbump = rs.getTimestamp("subbump");
+            int rsResponses = rs.getInt("responses");
+            int rsSubresponses = rs.getInt("subresponses");
+            String rsAuthor = rs.getString("author");
+            String rsWarning = rs.getString("warning");
+            Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
+            posts.add(currentPost);
         }
-        catch(SQLException s)
-        {
-            posts.clear();
-            try
-            {
-                response.sendError(500);
-                return posts;
-            }
-            catch(IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return posts;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(statement != null)
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-        }
+    } // processResult()
 
+    @Override
+    protected ArrayList<Post> getData()
+    {
         return posts;
-    } // execute()
+    } // getData()
+
+    @Override
+    protected void setVariables(PreparedStatement statement) throws SQLException
+    {
+        statement.setString(1, sort);
+        statement.setString(2, flow);
+        statement.setInt(3, page * POST_COUNT);
+        statement.setInt(4, POST_COUNT);
+    } // setVariables()
 
 } // FlatPostRetriever
