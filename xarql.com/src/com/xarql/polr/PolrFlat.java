@@ -93,13 +93,18 @@ public class PolrFlat extends HttpServlet
             page = MIN_PAGE; // default
         request.setAttribute("page", page);
 
-        FlatPostRetriever fpr = new FlatPostRetriever(response, sort, flow, page);
-        ArrayList<Post> posts = fpr.execute();
-        request.setAttribute("posts", posts);
-        if(ajax)
-            request.getRequestDispatcher("/src/polr/flat-ajax.jsp").forward(request, response);
+        FlatPostRetriever fpr = new FlatPostRetriever(sort, flow, page);
+        if(fpr.execute())
+        {
+            ArrayList<Post> posts = fpr.getData();
+            request.setAttribute("posts", posts);
+            if(ajax)
+                request.getRequestDispatcher("/src/polr/flat-ajax.jsp").forward(request, response);
+            else
+                request.getRequestDispatcher("/src/polr/flat.jsp").forward(request, response);
+        }
         else
-            request.getRequestDispatcher("/src/polr/flat.jsp").forward(request, response);
+            response.sendError(500, "Could not retrieve posts from class FlatPostRetriever");
     } // doGet()
 
     /**

@@ -69,23 +69,20 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
-        while(rs.next())
-        {
-            int rsId = rs.getInt("id");
-            String rsTitle = rs.getString("title");
-            String rsContent = rs.getString("content");
-            int rsAnswers = rs.getInt("answers");
-            int rsRemoved = rs.getInt("removed");
-            Timestamp rsDate = rs.getTimestamp("date");
-            Timestamp rsBump = rs.getTimestamp("bump");
-            Timestamp rsSubbump = rs.getTimestamp("subbump");
-            int rsResponses = rs.getInt("responses");
-            int rsSubresponses = rs.getInt("subresponses");
-            String rsAuthor = rs.getString("author");
-            String rsWarning = rs.getString("warning");
-            Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
-            posts.add(currentPost);
-        }
+        int rsId = rs.getInt("id");
+        String rsTitle = rs.getString("title");
+        String rsContent = rs.getString("content");
+        int rsAnswers = rs.getInt("answers");
+        int rsRemoved = rs.getInt("removed");
+        Timestamp rsDate = rs.getTimestamp("date");
+        Timestamp rsBump = rs.getTimestamp("bump");
+        Timestamp rsSubbump = rs.getTimestamp("subbump");
+        int rsResponses = rs.getInt("responses");
+        int rsSubresponses = rs.getInt("subresponses");
+        String rsAuthor = rs.getString("author");
+        String rsWarning = rs.getString("warning");
+        Post currentPost = new Post(rsId, rsTitle, rsContent, rsAnswers, rsRemoved, rsDate, rsBump, rsSubbump, rsResponses, rsSubresponses, rsAuthor, rsWarning);
+        posts.add(currentPost);
     } // processResult()
 
     @Override
