@@ -60,7 +60,7 @@
         <table>
           <tr><td>Total Sessions</td><td style="padding-left:1rem;">${total_sessions}</td></tr>
           <tr><td>Auth Sessions</td><td style="padding-left:1rem;">${auth_sessions}</td></tr>
-          <tr><td>Live Chats</td><td style="padding-left:1rem;">${live_chats}</td></tr>
+          <tr><td>Registered Users</td><td style="padding-left:1rem;">${user_count}</td></tr>
         </table>
       </div>
     </div>

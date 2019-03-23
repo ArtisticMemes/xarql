@@ -23,7 +23,8 @@ public class AccountProcessor
             if(ag.getID() == -1)
             {
                 AccountCreator ac = new AccountCreator(username, Password.hashPassword(password));
-                ac.execute();
+                if(ac.execute())
+                    AccountCounter.increaseCount();
             }
             else
                 throw new IllegalArgumentException("Username already exists in database");

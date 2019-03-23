@@ -29,7 +29,7 @@ public class ReportGrabber extends DatabaseQuery<ArrayList<Report>>
     } // processResult
 
     @Override
-    protected ArrayList<Report> getData()
+    public ArrayList<Report> getData()
     {
         return reports;
     } // getData();

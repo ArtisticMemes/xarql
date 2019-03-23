@@ -35,7 +35,7 @@ public class HashPostRetriever extends DatabaseQuery<ArrayList<Post>>
     } // processResult()
 
     @Override
-    protected ArrayList<Post> getData()
+    public ArrayList<Post> getData()
     {
         return posts;
     } // getData()

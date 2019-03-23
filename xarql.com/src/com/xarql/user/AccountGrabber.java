@@ -37,7 +37,7 @@ public class AccountGrabber extends DatabaseQuery<String>
     } // processResult()
 
     @Override
-    protected String getData()
+    public String getData()
     {
         return username;
     } // getData()

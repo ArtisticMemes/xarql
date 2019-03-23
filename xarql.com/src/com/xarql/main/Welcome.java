@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
-import com.xarql.util.BuildTimer;
+import com.xarql.user.AccountCounter;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -34,8 +34,7 @@ public class Welcome extends HttpServlet
     public Welcome()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+    } // Welcome()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -44,7 +43,6 @@ public class Welcome extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        BuildTimer bt = new BuildTimer(request);
         ServletUtilities.standardSetup(request);
         request.setAttribute("auth_sessions", AuthTable.size());
 
@@ -62,6 +60,9 @@ public class Welcome extends HttpServlet
         }
 
         request.setAttribute("total_sessions", activeSessions);
+
+        int userCount = new AccountCounter().getData();
+        request.setAttribute("user_count", userCount);
         request.getRequestDispatcher("/src/welcome/welcome.jsp").forward(request, response);
     } // doGet()
 
@@ -72,7 +73,6 @@ public class Welcome extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 

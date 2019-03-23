@@ -23,7 +23,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
 
     protected abstract void processResult(ResultSet rs) throws SQLException;
 
-    protected abstract RequestedDataClass getData();
+    public abstract RequestedDataClass getData();
 
     @Override
     protected boolean makeRequest()
