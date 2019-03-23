@@ -19,17 +19,19 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
 
     private ArrayList<Post> posts;
 
-    private static final String DEFAULT_SORT        = PostRetriever.DEFAULT_SORT;
-    private static final String DEFAULT_FLOW        = PostRetriever.DEFAULT_FLOW;
-    private static final int    POST_COUNT          = PostRetriever.DEFAULT_POST_COUNT;
-    private static final String FLAT_POST_RETRIEVAL = "SELECT * FROM polr ORDER BY ? ? LIMIT ?, ?";
+    private static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
+    private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
+    private static final int    POST_COUNT   = PostRetriever.DEFAULT_POST_COUNT;
 
     public FlatPostRetriever(String sort, String flow, int page)
     {
-        super(FLAT_POST_RETRIEVAL);
+        super();
+        posts = new ArrayList<Post>();
         setSort(sort);
         setFlow(flow);
         setPage(page);
+        // Prepared statements don't support using ? for sorting types
+        setCommand("SELECT * FROM polr ORDER BY " + sort + " " + flow + " LIMIT ?, ?");
     } // FlatPostRetriever()
 
     private void setSort(String sort)
@@ -43,7 +45,7 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
             else
                 this.sort = DEFAULT_SORT;
         }
-    } // setSort(String sort)
+    } // setSort()
 
     private void setFlow(String flow)
     {
@@ -56,7 +58,7 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
             else
                 this.flow = DEFAULT_FLOW;
         }
-    } // setSort(String sort)
+    } // setFlow()
 
     private void setPage(int page)
     {
@@ -94,10 +96,8 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
-        statement.setString(1, sort);
-        statement.setString(2, flow);
-        statement.setInt(3, page * POST_COUNT);
-        statement.setInt(4, POST_COUNT);
+        statement.setInt(1, page * POST_COUNT);
+        statement.setInt(2, POST_COUNT);
     } // setVariables()
 
 } // FlatPostRetriever
