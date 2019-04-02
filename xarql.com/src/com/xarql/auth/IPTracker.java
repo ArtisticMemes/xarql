@@ -46,6 +46,11 @@ public class IPTracker
         log(request, targetPostID, "flag");
     } // logReport()
 
+    public static void logNewUser(HttpServletRequest request)
+    {
+        log(request, 0, "user/sign_up");
+    } // logNewUser()
+
     private static void log(HttpServletRequest request, int submissionID, String submissionType)
     {
         String sessionCookie = AuthTable.get(request.getRequestedSessionId()).getTomcatSession();

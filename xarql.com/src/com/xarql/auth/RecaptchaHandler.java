@@ -29,7 +29,6 @@ public class RecaptchaHandler extends HttpServlet
     public RecaptchaHandler()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -39,7 +38,6 @@ public class RecaptchaHandler extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // request.setAttribute("domain", DOMAIN);
         response.sendRedirect(DOMAIN + "/auth");
     } // doGet()
 

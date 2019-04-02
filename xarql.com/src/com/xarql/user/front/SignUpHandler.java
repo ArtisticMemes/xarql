@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthSession;
+import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.user.Account;
 import com.xarql.user.AccountProcessor;
@@ -59,6 +60,7 @@ public class SignUpHandler extends HttpServlet
                 String password = request.getParameter("password");
                 new AccountProcessor(username, password);
                 new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
+                IPTracker.logNewUser(request);
                 response.sendRedirect(DOMAIN + "/user?msg=Account Created");
             }
             catch(Exception e)

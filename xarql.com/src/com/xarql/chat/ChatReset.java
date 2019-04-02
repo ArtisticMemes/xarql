@@ -89,4 +89,4 @@ public class ChatReset
             }
         }
     } // execute()
-}
+} // ChatReset

@@ -22,7 +22,6 @@ public class AuthStatus extends HttpServlet
     public AuthStatus()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -33,9 +32,7 @@ public class AuthStatus extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         if(request.getRequestedSessionId() != null && AuthTable.contains(request.getRequestedSessionId()))
-        {
             return;
-        }
         else
             response.sendError(401, "Client has not authenticated. Go to http://xarql.com/auth");
     } // doGet()
@@ -47,7 +44,6 @@ public class AuthStatus extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 
