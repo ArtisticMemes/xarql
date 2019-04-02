@@ -35,7 +35,7 @@ public class ReportPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities.standardSetup(request);
-        if(ServletUtilities.hasParameter("id", request))
+        if(ServletUtilities.hasParam("id", request))
         {
             try
             {

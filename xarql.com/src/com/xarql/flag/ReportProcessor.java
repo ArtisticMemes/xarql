@@ -52,7 +52,7 @@ public class ReportProcessor extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        if(ServletUtilities.userIsAuth(request) && ServletUtilities.hasParameters(REQUIRED_PARAMS, request, response))
+        if(ServletUtilities.userIsAuth(request) && ServletUtilities.hasParams(REQUIRED_PARAMS, request))
         {
             ServletUtilities.standardSetup(request);
 

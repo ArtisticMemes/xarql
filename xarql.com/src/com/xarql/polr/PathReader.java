@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
+import com.xarql.main.Polr;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -23,8 +24,12 @@ public class PathReader extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
-    public static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
+    private static final String ID           = Polr.ID;
+    private static final String SORT         = Polr.SORT;
+    private static final String FLOW         = Polr.FLOW;
+    private static final String PAGE         = "page";
+    private static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
+    private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 
     public static final int MIN_PAGE = 0;
     public static final int MAX_PAGE = 4;
@@ -39,7 +44,6 @@ public class PathReader extends HttpServlet
     public PathReader()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -49,58 +53,22 @@ public class PathReader extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
+        ServletUtilities util = new ServletUtilities(request);
 
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
 
-        request.setAttribute("authenticated", ServletUtilities.userIsAuth(request));
-
-        // use sort parameter
-        String sort;
-        request.setAttribute("sort", request.getParameter("sort"));
-        if(request.getAttribute("sort") == null)
-            sort = DEFAULT_SORT;
-        else
-            sort = request.getAttribute("sort").toString();
-        request.setAttribute("sort", sort);
-
-        // use flow parameter
-        String flow;
-        request.setAttribute("flow", request.getParameter("flow"));
-        if(request.getAttribute("flow") == null)
-            flow = DEFAULT_FLOW;
-        else
-            flow = request.getAttribute("flow").toString();
-        request.setAttribute("flow", flow);
+        String sort = util.useParam(SORT, DEFAULT_SORT);
+        String flow = util.useParam(FLOW, DEFAULT_FLOW);
+        util.useParam(PAGE);
 
         // get page
-        int page;
-        request.setAttribute("page", request.getParameter("page"));
-        if(request.getAttribute("page") == null)
-            page = MIN_PAGE; // default
-        else
-        {
-            try
-            {
-                page = Integer.parseInt(request.getAttribute("page").toString());
-            }
-            catch(NumberFormatException nfe)
-            {
-                page = MIN_PAGE; // default
-            }
-        }
+        int page = util.useInt(PAGE);
         if(page < MIN_PAGE || page > MAX_PAGE)
             page = MIN_PAGE; // default
-        request.setAttribute("page", page);
 
         int postSkipCount = page * POSTS_PER_PAGE;
         int postCount = POSTS_PER_PAGE;
-
-        /*
-         * System.out.println(pathParts.length); for(int i = 0; i < pathParts.length;
-         * i++) System.out.println(pathParts[i]);
-         */
 
         if(pathParts.length == 1)
         {

@@ -12,7 +12,7 @@ public class DeveloperOptions
 {
     private static final String  DOMAIN  = "https://xarql.com";
     private static final String  CONTEXT = "";
-    private static final boolean TESTING = false;
+    private static final boolean TESTING = true;
     /*
      * TESTING must equal true if you're trying to test something due to the
      * Recaptcha API's requirement for the Recaptcha key to be associated with the

@@ -82,7 +82,7 @@
          <p style="display:inline;margin-left:1rem;"><a href="${domain}/jott" target="_blank">Test</a></p>
        </form>
        <p id="advisory" style="display:none;"></p>
-       <c:if test="${not authenticated}">
+       <c:if test="${not auth}">
          <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
            <div style="position:relative;">
              <div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>

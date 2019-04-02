@@ -6,6 +6,9 @@ package com.xarql.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +37,19 @@ public class ServletUtilities
     private static final int    NORMAL_FONT_WEIGHT = 400;
     private static final int    LIGHT_FONT_WEIGHT  = 200;
     private static final String DEFAULT_FONT_SIZE  = "1rem";
+    private static final String DEFAULT_THEME      = "light";
+
+    private static final int DEFAULT_INT = 0;
 
     /**
      * Allows for using static methods in an object to reduce typing
      * 
      * @param request The request to send to static methods
      */
-    public ServletUtilities(HttpServletRequest request)
+    public ServletUtilities(HttpServletRequest request) throws UnsupportedEncodingException
     {
         this.request = request;
+        standardSetup(request);
     } // ServletUtilities()
 
     /**
@@ -58,6 +65,37 @@ public class ServletUtilities
         return request.getParameter(param);
     } // useParam()
 
+    public String useParam(String param, String fallback)
+    {
+        if(hasParam(param))
+            return useParam(param);
+        else
+        {
+            request.setAttribute(param, fallback);
+            return fallback;
+        }
+    } // useParam()
+
+    public int useInt(String name)
+    {
+        return useInt(name, DEFAULT_INT);
+    } // useInt()
+
+    public int useInt(String name, int fallback)
+    {
+        int output;
+        try
+        {
+            output = Integer.parseInt(request.getParameter(name).toString());
+        }
+        catch(NumberFormatException | NullPointerException e)
+        {
+            output = fallback;
+        }
+        request.setAttribute(name, output);
+        return output;
+    } // useInt()
+
     /**
      * Object based version of standardSetup()
      * 
@@ -70,8 +108,8 @@ public class ServletUtilities
     } // standardSetup()
 
     /**
-     * Sets the "domain", "recaptcha_key", and "theme" attributes. Sets the
-     * Character Encoding to UTF-8
+     * Sets several attributes to their universal defaults, others to cookies and
+     * others to session details. Sets the Character Encoding to UTF-8.
      * 
      * @param request The request which requires a standard set up.
      * @throws UnsupportedEncodingException Shouldn't happen. Occurs if the server
@@ -96,7 +134,8 @@ public class ServletUtilities
 
     private static void setFontWeight(HttpServletRequest request)
     {
-        // Get font weight
+        // TODO: make this use setAttributeByCookie()
+        // setAttributeByCookie(request, "font-weight", NORMAL_FONT_WEIGHT);
         int fontWeight = 0;
         Cookie[] cookies = request.getCookies();
         if(cookies != null)
@@ -121,23 +160,29 @@ public class ServletUtilities
 
     public static void setFontSize(HttpServletRequest request)
     {
-        // Get font size
+        setAttributeByCookie(request, "font-size", DEFAULT_FONT_SIZE);
+    } // setFontSize()
+
+    public static void setAttributeByCookie(HttpServletRequest request, String name, Object fallback)
+    {
+        String insertableName = name.replace('-', '_');
+        // Sort through all of the cookies
         Cookie[] cookies = request.getCookies();
         if(cookies != null)
         {
             for(Cookie item : cookies)
             {
-                if(item.getName().equals("font-size"))
+                if(item.getName().equals(name))
                 {
-                    request.setAttribute("font_size", item.getValue());
+                    request.setAttribute(insertableName, item.getValue());
                     return;
                 }
             }
-            request.setAttribute("font_size", DEFAULT_FONT_SIZE); // default
+            request.setAttribute(insertableName, fallback); // default
         }
         else
-            request.setAttribute("font_size", DEFAULT_FONT_SIZE);
-    } // setFontSize()
+            request.setAttribute(insertableName, fallback);
+    } // setAttributeByCookie()
 
     /**
      * Determines if the user that made a request is a moderator. Checks the
@@ -207,12 +252,7 @@ public class ServletUtilities
 
     public boolean userHasAccount()
     {
-        if(request.getRequestedSessionId() == null) // NullPointerException protection
-            return false;
-        else if(AuthTable.get(request.getRequestedSessionId()) != null && AuthTable.get(request.getRequestedSessionId()).getAccount() != null)
-            return true;
-        else
-            return false;
+        return userHasAccount(request);
     } // userHasAccount()
 
     public static Account getAccount(HttpServletRequest request)
@@ -233,22 +273,7 @@ public class ServletUtilities
      */
     public static void setTheme(HttpServletRequest request)
     {
-        // Get theme
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null)
-        {
-            for(Cookie item : cookies)
-            {
-                if(item.getName().equals("theme"))
-                {
-                    request.setAttribute("theme", item.getValue());
-                    return;
-                }
-            }
-            request.setAttribute("theme", "light"); // default
-        }
-        else
-            request.setAttribute("theme", "light");
+        setAttributeByCookie(request, "theme", DEFAULT_THEME);
     } // setTheme()
 
     /**
@@ -277,7 +302,7 @@ public class ServletUtilities
      * @return true if the parameters are usable, false otherwise
      * @throws IOException Something went wrong with http
      */
-    public static boolean hasParameters(String[] parameters, HttpServletRequest request, HttpServletResponse response) throws IOException
+    public static boolean hasParams(List<String> parameters, HttpServletRequest request)
     {
         for(String param : parameters)
         {
@@ -287,7 +312,25 @@ public class ServletUtilities
             }
         }
         return true;
-    } // hasParameters()
+    } // hasParams()
+
+    public boolean hasParams(List<String> parameters)
+    {
+        return hasParams(parameters, request);
+    } // hasParams()
+
+    public static boolean hasParams(String[] parameters, HttpServletRequest request)
+    {
+        List<String> tmp = new ArrayList<String>();
+        for(String param : parameters)
+            tmp.add(param);
+        return hasParams(tmp, request);
+    } // hasParams()
+
+    public boolean hasParams(String[] parameters)
+    {
+        return hasParams(parameters, request);
+    } // hasParams()
 
     /**
      * Checks to see if the given parameter is not null and not empty
@@ -296,9 +339,36 @@ public class ServletUtilities
      * @param request The request the parameter is in
      * @return true if the parameter is usable, false otherwise
      */
-    public static boolean hasParameter(String parameter, HttpServletRequest request)
+    public static boolean hasParam(String parameter, HttpServletRequest request)
     {
         return !(request.getParameter(parameter) == null || request.getParameter(parameter).equals(""));
-    } // hasParamter()
+    } // hasParam()
+
+    public boolean hasParam(String parameter)
+    {
+        return hasParam(parameter, request);
+    } // hasParam()
+
+    public static int requireInt(String parameter, HttpServletRequest request) throws NoSuchElementException
+    {
+        if(hasParam(parameter, request))
+        {
+            try
+            {
+                return Integer.parseInt(request.getAttribute(parameter).toString());
+            }
+            catch(NumberFormatException nfe)
+            {
+                throw new NoSuchElementException("The desired parameter was not an int");
+            }
+        }
+        else
+            throw new NoSuchElementException("The request didn't include that parameter");
+    } // requireInt()
+
+    public int requireInt(String parameter)
+    {
+        return requireInt(parameter, request);
+    } // requireInt()
 
 } // ServletUtilities

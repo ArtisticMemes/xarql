@@ -50,9 +50,9 @@ public class SignUpHandler extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        if(ServletUtilities.hasParameters(new String[]{
+        if(ServletUtilities.hasParams(new String[]{
                 "username", "password"
-        }, request, response))
+        }, request))
         {
             try
             {

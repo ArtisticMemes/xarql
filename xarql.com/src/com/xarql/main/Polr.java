@@ -4,6 +4,7 @@
 package com.xarql.main;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.polr.PostRetriever;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -22,11 +24,12 @@ public class Polr extends HttpServlet
 
     private static final long serialVersionUID = 1L;
 
-    private HttpServletRequest  currentRequest  = null;
-    private HttpServletResponse currentResponse = null;
+    public static final String ID   = "id";
+    public static final String SORT = "sort";
+    public static final String FLOW = "flow";
 
-    public static final String DEFAULT_SORT = "subbump";
-    public static final String DEFAULT_FLOW = "desc";
+    private static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
+    private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 
     public static final String DOMAIN = DeveloperOptions.getDomain();
 
@@ -36,7 +39,6 @@ public class Polr extends HttpServlet
     public Polr()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -46,63 +48,26 @@ public class Polr extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
+        ServletUtilities util = new ServletUtilities(request);
 
-        // System.out.println("incoming request for /polr");
-        currentRequest = request;
-        currentResponse = response;
+        String sort = util.useParam(SORT, DEFAULT_SORT);
+        String flow = util.useParam(FLOW, DEFAULT_FLOW);
 
-        request.setAttribute("id", request.getParameter("id"));
-
-        // use sort parameter
-        String sort;
-        request.setAttribute("sort", request.getParameter("sort"));
-        if(attributeEmpty("sort"))
-            sort = DEFAULT_SORT;
-        else
-            sort = request.getAttribute("sort").toString();
-
-        // use flow parameter
-        String flow;
-        request.setAttribute("flow", request.getParameter("flow"));
-        if(attributeEmpty("flow"))
-            flow = DEFAULT_FLOW;
-        else
-            flow = request.getAttribute("flow").toString();
-
-        if(attributeEmpty("id"))
+        try
         {
-            response.sendRedirect(DOMAIN + "/polr/0");
-            return;
-        }
-        else
-        {
-            int id;
-            try
-            {
-                id = Integer.parseInt(request.getAttribute("id").toString());
-            }
-            catch(NumberFormatException nfe)
-            {
-                response.sendError(400);
-                return;
-            }
+            int id = util.useInt(ID);
             if(sort != DEFAULT_SORT || flow != DEFAULT_FLOW)
                 response.sendRedirect(DOMAIN + "/polr/" + id + "&sort=" + sort + "&flow=" + flow);
             else
                 response.sendRedirect(DOMAIN + "/polr/" + id);
             return;
         }
-
+        catch(NoSuchElementException nsee)
+        {
+            response.sendRedirect(DOMAIN + "/polr/0");
+            return;
+        }
     } // doGet()
-
-    private boolean attributeEmpty(String name)
-    {
-        if(currentRequest.getAttribute(name) == null || currentRequest.getAttribute(name).toString().equals(""))
-            return true;
-        else
-            return false;
-    } // attributeEmpty(String name)
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -111,7 +76,6 @@ public class Polr extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 } // Polr
