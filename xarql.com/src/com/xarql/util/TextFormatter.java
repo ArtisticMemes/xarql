@@ -314,32 +314,6 @@ public class TextFormatter
     } // removeRepeats()
 
     /**
-     * Adds HTML newlines according to the appearance of <code>`n`</code>
-     * 
-     * @param input A <code>String</code> from the user with formatting.
-     * @return A String with <code><br></code> instead of <code>`n`</code>
-     * @deprecated
-     */
-    @Deprecated
-    private static String addNewlines(String input)
-    {
-        char trigger = 'n';
-        String output = "";
-        boolean withinFormat = false;
-        for(int i = 0; i < input.length(); i++)
-        {
-            if(input.length() > i + 2 && input.charAt(i) == '`' && input.charAt(i + 1) == trigger && input.charAt(i + 2) == '`')
-            {
-                output += "<br/>";
-                i += 2;
-            }
-            else
-                output += input.charAt(i);
-        }
-        return output;
-    } // addNewlines()
-
-    /**
      * Replace a backtick format marker, such as <code>`b`</code>, with its
      * respective span class
      * 
@@ -389,45 +363,6 @@ public class TextFormatter
         }
         return output;
     } // addFormat()
-
-    /**
-     * Makes text surrounded with tildes (~) clickable. These clickable links will
-     * open in new tabs.
-     * 
-     * @param input A <code>String</code> fro the user.
-     * @return A <code>String</code> with clickable links; determined by user.
-     */
-    @Deprecated
-    private static String addLinks(String input)
-    {
-        // Enable links with ~
-        boolean insideTilde = false;
-        String linkedText = "";
-        String withinTilde = "";
-        for(int i = 0; i < input.length(); i++)
-        {
-            if(input.charAt(i) == '~' && insideTilde == false && input.substring(i + 1, input.length()).contains("~"))
-            {
-                insideTilde = true;
-                linkedText += "<a href=\"";
-            }
-            else if(input.charAt(i) == '~' && insideTilde == true)
-            {
-                insideTilde = false;
-                linkedText += withinTilde + "\" target=\"_blank\">" + withinTilde + "</a>";
-                withinTilde = "";
-            }
-            else if(insideTilde)
-            {
-                withinTilde += input.charAt(i);
-            }
-            else
-            {
-                linkedText += input.charAt(i);
-            }
-        }
-        return linkedText;
-    } // link()
 
     /**
      * Strip potentially dangerous characters to prevent HTML injection.

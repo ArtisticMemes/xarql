@@ -30,7 +30,7 @@ public class FlatPostRetriever extends DatabaseQuery<ArrayList<Post>>
         setFlow(flow);
         setPage(page);
         // Prepared statements don't support using ? for sorting types
-        setCommand("SELECT * FROM polr ORDER BY " + sort + " " + flow + " LIMIT ?, ?");
+        setCommand("SELECT * FROM polr ORDER BY " + this.sort + " " + this.flow + " LIMIT ?, ?");
     } // FlatPostRetriever()
 
     private void setSort(String sort)

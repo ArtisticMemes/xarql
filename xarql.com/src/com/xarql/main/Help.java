@@ -21,15 +21,12 @@ public class Help extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String DOMAIN = DeveloperOptions.getDomain();
-
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Help()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -52,7 +49,6 @@ public class Help extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 

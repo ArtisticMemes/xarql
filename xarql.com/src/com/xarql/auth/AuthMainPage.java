@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.main.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -21,8 +20,6 @@ import com.xarql.util.ServletUtilities;
 public class AuthMainPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

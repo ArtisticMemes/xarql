@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.rjeschke.txtmark.Processor;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -40,8 +41,7 @@ public class JottMarkDown extends HttpServlet
         {
             String input = request.getParameter("content");
             request.setAttribute("input", input);
-            JottFile jf = new JottFile(input);
-            String output = jf.getContent();
+            String output = Processor.process(input);
             request.setAttribute("output", output);
         }
         catch(NullPointerException npe)

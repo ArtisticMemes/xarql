@@ -32,7 +32,7 @@ public class ChatWebsocket
         // Testing getNameValuePairs()
         String input = "hello:no,type:message,hi:hello|";
         System.out.println("length: " + input.length());
-        HashMap map = getHeaders(input);
+        HashMap<String, String> map = getHeaders(input);
         System.out.println(map.get("hello"));
         System.out.println(map.get("type"));
         System.out.println(map.get("hi"));
@@ -171,7 +171,7 @@ public class ChatWebsocket
 
     private static HashMap<String, String> getHeaders(String input)
     {
-        HashMap map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<String, String>();
         int i = 0;
         boolean a = true; // Represents being at name in name:value pair
         String name = "";
