@@ -3,28 +3,25 @@
  */
 package com.xarql.polr;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletResponse;
-
-import com.xarql.util.ConnectionManager;
+import com.xarql.util.DatabaseQuery;
 import com.xarql.util.TextFormatter;
 
-public class UserPostRetriever
+public class UserPostRetriever extends DatabaseQuery<ArrayList<Post>>
 {
-    private HttpServletResponse response;
-    private String              username;
+    private String          username;
+    private ArrayList<Post> posts = new ArrayList<Post>();
 
-    private static final int POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
+    private static final int    POST_COUNT = PostRetriever.DEFAULT_POST_COUNT;
+    private static final String COMMAND    = "SELECT * FROM polr WHERE author=? ORDER BY date DESC LIMIT ?";
 
-    public UserPostRetriever(HttpServletResponse response, String username) throws Exception
+    public UserPostRetriever(String username) throws Exception
     {
-        this.response = response;
+        super(COMMAND);
         setUsername(username);
     } // FlatPostRetriever()
 
@@ -38,63 +35,23 @@ public class UserPostRetriever
             this.username = username;
     } // setUsername()
 
-    public ArrayList<Post> execute()
+    @Override
+    protected void processResult(ResultSet rs) throws SQLException
     {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        ArrayList<Post> posts = new ArrayList<Post>();
-        String sql = "SELECT * FROM polr WHERE author=? ORDER BY date DESC LIMIT ?";
+        posts.add(Post.interperetPost(rs));
+    } // processResult()
 
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(sql);
-
-            statement.setString(1, username);
-            statement.setInt(2, POST_COUNT);
-
-            rs = statement.executeQuery();
-            while(rs.next())
-                posts.add(Post.interperetPost(rs));
-
-        }
-        catch(SQLException s)
-        {
-            posts.clear();
-            try
-            {
-                response.sendError(500);
-                return posts;
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-            return posts;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(statement != null)
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-        }
-
+    @Override
+    public ArrayList<Post> getData()
+    {
         return posts;
-    } // execute()
+    } // getData()
+
+    @Override
+    protected void setVariables(PreparedStatement statement) throws SQLException
+    {
+        statement.setString(1, username);
+        statement.setInt(2, POST_COUNT);
+    } // setVariables()
 
 } // FlatPostRetriever

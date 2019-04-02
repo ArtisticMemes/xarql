@@ -39,11 +39,34 @@
       <div class="large-card">
         <h4>${username}</h4>
         <c:if test="${is_mod}"><p>This user is a moderator. They can censor, remove, and restore posts.</p></c:if>
-        <p><a href="${domain}/polr/user?name=${username}">Posts</a></p>
       </div>
-      <div class="small-card">
-        <p class="warn">[PLACEHOLDER]</p>
-        <p>Notifications will appear here</p>
+      <c:if test="${posts.size() == 0}">
+        <div class="small-card">
+          <p>No posts were made by this user</p>
+        </div>
+      </c:if>
+      <div id="posts">
+        <c:forEach begin="0" var="post" items="${posts}">
+    		  <div class="large-card">
+    		    <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
+    		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+            <c:if test="${post.isExpired()}"><p class="overline"><span class="warn">Expired</span></p></c:if>
+            <div id="post-inner-${post.getId()}"<c:if test="${post.getWarning() != 'None'}">style="display:none;"</c:if>>
+              <h6>${post.getTitle()}</h6>
+              <p>${post.getContent()}</p>
+            </div>
+            <c:if test="${post.getWarning() != 'None'}">
+              <h6 class="warn" id="post-warning-${post.getId()}">${post.getWarning()} Content</h6>
+            </c:if>
+    		    <p>
+              <a href="${domain}/polr/${post.getId()}" class="view-link" post-id="${post.getId()}">View</a>
+              <c:if test="${post.getAuthor() != 'Unknown'}">
+                ⤷<a href="${domain}/user/view?name=${post.getAuthor()}">${post.getAuthor()}</a>
+              </c:if>
+              <c:if test="${post.getWarning() != 'None'}"><a class="reveal-link" data="${post.getId()}">Reveal</a></c:if>
+            </p>
+    		  </div>
+    		</c:forEach>
       </div>
     </div>
   </div>

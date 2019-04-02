@@ -1,7 +1,6 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +29,6 @@ public class PolrUser extends HttpServlet
     public PolrUser()
     {
         super();
-        // TODO Auto-generated constructor stub
     } // PolrUser
 
     /**
@@ -57,17 +55,21 @@ public class PolrUser extends HttpServlet
             UserPostRetriever upr;
             try
             {
-                upr = new UserPostRetriever(response, name);
+                upr = new UserPostRetriever(name);
             }
             catch(Exception e)
             {
                 response.sendError(400);
                 return;
             }
-            ArrayList<Post> posts = upr.execute();
-            request.setAttribute("posts", posts);
-            request.getRequestDispatcher(JSP_PATH).forward(request, response);
-            return;
+            if(upr.execute())
+            {
+                request.setAttribute("posts", upr.getData());
+                request.getRequestDispatcher(JSP_PATH).forward(request, response);
+                return;
+            }
+            else
+                response.sendError(500);
         }
         else
         {

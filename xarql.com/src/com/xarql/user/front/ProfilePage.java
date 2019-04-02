@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
+import com.xarql.polr.UserPostRetriever;
 import com.xarql.user.AccountGrabber;
+import com.xarql.user.AccountProcessor;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
+import com.xarql.util.TextFormatter;
 
 /**
  * Servlet implementation class ProfilePage
@@ -21,7 +24,8 @@ public class ProfilePage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String DOMAIN = DeveloperOptions.getDomain();
+    private static final String DOMAIN              = DeveloperOptions.getDomain();
+    private static final int    MAX_USERNAME_LENGTH = AccountProcessor.MAX_VARIABLE_LENGTH;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,6 +48,8 @@ public class ProfilePage extends HttpServlet
             ServletUtilities util = new ServletUtilities(request);
             util.standardSetup();
 
+            username = username.toLowerCase();
+
             AccountGrabber ag = new AccountGrabber(username);
             if(ag.execute())
             {
@@ -51,10 +57,32 @@ public class ProfilePage extends HttpServlet
                     response.sendError(404);
                 else
                 {
-                    // NotificationHandler nh = new NotificationHandler(true, username);
-                    // request.setAttribute("notifications", nh.getList());
                     request.setAttribute("username", username);
                     request.setAttribute("is_mod", Secrets.modList().contains(username));
+
+                    if(username != null)
+                    {
+                        if(!TextFormatter.isAlphaNumeric(username) || username.length() > MAX_USERNAME_LENGTH)
+                        {
+                            response.sendError(400);
+                            return;
+                        }
+
+                        UserPostRetriever upr;
+                        try
+                        {
+                            upr = new UserPostRetriever(username);
+                            upr.execute();
+                            request.setAttribute("posts", upr.getData());
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                            response.sendError(400);
+                            return;
+                        }
+                    }
+
                     request.getRequestDispatcher("/src/user/view.jsp").forward(request, response);
                 }
             }
