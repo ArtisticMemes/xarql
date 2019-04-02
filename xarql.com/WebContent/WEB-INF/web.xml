@@ -92,16 +92,6 @@
     <url-pattern>/flag</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Blog</description>
-    <display-name>Blog</display-name>
-    <servlet-name>Blog</servlet-name>
-    <servlet-class>com.xarql.main.Blog</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>com.xarql.main.Blog</servlet-name>
-    <url-pattern>/blog</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description></description>
     <display-name>Polr</display-name>
     <servlet-name>Polr</servlet-name>
@@ -200,16 +190,6 @@
   <servlet-mapping>
     <servlet-name>com.xarql.main.Chat</servlet-name>
     <url-pattern>/chat</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>A canvas of pixels that can be edited one at a time</description>
-    <display-name>Pexl</display-name>
-    <servlet-name>Pexl</servlet-name>
-    <servlet-class>com.xarql.main.Pexl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>com.xarql.main.Pexl</servlet-name>
-    <url-pattern>/pexl</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
