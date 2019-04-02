@@ -84,6 +84,14 @@ public class ReportProcessor extends HttpServlet
                 return;
             }
 
+            ReportExistenceChecker rec = new ReportExistenceChecker(report.getPostID());
+            rec.execute();
+            if(rec.getData())
+            {
+                response.sendError(429);
+                return;
+            }
+
             // File the report, and log the filing
             ReportFiler rf = new ReportFiler(response, report);
             if(rf.execute())

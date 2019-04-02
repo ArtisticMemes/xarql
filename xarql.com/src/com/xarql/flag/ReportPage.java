@@ -25,7 +25,6 @@ public class ReportPage extends HttpServlet
     public ReportPage()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**

@@ -11,7 +11,7 @@ public class ReportGrabber extends DatabaseQuery<ArrayList<Report>>
 {
     private ArrayList<Report> reports = new ArrayList<Report>(25);
 
-    private static final String REPORT_GRAB = "SELECT * FROM flag LIMIT 25";
+    private static final String REPORT_GRAB = "SELECT * FROM flag LIMIT 25 ORDER BY date DESC";
 
     public ReportGrabber()
     {

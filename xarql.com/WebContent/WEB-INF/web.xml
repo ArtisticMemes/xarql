@@ -312,8 +312,16 @@
     <url-pattern>/user/sign_up/form</url-pattern>
   </servlet-mapping>
   <error-page>
+    <error-code>429</error-code>
+    <location>/error?code=429</location>
+  </error-page>
+  <error-page>
     <error-code>410</error-code>
     <location>/error?code=410</location>
+  </error-page>
+  <error-page>
+    <error-code>405</error-code>
+    <location>/error?code=405</location>
   </error-page>
   <error-page>
     <error-code>404</error-code>
@@ -330,10 +338,6 @@
   <error-page>
     <error-code>400</error-code>
     <location>/error?code=400</location>
-  </error-page>
-  <error-page>
-    <error-code>405</error-code>
-    <location>/error?code=405</location>
   </error-page>
   <filter>
     <filter-name>ExpiresFilter</filter-name>

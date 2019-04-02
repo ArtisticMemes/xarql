@@ -32,7 +32,6 @@ public class Error extends HttpServlet
     public Error()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
