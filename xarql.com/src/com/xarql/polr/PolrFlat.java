@@ -43,7 +43,7 @@ public class PolrFlat extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
+        ServletUtilities util = new ServletUtilities(request);
 
         // use sort parameter
         String sort;

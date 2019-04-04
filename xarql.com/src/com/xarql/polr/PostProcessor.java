@@ -54,8 +54,8 @@ public class PostProcessor extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
-        if(ServletUtilities.userIsAuth(request))
+        ServletUtilities util = new ServletUtilities(request);
+        if(util.userIsAuth())
         {
             if(!SpamFilter.shouldBlock(request))
             {

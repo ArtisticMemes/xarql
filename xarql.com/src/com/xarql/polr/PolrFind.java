@@ -37,16 +37,10 @@ public class PolrFind extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
+        ServletUtilities util = new ServletUtilities(request);
 
         // use query parameter
-        String query;
-        request.setAttribute("query", request.getParameter("q"));
-        if(request.getAttribute("query") == null)
-            query = "";
-        else
-            query = request.getAttribute("query").toString();
-        request.setAttribute("query", query);
+        String query = util.useParam("q", "");
 
         // use ajax parameter
         boolean ajax;

@@ -34,8 +34,8 @@ public class ReportPage extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
-        if(ServletUtilities.hasParam("id", request))
+        ServletUtilities util = new ServletUtilities(request);
+        if(util.hasParam("id"))
         {
             try
             {
@@ -49,7 +49,7 @@ public class ReportPage extends HttpServlet
         else
             request.setAttribute("id", 0);
 
-        if(ServletUtilities.userIsMod(request))
+        if(util.userIsMod())
         {
             ReportGrabber rg = new ReportGrabber();
             if(rg.execute())

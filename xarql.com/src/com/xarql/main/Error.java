@@ -21,10 +21,7 @@ public class Error extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    HttpServletRequest  currentRequest  = null;
-    HttpServletResponse currentResponse = null;
-
-    public static final String DOMAIN = DeveloperOptions.getDomain();
+    private static final String CODE = "code";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,7 +29,7 @@ public class Error extends HttpServlet
     public Error()
     {
         super();
-    }
+    } // Error()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -41,16 +38,17 @@ public class Error extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
+        ServletUtilities util = new ServletUtilities(request);
 
-        currentRequest = request;
-        currentResponse = response;
-        request.setAttribute("code", request.getParameter("code"));
-        if(attributeEmpty("code"))
+        String code;
+        if(util.hasParam(CODE))
+            code = util.useParam(CODE);
+        else
         {
-            request.setAttribute("code", "???");
+            code = "???";
+            request.setAttribute(CODE, code);
         }
-        String code = request.getAttribute("code").toString();
+
         String type;
         switch(code)
         {
@@ -80,16 +78,7 @@ public class Error extends HttpServlet
         }
         request.setAttribute("type", type);
         request.getRequestDispatcher("/src/error/error.jsp").forward(request, response);
-    }
-
-    // Check if the attribute has content
-    private boolean attributeEmpty(String name)
-    {
-        if(currentRequest.getAttribute(name) == null || currentRequest.getAttribute(name).toString().equals(""))
-            return true;
-        else
-            return false;
-    }
+    } // doGet()
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -98,8 +87,7 @@ public class Error extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
-    }
+    } // doPost()
 
-}
+} // Error

@@ -49,7 +49,7 @@ public class ServletUtilities
     public ServletUtilities(HttpServletRequest request) throws UnsupportedEncodingException
     {
         this.request = request;
-        standardSetup(request);
+        standardSetup();
     } // ServletUtilities()
 
     /**
@@ -97,17 +97,6 @@ public class ServletUtilities
     } // useInt()
 
     /**
-     * Object based version of standardSetup()
-     * 
-     * @throws UnsupportedEncodingException If the client refuses or server can't
-     *         supply an encoding
-     */
-    public void standardSetup() throws UnsupportedEncodingException
-    {
-        standardSetup(request);
-    } // standardSetup()
-
-    /**
      * Sets several attributes to their universal defaults, others to cookies and
      * others to session details. Sets the Character Encoding to UTF-8.
      * 
@@ -115,24 +104,24 @@ public class ServletUtilities
      * @throws UnsupportedEncodingException Shouldn't happen. Occurs if the server
      *         or client can't use UTF-8. Although that's extremely rare.
      */
-    public static void standardSetup(HttpServletRequest request) throws UnsupportedEncodingException
+    private void standardSetup() throws UnsupportedEncodingException
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("google_analytics_id", GOOGLE_ANALYTICS_ID);
         request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
-        request.setAttribute("auth", userIsAuth(request));
-        setTheme(request);
-        setFontWeight(request);
-        setFontSize(request);
+        request.setAttribute("auth", userIsAuth());
+        setTheme();
+        setFontWeight();
+        setFontSize();
         request.setCharacterEncoding("UTF-8");
         request.setAttribute("testing", TESTING);
-        if(userHasAccount(request))
-            request.setAttribute("account_name", getAccount(request).getUsername());
+        if(userHasAccount())
+            request.setAttribute("account_name", getAccount().getUsername());
         else
             request.setAttribute("account_name", Post.DEFAULT_AUTHOR);
     } // standardSetup(request)
 
-    private static void setFontWeight(HttpServletRequest request)
+    private void setFontWeight()
     {
         // TODO: make this use setAttributeByCookie()
         // setAttributeByCookie(request, "font-weight", NORMAL_FONT_WEIGHT);
@@ -158,12 +147,12 @@ public class ServletUtilities
             request.setAttribute("font_weight", NORMAL_FONT_WEIGHT);
     } // setFontWeight
 
-    public static void setFontSize(HttpServletRequest request)
+    public void setFontSize()
     {
-        setAttributeByCookie(request, "font-size", DEFAULT_FONT_SIZE);
+        setAttributeByCookie("font-size", DEFAULT_FONT_SIZE);
     } // setFontSize()
 
-    public static void setAttributeByCookie(HttpServletRequest request, String name, Object fallback)
+    public void setAttributeByCookie(String name, Object fallback)
     {
         String insertableName = name.replace('-', '_');
         // Sort through all of the cookies
@@ -192,7 +181,7 @@ public class ServletUtilities
      * @return <code>true</code> if the user is a moderator, <code>false</code>
      *         otherwise.
      */
-    public static boolean userIsMod(HttpServletRequest request)
+    public boolean userIsMod()
     {
         if(AuthTable.get(request.getRequestedSessionId()) == null)
             return false;
@@ -210,7 +199,7 @@ public class ServletUtilities
      * @return <code>true</code> if the user is authorized, <code>false</code>
      *         otherwise.
      */
-    public static boolean userIsAuth(HttpServletRequest request)
+    public boolean userIsAuth()
     {
         if(request.getRequestedSessionId() == null) // NullPointerException protection
             return false;
@@ -219,16 +208,6 @@ public class ServletUtilities
         else
             return false;
     } // userIsAuth()
-
-    public boolean userIsAuth()
-    {
-        return userIsAuth(request);
-    } // userIsAuth()
-
-    public boolean userIsMod()
-    {
-        return userIsMod(request);
-    } // userIsMod()
 
     public AuthSession getAuthSession()
     {
@@ -240,7 +219,7 @@ public class ServletUtilities
             return null;
     } // getAuthSession()
 
-    public static boolean userHasAccount(HttpServletRequest request)
+    public boolean userHasAccount()
     {
         if(request.getRequestedSessionId() == null) // NullPointerException protection
             return false;
@@ -250,20 +229,10 @@ public class ServletUtilities
             return false;
     } // userHasAccount(HttpServletRequest)
 
-    public boolean userHasAccount()
-    {
-        return userHasAccount(request);
-    } // userHasAccount()
-
-    public static Account getAccount(HttpServletRequest request)
-    {
-        return AuthTable.get(request.getRequestedSessionId()).getAccount();
-    } // getAccount(HttpServletRequest)
-
     public Account getAccount()
     {
         return AuthTable.get(request.getRequestedSessionId()).getAccount();
-    } // getAccount()
+    } // getAccount(HttpServletRequest)
 
     /**
      * Adds a "theme" attribute to the request. This is used to chose a style sheet
@@ -271,9 +240,9 @@ public class ServletUtilities
      * 
      * @param request The request which needs a theme to be applied.
      */
-    public static void setTheme(HttpServletRequest request)
+    public void setTheme()
     {
-        setAttributeByCookie(request, "theme", DEFAULT_THEME);
+        setAttributeByCookie("theme", DEFAULT_THEME);
     } // setTheme()
 
     /**
@@ -293,7 +262,7 @@ public class ServletUtilities
     } // rejectPostMethod()
 
     /**
-     * Checks to see if the given parameters are not null and not empty
+     * Checks to see if all of the given parameters are not null and not empty
      * 
      * @param parameters The parameters from the client, often represented in the
      *        URL
@@ -302,7 +271,7 @@ public class ServletUtilities
      * @return true if the parameters are usable, false otherwise
      * @throws IOException Something went wrong with http
      */
-    public static boolean hasParams(List<String> parameters, HttpServletRequest request)
+    public boolean hasParams(List<String> parameters)
     {
         for(String param : parameters)
         {
@@ -314,22 +283,12 @@ public class ServletUtilities
         return true;
     } // hasParams()
 
-    public boolean hasParams(List<String> parameters)
-    {
-        return hasParams(parameters, request);
-    } // hasParams()
-
-    public static boolean hasParams(String[] parameters, HttpServletRequest request)
+    public boolean hasParams(String[] parameters)
     {
         List<String> tmp = new ArrayList<String>();
         for(String param : parameters)
             tmp.add(param);
-        return hasParams(tmp, request);
-    } // hasParams()
-
-    public boolean hasParams(String[] parameters)
-    {
-        return hasParams(parameters, request);
+        return hasParams(tmp);
     } // hasParams()
 
     /**
@@ -339,19 +298,14 @@ public class ServletUtilities
      * @param request The request the parameter is in
      * @return true if the parameter is usable, false otherwise
      */
-    public static boolean hasParam(String parameter, HttpServletRequest request)
+    public boolean hasParam(String parameter)
     {
         return !(request.getParameter(parameter) == null || request.getParameter(parameter).equals(""));
     } // hasParam()
 
-    public boolean hasParam(String parameter)
+    public int requireInt(String parameter) throws NoSuchElementException
     {
-        return hasParam(parameter, request);
-    } // hasParam()
-
-    public static int requireInt(String parameter, HttpServletRequest request) throws NoSuchElementException
-    {
-        if(hasParam(parameter, request))
+        if(hasParam(parameter))
         {
             try
             {
@@ -364,11 +318,6 @@ public class ServletUtilities
         }
         else
             throw new NoSuchElementException("The request didn't include that parameter");
-    } // requireInt()
-
-    public int requireInt(String parameter)
-    {
-        return requireInt(parameter, request);
     } // requireInt()
 
 } // ServletUtilities

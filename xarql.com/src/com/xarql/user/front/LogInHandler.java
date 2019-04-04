@@ -48,9 +48,10 @@ public class LogInHandler extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        if(ServletUtilities.hasParams(new String[]{
+        ServletUtilities util = new ServletUtilities(request);
+        if(util.hasParams(new String[]{
                 "username", "password"
-        }, request))
+        }))
         {
             try
             {

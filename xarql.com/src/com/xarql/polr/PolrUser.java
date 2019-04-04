@@ -39,7 +39,6 @@ public class PolrUser extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
         String name = util.useParam("name");
 
         if(name != null)

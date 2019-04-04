@@ -37,7 +37,6 @@ public class Help extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
         response.setHeader("Cache-Control", "public, max-age=86400");
         request.getRequestDispatcher("/src/help/help.jsp").forward(request, response);
     } // doGet()

@@ -42,7 +42,6 @@ public class PolrHash extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
         String tag = util.useParam("tag");
 
         if(tag != null)

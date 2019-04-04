@@ -46,7 +46,6 @@ public class ProfilePage extends HttpServlet
         if(username != null && !username.equals(""))
         {
             ServletUtilities util = new ServletUtilities(request);
-            util.standardSetup();
 
             username = username.toLowerCase();
 

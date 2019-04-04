@@ -43,7 +43,7 @@ public class Welcome extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.standardSetup(request);
+        ServletUtilities util = new ServletUtilities(request);
         request.setAttribute("auth_sessions", AuthTable.size());
 
         int activeSessions = 0;

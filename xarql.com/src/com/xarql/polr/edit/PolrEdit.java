@@ -38,7 +38,6 @@ public class PolrEdit extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
         if(util.userIsMod())
         {
             request.getRequestDispatcher("/src/polr/edit.jsp").forward(request, response);

@@ -39,7 +39,6 @@ public class Chat extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
         boolean idDone = false;
         if(request.getCookies() != null)
         {

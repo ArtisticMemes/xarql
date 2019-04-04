@@ -46,7 +46,6 @@ public class HelpDispatcher extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
 
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");

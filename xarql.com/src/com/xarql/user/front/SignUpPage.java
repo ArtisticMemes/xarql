@@ -34,7 +34,6 @@ public class SignUpPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
         request.setAttribute("fail", request.getParameter("fail"));
         request.setAttribute("prefill", request.getParameter("prefill"));
         request.getRequestDispatcher("/src/user/sign_up.jsp").forward(request, response);
