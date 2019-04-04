@@ -39,16 +39,8 @@ public class PolrFind extends HttpServlet
     {
         ServletUtilities util = new ServletUtilities(request);
 
-        // use query parameter
         String query = util.useParam("q", "");
-
-        // use ajax parameter
-        boolean ajax;
-        request.setAttribute("ajax", request.getParameter("ajax"));
-        if(request.getAttribute("ajax") == null)
-            ajax = false;
-        else
-            ajax = Boolean.parseBoolean(request.getAttribute("ajax").toString());
+        boolean ajax = util.useBoolean("ajax", false);
 
         PostFinder pf = new PostFinder(query);
         if(pf.execute())

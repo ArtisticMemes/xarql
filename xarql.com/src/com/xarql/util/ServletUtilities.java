@@ -39,7 +39,8 @@ public class ServletUtilities
     private static final String DEFAULT_FONT_SIZE  = "1rem";
     private static final String DEFAULT_THEME      = "light";
 
-    private static final int DEFAULT_INT = 0;
+    private static final int     DEFAULT_INT     = 0;
+    private static final boolean DEFAULT_BOOLEAN = false;
 
     /**
      * Allows for using static methods in an object to reduce typing
@@ -86,7 +87,7 @@ public class ServletUtilities
         int output;
         try
         {
-            output = Integer.parseInt(request.getParameter(name).toString());
+            output = Integer.parseInt(request.getParameter(name));
         }
         catch(NumberFormatException | NullPointerException e)
         {
@@ -95,6 +96,22 @@ public class ServletUtilities
         request.setAttribute(name, output);
         return output;
     } // useInt()
+
+    public boolean useBoolean(String name)
+    {
+        return useBoolean(name, DEFAULT_BOOLEAN);
+    } // useBoolean()
+
+    public boolean useBoolean(String name, boolean fallback)
+    {
+        boolean output;
+        if(hasParam(name))
+            output = Boolean.parseBoolean(request.getParameter(name));
+        else
+            output = fallback;
+        request.setAttribute(name, output);
+        return output;
+    } // useBoolean()
 
     /**
      * Sets several attributes to their universal defaults, others to cookies and
