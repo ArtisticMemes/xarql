@@ -27,7 +27,7 @@ public class PathReader extends HttpServlet
     private static final String ID           = Polr.ID;
     private static final String SORT         = Polr.SORT;
     private static final String FLOW         = Polr.FLOW;
-    private static final String PAGE         = "page";
+    public static final String  PAGE         = "page";
     private static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
     private static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
 
@@ -44,7 +44,7 @@ public class PathReader extends HttpServlet
     public PathReader()
     {
         super();
-    }
+    } // PathReader()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -121,7 +121,6 @@ public class PathReader extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 

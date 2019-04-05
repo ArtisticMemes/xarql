@@ -169,16 +169,16 @@ public class ServletUtilities
         setAttributeByCookie("font-size", DEFAULT_FONT_SIZE);
     } // setFontSize()
 
-    public void setAttributeByCookie(String name, Object fallback)
+    public void setAttributeByCookie(String cookie, Object fallback)
     {
-        String insertableName = name.replace('-', '_');
+        String insertableName = cookie.replace('-', '_');
         // Sort through all of the cookies
         Cookie[] cookies = request.getCookies();
         if(cookies != null)
         {
             for(Cookie item : cookies)
             {
-                if(item.getName().equals(name))
+                if(item.getName().equals(cookie))
                 {
                     request.setAttribute(insertableName, item.getValue());
                     return;
@@ -320,21 +320,31 @@ public class ServletUtilities
         return !(request.getParameter(parameter) == null || request.getParameter(parameter).equals(""));
     } // hasParam()
 
+    public String require(String parameter)
+    {
+        if(hasParam(parameter) && !request.getParameter(parameter).trim().equals(""))
+            return request.getParameter(parameter).trim();
+        else
+            throw new NoSuchElementException("The desired parameter (" + parameter + ") wasn't included");
+    } // require()
+
     public int requireInt(String parameter) throws NoSuchElementException
     {
         if(hasParam(parameter))
         {
             try
             {
-                return Integer.parseInt(request.getAttribute(parameter).toString());
+                int tmp = Integer.parseInt(request.getParameter(parameter).toString());
+                request.setAttribute(parameter, tmp);
+                return tmp;
             }
             catch(NumberFormatException nfe)
             {
-                throw new NoSuchElementException("The desired parameter was not an int");
+                throw new NoSuchElementException("The desired parameter (" + parameter + ") was not an int");
             }
         }
         else
-            throw new NoSuchElementException("The request didn't include that parameter");
+            throw new NoSuchElementException("The desired parameter (" + parameter + ") wasn't included");
     } // requireInt()
 
 } // ServletUtilities

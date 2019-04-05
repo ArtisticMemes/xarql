@@ -4,6 +4,7 @@
 package com.xarql.polr;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.auth.AuthTable;
 import com.xarql.auth.IPTracker;
 import com.xarql.auth.SpamFilter;
-import com.xarql.user.Account;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -33,8 +32,7 @@ public class PostProcessor extends HttpServlet
     public PostProcessor()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+    } // PostProcessor()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -59,42 +57,24 @@ public class PostProcessor extends HttpServlet
         {
             if(!SpamFilter.shouldBlock(request))
             {
-                request.setAttribute("title", request.getParameter("title"));
-                request.setAttribute("content", request.getParameter("content"));
-                request.setAttribute("answers", request.getParameter("answers"));
-
-                // null pointer exception prevention
-                if(request.getAttribute("title") == null || request.getAttribute("content") == null || request.getAttribute("answers") == null)
-                {
-                    response.sendError(400);
-                    return;
-                }
-
-                String title = request.getAttribute("title").toString();
-                String content = request.getAttribute("content").toString();
-
-                if(content.trim().equals(""))
-                {
-                    response.sendError(400);
-                    return;
-                }
-
-                // Get an int from the answers string in the request
+                String content;
+                String title;
                 int answers;
                 try
                 {
-                    answers = Integer.parseInt(request.getAttribute("answers").toString());
+                    content = util.require("content");
+                    title = util.useParam("title");
+                    answers = util.requireInt("answers");
                 }
-                catch(NumberFormatException nfe)
+                catch(NoSuchElementException e)
                 {
                     response.sendError(400);
                     return;
                 }
 
                 String author = PostCreator.DEFAULT_AUTHOR;
-                Account account = AuthTable.get(request.getRequestedSessionId()).getAccount();
-                if(account != null)
-                    author = account.getUsername();
+                if(util.userHasAccount())
+                    author = util.getAccount().getUsername();
 
                 PostCreator pc = new PostCreator(title, content, answers, author);
                 if(pc.execute(response))
@@ -102,19 +82,14 @@ public class PostProcessor extends HttpServlet
                     IPTracker.logPolrPost(request, pc.getDeterminedID());
                     response.setStatus(200);
                 }
-                return;
+                else
+                    response.sendError(500);
             }
             else
-            {
                 response.sendError(429);
-                return;
-            }
         }
         else
-        {
             response.sendError(401);
-            return;
-        }
     } // doPost()
 
 } // PostProcessor

@@ -31,7 +31,6 @@ public class PolrHash extends HttpServlet
     public PolrHash()
     {
         super();
-        // TODO Auto-generated constructor stub
     } // PolrHash()
 
     /**
@@ -57,14 +56,8 @@ public class PolrHash extends HttpServlet
             HashPostRetriever hpr = new HashPostRetriever(response, tag);
             if(hpr.execute() && hpr.getData().size() > 0)
                 request.setAttribute("posts", hpr.getData());
-            request.getRequestDispatcher(JSP_PATH).forward(request, response);
-            return;
         }
-        else
-        {
-            request.getRequestDispatcher(JSP_PATH).forward(request, response);
-            return;
-        }
+        request.getRequestDispatcher(JSP_PATH).forward(request, response);
     } // doGet()
 
     /**

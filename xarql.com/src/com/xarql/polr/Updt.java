@@ -5,6 +5,7 @@ package com.xarql.polr;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.main.DeveloperOptions;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class Updt
@@ -21,9 +23,6 @@ import com.xarql.main.DeveloperOptions;
 public class Updt extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    private HttpServletRequest  currentRequest  = null;
-    private HttpServletResponse currentResponse = null;
 
     public static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
     public static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
@@ -36,7 +35,6 @@ public class Updt extends HttpServlet
     public Updt()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -46,37 +44,14 @@ public class Updt extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
-
-        currentRequest = request;
-        currentResponse = response;
+        ServletUtilities util = new ServletUtilities(request);
 
         // Get sort and flow, not needed, will go to defaults
-        // use sort parameter
-        String sort;
-        request.setAttribute("sort", request.getParameter("sort"));
-        if(request.getAttribute("sort") == null)
-            sort = DEFAULT_SORT;
-        else
-            sort = request.getAttribute("sort").toString();
-        request.setAttribute("sort", sort);
+        String sort = util.useParam("sort", DEFAULT_SORT);
+        String flow = util.useParam("flow", DEFAULT_FLOW);
 
-        // use flow parameter
-        String flow;
-        request.setAttribute("flow", request.getParameter("flow"));
-        if(request.getAttribute("flow") == null)
-            flow = DEFAULT_FLOW;
-        else
-            flow = request.getAttribute("flow").toString();
-        request.setAttribute("flow", flow);
-
-        // Get id and page numbers, these must be included in ajax request
-        request.setAttribute("id", request.getParameter("id"));
-        request.setAttribute("page", request.getParameter("page"));
-
-        if(attributeEmpty("id") || attributeEmpty("page"))
+        if(!util.hasParam("id") || !util.hasParam("page"))
         {
-            // System.out.println("Parameters not found");
             response.sendError(400);
             return;
         }
@@ -86,10 +61,10 @@ public class Updt extends HttpServlet
             int page;
             try
             {
-                id = Integer.parseInt(request.getAttribute("id").toString());
-                page = Integer.parseInt(request.getAttribute("page").toString());
+                id = util.requireInt("id");
+                page = util.requireInt("page");
             }
-            catch(NumberFormatException nfe)
+            catch(NoSuchElementException e)
             {
                 response.sendError(400);
                 return;
@@ -100,8 +75,6 @@ public class Updt extends HttpServlet
             int postCount = PathReader.POSTS_PER_PAGE;
             PostRetriever ps = new PostRetriever(id, sort, flow, postSkipCount, postCount);
             ArrayList<Post> posts = ps.execute(response);
-            // System.out.println(posts.size());
-            // System.out.println("ps.execute() ran well");
             request.setAttribute("posts", posts);
             if(posts.size() > 0)
                 request.getRequestDispatcher("/src/polr/updt.jsp").forward(request, response);
@@ -111,14 +84,6 @@ public class Updt extends HttpServlet
         }
     } // doGet()
 
-    private boolean attributeEmpty(String name)
-    {
-        if(currentRequest.getAttribute(name) == null || currentRequest.getAttribute(name).toString().equals(""))
-            return true;
-        else
-            return false;
-    } // attributeEmpty(String name)
-
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      *      response)
@@ -126,7 +91,6 @@ public class Updt extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 

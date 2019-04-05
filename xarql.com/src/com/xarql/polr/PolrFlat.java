@@ -27,14 +27,15 @@ public class PolrFlat extends HttpServlet
     private static final int    MIN_PAGE     = PathReader.MIN_PAGE;
     private static final int    MAX_PAGE     = PathReader.MAX_PAGE;
 
+    private static final String PAGE = PathReader.PAGE;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public PolrFlat()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+    } // PolrFlat()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -45,61 +46,25 @@ public class PolrFlat extends HttpServlet
     {
         ServletUtilities util = new ServletUtilities(request);
 
-        // use sort parameter
-        String sort;
-        request.setAttribute("sort", request.getParameter("sort"));
-        if(request.getAttribute("sort") == null)
-            sort = DEFAULT_SORT;
-        else
-            sort = request.getAttribute("sort").toString();
-        request.setAttribute("sort", sort);
-
-        // use flow parameter
-        String flow;
-        request.setAttribute("flow", request.getParameter("flow"));
-        if(request.getAttribute("flow") == null)
-            flow = DEFAULT_FLOW;
-        else
-            flow = request.getAttribute("flow").toString();
-        request.setAttribute("flow", flow);
-
-        // use ajax parameter
-        boolean ajax;
-        request.setAttribute("ajax", request.getParameter("ajax"));
-        if(request.getAttribute("ajax") == null)
-            ajax = false;
-        else
-            ajax = Boolean.parseBoolean(request.getAttribute("ajax").toString());
-
-        // get page
-        int page;
-        request.setAttribute("page", request.getParameter("page"));
-        if(request.getAttribute("page") == null)
-            page = MIN_PAGE; // default
-        else
-        {
-            try
-            {
-                page = Integer.parseInt(request.getAttribute("page").toString());
-            }
-            catch(NumberFormatException nfe)
-            {
-                page = MIN_PAGE; // default
-            }
-        }
+        String sort = util.useParam("sort", DEFAULT_SORT);
+        String flow = util.useParam("flow", DEFAULT_FLOW);
+        boolean ajax = util.useBoolean("ajax", false);
+        int page = util.useInt(PAGE);
         if(page < MIN_PAGE || page > MAX_PAGE)
             page = MIN_PAGE; // default
-        request.setAttribute("page", page);
+        request.setAttribute(PAGE, page);
 
         FlatPostRetriever fpr = new FlatPostRetriever(sort, flow, page);
         if(fpr.execute())
         {
             ArrayList<Post> posts = fpr.getData();
             request.setAttribute("posts", posts);
+            String loc;
             if(ajax)
-                request.getRequestDispatcher("/src/polr/flat-ajax.jsp").forward(request, response);
+                loc = "/src/polr/flat-ajax.jsp";
             else
-                request.getRequestDispatcher("/src/polr/flat.jsp").forward(request, response);
+                loc = "/src/polr/flat.jsp";
+            request.getRequestDispatcher(loc).forward(request, response);
         }
         else
             response.sendError(500, "Could not retrieve posts from class FlatPostRetriever");
@@ -112,7 +77,6 @@ public class PolrFlat extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         doGet(request, response);
     } // doPost()
 
