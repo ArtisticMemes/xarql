@@ -1,7 +1,6 @@
 package com.xarql.chat;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.TextFormatter;
@@ -9,24 +8,17 @@ import com.xarql.util.TrackedHashMap;
 
 public class WebsocketPackage
 {
-    // Standard Headers
-    public static final String            TYPE             = "type";
-    public static final String            CLIENT_COLOR     = "client-color";
-    public static final String            CREATION_DATE    = "creation-date";
-    public static final String            TEXT_COLOR       = "text-color";
-    public static final ArrayList<String> VALID_PARAMETERS = generateValidParameters();
-
     private static final String DOMAIN = DeveloperOptions.getDomain();
 
     // Data
-    private TrackedHashMap<String, String> headers = new TrackedHashMap<String, String>();
-    private Client                         source;
-    private String                         content;
-    private Timestamp                      creationDate;
+    private TrackedHashMap<Headers, String> headers = new TrackedHashMap<>();
+    private Client                          source;
+    private String                          content;
+    private Timestamp                       creationDate;
 
     public WebsocketPackage(String content, Client source)
     {
-        setHeader(TYPE, determineType());
+        setType();
         setSource(source);
         setContent(content);
         setCreationDate();
@@ -42,21 +34,16 @@ public class WebsocketPackage
         this(null, source);
     } // WebsocketPackage(Client)
 
-    protected void setHeader(String name, Object value) throws IllegalArgumentException
+    protected void setHeader(Headers name, Object value) throws IllegalArgumentException
     {
-        if(VALID_PARAMETERS.contains(name))
-        {
-            String insert = value.toString().replace(':', ';');
-            if(insert.contains(",") || insert.contains("|"))
-                throw new IllegalArgumentException("Parameter value has illegal characters " + insert);
-            else
-                headers.add(name, insert);
-        }
+        String insert = value.toString().replace(':', ';');
+        if(insert.contains(",") || insert.contains("|"))
+            throw new IllegalArgumentException("Parameter value has illegal characters " + insert);
         else
-            throw new IllegalArgumentException("Invalid parameter name. Please use a const and not a magic string.");
+            headers.add(name, insert);
     } // setHeader()
 
-    public String getHeader(String name)
+    public String getHeader(Headers name)
     {
         return headers.get(name);
     } // getHeader()
@@ -77,7 +64,7 @@ public class WebsocketPackage
     private void setCreationDate()
     {
         creationDate = new Timestamp(System.currentTimeMillis());
-        setHeader(CREATION_DATE, creationDate);
+        setHeader(Headers.CREATION_DATE, creationDate);
     } // setCreationDate()
 
     public Timestamp getCreationDate()
@@ -89,8 +76,8 @@ public class WebsocketPackage
     {
         if(source != null)
         {
-            setHeader(CLIENT_COLOR, source.getColor());
-            setHeader(TEXT_COLOR, textColor(source));
+            setHeader(Headers.CLIENT_COLOR, source.getColor());
+            setHeader(Headers.TEXT_COLOR, textColor(source));
             this.source = source;
         }
     } // setSource()
@@ -99,6 +86,11 @@ public class WebsocketPackage
     {
         return source;
     } // getSource()
+
+    private void setType()
+    {
+        setHeader(Headers.TYPE, determineType());
+    };
 
     private static String textColor(Client client)
     {
@@ -119,7 +111,7 @@ public class WebsocketPackage
         {
             if(i != 0 && type.charAt(i) != type.toLowerCase().charAt(i))
             {
-                type = type.substring(0, i) + "-" + type.substring(i);
+                type = type.substring(0, i) + "_" + type.substring(i);
                 i++;
             }
         }
@@ -143,22 +135,5 @@ public class WebsocketPackage
         output += content;
         return output;
     } // toString()
-
-    private static ArrayList<String> generateValidParameters()
-    {
-        ArrayList<String> output = new ArrayList<String>(1);
-
-        output.add(TYPE);
-        output.add(CLIENT_COLOR);
-        output.add(CREATION_DATE);
-        output.add(TEXT_COLOR);
-        output.add(TypingStatus.TYPING);
-        output.add(BufferStatus.BUFFER);
-
-        for(String names : output)
-            if(!TextFormatter.isAlphaNumeric(names))
-                throw new IllegalStateException("A const has non alpha numeric characters");
-        return output;
-    } // generateValidParameters()
 
 } // WebsocketPackage

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Message extends WebsocketPackage
 {
-    private static final long MESSAGE_LIFESPAN = 3600000;
+    private static final long MESSAGE_LIFESPAN = 10000; // 1 day = 3600000
 
     public Message(String content, Client client) throws IllegalArgumentException
     {
@@ -13,11 +13,11 @@ public class Message extends WebsocketPackage
 
     public boolean isExpired()
     {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        if(getCreationDate().compareTo(now) + MESSAGE_LIFESPAN < 0)
-            return true;
-        else
+        Timestamp maxAge = new Timestamp(System.currentTimeMillis() - MESSAGE_LIFESPAN);
+        if(getCreationDate().compareTo(maxAge) > 0)
             return false;
+        else
+            return true;
     } // isExpired()
 
 } // Message

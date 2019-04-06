@@ -82,15 +82,15 @@ $(document).ready(function () {
       // Add the key:value pair to the map
       headers.set(param, value);
     }
-    if(headers.get('type') !== 'message')
+    if(headers.get('TYPE') !== 'message')
     {
-      if(headers.get('type') === 'user-join') {
-        addUser(headers.get('client-color'));
+      if(headers.get('TYPE') === 'user_join') {
+        addUser(headers.get('client_color'));
       }
-      else if(headers.get('type') === 'user-exit') {
-        removeUser(headers.get('client-color'));
+      else if(headers.get('TYPE') === 'user_exit') {
+        removeUser(headers.get('client_color'));
       }
-      else if(headers.get('type') === 'users-report') {
+      else if(headers.get('TYPE') === 'users_report') {
         data = data.substr(7);
         if(data.length > 1)
         {
@@ -102,20 +102,20 @@ $(document).ready(function () {
           }
         }
       }
-      else if(headers.get('type') === 'typing-status') {
-        if(headers.get('typing') === 'true') {
-          userTyping(headers.get('client-color'));
+      else if(headers.get('TYPE') === 'typing_status') {
+        if(headers.get('TYPING') === 'true') {
+          userTyping(headers.get('CLIENT_COLOR'));
         }
-        else if(headers.get('typing') === 'false') {
-          userNotTyping(headers.get('client-color'));
+        else if(headers.get('TYPING') === 'false') {
+          userNotTyping(headers.get('CLIENT_COLOR'));
         }
       }
-      else if(headers.get('type') === 'buffer-status') {
-        if(headers.get('buffer') === 'true') {
-          userBuffered(headers.get('client-color'));
+      else if(headers.get('TYPE') === 'buffer_status') {
+        if(headers.get('BUFFER') === 'true') {
+          userBuffered(headers.get('CLIENT_COLOR'));
         }
-        else if(headers.get('buffer') === 'false') {
-          userNotBuffered(headers.get('client-color'));
+        else if(headers.get('BUFFER') === 'false') {
+          userNotBuffered(headers.get('CLIENT_COLOR'));
         }
       }
       else {
@@ -123,8 +123,8 @@ $(document).ready(function () {
       }
     }
     else {
-      var color = headers.get('client-color');
-      var textColor = headers.get('text-color');
+      var color = headers.get('CLIENT_COLOR');
+      var textColor = headers.get('TEXT_COLOR');
       $('#messages').append('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + data + '</p></div>');
     }
   }
