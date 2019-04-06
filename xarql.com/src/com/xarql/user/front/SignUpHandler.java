@@ -51,30 +51,41 @@ public class SignUpHandler extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        if(util.hasParams(new String[]{
-                "username", "password"
-        }))
+        if(util.userIsAuth())
         {
-            try
+            if(util.userHasAccount())
+                response.sendError(403, "Please log out");
+            else
             {
-                String username = request.getParameter("username").trim().toLowerCase();
-                String password = request.getParameter("password");
-                new AccountProcessor(username, password);
-                new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
-                IPTracker.logNewUser(request);
-                response.sendRedirect(DOMAIN + "/user?msg=Account Created");
-            }
-            catch(Exception e)
-            {
-                String username = request.getParameter("username");
-                if(username != null && !username.equals(""))
-                    response.sendRedirect(DOMAIN + "/user/sign_up?prefill=" + username + "&fail=" + e.getMessage());
+
+                if(util.hasParams(new String[]{
+                        "username", "password"
+                }))
+                {
+                    try
+                    {
+                        String username = request.getParameter("username").trim().toLowerCase();
+                        String password = request.getParameter("password");
+                        new AccountProcessor(username, password);
+                        new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
+                        IPTracker.logNewUser(request);
+                        response.sendRedirect(DOMAIN + "/user?msg=Account Created");
+                    }
+                    catch(Exception e)
+                    {
+                        String username = request.getParameter("username");
+                        if(username != null && !username.equals(""))
+                            response.sendRedirect(DOMAIN + "/user/sign_up?prefill=" + username + "&fail=" + e.getMessage());
+                        else
+                            response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
+                    }
+                }
                 else
-                    response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
+                    response.sendError(400);
             }
         }
         else
-            response.sendError(400);
+            response.sendRedirect(DOMAIN + "/auth?redirect=/user/sign_up");
     } // doPost()
 
 } // SignUpHandler

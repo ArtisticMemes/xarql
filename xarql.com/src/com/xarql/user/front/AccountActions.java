@@ -40,7 +40,30 @@ public class AccountActions extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities.rejectGetMethod(response);
+        ServletUtilities util = new ServletUtilities(request);
+        if(util.userHasAccount())
+        {
+            String type = request.getParameter("type");
+            if(type == null)
+                response.sendError(400);
+
+            try
+            {
+                switch(type)
+                {
+                    case "log_out" :
+                        util.getAuthSession().kill();
+                        break;
+                }
+                response.sendRedirect(DOMAIN + "/user");
+            }
+            catch(Exception e)
+            {
+                response.sendRedirect(DOMAIN + "/user?fail=" + e.getMessage());
+            }
+        }
+        else
+            response.sendError(401);
     } // doGet()
 
     /**

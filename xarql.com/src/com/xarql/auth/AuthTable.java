@@ -24,11 +24,9 @@ public class AuthTable
             if(sessions.contains(session.getTomcatSession()))
                 sessions.remove(session.getTomcatSession());
             sessions.add(session.getTomcatSession(), session);
-
         }
 
-        if(getLastTrimTime().compareTo(new Timestamp(System.currentTimeMillis())) < 10000) // Trim after every 10
-                                                                                           // seconds
+        if(getLastTrimTime().compareTo(new Timestamp(System.currentTimeMillis())) < 10000) // Trim every 10 seconds
         {
             trim();
             setLastTrimTime();

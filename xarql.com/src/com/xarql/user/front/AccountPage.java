@@ -39,8 +39,8 @@ public class AccountPage extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         if(util.userHasAccount())
         {
-            request.setAttribute("msg", request.getParameter("msg"));
-            request.setAttribute("fail", request.getParameter("fail"));
+            util.useParam("msg");
+            util.useParam("fail");
             request.setAttribute("username", util.getAccount().getUsername());
             request.setAttribute("email", util.getAccount().getEmail());
             request.getRequestDispatcher("/src/user/account.jsp").forward(request, response);

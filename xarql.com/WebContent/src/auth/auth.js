@@ -1,4 +1,7 @@
 var domain = document.getElementById('domain').getAttribute('value');
+var redirect = document.getElementById('redirect').getAttribute('value');
+console.log(redirect);
+
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () {
@@ -49,15 +52,17 @@ function recaptchaCallback()
 	xhr.open('POST', domain + '/auth/recaptcha');
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
-	  //console.log('response loaded');
+    var recaptchaWorked = setTimeout(checkStatusHidden(), 2000);
+  	if(recaptchaWorked)
+  	{
+  		var toRemove = document.getElementById('recaptcha-form');
+      toRemove.parentNode.removeChild(toRemove);
+
+      if(redirect != null)
+        window.location.replace(domain + redirect);
+  	}
 	};
 	xhr.send('data=' + recaptchaData);
-	var recaptchaWorked = setTimeout(checkStatusHidden(), 2000);
-	if(recaptchaWorked)
-	{
-		var toRemove = document.getElementById('recaptcha-form');
-	    toRemove.parentNode.removeChild(toRemove);
-	}
 }
 function checkStatusHidden()
 {
@@ -76,5 +81,11 @@ function checkStatusHidden()
         		return false;
         }
     };
-	xhr.send();
+    try {
+      xhr.send();
+    } catch (e) {
+
+    } finally {
+
+    }
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -17,6 +18,8 @@ import com.xarql.util.ServletUtilities;
 public class SignUpPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,9 +37,14 @@ public class SignUpPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        request.setAttribute("fail", request.getParameter("fail"));
-        request.setAttribute("prefill", request.getParameter("prefill"));
-        request.getRequestDispatcher("/src/user/sign_up.jsp").forward(request, response);
+        if(util.userIsAuth())
+        {
+            util.useParam("fail");
+            util.useParam("prefill");
+            request.getRequestDispatcher("/src/user/sign_up.jsp").forward(request, response);
+        }
+        else
+            response.sendRedirect(DOMAIN + "/auth?redirect=/user/sign_up");
     } // doGet()
 
     /**

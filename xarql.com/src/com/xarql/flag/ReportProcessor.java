@@ -58,21 +58,11 @@ public class ReportProcessor extends HttpServlet
 
             // Make a report
             Report report = null;
-            int id;
-            try
-            {
-
-                id = Integer.parseInt(request.getParameter("id").toString());
-                PostCreator pc = new PostCreator("", "", id, "");
-                if(pc.postExists(id, response))
-                    report = new Report(request.getParameter("type"), request.getParameter("description"), id);
-                else
-                {
-                    response.sendError(400);
-                    return;
-                }
-            }
-            catch(Exception e)
+            int id = util.useInt("id");
+            PostCreator pc = new PostCreator("", "", id, "");
+            if(pc.postExists(id, response))
+                report = new Report(request.getParameter("type"), request.getParameter("description"), id);
+            else
             {
                 response.sendError(400);
                 return;

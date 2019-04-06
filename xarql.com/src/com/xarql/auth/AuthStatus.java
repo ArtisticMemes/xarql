@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xarql.main.DeveloperOptions;
+
 /**
  * Servlet implementation class AuthStatus
  */
@@ -16,13 +18,15 @@ public class AuthStatus extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
+    private static final String DOMAIN = DeveloperOptions.getDomain();
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AuthStatus()
     {
         super();
-    }
+    } // AuthStatus()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -32,9 +36,9 @@ public class AuthStatus extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         if(request.getRequestedSessionId() != null && AuthTable.contains(request.getRequestedSessionId()))
-            return;
+            request.getRequestDispatcher("/src/auth/status.jsp").forward(request, response);
         else
-            response.sendError(401, "Client has not authenticated. Go to http://xarql.com/auth");
+            response.sendError(401, "Client has not authenticated. Go to " + DOMAIN + "/auth");
     } // doGet()
 
     /**

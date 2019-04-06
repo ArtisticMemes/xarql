@@ -35,19 +35,7 @@ public class ReportPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        if(util.hasParam("id"))
-        {
-            try
-            {
-                request.setAttribute("id", Integer.parseInt(request.getParameter("id").toString()));
-            }
-            catch(Exception e)
-            {
-                request.setAttribute("id", 0);
-            }
-        }
-        else
-            request.setAttribute("id", 0);
+        util.useInt("id");
 
         if(util.userIsMod())
         {

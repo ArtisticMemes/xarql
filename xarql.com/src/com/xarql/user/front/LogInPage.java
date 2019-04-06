@@ -35,8 +35,8 @@ public class LogInPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        request.setAttribute("fail", request.getParameter("fail"));
-        request.setAttribute("prefill", request.getParameter("prefill"));
+        util.useParam("fail");
+        util.useParam("prefill");
         request.getRequestDispatcher("/src/user/log_in.jsp").forward(request, response);
     } // doGet()
 

@@ -37,7 +37,7 @@ public class AuthMainPage extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        request.setAttribute("authorized", util.userIsAuth());
+        util.useParam("redirect");
         request.getRequestDispatcher("/src/auth/auth.jsp").forward(request, response);
     } // doGet()
 

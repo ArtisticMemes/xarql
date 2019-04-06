@@ -53,7 +53,7 @@
       </c:if>
       <c:if test="${account_name != 'Unknown'}">
         <div class="small-card">
-          <p>Currently logged in as @${account_name}</p>
+          <p>Currently logged in as <a href="${domain}/user/view?name=${account_name}">@${account_name}</a>.</p>
         </div>
       </c:if>
     </div>

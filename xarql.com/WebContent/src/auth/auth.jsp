@@ -15,6 +15,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
+  <meta id="redirect" value="${redirect}">
   <title>Authentication ~ xarql</title>
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
   <link rel="shortcut icon" href="${domain}/logo.png" type="image/x-icon">
@@ -35,11 +36,11 @@
 <body>
   <div id="wrapper">
     <div id="column">
-      <c:if test="${authorized == true}"><div class="small-card"><h4 class="centered" id="notice">You Are Authorized</h4></div></c:if>
-      <c:if test="${authorized == false}"><div class="small-card"><h4 class="centered" id="notice">You Are Not Authorized</h4></div></c:if>
+      <c:if test="${auth == true}"><div class="small-card"><h4 class="centered" id="notice">You Are Authorized</h4></div></c:if>
+      <c:if test="${auth == false}"><div class="small-card"><h4 class="centered" id="notice">You Are Not Authorized</h4></div></c:if>
       <div class="large-card">
         <br>
-        <form action="${domain}/auth/recaptcha" method="POST">
+        <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
           <div class="centered">
            	<div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
            	<input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>

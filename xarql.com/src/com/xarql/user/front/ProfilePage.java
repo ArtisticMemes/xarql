@@ -24,8 +24,9 @@ public class ProfilePage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String DOMAIN              = DeveloperOptions.getDomain();
-    private static final int    MAX_USERNAME_LENGTH = AccountProcessor.MAX_VARIABLE_LENGTH;
+    private static final String  DOMAIN              = DeveloperOptions.getDomain();
+    private static final boolean TESTING             = DeveloperOptions.getTesting();
+    private static final int     MAX_USERNAME_LENGTH = AccountProcessor.MAX_VARIABLE_LENGTH;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,11 +43,10 @@ public class ProfilePage extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String username = request.getParameter("name");
+        ServletUtilities util = new ServletUtilities(request);
+        String username = util.useParam("name");
         if(username != null && !username.equals(""))
         {
-            ServletUtilities util = new ServletUtilities(request);
-
             username = username.toLowerCase();
 
             AccountGrabber ag = new AccountGrabber(username);
@@ -59,34 +59,32 @@ public class ProfilePage extends HttpServlet
                     request.setAttribute("username", username);
                     request.setAttribute("is_mod", Secrets.modList().contains(username));
 
-                    if(username != null)
+                    if(!TextFormatter.isAlphaNumeric(username) || username.length() > MAX_USERNAME_LENGTH)
                     {
-                        if(!TextFormatter.isAlphaNumeric(username) || username.length() > MAX_USERNAME_LENGTH)
-                        {
-                            response.sendError(400);
-                            return;
-                        }
+                        response.sendError(400);
+                        return;
+                    }
 
-                        UserPostRetriever upr;
-                        try
-                        {
-                            upr = new UserPostRetriever(username);
-                            upr.execute();
-                            request.setAttribute("posts", upr.getData());
-                        }
-                        catch(Exception e)
-                        {
+                    UserPostRetriever upr;
+                    try
+                    {
+                        upr = new UserPostRetriever(username);
+                        upr.execute();
+                        request.setAttribute("posts", upr.getData());
+                    }
+                    catch(Exception e)
+                    {
+                        if(TESTING)
                             e.printStackTrace();
-                            response.sendError(400);
-                            return;
-                        }
+                        response.sendError(500, "SQL error occured when trying to retrieve this account's posts.");
+                        return;
                     }
 
                     request.getRequestDispatcher("/src/user/view.jsp").forward(request, response);
                 }
             }
             else
-                response.sendError(500, "SQL error occured");
+                response.sendError(500, "SQL error occured when trying to determine the account's existence.");
         }
         else
             response.sendRedirect(DOMAIN + "/user");
