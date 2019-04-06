@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Message extends WebsocketPackage
 {
-    private static final long MESSAGE_LIFESPAN = 10000; // 1 day = 3600000
+    private static final long MESSAGE_LIFESPAN = 600000; // 10 minutes = 600000
 
     public Message(String content, Client client) throws IllegalArgumentException
     {

@@ -1,6 +1,5 @@
 package com.xarql.chat;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -18,14 +17,10 @@ import com.xarql.util.TrackedHashMap;
 @ServerEndpoint ("/chat/websocket/{id}")
 public class ChatWebsocket
 {
-    // 3 minutes
-    private static final long    CHECK_INTERVAL = 180000;
-    private static final boolean TESTING        = DeveloperOptions.getTesting();
+    private static final boolean TESTING = DeveloperOptions.getTesting();
 
-    private static TrackedHashMap<String, Client> clients   = new TrackedHashMap<String, Client>();
-    private static CopyOnWriteArrayList<Message>  messages  = new CopyOnWriteArrayList<Message>();
-    private static Timestamp                      lastCheck = new Timestamp(System.currentTimeMillis());
-    private static boolean                        checking  = false;
+    private static TrackedHashMap<String, Client> clients  = new TrackedHashMap<String, Client>();
+    private static CopyOnWriteArrayList<Message>  messages = new CopyOnWriteArrayList<Message>();
 
     public static void main(String[] args)
     {
@@ -110,28 +105,17 @@ public class ChatWebsocket
         return clients.size();
     } // connectionCount()
 
-    private static void refresh()
+    private synchronized static void refresh()
     {
-        if(!checking)
-        {
-            checking = true;
-            // See if the last check was
-            if(lastCheck.compareTo(now()) + CHECK_INTERVAL < 0)
-            {
-                // Remove old messages
-                for(Message msg : messages)
-                    if(msg.isExpired())
-                        messages.remove(msg);
+        // Remove old messages
+        for(Message msg : messages)
+            if(msg.isExpired())
+                messages.remove(msg);
 
-                // Remove closed sessions / dead clients
-                for(Client c : clients)
-                    if(!c.isOpen())
-                        clients.remove(c.getID());
-
-                lastCheck = now();
-            }
-            checking = false;
-        }
+        // Remove closed sessions / dead clients
+        for(Client c : clients)
+            if(!c.isOpen())
+                clients.remove(c.getID());
     } // refresh()
 
     private WebsocketPackage parseMessage(Session session, String message)
@@ -210,10 +194,5 @@ public class ChatWebsocket
     {
         return input.substring(input.indexOf('|') + 1);
     } // getContent()
-
-    private static Timestamp now()
-    {
-        return new Timestamp(System.currentTimeMillis());
-    } // now()
 
 } // ChatWebsocket
