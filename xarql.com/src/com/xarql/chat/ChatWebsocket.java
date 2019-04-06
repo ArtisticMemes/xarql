@@ -83,6 +83,7 @@ public class ChatWebsocket
         if(TESTING)
             e.printStackTrace();
         clients.get(session.getId()).send(new ErrorReport(e));
+        onClose(session);
     } // onError()
 
     private static void broadcast(WebsocketPackage pkg)
@@ -115,7 +116,10 @@ public class ChatWebsocket
         // Remove closed sessions / dead clients
         for(Client c : clients)
             if(!c.isOpen())
+            {
+                ripple(new UserExit(c), c);
                 clients.remove(c.getID());
+            }
     } // refresh()
 
     private WebsocketPackage parseMessage(Session session, String message)

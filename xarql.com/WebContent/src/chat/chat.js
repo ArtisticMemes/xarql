@@ -41,7 +41,7 @@ $(document).ready(function () {
     wsSendMessage();
   });
 
-  $('#updates').append('<div class="small-card" id="status"><p class="status">Connecting...</p></div>');
+  $('#updates').prepend('<div class="small-card" id="status"><p class="status">Connecting...</p></div>');
   var webSocket;
   var protocol;
   if(domain.includes('https://'))
@@ -85,10 +85,10 @@ $(document).ready(function () {
     if(headers.get('TYPE') !== 'message')
     {
       if(headers.get('TYPE') === 'user_join') {
-        addUser(headers.get('client_color'));
+        addUser(headers.get('CLIENT_COLOR'));
       }
       else if(headers.get('TYPE') === 'user_exit') {
-        removeUser(headers.get('client_color'));
+        removeUser(headers.get('CLIENT_COLOR'));
       }
       else if(headers.get('TYPE') === 'users_report') {
         data = data.substr(7);
@@ -119,13 +119,13 @@ $(document).ready(function () {
         }
       }
       else {
-        $('#messages').append('<div class="small-card"><p class="status">' + data + '</p></div>');
+        $('#messages').prepend('<div class="small-card"><p class="status">' + data + '</p></div>');
       }
     }
     else {
       var color = headers.get('CLIENT_COLOR');
       var textColor = headers.get('TEXT_COLOR');
-      $('#messages').append('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + data + '</p></div>');
+      $('#messages').prepend('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + data + '</p></div>');
     }
   }
   function wsOpen(message) {
@@ -135,14 +135,14 @@ $(document).ready(function () {
     }, 3000);
   }
   function wsClose(message) {
-    $('#updates').append('<div class="small-card"><p class="warn">Disconnected</p></div>');
+    $('#updates').prepend('<div class="small-card"><p class="warn">Disconnected</p></div>');
     window.setTimeout(function () {
-      $('#updates').append('<div class="small-card"><p class="status">Reloading...</p></div>');
+      $('#updates').prepend('<div class="small-card"><p class="status">Reloading...</p></div>');
       location.reload();
     }, 3000);
   }
   function wsError(message) {
-    $('#updates').append('<div class="small-card"><p class="warn">Error!</p></div>');
+    $('#updates').prepend('<div class="small-card"><p class="warn">Error!</p></div>');
   }
 
   var canSendTyping = true;
