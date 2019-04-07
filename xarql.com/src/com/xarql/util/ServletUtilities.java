@@ -66,6 +66,14 @@ public class ServletUtilities
         return request.getParameter(param);
     } // useParam()
 
+    /**
+     * Tries to get a String from a parameter and add the parameter to the request
+     * as an attribute. Uses the fallback if the request doesn't have the parameter.
+     * 
+     * @param param The name of the parameter
+     * @param fallback A default
+     * @return The String held by the parameter
+     */
     public String useParam(String param, String fallback)
     {
         if(hasParam(param))
