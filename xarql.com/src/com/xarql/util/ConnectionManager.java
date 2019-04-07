@@ -7,10 +7,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Provides connections to the database. The database used is MariaDB.
+ * 
+ * @author Bryan Johnson
+ */
 public class ConnectionManager
 {
     private static Connection connection = null;
 
+    /**
+     * This method provides the connection. It tries to use the static connection
+     * variable to speed up database use.
+     * 
+     * @return A connection to the database
+     */
     public static Connection get()
     {
         if(connection == null)
@@ -29,6 +40,9 @@ public class ConnectionManager
         return connection;
     } // getConnection()
 
+    /**
+     * Closes the static connection variable
+     */
     public static void close()
     {
         if(connection != null)
