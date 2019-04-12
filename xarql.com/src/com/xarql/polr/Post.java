@@ -276,6 +276,29 @@ public class Post
         return getTitleText() + " ~ " + getContentText();
     } // toString()
 
+    public String replyStats()
+    {
+        String output = "";
+
+        // Replies
+        if(getResponses() == 0)
+            output += "No Replies";
+        else if(getResponses() == getSubresponses())
+            output += "Replies: " + getResponses();
+        else
+            output += "Replies: " + getResponses() + " ~ SubReplies: " + getSubresponses();
+
+        // Bump
+        if(getBump().equals(getDate()))
+            output += "";
+        else if(getBump().equals(getSubbump()))
+            output += " ~ Bump: " + timeSinceBump();
+        else
+            output += " ~ Bump: " + timeSinceBump() + " ~ SubBump: " + timeSinceSubbump();
+
+        return output;
+    } // replyStats()
+
     /* Static Methods Below */
 
     public static Post interperetPost(ResultSet rs) throws SQLException

@@ -51,8 +51,8 @@
       <div id="main-post">
       <c:forEach begin="0" var="post" items="${posts}" end="0">
 		  <div class="large-card">
-		    <p class="overline">ID : <span id="main-post-id">${post.getId()}</span> ~ <a href="${domain}/polr/${post.getAnswers()}" class="view-link" post-id="${post.getAnswers()}">Replied To : ${post.getAnswers()}</a> ~ Date : ${post.getDisplayDate()}</p>
-		    <p class="overline">Replies : <span id="reply-count">${post.getResponses()}</span> ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+		    <p class="overline">ID: <span id="main-post-id">${post.getId()}</span> ~ <a href="${domain}/polr/${post.getAnswers()}" class="view-link" post-id="${post.getAnswers()}">Replied To: ${post.getAnswers()}</a> ~ Date: ${post.getDisplayDate()}</p>
+        <p class="overline">${post.replyStats()}</p>
 		    <h6>${post.getTitle()}</h6>
 		    <p>${post.getContent()}</p>
         <c:if test="${post.isExpired()}">
@@ -118,8 +118,7 @@
       <div id="replies">
 		<c:forEach begin="1" var="post" items="${posts}">
 		  <div class="large-card">
-		    <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
-		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+		    <p class="overline">${post.replyStats()}</p>
         <c:if test="${post.isExpired()}"><p class="overline"><span class="warn">Expired</span></p></c:if>
         <div id="post-inner-${post.getId()}"<c:if test="${post.getWarning() != 'None'}">style="display:none;"</c:if>>
           <h6>${post.getTitle()}</h6>

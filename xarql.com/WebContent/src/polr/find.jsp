@@ -49,8 +49,8 @@
     <div id="results">
       <c:forEach begin="0" var="post" items="${posts}">
   		  <div class="large-card">
-  		    <p class="overline">ID : ${post.getId()} ~ Date : ${post.getDisplayDate()}</p>
-  		    <p class="overline">Replies : ${post.getResponses()} ~ SubReplies : ${post.getSubresponses()} ~ Bump : ${post.timeSinceBump()} ~ SubBump : ${post.timeSinceSubbump()}</p>
+  		    <p class="overline">ID: ${post.getId()} ~ Date: ${post.getDisplayDate()}</p>
+  		    <p class="overline">${post.replyStats()}</p>
           <c:if test="${post.isExpired()}"><p class="overline"><span class="warn">Expired</span></p></c:if>
           <div id="post-inner-${post.getId()}"<c:if test="${post.getWarning() != 'None'}">style="display:none;"</c:if>>
             <h6>${post.getTitle()}</h6>
