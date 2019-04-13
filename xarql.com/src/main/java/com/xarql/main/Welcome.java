@@ -9,7 +9,6 @@ import java.lang.management.ManagementFactory;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,6 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class Welcome
  */
-@WebServlet ("/Welcome")
 public class Welcome extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
