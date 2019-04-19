@@ -25,7 +25,7 @@ public class DeveloperOptions
     private static final String TEST_RECAPTCHA_SECRET = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
 
     // Assumed; may need to be changed
-    private static final String TEST_DOMAIN  = "http://localhost:8080/xarql.com";
+    private static final String TEST_DOMAIN  = "http://localhost:8080/main-site";
     private static final String TEST_CONTEXT = "/xarql.com";
 
     public static final String GOOGLE_ANALYTICS_ID = "UA-131023139-1";

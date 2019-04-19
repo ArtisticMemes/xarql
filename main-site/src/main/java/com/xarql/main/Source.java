@@ -69,7 +69,7 @@ public class Source extends HttpServlet
         }
 
         // Used for the MIME type of the response
-        String contentType = request.getServletContext().getMimeType(file.getName());
+        String contentType = getServletContext().getMimeType(file.getName());
 
         // Unsupported file type
         if(contentType == null)
