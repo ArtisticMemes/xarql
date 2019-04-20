@@ -184,8 +184,11 @@ public class TextFormatter
         while(m.find() && count < HASHTAG_LIMIT)
         {
             String match = m.group();
-            tags.add(match.substring(1));
-            count++;
+            if(!tags.contains(match.substring(1)))
+            {
+                tags.add(match.substring(1));
+                count++;
+            }
         }
         return tags;
     } // getHashtags()
