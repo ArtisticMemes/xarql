@@ -1,0 +1,2 @@
+CREATE TABLE chat(id int PRIMARY KEY AUTO_INCREMENT, message text(256) NOT NULL, date TIMESTAMP, session text(32) NOT NULL);
+CREATE TABLE polr(id int PRIMARY KEY AUTO_INCREMENT, title text(128), content text(4096) NOT NULL, answers int NOT NULL DEFAULT 0, date timestamp NOT NULL DEFAULT NOW(), bump timestamp NOT NULL DEFAULT NOW(), subbump timestamp NOT NULL DEFAULT NOW(), responses int NOT NULL DEFAULT 0, subresponses int NOT NULL DEFAULT 0);

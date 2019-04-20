@@ -1,0 +1,14 @@
+CREATE TABLE ip_tracking(id int PRIMARY KEY AUTO_INCREMENT, submission_id int, submission_type text, address text, session_cookie text, date timestamp);
+
+CREATE TABLE flag(id int PRIMARY KEY AUTO_INCREMENT, type text(128), post_id int, content text(512), done int, date timestamp);
+
+CREATE TABLE polr_tags_relations(id int PRIMARY KEY AUTO_INCREMENT, tag int, post_id int, content text(32));
+
+CREATE TABLE polr_tags(id int PRIMARY KEY AUTO_INCREMENT, content text(16), count int, date timestamp);
+
+
+CONSTRAINT FK_TagExistence FOREIGN KEY (tag)
+REFERENCES polr_tags(tag)
+
+CONSTRAINT FK_PostExistence FOREIGN KEY (id)
+REFERENCES polr(id)
