@@ -52,7 +52,7 @@ public class TextFormatter
             outputParts.add(input.substring(prevEnd, start));
             if(!match.startsWith("https://") && !match.startsWith("http://"))
                 match = "//" + match;
-            outputParts.add("<a class=\"out-link\" href=\"" + match + "\">" + match + "</a>");
+            outputParts.add("<a href=\"" + match + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -80,7 +80,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a class=\"photo-link\" href=\"https://xarql.net/" + match.substring(1) + "\" data=\"" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"https://xarql.net/" + match.substring(1) + "\" data=\"" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -135,7 +135,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a class=\"user-link\" href=\"{DOMAIN}/user/view?name=" + match.substring(1) + "\" data=\"" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"{DOMAIN}/user/view?name=" + match.substring(1) + "\" data=\"" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -144,7 +144,7 @@ public class TextFormatter
             output += item;
 
         return output;
-    } // clickableHashtags
+    } // clickableUsers
 
     public static String clickableHashtags(String input)
     {
@@ -163,7 +163,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a class=\"hash-link\" href=\"{DOMAIN}/polr/hash?tag=" + match.substring(1) + "\" data=\"" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"{DOMAIN}/polr/hash?tag=" + match.substring(1) + "\" data=\"" + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -179,11 +179,13 @@ public class TextFormatter
         ArrayList<String> tags = new ArrayList<String>(); // tags to be returned
         Pattern p = Pattern.compile(HASHTAG_REGEX); // the pattern to search for
         Matcher m = p.matcher(input);
+        int count = 0;
         // if we find a match, add it to tags
-        while(m.find())
+        while(m.find() && count < HASHTAG_LIMIT)
         {
             String match = m.group();
             tags.add(match.substring(1));
+            count++;
         }
         return tags;
     } // getHashtags()
