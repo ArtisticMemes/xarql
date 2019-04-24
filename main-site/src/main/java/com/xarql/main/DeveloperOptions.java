@@ -26,7 +26,7 @@ public class DeveloperOptions
 
     // Assumed; may need to be changed
     private static final String TEST_DOMAIN  = "http://localhost:8080/main-site";
-    private static final String TEST_CONTEXT = "/xarql.com";
+    private static final String TEST_CONTEXT = "/main-site";
 
     public static final String GOOGLE_ANALYTICS_ID = "UA-131023139-1";
 

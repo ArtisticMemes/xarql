@@ -8,6 +8,7 @@ import java.lang.management.ManagementFactory;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
 import com.xarql.user.AccountCounter;
+import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -35,6 +37,13 @@ public class Welcome extends HttpServlet
     {
         super();
     } // Welcome()
+
+    @Override
+    public void init(ServletConfig config) throws ServletException
+    {
+        super.init(config);
+        JSPBuilder.build("/welcome/welcome", getServletContext());
+    } // init()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
