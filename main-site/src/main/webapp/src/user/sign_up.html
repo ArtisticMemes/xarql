@@ -1,0 +1,39 @@
+<title>Sign Up ~ xarql</title>
+<!-- END HEAD -->
+<div class="large-card">
+    <h4>Sign Up</h4>
+    <form class="user-form" action="${domain}/user/sign_up/form" method="POST" accept-charset="UTF-8" spellcheck="false">
+        <input type="text" name="username" placeholder="Username" minlength="1" maxlength="128" required value="${prefill}">
+        <input id="password" type="password" name="password" placeholder="Password" minlength="6" maxlength="128" required>
+        <input id="password_confirmation" type="password" name="retype" placeholder="Retype Password" required>
+        <input type="submit" class="button" value="Sign Up">
+    </form>
+    <p>Want to log in to an account? <a href="${domain}/user/log_in">Log In</a></p>
+</div>
+<c:if test="${not empty fail}">
+    <div class="small-card">
+        <h5 class="warn">Error:</h5>
+        <p>${fail}</p>
+    </div>
+</c:if>
+<c:if test="${account_name != 'Unknown'}">
+    <div class="small-card">
+        <p>Currently logged in as <a href="${domain}/user">@${account_name}</a>.</p>
+        <p>You must <a href="${domain}/user/act?type=log_out">log out</a> before making a new account.</p>
+    </div>
+</c:if>
+<script>
+    var password = document.getElementById("password"),
+        confirm_password = document.getElementById("password_confirmation");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>

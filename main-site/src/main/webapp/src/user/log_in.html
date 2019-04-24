@@ -1,0 +1,22 @@
+<title>Log In ~ xarql</title>
+<!-- END HEAD -->
+<div class="large-card">
+    <h4>Log In</h4>
+    <form class="user-form" action="${domain}/user/log_in/form" method="POST" accept-charset="UTF-8" spellcheck="false">
+        <input type="text" name="username" placeholder="Username" required value="${prefill}">
+        <input id="password" type="password" name="password" placeholder="Password" required>
+        <input type="submit" class="button" value="Log In">
+    </form>
+    <p>Need to register an account? <a href="${domain}/user/sign_up">Sign Up</a></p>
+</div>
+<c:if test="${not empty fail}">
+    <div class="small-card">
+        <h5 class="warn">Error:</h5>
+        <p>${fail}</p>
+    </div>
+</c:if>
+<c:if test="${account_name != 'Unknown'}">
+    <div class="small-card">
+        <p>Currently logged in as <a href="${domain}/user">@${account_name}</a>.</p>
+    </div>
+</c:if>
