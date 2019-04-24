@@ -5,6 +5,7 @@ package com.xarql.main;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthSession;
+import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -29,7 +31,14 @@ public class Chat extends HttpServlet
     public Chat()
     {
         super();
-    }
+    } // Chat()
+
+    @Override
+    public void init(ServletConfig config) throws ServletException
+    {
+        super.init(config);
+        JSPBuilder.build("/chat/chat", getServletContext());
+    } // init()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

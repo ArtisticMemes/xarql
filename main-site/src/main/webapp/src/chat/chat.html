@@ -1,0 +1,68 @@
+<title>Chat ~ xarql</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer=""></script>
+<script src="${domain}/src/common/jscookie.js" defer=""></script>
+<script src="${domain}/src/chat/chat.min.js" defer=""></script>
+<style>
+  #column {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: auto;
+  }
+  #text-entry {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 1rem;
+  }
+</style>
+<!-- END HEAD -->
+<div id="messages">
+</div>
+<div id="updates">
+</div>
+<div class="small-card" id="text-entry">
+    <div id="users">
+    </div>
+    <form id="message-form">
+        <input id="message" autocomplete="off" spellcheck="true" type="text" name="message" placeholder="Message" maxlength="128" style="width:100%;">
+        <input id="send-button" value="Send" type="button" class="button">
+    </form>
+    <c:if test="${account_name != 'Unknown'}">
+        <p>Currently logged in as <a href="${domain}/user">@${account_name}</a></p>
+    </c:if>
+    <p>
+        <a href="${domain}/help/chat">Help</a>
+        <span class="status" style="display:none;"></span>
+        <span class="ajax-bar" style="display:none">
+          <a id="option-pane-open-button" style="margin-left:1em;">Options</a>
+        </span>
+    </p>
+</div>
+<div class="large-card" id="option-pane" style="display:none;position:relative;">
+    <table>
+        <tr>
+            <td>
+                <p>Size</td>
+            <td><span style="letter-spacing:1em">:</span></td>
+            <td><a class="spacey-link" id="text-up">↑</a><a class="spacey-link" id="text-dn">↓</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Font</td>
+            <td>:</td>
+            <td><a class="spacey-link" id="font-light-button">Light</a><a class="spacey-link" id="font-normal-button">Normal</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Theme</td>
+            <td>:</td>
+            <td>
+                <a class="theme-button" id="light-theme-button" data="light">Light</a>
+                <a class="theme-button" id="dark-theme-button" data="dark">Dark</a>
+                <a class="theme-button" id="rainbow-theme-button" data="rainbow">Rainbow</a>
+            </td>
+        </tr>
+    </table>
+    <p><span style="position:absolute;bottom:0.8rem;right:2rem;"><a id="option-pane-close-button">Close</a></span></p>
+</div>

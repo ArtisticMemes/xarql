@@ -1,0 +1,35 @@
+<meta id="redirect" value="${redirect}">
+<title>Authentication ~ xarql</title>
+<!-- END HEAD -->
+<c:if test="${auth == true}">
+    <div class="small-card">
+        <h4 class="centered" id="notice">You Are Authorized</h4></div>
+</c:if>
+<c:if test="${auth == false}">
+    <div class="small-card">
+        <h4 class="centered" id="notice">You Are Not Authorized</h4></div>
+</c:if>
+<div class="large-card">
+    <br>
+    <form action="${domain}/auth/recaptcha" method="POST" id="recaptcha-form">
+        <div class="centered">
+            <div data-theme="${theme}" class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="${recaptcha_key}"></div>
+            <input id='recaptcha_check_empty' required="" tabindex='-1' style='width:50px; height:0; opacity:0; pointer-events:none; position:absolute; bottom:0;'>
+        </div>
+    </form>
+    <p class="centered" id="status-p"><a href="#" id="check-status" onclick="checkStatus();">Check Status</a></p>
+    <div class="link-div">
+        <span class="link-span">
+              <p class="link"><a href="${domain}/chat">chat</a></p>
+              <p class="link"><a href="#" onclick="history.back()">Return</a></p>
+              <p class="link"><a href="${domain}/polr">polr</a></p>
+            </span>
+    </div>
+</div>
+<c:if test="${account_name != 'Unknown'}">
+    <div class="small-card">
+        <p>Currently logged in as @${account_name}</p>
+    </div>
+</c:if>
+<script src="${domain}/src/auth/auth.min.js" defer=""></script>
+<script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
