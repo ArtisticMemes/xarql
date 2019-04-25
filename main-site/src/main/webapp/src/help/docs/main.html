@@ -1,0 +1,13 @@
+<title>Help Main Page ~ xarql</title>
+<!-- END HEAD -->
+<div class="large-card">
+    <h2 class="centered">Home</h2>
+    <p class="centered">Welcome to the xarql wiki!</p>
+    <p>It's suggested that if you're unfamiliar with the site that you browse through it while reading these pages to gain deeper knowledge about what you're viewing.</p>
+</div>
+<div class="large-card">
+    <h3>Topics</h3>
+    <c:forEach begin="0" var="page" items="${pages}">
+        <p><a href="${domain}/help/${page}">${page}</a></p>
+    </c:forEach>
+</div>

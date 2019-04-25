@@ -12,7 +12,7 @@
     gtag('config', '${google_analytics_id}');
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Help Main Page ~ xarql</title>
+  <title>Help (${topic}) ~ xarql</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
   <link rel="stylesheet" type="text/css" href="${domain}/src/common/${theme}-common.min.css">
@@ -35,17 +35,10 @@
   <div id="wrapper">
     <div id="column">
       <div class="large-card">
-        <h2 class="centered">Home</h2><p class="centered">Welcome to the xarql wiki!</p><p>It's suggested that if you're unfamiliar with the site that you browse through it while reading these pages to gain deeper knowledge about what you're viewing.</p>
+        <!-- INSERT MARKDOWN -->
       </div>
-      <div class="large-card">
-        <h3>Topics</h3>
-        <p><a href="${domain}/help/polr">/polr</a></p>
-        <p><a href="${domain}/help/account">/user</a></p>
-        <p><a href="${domain}/help/chat">/chat</a></p>
-        <p><a href="${domain}/help/net">.net</a></p>
-        <p><a href="${domain}/help/markdown">MarkDown</a></p>
-        <p><a href="${domain}/help/textformatter">TextFormatter</a></p>
-        <p><a href="${domain}/help/parameters">HTML Parameters</a></p>
+      <div class="small-card">
+        <a style="margin-top:0.5em;" class="centered" href="${domain}/help/main"><span class="italic">Main Help Page</span></a>
       </div>
     </div>
   </div>

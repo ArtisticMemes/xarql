@@ -1,0 +1,3 @@
+#### Disclaimer
+
+xarql.com does not make any guarantees as to the quality of its user generated content (UGC). As such, you may find content which you consider objectionable or offensive where UGC is displayed. Please discontinue use of the site if you are uncomfortable with this content, as xarql.com may not have the tools or human resources required to moderate UGC. UGC is included on [/polr](http://xarql.com/polr) and [/chat](http://xarql.com/chat)
