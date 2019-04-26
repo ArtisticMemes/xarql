@@ -22,11 +22,16 @@ public class TextFormatter
         System.out.println(full(test));
     } // main()
 
-    public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_+]+)*";
-    public static final int    HASHTAG_LIMIT = 5;
+    public static final int HASHTAG_LIMIT = 5;
+
+    public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\.[a-zA-Z0-9-_]{1,4})?(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_+]+)*";
     public static final String PHOTO_REGEX   = "\\$[0-1][0-9a-zA-Z]+";
     public static final String HASHTAG_REGEX = "(?>#[a-z0-9-_]+)(?!;)";
     public static final String USER_REGEX    = "(?>@[a-z0-9-_]+)";
+
+    public static final String PHOTO_PRE_LINK   = "https://xarql.net/";
+    public static final String HASHTAG_PRE_LINK = "{DOMAIN}/polr/hash?tag=";
+    public static final String USER_PRE_LINK    = "{DOMAIN}/user/view?name=";
 
     public static String processMarkdown(String input)
     {
@@ -65,65 +70,25 @@ public class TextFormatter
 
     public static String quickPic(String input)
     {
-        String output = "";
-        ArrayList<String> outputParts = new ArrayList<String>();
-        Pattern p = Pattern.compile(PHOTO_REGEX); // the pattern to search for
-        Matcher m = p.matcher(input);
-        int start = 0;
-        int prevEnd = 0;
-        int end = 0;
-        // if we find a match, get the group
-        while(m.find())
-        {
-            String match = m.group();
-            start = m.start();
-            end = m.end();
-            outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"https://xarql.net/" + match.substring(1) + "\">" + match + "</a>");
-            prevEnd = end;
-        }
-        outputParts.add(input.substring(end));
-
-        for(String item : outputParts)
-            output += item;
-
-        return output;
+        return linkShortcut(PHOTO_REGEX, PHOTO_PRE_LINK, input);
     } // quickPic()
-
-    public static String clickableUsers(String input)
-    {
-        String output = "";
-        ArrayList<String> outputParts = new ArrayList<String>();
-        Pattern p = Pattern.compile(USER_REGEX); // the pattern to search for
-        Matcher m = p.matcher(input);
-        int start = 0;
-        int prevEnd = 0;
-        int end = 0;
-        // if we find a match, get the group
-        while(m.find())
-        {
-            String match = m.group();
-            start = m.start();
-            end = m.end();
-            outputParts.add(input.substring(prevEnd, start));
-
-            outputParts.add("<a href=\"{DOMAIN}/user/view?name=" + match.substring(1) + "\">" + match + "</a>");
-            prevEnd = end;
-        }
-        outputParts.add(input.substring(end));
-
-        for(String item : outputParts)
-            output += item;
-
-        return output;
-    } // clickableUsers
 
     public static String clickableHashtags(String input)
     {
+        return linkShortcut(HASHTAG_REGEX, HASHTAG_PRE_LINK, input);
+    } // clickableHashtags()
+
+    public static String clickableUsers(String input)
+    {
+        return linkShortcut(USER_REGEX, USER_PRE_LINK, input);
+    } // clickableUsers()
+
+    public static String linkShortcut(String regex, String preLink, String input)
+    {
         String output = "";
         ArrayList<String> outputParts = new ArrayList<String>();
-        Pattern p = Pattern.compile(HASHTAG_REGEX); // the pattern to search for
+        Pattern p = Pattern.compile(regex); // the pattern to search for
         Matcher m = p.matcher(input);
         int start = 0;
         int prevEnd = 0;
@@ -136,7 +101,7 @@ public class TextFormatter
             end = m.end();
             outputParts.add(input.substring(prevEnd, start));
 
-            outputParts.add("<a href=\"{DOMAIN}/polr/hash?tag=" + match.substring(1) + "\">" + match + "</a>");
+            outputParts.add("<a href=\"" + preLink + match.substring(1) + "\">" + match + "</a>");
             prevEnd = end;
         }
         outputParts.add(input.substring(end));
@@ -145,7 +110,7 @@ public class TextFormatter
             output += item;
 
         return output;
-    } // clickableHashtags
+    } // linkShortcut()
 
     public static ArrayList<String> getHashtags(String input)
     {
