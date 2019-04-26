@@ -27,7 +27,7 @@ public class WebsocketPackage
     public WebsocketPackage(String content)
     {
         this(content, null);
-    } // Websocket(String)
+    } // WebsocketPackage(String)
 
     public WebsocketPackage(Client source)
     {
@@ -90,7 +90,7 @@ public class WebsocketPackage
     private void setType()
     {
         setHeader(Headers.TYPE, determineType());
-    };
+    } // setType()
 
     private static String textColor(Client client)
     {

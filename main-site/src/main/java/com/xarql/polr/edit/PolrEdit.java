@@ -28,7 +28,7 @@ public class PolrEdit extends HttpServlet
     public PolrEdit()
     {
         super();
-    }
+    } // PolrEdit()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

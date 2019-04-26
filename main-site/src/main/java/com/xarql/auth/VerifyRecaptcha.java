@@ -23,7 +23,7 @@ import com.xarql.main.DeveloperOptions;
 
 public class VerifyRecaptcha
 {
-    private static String SECRET = DeveloperOptions.getRecaptchaSecret();
+    private static final String SECRET = DeveloperOptions.getRecaptchaSecret();
 
     public static boolean verify(String response)
     {
