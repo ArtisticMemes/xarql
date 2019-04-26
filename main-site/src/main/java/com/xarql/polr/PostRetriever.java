@@ -3,18 +3,14 @@
  */
 package com.xarql.polr;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletResponse;
+import com.xarql.util.DatabaseQuery;
 
-import com.xarql.util.ConnectionManager;
-
-public class PostRetriever
+public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
 {
     // Request Parameters
     private int    id;
@@ -22,6 +18,8 @@ public class PostRetriever
     private String flow;
     private int    postSkipCount;
     private int    postCount;
+
+    private ArrayList<Post> posts;
 
     // Defaults and Limits
     private static final int   DEFAULT_ID              = 0;
@@ -103,77 +101,51 @@ public class PostRetriever
     } // setPostCount(int postCount)
 
     // Return a specific set of posts
-    public ArrayList<Post> execute(HttpServletResponse response)
+    @Override
+    public boolean execute()
     {
         int page = postSkipCount / postCount;
         if(PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page) != null)
-            return PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page);
+        {
+            posts = PageCache.getPageAsList(id + "|" + sort + "|" + flow + "|" + page);
+            return true;
+        }
         else
         {
-            ArrayList<Post> posts = new ArrayList<Post>();
-            posts.addAll(sqlQuery("SELECT * FROM polr WHERE id=?", id, response));
-            posts.addAll(sqlQuery("SELECT * FROM polr WHERE removed=0 AND answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount, id, response));
-            PageCache pc = new PageCache(id, sort, flow, page, posts);
-            return posts;
+            posts = new ArrayList<Post>();
+            setCommand("SELECT * FROM polr WHERE id=?");
+            if(makeRequest())
+            {
+                setCommand("SELECT * FROM polr WHERE removed=0 AND answers=? ORDER BY " + sort + " " + flow + " LIMIT " + postSkipCount + ", " + postCount);
+                if(makeRequest())
+                {
+                    new PageCache(id, sort, flow, page, posts);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
         }
     } // ArrayList execute(HttpServletResponse response)
 
-    private ArrayList<Post> sqlQuery(String query, int id, HttpServletResponse response)
+    @Override
+    protected void processResult(ResultSet rs) throws SQLException
     {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        ArrayList<Post> posts = new ArrayList<Post>();
+        posts.add(Post.interperetPost(rs));
+    } // rs()
 
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(query);
-
-            statement.setInt(1, id);
-
-            rs = statement.executeQuery();
-            while(rs.next())
-                posts.add(Post.interperetPost(rs));
-
-        }
-        catch(SQLException s)
-        {
-            posts.clear();
-            try
-            {
-                response.sendError(500);
-                return posts;
-            }
-            catch(IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return posts;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(statement != null)
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-        }
-
+    @Override
+    public ArrayList<Post> getData()
+    {
         return posts;
-    } // ArrayList sqlQuery(String query, int id, HttpServletResponse response)
+    } // getData()
+
+    @Override
+    protected void setVariables(PreparedStatement statement) throws SQLException
+    {
+        statement.setInt(1, id);
+    } // setVariables()
 
 } // PostRetriever

@@ -4,7 +4,6 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
@@ -74,13 +73,17 @@ public class Updt extends HttpServlet
             int postSkipCount = page * PathReader.POSTS_PER_PAGE;
             int postCount = PathReader.POSTS_PER_PAGE;
             PostRetriever ps = new PostRetriever(id, sort, flow, postSkipCount, postCount);
-            ArrayList<Post> posts = ps.execute(response);
-            request.setAttribute("posts", posts);
-            if(posts.size() > 0)
-                request.getRequestDispatcher("/src/polr/updt.jsp").forward(request, response);
+            if(ps.execute())
+            {
+                request.setAttribute("posts", ps.getData());
+                if(ps.getData().size() > 0)
+                    request.getRequestDispatcher("/src/polr/updt.jsp").forward(request, response);
+                else
+                    response.sendError(404);
+                return;
+            }
             else
-                response.sendError(404);
-            return;
+                response.sendError(500);
         }
     } // doGet()
 

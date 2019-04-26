@@ -4,7 +4,6 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -102,13 +101,17 @@ public class PathReader extends HttpServlet
             }
             request.setAttribute("id", id);
             PostRetriever ps = new PostRetriever(id, sort, flow, postSkipCount, postCount);
-            ArrayList<Post> posts = ps.execute(response);
-            request.setAttribute("posts", posts);
-            if(posts.size() > 0)
-                request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
+            if(ps.execute())
+            {
+                request.setAttribute("posts", ps.getData());
+                if(ps.getData().size() > 0)
+                    request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
+                else
+                    response.sendError(404);
+                return;
+            }
             else
-                response.sendError(404);
-            return;
+                response.sendError(500);
         }
         else if(pathParts.length > 2)
         {
@@ -120,7 +123,6 @@ public class PathReader extends HttpServlet
             response.sendRedirect(DOMAIN + "/polr/0");
             return;
         }
-
     } // doGet()
 
     /**
