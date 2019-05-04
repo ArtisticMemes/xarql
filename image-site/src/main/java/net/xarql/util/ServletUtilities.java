@@ -25,8 +25,8 @@ public class ServletUtilities
     public static void standardSetup(HttpServletRequest request)
     {
         request.setAttribute("domain", DOMAIN);
-        request.setAttribute("google_analytics_id", DeveloperOptions.getGoogleAnalyticsID());
-        request.setAttribute("recaptcha_key", DeveloperOptions.getRecaptchaKey());
+        request.setAttribute("google_analytics_id", GOOGLE_ANALYTICS_ID);
+        request.setAttribute("recaptcha_key", RECAPTCHA_KEY);
         request.setAttribute("authenticated", isAuth(request));
     } // standardSetup()
 
