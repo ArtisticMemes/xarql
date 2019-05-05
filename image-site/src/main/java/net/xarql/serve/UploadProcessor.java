@@ -39,8 +39,8 @@ public class UploadProcessor extends HttpServlet
     private static HashMap<String, Integer> highestImageID = new HashMap<String, Integer>();
     private static boolean                  firstRun       = true;
 
-    private static final String FILE_STORE = DeveloperOptions.FILE_STORE;
-    private static final String DOMAIN     = DeveloperOptions.DOMAIN;
+    private static final String FILE_STORE = DeveloperOptions.getFileStore();
+    private static final String DOMAIN     = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -85,7 +85,7 @@ public class UploadProcessor extends HttpServlet
                 fileType = getFileType(part);
                 if(!fileType.equals(".jpg") && !fileType.equals(".png"))
                 {
-                    response.sendError(400);
+                    response.sendError(400, "Uploaded file was of invalid type " + fileType);
                     return;
                 }
                 if(fileType != null && !fileType.equals(""))
@@ -137,7 +137,7 @@ public class UploadProcessor extends HttpServlet
             {
                 String name = content.substring(content.indexOf("=") + 2, content.length() - 1);
                 name = name.substring(name.indexOf('.')).toLowerCase();
-                if(name == ".jpeg")
+                if(name.equals(".jpeg"))
                     name = ".jpg";
                 return name;
             }

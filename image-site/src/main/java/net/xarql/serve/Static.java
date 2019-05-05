@@ -30,11 +30,11 @@ public class Static extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final int     BUFFER_SIZE        = 5120;                       // 5KB
-    private static final String FILE_STORE         = DeveloperOptions.FILE_STORE;
+    public static final int     BUFFER_SIZE        = 5120;                           // 5KB
+    private static final String FILE_STORE         = DeveloperOptions.getFileStore();
     private static final String NOT_FOUND_FILENAME = "not_found";
 
-    private static final String DOMAIN = DeveloperOptions.DOMAIN;
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

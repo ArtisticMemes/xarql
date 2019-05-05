@@ -6,7 +6,7 @@ import net.xarql.auth.AuthTable;
 
 public class ServletUtilities
 {
-    private static final String DOMAIN              = DeveloperOptions.DOMAIN;
+    private static final String DOMAIN              = DeveloperOptions.getDomain();
     private static final String GOOGLE_ANALYTICS_ID = DeveloperOptions.getGoogleAnalyticsID();
     private static final String RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
 

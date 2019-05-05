@@ -29,8 +29,8 @@ public class Source extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final int    INPUT_BUFFER = 65536;                  // 64KB
-    private static final String DOMAIN       = DeveloperOptions.DOMAIN;
+    private static final int    INPUT_BUFFER = 65536;                       // 64KB
+    private static final String DOMAIN       = DeveloperOptions.getDomain();
 
     private static String lastModified;
 

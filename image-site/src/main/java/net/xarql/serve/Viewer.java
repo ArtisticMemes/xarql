@@ -23,7 +23,7 @@ public class Viewer extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final String DOMAIN = DeveloperOptions.DOMAIN;
+    public static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

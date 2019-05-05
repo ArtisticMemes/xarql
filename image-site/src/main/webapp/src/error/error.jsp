@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,6 +25,7 @@
       <h4 class="centered" id="error-title">Error</h5>
       <h1 class="centered" id="error-code">${code}</h1>
       <h5 class="centered">${type}</h4>
+      <p class="centered"><c:out value="${requestScope['javax.servlet.error.message']}"/></p>
       <div class="link-div">
         <span class="link-span">
           <p class="link"><a href="https://xarql.com/help">Help</a></p>

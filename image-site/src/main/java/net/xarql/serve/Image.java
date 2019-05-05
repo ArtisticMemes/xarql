@@ -4,7 +4,7 @@ import net.xarql.util.DeveloperOptions;
 
 public class Image
 {
-    private static final String   DOMAIN      = DeveloperOptions.DOMAIN;
+    private static final String   DOMAIN      = DeveloperOptions.getDomain();
     private static final String[] VALID_TYPES = {
             "jpg", "png"
     };

@@ -29,8 +29,7 @@ public class Error extends HttpServlet
     public Error()
     {
         super();
-        // TODO Auto-generated constructor stub
-    }
+    } // Error()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
