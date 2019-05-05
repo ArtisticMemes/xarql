@@ -2,7 +2,7 @@ package net.xarql.util;
 
 public class DeveloperOptions
 {
-    public static final boolean TESTING = false;
+    public static final boolean TESTING = true;
 
     // Paths
     private static final String DOMAIN      = "https://xarql.net";

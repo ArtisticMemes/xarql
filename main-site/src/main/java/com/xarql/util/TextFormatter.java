@@ -182,6 +182,7 @@ public class TextFormatter
         String output = input.trim();
         output = clean(output);
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
+        output = output.replaceAll("-->", "→"); // Shortcut for unicode arrow
         output = autoLinks(output);
         output = clickableHashtags(output);
         output = clickableUsers(output);
