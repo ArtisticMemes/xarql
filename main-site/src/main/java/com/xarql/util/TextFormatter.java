@@ -180,9 +180,9 @@ public class TextFormatter
     public static String full(String input)
     {
         String output = input.trim();
+        output = output.replace("-->", "→"); // Shortcut for unicode arrow
         output = clean(output);
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
-        output = output.replaceAll("-->", "→"); // Shortcut for unicode arrow
         output = autoLinks(output);
         output = clickableHashtags(output);
         output = clickableUsers(output);
