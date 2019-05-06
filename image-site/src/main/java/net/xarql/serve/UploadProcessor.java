@@ -31,7 +31,7 @@ import net.xarql.util.ServletUtilities;
  * Servlet implementation class Upload
  */
 @WebServlet ("/Upload")
-@MultipartConfig (fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig (fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -115,8 +115,8 @@ public class UploadProcessor extends HttpServlet
     // Get accurate image counts
     private static void initialize()
     {
-        setHighestImageID(getHighestImageID(false, FileType.JPG), FileType.JPG);
-        setHighestImageID(getHighestImageID(false, FileType.PNG), FileType.PNG);
+        for(FileType extension : FileType.values())
+            setHighestImageID(getHighestImageID(false, extension), extension);
     } // init()
 
     private static FileType getFileType(Part part)
@@ -172,10 +172,9 @@ public class UploadProcessor extends HttpServlet
                         }
                     }
                 }
-
                 catch(IOException e)
                 {
-                    e.printStackTrace();
+                    // do nothing
                 }
                 try
                 {
@@ -186,7 +185,7 @@ public class UploadProcessor extends HttpServlet
                 }
                 catch(IOException e)
                 {
-                    e.printStackTrace();
+                    // do nothing
                 }
             }
             return maxFolderID;

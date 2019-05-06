@@ -61,16 +61,24 @@ public class DeveloperOptions
     {
         try
         {
-            String[] output = new URI(getDomain()).getPath().split("/");
-            if(output[0].equals(""))
+            if(getDomain().equals(DOMAIN))
             {
-                // Shift array to the left by 1
-                for(int i = 0; i < output.length - 1; i++)
-                    output[i] = output[i + 1];
-                // Remove last index
-                output = Arrays.copyOf(output, output.length - 1);
+                return new String[]{ };
             }
-            return output;
+            else
+            {
+                String path = new URI(getDomain()).getPath();
+                String[] output = path.split("/");
+                if(output[0].equals(""))
+                {
+                    // Shift array to the left by 1
+                    for(int i = 0; i < output.length - 1; i++)
+                        output[i] = output[i + 1];
+                    // Remove last index
+                    output = Arrays.copyOf(output, output.length - 1);
+                }
+                return output;
+            }
         }
         catch(URISyntaxException e)
         {

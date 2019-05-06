@@ -47,7 +47,7 @@ public class Viewer extends HttpServlet
 
         String URI = request.getRequestURI();
         String[] pathParts = URI.split("/");
-        if(pathParts[0].equals(""))
+        if(pathParts.length > 0 && pathParts[0].equals(""))
         {
             // Shift array to the left by 1
             for(int i = 0; i < pathParts.length - 1; i++)
@@ -58,9 +58,8 @@ public class Viewer extends HttpServlet
 
         if(pathParts.length - BASE.length == 0)
             response.sendRedirect(DOMAIN + "/-/upload");
-        else
+        else if(pathParts.length - BASE.length == 1)
         {
-
             String id = pathParts[pathParts.length - 1].substring(1);
             String type = pathParts[pathParts.length - 1].substring(0, 1);
             request.setAttribute("loc", type + id); // locator
@@ -97,7 +96,17 @@ public class Viewer extends HttpServlet
             request.setAttribute("id", id);
             request.setAttribute("type", extension.getExtension());
             response.setHeader("Cache-Control", "public, max-age=86400");
-            request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
+            if(extension == FileType.JPG || extension == FileType.PNG)
+                request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
+            else if(extension == FileType.MP3)
+                request.getRequestDispatcher("/src/viewer/audio.jsp").forward(request, response);
+            else
+                response.sendError(500, "Missing branches for some FileType enumeration in Viewer.java");
+        }
+        else
+        {
+            response.sendError(400, "Too many path elements.");
+            return;
         }
     } // doGet()
 

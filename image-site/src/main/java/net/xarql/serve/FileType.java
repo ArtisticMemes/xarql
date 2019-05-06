@@ -7,7 +7,7 @@ enum FileType
 {
     JPG(new String[]{
             "jpg", "jpeg"
-    }), PNG("png");
+    }), PNG("png"), MP3("mp3");
 
     private String   extension;
     private String[] aliases;
