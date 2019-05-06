@@ -1,5 +1,9 @@
 package net.xarql.util;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+
 public class DeveloperOptions
 {
     public static final boolean TESTING = true;
@@ -52,5 +56,27 @@ public class DeveloperOptions
         else
             return FILE_STORE;
     } // getFileStore()
+
+    public static String[] getBase()
+    {
+        try
+        {
+            String[] output = new URI(getDomain()).getPath().split("/");
+            if(output[0].equals(""))
+            {
+                // Shift array to the left by 1
+                for(int i = 0; i < output.length - 1; i++)
+                    output[i] = output[i + 1];
+                // Remove last index
+                output = Arrays.copyOf(output, output.length - 1);
+            }
+            return output;
+        }
+        catch(URISyntaxException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 } // DeveloperOptions

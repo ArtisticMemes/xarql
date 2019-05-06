@@ -4,6 +4,7 @@
 package net.xarql.serve;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,8 @@ public class Viewer extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final String DOMAIN = DeveloperOptions.getDomain();
+    private static final String   DOMAIN = DeveloperOptions.getDomain();
+    private static final String[] BASE   = DeveloperOptions.getBase();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,8 +47,16 @@ public class Viewer extends HttpServlet
 
         String URI = request.getRequestURI();
         String[] pathParts = URI.split("/");
+        if(pathParts[0].equals(""))
+        {
+            // Shift array to the left by 1
+            for(int i = 0; i < pathParts.length - 1; i++)
+                pathParts[i] = pathParts[i + 1];
+            // Remove last index
+            pathParts = Arrays.copyOf(pathParts, pathParts.length - 1);
+        }
 
-        if(pathParts.length == 0)
+        if(pathParts.length - BASE.length == 0)
             response.sendRedirect(DOMAIN + "/-/upload");
         else
         {
