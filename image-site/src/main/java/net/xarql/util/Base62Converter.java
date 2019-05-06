@@ -29,7 +29,7 @@ public class Base62Converter
             else if(input.charAt(i) >= 97 && input.charAt(i) <= 122)
                 charValue = input.charAt(i) - 61;
             else
-                throw new IllegalArgumentException("Illegal Character:" + input.charAt(i));
+                throw new IllegalArgumentException("Illegal Character : " + input.charAt(i));
             int weight = (input.length() - 1) - i;
             output += charValue * pow(62, weight);
         }

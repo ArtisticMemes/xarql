@@ -55,22 +55,20 @@ public class Viewer extends HttpServlet
             String type = pathParts[pathParts.length - 1].substring(0, 1);
             request.setAttribute("loc", type + id); // locator
 
-            switch(type)
+            FileType extension;
+            try
             {
-                case "0" :
-                    type = "jpg";
-                    break;
-                case "1" :
-                    type = "png";
-                    break;
-                default :
-                    response.sendError(400);
-                    return;
+                extension = FileType.parseInt(type);
+            }
+            catch(IllegalArgumentException e)
+            {
+                response.sendError(400, e.getMessage());
+                return;
             }
 
             if(id == null || id.length() == 0)
             {
-                response.sendError(400);
+                response.sendError(400, "ID of media was not provided");
                 return;
             }
             else
@@ -81,13 +79,13 @@ public class Viewer extends HttpServlet
                 }
                 catch(IllegalArgumentException e)
                 {
-                    response.sendError(400);
+                    response.sendError(400, e.getMessage());
                     return;
                 }
             }
 
             request.setAttribute("id", id);
-            request.setAttribute("type", type);
+            request.setAttribute("type", extension.getExtension());
             response.setHeader("Cache-Control", "public, max-age=86400");
             request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
         }

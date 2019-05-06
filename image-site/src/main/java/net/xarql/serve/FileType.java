@@ -85,6 +85,52 @@ enum FileType
         }
     } // determine(extension, fallback)
 
+    public static FileType determine(int number) throws IllegalArgumentException
+    {
+        for(FileType type : FileType.values())
+        {
+            if(number == type.ordinal())
+                return type;
+        }
+        throw new IllegalArgumentException("Index didn't correlate to a valid FileType. Index : " + number);
+    }
+
+    public static FileType determine(int number, FileType fallback)
+    {
+        try
+        {
+            return determine(number);
+        }
+        catch(IllegalArgumentException e)
+        {
+            return fallback;
+        }
+    }
+
+    public static FileType parseInt(String number) throws IllegalArgumentException
+    {
+        try
+        {
+            return determine(Integer.parseInt(number));
+        }
+        catch(NumberFormatException e)
+        {
+            throw new IllegalArgumentException("String representing a FileType index was incorrect. String : " + number);
+        }
+    }
+
+    public static FileType parseInt(String number, FileType fallback)
+    {
+        try
+        {
+            return parseInt(number);
+        }
+        catch(IllegalArgumentException e)
+        {
+            return fallback;
+        }
+    }
+
     private static String prepare(String extension)
     {
         extension = extension.toLowerCase().trim();
