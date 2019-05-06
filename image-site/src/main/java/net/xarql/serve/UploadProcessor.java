@@ -36,11 +36,12 @@ public class UploadProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static HashMap<String, Integer> highestImageID = new HashMap<String, Integer>();
-    private static boolean                  firstRun       = true;
+    private static HashMap<FileType, Integer> highestImageID = new HashMap<>();
+    private static boolean                    firstRun       = true;
 
-    private static final String FILE_STORE = DeveloperOptions.getFileStore();
+    private static final File   FILE_STORE = new File(DeveloperOptions.getFileStore());
     private static final String DOMAIN     = DeveloperOptions.getDomain();
+    private static final String INFO_FILE  = "/" + "info.txt";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -71,41 +72,30 @@ public class UploadProcessor extends HttpServlet
     {
         ensureInit();
 
-        String fileType = "";
+        FileType fileType;
         ServletUtilities util = new ServletUtilities(request);
         if(util.isAuth())
         {
-            File fileStore = new File(FILE_STORE);
-            if(!fileStore.exists())
-                fileStore.mkdir();
+            if(!FILE_STORE.exists())
+                FILE_STORE.mkdirs();
 
-            String exportedFileType = "";
+            fileType = null;
             for(Part part : request.getParts())
             {
                 fileType = getFileType(part);
-                if(!fileType.equals(".jpg") && !fileType.equals(".png"))
+                if(fileType == null)
                 {
-                    response.sendError(400, "Uploaded file was of invalid type " + fileType);
+                    response.sendError(400, "Uploaded file was an invalid type.");
                     return;
                 }
-                if(fileType != null && !fileType.equals(""))
-                    exportedFileType = fileType;
-                File dir = new File(FILE_STORE + File.separator + fileType.substring(1) + File.separator + (Base62Converter.to(getHighestImageID(fileType.substring(1)) + 1)));
+                final File dir = new File(FILE_STORE + "/" + fileType.getExtension() + "/" + (Base62Converter.to(getHighestImageID(fileType) + 1)));
                 if(!dir.exists())
                     dir.mkdirs();
-                part.write(FILE_STORE + File.separator + fileType.substring(1) + File.separator + (Base62Converter.to(getHighestImageID(fileType.substring(1)) + 1)) + File.separator + "raw" + fileType);
-                setHighestImageID(getHighestImageID(fileType.substring(1)) + 1, fileType.substring(1));
+                part.write(dir.getPath() + "/" + "raw" + fileType.dotExtension());
+                setHighestImageID(getHighestImageID(fileType) + 1, fileType);
             }
 
-            int typeID;
-            if(exportedFileType.equals(".jpg"))
-                typeID = 0;
-            else if(exportedFileType.equals(".png"))
-                typeID = 1;
-            else
-                typeID = 0;
-
-            response.sendRedirect(DOMAIN + "/" + typeID + Base62Converter.to(getHighestImageID(fileType.substring(1))));
+            response.sendRedirect(DOMAIN + "/" + fileType.ordinal() + Base62Converter.to(getHighestImageID(fileType)));
             util.revokeAuth();
         }
         else
@@ -125,38 +115,34 @@ public class UploadProcessor extends HttpServlet
     // Get accurate image counts
     private static void initialize()
     {
-        setHighestImageID(getHighestImageID(false, "jpg"), "jpg");
-        setHighestImageID(getHighestImageID(false, "png"), "png");
+        setHighestImageID(getHighestImageID(false, FileType.JPG), FileType.JPG);
+        setHighestImageID(getHighestImageID(false, FileType.PNG), FileType.PNG);
     } // init()
 
-    private static String getFileType(Part part)
+    private static FileType getFileType(Part part)
     {
         for(String content : part.getHeader("content-disposition").split(";"))
         {
             if(content.trim().startsWith("filename"))
             {
                 String name = content.substring(content.indexOf("=") + 2, content.length() - 1);
-                name = name.substring(name.indexOf('.')).toLowerCase();
-                if(name.equals(".jpeg"))
-                    name = ".jpg";
-                return name;
+                return FileType.determine(name, null);
             }
         }
-        return ".none";
+        return null;
     } // getFileType
 
-    public static int getHighestImageID(String fileType)
+    public static int getHighestImageID(FileType fileType)
     {
         return getHighestImageID(true, fileType);
     } // getHighestImageID()
 
-    private static int getHighestImageID(boolean trustingFile, String fileType)
+    private static int getHighestImageID(boolean trustingFile, FileType fileType)
     {
         if(highestImageID.get(fileType) == null || !trustingFile)
         {
-            //
             int maxFolderID = 0;
-            File infoFile = new File(FILE_STORE + "/" + fileType + "/info.txt");
+            final File infoFile = new File(FILE_STORE + "/" + fileType.getExtension() + "/info.txt");
             if(infoFile.exists() && trustingFile)
             {
                 Scanner scan;
@@ -173,7 +159,7 @@ public class UploadProcessor extends HttpServlet
             }
             else
             {
-                File dir = new File(FILE_STORE + "/" + fileType);
+                final File dir = new File(FILE_STORE + "/" + fileType.getExtension());
                 final Pattern pattern = Pattern.compile("\\V");
                 try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir.getAbsolutePath()), entry -> pattern.matcher(entry.getFileName().toString()).matches()))
                 {
@@ -209,10 +195,10 @@ public class UploadProcessor extends HttpServlet
             return highestImageID.get(fileType);
     } // getHighestImageID()
 
-    private static void setHighestImageID(int input, String fileType)
+    private static void setHighestImageID(int input, FileType fileType)
     {
         highestImageID.put(fileType, input);
-        File infoFile = new File(FILE_STORE + "/" + fileType + "/info.txt");
+        final File infoFile = new File(FILE_STORE + "/" + fileType.getExtension() + INFO_FILE);
         try
         {
             FileWriter fw = new FileWriter(infoFile);

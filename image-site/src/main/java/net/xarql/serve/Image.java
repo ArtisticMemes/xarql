@@ -2,52 +2,56 @@ package net.xarql.serve;
 
 import net.xarql.util.DeveloperOptions;
 
-public class Image
+public final class Image
 {
-    private static final String   DOMAIN      = DeveloperOptions.getDomain();
-    private static final String[] VALID_TYPES = {
-            "jpg", "png"
-    };
+    /**
+     * Current root URL
+     */
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
-    private String id;
-    private int    type;
+    /**
+     * The ID of the image. Represented as a base 62 alphanumeric number. Excludes
+     * the first character used for type indication.
+     */
+    private final String   id;
+    /**
+     * The file extension of the image.
+     */
+    private final FileType type;
 
-    public Image(String id, int type) throws IllegalArgumentException
-    {
-        setID(id);
-        setType(type);
-    } // Image()
-
-    public String getLink()
-    {
-        return DOMAIN + "/" + getType() + getID();
-    } // getLink()
-
-    public String getRawLink()
-    {
-        return DOMAIN + "/-/static/" + VALID_TYPES[getType()] + "/" + getID() + "/raw." + VALID_TYPES[getType()];
-    } // getRawLink()
-
-    private String getID()
-    {
-        return id;
-    } // getID()
-
-    private int getType()
-    {
-        return type;
-    } // getType()
-
-    private void setID(String id)
+    /**
+     * Creates a new image with the supplied id and type.
+     * 
+     * @param id Represents the image's number. Exclude the first character; that is
+     *        only for type indication.
+     * @param type The extension for the image. 0 for jpg. 1 for png.
+     * @throws IllegalArgumentException
+     */
+    public Image(String id, FileType type) throws IllegalArgumentException
     {
         this.id = id;
-    } // setID()
-
-    private void setType(int type) throws IllegalArgumentException
-    {
-        if(type < 0 || type >= VALID_TYPES.length)
-            throw new IllegalArgumentException("Type was invalid");
         this.type = type;
-    } // setType()
+    } // Image()
+
+    /**
+     * Gives the short link to this image which opens in an image viewer.
+     * 
+     * @return The short link
+     */
+    public String getLink()
+    {
+        return DOMAIN + "/" + type.ordinal() + id;
+    } // getLink()
+
+    /**
+     * Gives the long link to this image which provides the actual file on its own.
+     * The file will be named raw.
+     * 
+     * @return The raw link
+     */
+    public String getRawLink()
+    {
+        return DOMAIN + "/-/static/" + type.getExtension() + "/" + id + "/raw." + type.getExtension();
+    } // getRawLink()
 
 } // Image

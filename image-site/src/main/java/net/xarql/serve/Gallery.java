@@ -45,8 +45,8 @@ public class Gallery extends HttpServlet
         // Try to get the newest images based on the highest image id
         int JPGinit = DEFAULT_INIT;
         int PNGinit = DEFAULT_INIT;
-        JPGinit = UploadProcessor.getHighestImageID("jpg") - IMAGE_COUNT;
-        PNGinit = UploadProcessor.getHighestImageID("png") - IMAGE_COUNT;
+        JPGinit = UploadProcessor.getHighestImageID(FileType.JPG) - IMAGE_COUNT;
+        PNGinit = UploadProcessor.getHighestImageID(FileType.PNG) - IMAGE_COUNT;
 
         // If the user has specified a starting id (initial id), use that instead
         if(request.getParameter("init") != null && !request.getParameter("init").equals(""))
@@ -74,12 +74,12 @@ public class Gallery extends HttpServlet
         }
 
         // Determine valid IDs of images and add them to a list
-        ArrayList<Image> images = new ArrayList<Image>();
-        for(int i = JPGinit; i <= UploadProcessor.getHighestImageID("jpg") && i <= JPGinit + IMAGE_COUNT; i++)
-            images.add(new Image(Base62Converter.to(i), 0));
+        ArrayList<Image> images = new ArrayList<>();
+        for(int i = JPGinit; i <= UploadProcessor.getHighestImageID(FileType.JPG) && i <= JPGinit + IMAGE_COUNT; i++)
+            images.add(new Image(Base62Converter.to(i), FileType.JPG));
 
-        for(int i = PNGinit; i <= UploadProcessor.getHighestImageID("png") && i <= PNGinit + IMAGE_COUNT; i++)
-            images.add(new Image(Base62Converter.to(i), 1));
+        for(int i = PNGinit; i <= UploadProcessor.getHighestImageID(FileType.PNG) && i <= PNGinit + IMAGE_COUNT; i++)
+            images.add(new Image(Base62Converter.to(i), FileType.PNG));
 
         request.setAttribute("images", images);
         request.getRequestDispatcher("/src/viewer/gallery.jsp").forward(request, response);

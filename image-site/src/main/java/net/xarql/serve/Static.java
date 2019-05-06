@@ -30,11 +30,10 @@ public class Static extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    public static final int     BUFFER_SIZE        = 5120;                           // 5KB
-    private static final String FILE_STORE         = DeveloperOptions.getFileStore();
-    private static final String NOT_FOUND_FILENAME = "not_found";
-
-    private static final String DOMAIN = DeveloperOptions.getDomain();
+    public static final int     BUFFER_SIZE    = 5120;                                     // 5KB
+    private static final File   FILE_STORE     = new File(DeveloperOptions.getFileStore());
+    private static final String NOT_FOUND_FILE = "/icon/not_found";
+    private static final String DOMAIN         = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -70,12 +69,12 @@ public class Static extends HttpServlet
             contentType = request.getServletContext().getMimeType(filePath);
             if(contentType != null && contentType.equals("image/png"))
             {
-                file = new File(getServletContext().getRealPath("/src").replace('\\', '/'), "/icon/not_found.png");
+                file = new File(getServletContext().getRealPath("/src").replace('\\', '/'), NOT_FOUND_FILE + ".png");
                 contentType = "image/png";
             }
             else
             {
-                file = new File(getServletContext().getRealPath("/src").replace('\\', '/'), "/icon/not_found.jpg");
+                file = new File(getServletContext().getRealPath("/src").replace('\\', '/'), NOT_FOUND_FILE + ".jpg");
                 contentType = "image/jpeg";
             }
         }
