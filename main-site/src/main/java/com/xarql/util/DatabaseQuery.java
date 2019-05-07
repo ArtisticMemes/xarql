@@ -1,6 +1,5 @@
 package com.xarql.util;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,15 +66,13 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
     protected boolean makeRequest()
     {
         nextIndex();
-        Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
         String query = getCommand();
 
         try
         {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(query);
+            statement = ConnectionManager.get().prepareStatement(query);
             setVariables(statement);
             rs = statement.executeQuery();
             while(rs.next())

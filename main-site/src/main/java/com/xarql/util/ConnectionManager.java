@@ -43,7 +43,7 @@ public class ConnectionManager
     /**
      * Closes the static connection variable
      */
-    public static void close()
+    private static void close()
     {
         if(connection != null)
         {
