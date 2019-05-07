@@ -25,7 +25,7 @@ public class TextFormatter
     public static final int HASHTAG_LIMIT = 5;
 
     public static final String URL_REGEX     = "((http)s?(:\\/\\/)([a-z0-9]+\\.)+([a-z]+(\\/)?)|([a-z0-9]+\\.)((com|net|org|io|co)(\\/)?))([a-zA-Z0-9-_]+(\\/)?)*(\\.[a-zA-Z0-9-_]{1,4})?(\\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_+]+)*";
-    public static final String PHOTO_REGEX   = "\\$[0-1][0-9a-zA-Z]+";
+    public static final String MEDIA_REGEX   = "\\$[0-2][0-9a-zA-Z]+";
     public static final String HASHTAG_REGEX = "(?>#[a-z0-9-_]+)(?!;)";
     public static final String USER_REGEX    = "(?>@[a-z0-9-_]+)";
 
@@ -68,10 +68,10 @@ public class TextFormatter
         return output;
     } // autoLinks()
 
-    public static String quickPic(String input)
+    public static String quickMedia(String input)
     {
 
-        return linkShortcut(PHOTO_REGEX, PHOTO_PRE_LINK, input);
+        return linkShortcut(MEDIA_REGEX, PHOTO_PRE_LINK, input);
     } // quickPic()
 
     public static String clickableHashtags(String input)
@@ -186,7 +186,7 @@ public class TextFormatter
         output = autoLinks(output);
         output = clickableHashtags(output);
         output = clickableUsers(output);
-        output = quickPic(output);
+        output = quickMedia(output);
         output = addFormat(output, "bold", 'b');
         output = addFormat(output, "code", 'c');
         output = addFormat(output, "italic", 'i');
