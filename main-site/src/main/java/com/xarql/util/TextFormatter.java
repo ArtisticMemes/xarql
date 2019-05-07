@@ -28,10 +28,12 @@ public class TextFormatter
     public static final String MEDIA_REGEX   = "\\$[0-2][0-9a-zA-Z]+";
     public static final String HASHTAG_REGEX = "(?>#[a-z0-9-_]+)(?!;)";
     public static final String USER_REGEX    = "(?>@[a-z0-9-_]+)";
+    public static final String POST_REGEX    = "(%[0-9]+)";
 
-    public static final String PHOTO_PRE_LINK   = "https://xarql.net/";
+    public static final String MEDIA_PRE_LINK   = "https://xarql.net/";
     public static final String HASHTAG_PRE_LINK = "{DOMAIN}/polr/hash?tag=";
     public static final String USER_PRE_LINK    = "{DOMAIN}/user/view?name=";
+    public static final String POST_PRE_LINK    = "{DOMAIN}/polr/";
 
     public static String processMarkdown(String input)
     {
@@ -71,7 +73,7 @@ public class TextFormatter
     public static String quickMedia(String input)
     {
 
-        return linkShortcut(MEDIA_REGEX, PHOTO_PRE_LINK, input);
+        return linkShortcut(MEDIA_REGEX, MEDIA_PRE_LINK, input);
     } // quickPic()
 
     public static String clickableHashtags(String input)
@@ -83,6 +85,11 @@ public class TextFormatter
     {
         return linkShortcut(USER_REGEX, USER_PRE_LINK, input);
     } // clickableUsers()
+
+    public static String clickablePosts(String input)
+    {
+        return linkShortcut(POST_REGEX, POST_PRE_LINK, input);
+    }
 
     public static String linkShortcut(String regex, String preLink, String input)
     {
@@ -184,9 +191,10 @@ public class TextFormatter
         output = clean(output);
         output = swapEscapeForHTML(output, '\n', "<br>", 2);
         output = autoLinks(output);
+        output = quickMedia(output);
         output = clickableHashtags(output);
         output = clickableUsers(output);
-        output = quickMedia(output);
+        output = clickablePosts(output);
         output = addFormat(output, "bold", 'b');
         output = addFormat(output, "code", 'c');
         output = addFormat(output, "italic", 'i');
