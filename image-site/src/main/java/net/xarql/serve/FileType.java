@@ -5,9 +5,7 @@ import java.util.List;
 
 enum FileType
 {
-    JPG(new String[]{
-            "jpg", "jpeg"
-    }), PNG("png"), MP3("mp3");
+    JPG("jpg", "jpeg"), PNG("png"), MP3("mp3"), WEBP("webp"), WEBM("webm"), MP4("mp4");
 
     private String   extension;
     private String[] aliases;
@@ -17,6 +15,13 @@ enum FileType
         this.extension = validExtensions[0];
         this.aliases = validExtensions;
     } // FileTypes(String[])
+
+    private FileType(String extension, String alias)
+    {
+        this(new String[]{
+                extension, alias
+        });
+    } // FileType(String, String)
 
     private FileType(String extension)
     {

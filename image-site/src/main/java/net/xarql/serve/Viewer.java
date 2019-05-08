@@ -96,10 +96,12 @@ public class Viewer extends HttpServlet
             request.setAttribute("id", id);
             request.setAttribute("type", extension.getExtension());
             response.setHeader("Cache-Control", "public, max-age=86400");
-            if(extension == FileType.JPG || extension == FileType.PNG)
+            if(extension == FileType.JPG || extension == FileType.PNG || extension == FileType.WEBP)
                 request.getRequestDispatcher("/src/viewer/image.jsp").forward(request, response);
             else if(extension == FileType.MP3)
                 request.getRequestDispatcher("/src/viewer/audio.jsp").forward(request, response);
+            else if(extension == FileType.WEBM || extension == FileType.MP4)
+                request.getRequestDispatcher("/src/viewer/video.jsp").forward(request, response);
             else
                 response.sendError(500, "Missing branches for some FileType enumeration in Viewer.java");
         }
