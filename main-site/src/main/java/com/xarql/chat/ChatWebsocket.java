@@ -1,7 +1,7 @@
 package com.xarql.chat;
 
 import java.util.HashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.List;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -14,13 +14,13 @@ import javax.websocket.server.ServerEndpoint;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.TrackedHashMap;
 
-@ServerEndpoint ("/chat/websocket/{id}")
+@ServerEndpoint ("/chat/websocket/{room}/{user}")
 public class ChatWebsocket
 {
-    private static final boolean TESTING = DeveloperOptions.getTesting();
+    private static final boolean                TESTING = DeveloperOptions.getTesting();
+    private static TrackedHashMap<String, Room> rooms   = new TrackedHashMap<>();
 
-    private static TrackedHashMap<String, Client> clients  = new TrackedHashMap<String, Client>();
-    private static CopyOnWriteArrayList<Message>  messages = new CopyOnWriteArrayList<Message>();
+    private String room;
 
     public static void main(String[] args)
     {
@@ -31,34 +31,49 @@ public class ChatWebsocket
         System.out.println(map.get("hello"));
         System.out.println(map.get("type"));
         System.out.println(map.get("hi"));
-    } // main()
+    }
+
+    private TrackedHashMap<String, Client> clients()
+    {
+        return rooms.get(room).getClients();
+    }
+
+    private List<Message> messages()
+    {
+        return rooms.get(room).getMessages();
+    }
 
     @OnOpen
-    public void onOpen(@PathParam ("id") String id, Session session)
+    public void onOpen(@PathParam ("user") String user, @PathParam ("room") String room, Session session)
     {
+        if(!rooms.contains(room))
+            rooms.add(room, new Room());
+        this.room = room;
         Client c;
         try
         {
-            c = new Client(session, id);
+            c = new Client(session, user);
         }
         catch(Exception e)
         {
             c = new Client(session);
         }
-        c.send(new UsersReport(clients));
-        clients.add(session.getId(), c);
+        c.send(new UsersReport(clients()));
+        clients().add(session.getId(), c);
         ripple(new UserJoin(c), c);
         refresh();
-        c.sendList(messages);
-    } // onOpen()
+        c.sendList(messages());
+    }
 
     @OnClose
     public void onClose(Session session)
     {
-        Client c = clients.get(session.getId());
+        Client c = clients().get(session.getId());
         ripple(new UserExit(c), c);
-        clients.remove(session.getId());
-    } // onClose()
+        clients().remove(session.getId());
+        if(clients().size() == 0)
+            rooms.remove(room);
+    }
 
     @OnMessage
     public void onMessage(Session session, String message)
@@ -69,79 +84,78 @@ public class ChatWebsocket
             Message msg = (Message) pkg;
             if(!msg.getContent().trim().equals(""))
             {
-                messages.add(msg);
+                messages().add(msg);
                 broadcast(msg);
             }
         }
         else
-            ripple(pkg, clients.get(session.getId()));
-    } // onMessage()
+            ripple(pkg, clients().get(session.getId()));
+    }
 
     @OnError
     public void onError(Session session, Throwable e)
     {
         if(TESTING)
             e.printStackTrace();
-        clients.get(session.getId()).send(new ErrorReport(e));
+        clients().get(session.getId()).send(new ErrorReport(e));
         onClose(session);
-    } // onError()
+    }
 
-    private static void broadcast(WebsocketPackage pkg)
+    private void broadcast(WebsocketPackage pkg)
     {
-        for(Client c : clients)
+        for(Client c : clients())
             c.send(pkg);
-    } // broadcast()
+    }
 
-    private static void ripple(WebsocketPackage pkg, Client client)
+    private void ripple(WebsocketPackage pkg, Client client)
     {
-        for(Client c : clients)
+        for(Client c : clients())
         {
             if(!c.equals(client))
                 c.send(pkg);
         }
-    } // ripple()
+    }
 
-    public static int connectionCount()
+    public int connectionCount()
     {
-        return clients.size();
-    } // connectionCount()
+        return clients().size();
+    }
 
-    private synchronized static void refresh()
+    private synchronized void refresh()
     {
-        // Remove old messages
-        for(Message msg : messages)
+        // Remove old messages()
+        for(Message msg : messages())
             if(msg.isExpired())
-                messages.remove(msg);
+                messages().remove(msg);
 
         // Remove closed sessions / dead clients
-        for(Client c : clients)
+        for(Client c : clients())
             if(!c.isOpen())
             {
                 ripple(new UserExit(c), c);
-                clients.remove(c.getID());
+                clients().remove(c.getID());
             }
-    } // refresh()
+    }
 
     private WebsocketPackage parseMessage(Session session, String message)
     {
         HashMap<String, String> headers = getHeaders(message);
-        String content = getContent(message);
         String type = headers.get("type");
         if(type.equals("message"))
         {
-            return new Message(getContent(message), clients.get(session.getId()));
+            return new Message(getContent(message), clients().get(session.getId()));
         }
         else if(type.equals("typing"))
         {
-            return new TypingStatus(booleanize(headers.get("typing")), clients.get(session.getId()));
+            return new TypingStatus(booleanize(headers.get("typing")), clients().get(session.getId()));
         }
         else if(type.equals("buffer"))
         {
-            return new BufferStatus(booleanize(headers.get("buffer")), clients.get(session.getId()));
+            return new BufferStatus(booleanize(headers.get("buffer")), clients().get(session.getId()));
         }
         else
             return new ErrorReport(null);
-    } // parseMessage()
+    }
 
     private static boolean booleanize(String value)
     {
@@ -155,7 +169,7 @@ public class ChatWebsocket
             else
                 return false;
         }
-    } // booleanize()
+    }
 
     private static HashMap<String, String> getHeaders(String input)
     {
@@ -192,11 +206,11 @@ public class ChatWebsocket
             }
         }
         return map;
-    } // getNameValuePairs
+    }
 
     private static String getContent(String input)
     {
         return input.substring(input.indexOf('|') + 1);
-    } // getContent()
+    }
 
-} // ChatWebsocket
+}

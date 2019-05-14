@@ -1,6 +1,9 @@
 $(document).ready(function () {
 	// Update Messages
-  var domain = document.getElementById('domain').getAttribute('value');
+  var domain = $('#domain').attr('value');
+  var room = $('#room').attr('value');
+  console.log(room);
+
 
 	// AJAX posting
 	$("#message-form" ).submit(function(event) {
@@ -48,7 +51,7 @@ $(document).ready(function () {
     protocol = "wss";
   else
     protocol = "ws";
-  webSocket = new WebSocket(protocol + domain.substr(domain.indexOf("://")) + "/chat/websocket/" + Cookies.get('chat-id').substr(1));
+  webSocket = new WebSocket(protocol + domain.substr(domain.indexOf("://")) + "/chat/websocket/" + room + "/" + Cookies.get('chat-id').substr(1));
   var message = document.getElementById("message");
   webSocket.onopen = function(message){ wsOpen(message);};
   webSocket.onmessage = function(message){ wsGetMessage(message);};
