@@ -63,6 +63,7 @@ public class ChatWebsocket
         ripple(new UserJoin(c), c);
         refresh();
         c.sendList(messages());
+        c.send(new RoomStatus(room));
     }
 
     @OnClose
@@ -116,9 +117,20 @@ public class ChatWebsocket
         }
     }
 
-    public int connectionCount()
+    public static int connectionCount()
     {
-        return clients().size();
+        int output = 0;
+        for(Room r : rooms)
+            output += r.getClients().size();
+        return output;
+    }
+
+    public static int messageCount()
+    {
+        int output = 0;
+        for(Room r : rooms)
+            output += r.getMessages().size();
+        return output;
     }
 
     private synchronized void refresh()

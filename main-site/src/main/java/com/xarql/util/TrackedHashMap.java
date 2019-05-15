@@ -8,6 +8,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * A container that has both a list and a map to use them as one. This was
+ * primarily made for caching.
+ * 
+ * @author Bryan Johnson
+ * @param <K> Key
+ * @param <E> Element
+ */
 public class TrackedHashMap<K, E> implements Iterable<E>, Cloneable
 {
     /**
