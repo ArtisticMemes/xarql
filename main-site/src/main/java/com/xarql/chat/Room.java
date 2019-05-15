@@ -15,17 +15,17 @@ public class Room
     {
         setUsers(null);
         setMessages(null);
-    }
+    } // -
 
     public TrackedHashMap<String, Client> getClients()
     {
         return clients;
-    }
+    } //
 
     public List<Message> getMessages()
     {
         return messages;
-    }
+    } //
 
     private void setUsers(TrackedHashMap<String, Client> clients)
     {
@@ -33,7 +33,7 @@ public class Room
             this.clients = new TrackedHashMap<String, Client>();
         else
             this.clients = clients;
-    }
+    } //
 
     private void setMessages(List<Message> messages)
     {
@@ -41,6 +41,6 @@ public class Room
             this.messages = new ArrayList<Message>();
         else
             this.messages = messages;
-    }
+    } //
 
-}
+} // *

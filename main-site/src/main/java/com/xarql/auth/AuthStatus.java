@@ -26,7 +26,7 @@ public class AuthStatus extends HttpServlet
     public AuthStatus()
     {
         super();
-    } // AuthStatus()
+    } // -
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,7 +39,7 @@ public class AuthStatus extends HttpServlet
             request.getRequestDispatcher("/src/auth/status.jsp").forward(request, response);
         else
             response.sendError(401, "Client has not authenticated. Go to " + DOMAIN + "/auth");
-    } // doGet()
+    } //
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -49,6 +49,6 @@ public class AuthStatus extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    } //
 
-} // AuthStatus
+} // *

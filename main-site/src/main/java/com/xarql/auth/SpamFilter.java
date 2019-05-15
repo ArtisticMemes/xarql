@@ -20,6 +20,6 @@ public class SpamFilter
             as.updateLastSubmitTime();
             return false;
         }
-    } // shouldBlock()
+    } //
 
-} // SpamFilter
+} // *

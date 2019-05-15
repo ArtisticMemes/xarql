@@ -29,7 +29,7 @@ public class RecaptchaHandler extends HttpServlet
     public RecaptchaHandler()
     {
         super();
-    }
+    } // -
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,7 +39,7 @@ public class RecaptchaHandler extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.sendRedirect(DOMAIN + "/auth");
-    } // doGet()
+    } //
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -67,6 +67,6 @@ public class RecaptchaHandler extends HttpServlet
         }
         else
             response.sendError(400, "Recaptcha Invalid");
-    } // doPost()
+    } //
 
-} // RecaptchaHandler
+} // *

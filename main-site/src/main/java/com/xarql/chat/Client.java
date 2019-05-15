@@ -21,7 +21,7 @@ public class Client
         queue = new ArrayList<String>();
         sending = false;
         setColor(randomColor());
-    } // Client()
+    } // -
 
     public Client(Session session, String color)
     {
@@ -36,7 +36,7 @@ public class Client
         {
             setColor(randomColor());
         }
-    } // Client()
+    } // -
 
     public void send(WebsocketPackage pkg)
     {
@@ -48,7 +48,7 @@ public class Client
         catch(Exception e)
         {
         }
-    } // send()
+    } //
 
     public void sendList(List<? extends WebsocketPackage> packages)
     {
@@ -61,7 +61,7 @@ public class Client
         catch(Exception e)
         {
         }
-    } // send()
+    } //
 
     private void sendQueue() throws IOException
     {
@@ -77,12 +77,12 @@ public class Client
             }
             sending = false;
         }
-    } // sendQueue()
+    } //
 
     public String getColor()
     {
         return color;
-    } // getColor()
+    } //
 
     private void setColor(String color)
     {
@@ -90,21 +90,21 @@ public class Client
             this.color = color;
         else
             throw new NullPointerException("Color shouldn't be null.");
-    } // setColor()
+    } //
 
     private static String randomColor()
     {
         return AuthSession.generateColor().substring(1);
-    } // randomizeColor()
+    } //
 
     public boolean isOpen()
     {
         return session.isOpen();
-    } // isOpen()
+    } //
 
     public String getID()
     {
         return session.getId();
-    } // getID()
+    } //
 
-} // Client
+} // *

@@ -15,7 +15,7 @@ public class AuthTable
     public AuthTable()
     {
         sessions.clear();
-    } // AuthTable()
+    } // -
 
     public static void add(AuthSession session)
     {
@@ -31,7 +31,7 @@ public class AuthTable
             trim();
             setLastTrimTime();
         }
-    } // add()
+    } //
 
     public static boolean contains(String tomcatSession)
     {
@@ -42,7 +42,7 @@ public class AuthTable
             sessions.remove(tomcatSession);
             return false;
         }
-    } // contains()
+    } //
 
     public static void trim()
     {
@@ -54,33 +54,33 @@ public class AuthTable
                 i--;
             }
         }
-    } // trim()
+    } //
 
     public static void remove(String session)
     {
         sessions.remove(session);
-    } // remove()
+    } //
 
     public static AuthSession get(String session)
     {
         return sessions.get(session);
-    } // get()
+    } //
 
     public static int size()
     {
         return sessions.size();
-    } // size()
+    } //
 
     private static Timestamp getLastTrimTime()
     {
         if(lastTrimTime == null)
             lastTrimTime = new Timestamp(System.currentTimeMillis());
         return lastTrimTime;
-    } // getLastTrimTime()
+    } //
 
     private static void setLastTrimTime()
     {
         lastTrimTime = new Timestamp(System.currentTimeMillis());
-    } // setLastTrimTime()
+    } //
 
-} // AuthTable
+} // *

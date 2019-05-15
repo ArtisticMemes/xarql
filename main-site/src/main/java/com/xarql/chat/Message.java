@@ -9,7 +9,7 @@ public class Message extends WebsocketPackage
     public Message(String content, Client client) throws IllegalArgumentException
     {
         super(content, client);
-    } // Message()
+    } // -
 
     public boolean isExpired()
     {
@@ -18,6 +18,6 @@ public class Message extends WebsocketPackage
             return false;
         else
             return true;
-    } // isExpired()
+    } //
 
-} // Message
+} // *

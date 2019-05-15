@@ -40,13 +40,13 @@ public class AuthSession
         AuthTable.add(this);
         setLastSubmitTime(new Timestamp(System.currentTimeMillis() - 60000));
         setKilled(false);
-    } // AuthSession()
+    } // -
 
     public AuthSession(String tomcatSession, Account account)
     {
         this(tomcatSession, "", "account");
         setAccount(account);
-    } // AuthSession(String, Account)
+    } // -
 
     protected AuthSession(AuthSession session)
     {
@@ -62,71 +62,71 @@ public class AuthSession
         {
             this.googleId = "";
         }
-    } // AuthSession()
+    } //
 
     public boolean verified()
     {
         return verified;
-    } // verified()
+    } //
 
     private void setTomcatSession(String tomcatSession)
     {
         this.tomcatSession = tomcatSession;
-    } // setTomcatSession()
+    } //
 
     public String getTomcatSession()
     {
         return tomcatSession;
-    } // getTomcatSession()
+    } //
 
     private void randomizeColor()
     {
         color = generateColor();
-    } // randomizeColor()
+    } //
 
     // Useful for other parts of xarql
     public static String generateColor()
     {
         int colorValue = r.nextInt(0xffffff + 1);
         return String.format("#%06x", colorValue).toLowerCase();
-    } // generateColor()
+    } //
 
     public String getColor()
     {
         return color;
-    } // getColor()
+    } //
 
     private void setUpdateTime()
     {
         updateTime = new Timestamp(System.currentTimeMillis());
-    } // setCreationTime()
+    } //
 
     private void setLastSubmitTime(Timestamp lastSubmitTime)
     {
         this.lastSubmitTime = lastSubmitTime;
-    } // setLastSubmitTime()
+    } //
 
     private void setKilled(boolean killed)
     {
         this.killed = killed;
-    } // setKilled()
+    } //
 
     public void kill()
     {
         setKilled(true);
         AuthTable.remove(getTomcatSession());
-    } // kill()
+    } //
 
     public void updateLastSubmitTime()
     {
         setUpdateTime();
         this.lastSubmitTime = new Timestamp(System.currentTimeMillis());
-    } // updateLastSubmitTime()
+    } //
 
     public Timestamp getLastSubmitTime()
     {
         return lastSubmitTime;
-    } // getLastSubmitTime()
+    } //
 
     public boolean expired() // Checks if older than 1 hour
     {
@@ -135,7 +135,7 @@ public class AuthSession
             return true;
         else
             return false;
-    } // expired()
+    } //
 
     public String getGoogleId() throws NullPointerException, GeneralSecurityException
     {
@@ -148,7 +148,7 @@ public class AuthSession
         }
         else
             throw new GeneralSecurityException("User isn't verified");
-    } // getGoogleId()
+    } //
 
     private void verifyRecaptcha(String recpatchaResponse)
     {
@@ -156,17 +156,17 @@ public class AuthSession
             verified = true;
         else
             verified = false;
-    } // verifyRecaptcha()
+    } //
 
     public Account getAccount()
     {
         return account;
-    } // getAccount()
+    } //
 
     public void setAccount(Account account)
     {
         this.account = account;
-    } // setAccount()
+    } //
 
     // Checks if this AuthSession belongs to a moderator
     public boolean isMod()
@@ -175,6 +175,6 @@ public class AuthSession
             return true;
         else
             return false;
-    } // isMod()
+    } //
 
-} // AuthSession
+} // *

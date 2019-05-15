@@ -14,42 +14,42 @@ public class IPTracker
     public static void logPolrPost(HttpServletRequest request, int postID)
     {
         log(request, postID, "polr/post");
-    } // logPolrPost()
+    } //
 
     public static void logChatSend(HttpServletRequest request, int sendID)
     {
         log(request, sendID, "chat/send");
-    } // logChatSend()
+    } //
 
     public static void logPolrEditRemove(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/remove");
-    } // logPolrEditRemoval()
+    } //
 
     public static void logPolrEditRestore(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/restore");
-    } // logPolrEditRestore()
+    } //
 
     public static void logPolrEditReplace(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/replace");
-    } // logPolrEditReplace()
+    } //
 
     public static void logPolrEditCensor(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/censor");
-    } // logPolrEditCensor()
+    } //
 
     public static void logReport(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "flag");
-    } // logReport()
+    } //
 
     public static void logNewUser(HttpServletRequest request)
     {
         log(request, 0, "user/sign_up");
-    } // logNewUser()
+    } //
 
     private static void log(HttpServletRequest request, int submissionID, String submissionType)
     {
@@ -90,6 +90,6 @@ public class IPTracker
                 }
             }
         }
-    } // log()
+    } //
 
-} // IPTracker
+} // *

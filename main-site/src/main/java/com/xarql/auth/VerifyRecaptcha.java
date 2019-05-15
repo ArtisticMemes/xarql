@@ -96,5 +96,5 @@ public class VerifyRecaptcha
         {
             return false;
         }
-    } // verify()
-} // VerifyRecaptcha
+    } //
+} // *

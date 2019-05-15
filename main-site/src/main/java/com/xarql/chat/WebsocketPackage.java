@@ -22,17 +22,17 @@ public class WebsocketPackage
         setSource(source);
         setContent(content);
         setCreationDate();
-    } // WebsocketPackage(String, Client)
+    } // -
 
     public WebsocketPackage(String content)
     {
         this(content, null);
-    } // WebsocketPackage(String)
+    } // -
 
     public WebsocketPackage(Client source)
     {
         this(null, source);
-    } // WebsocketPackage(Client)
+    } // -
 
     protected void setHeader(Headers name, Object value) throws IllegalArgumentException
     {
@@ -41,12 +41,12 @@ public class WebsocketPackage
             throw new IllegalArgumentException("Parameter value has illegal characters " + insert);
         else
             headers.add(name, insert);
-    } // setHeader()
+    } //
 
     public String getHeader(Headers name)
     {
         return headers.get(name);
-    } // getHeader()
+    } //
 
     private void setContent(String content)
     {
@@ -54,23 +54,23 @@ public class WebsocketPackage
             this.content = "";
         else
             this.content = TextFormatter.full(content.trim().replace("{DOMAIN}", DOMAIN));
-    } // setContent()
+    } //
 
     public String getContent()
     {
         return content;
-    } // getContent()
+    } //
 
     private void setCreationDate()
     {
         creationDate = new Timestamp(System.currentTimeMillis());
         setHeader(Headers.CREATION_DATE, creationDate);
-    } // setCreationDate()
+    } //
 
     public Timestamp getCreationDate()
     {
         return creationDate;
-    } // getCreationDate()
+    } //
 
     private void setSource(Client source)
     {
@@ -80,17 +80,17 @@ public class WebsocketPackage
             setHeader(Headers.TEXT_COLOR, textColor(source));
             this.source = source;
         }
-    } // setSource()
+    } //
 
     public Client getSource()
     {
         return source;
-    } // getSource()
+    } //
 
     private void setType()
     {
         setHeader(Headers.TYPE, determineType());
-    } // setType()
+    } //
 
     private static String textColor(Client client)
     {
@@ -102,7 +102,7 @@ public class WebsocketPackage
             return "000";
         else
             return "FFF";
-    } // textColor()
+    } //
 
     private String determineType()
     {
@@ -117,7 +117,7 @@ public class WebsocketPackage
         }
         type = type.toLowerCase();
         return type;
-    } // determineType()
+    } //
 
     @Override
     public String toString()
@@ -134,6 +134,6 @@ public class WebsocketPackage
         output += "|";
         output += content;
         return output;
-    } // toString()
+    } //
 
-} // WebsocketPackage
+} // *

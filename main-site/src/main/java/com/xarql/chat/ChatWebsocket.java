@@ -31,17 +31,17 @@ public class ChatWebsocket
         System.out.println(map.get("hello"));
         System.out.println(map.get("type"));
         System.out.println(map.get("hi"));
-    }
+    } //
 
     private TrackedHashMap<String, Client> clients()
     {
         return rooms.get(room).getClients();
-    }
+    } //
 
     private List<Message> messages()
     {
         return rooms.get(room).getMessages();
-    }
+    } //
 
     @OnOpen
     public void onOpen(@PathParam ("user") String user, @PathParam ("room") String room, Session session)
@@ -64,7 +64,7 @@ public class ChatWebsocket
         refresh();
         c.sendList(messages());
         c.send(new RoomStatus(room));
-    }
+    } //
 
     @OnClose
     public void onClose(Session session)
@@ -74,7 +74,7 @@ public class ChatWebsocket
         clients().remove(session.getId());
         if(clients().size() == 0)
             rooms.remove(room);
-    }
+    } //
 
     @OnMessage
     public void onMessage(Session session, String message)
@@ -91,7 +91,7 @@ public class ChatWebsocket
         }
         else
             ripple(pkg, clients().get(session.getId()));
-    }
+    } //
 
     @OnError
     public void onError(Session session, Throwable e)
@@ -100,13 +100,13 @@ public class ChatWebsocket
             e.printStackTrace();
         clients().get(session.getId()).send(new ErrorReport(e));
         onClose(session);
-    }
+    } //
 
     private void broadcast(WebsocketPackage pkg)
     {
         for(Client c : clients())
             c.send(pkg);
-    }
+    } //
 
     private void ripple(WebsocketPackage pkg, Client client)
     {
@@ -115,7 +115,7 @@ public class ChatWebsocket
             if(!c.equals(client))
                 c.send(pkg);
         }
-    }
+    } //
 
     public static int connectionCount()
     {
@@ -123,7 +123,7 @@ public class ChatWebsocket
         for(Room r : rooms)
             output += r.getClients().size();
         return output;
-    }
+    } //
 
     public static int messageCount()
     {
@@ -131,7 +131,7 @@ public class ChatWebsocket
         for(Room r : rooms)
             output += r.getMessages().size();
         return output;
-    }
+    } //
 
     private synchronized void refresh()
     {
@@ -147,7 +147,7 @@ public class ChatWebsocket
                 ripple(new UserExit(c), c);
                 clients().remove(c.getID());
             }
-    }
+    } //
 
     private WebsocketPackage parseMessage(Session session, String message)
     {
@@ -167,7 +167,7 @@ public class ChatWebsocket
         }
         else
             return new ErrorReport(null);
-    }
+    } //
 
     private static boolean booleanize(String value)
     {
@@ -181,7 +181,7 @@ public class ChatWebsocket
             else
                 return false;
         }
-    }
+    } //
 
     private static HashMap<String, String> getHeaders(String input)
     {
@@ -218,11 +218,11 @@ public class ChatWebsocket
             }
         }
         return map;
-    }
+    } //
 
     private static String getContent(String input)
     {
         return input.substring(input.indexOf('|') + 1);
-    }
+    } //
 
-}
+} // *
