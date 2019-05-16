@@ -13,13 +13,11 @@ public class Client
     private String            color;
     private Session           session;
     private ArrayList<String> queue;
-    private boolean           sending;
 
     public Client(Session session)
     {
         this.session = session;
         queue = new ArrayList<String>();
-        sending = false;
         setColor(randomColor());
     } // -
 
@@ -27,7 +25,6 @@ public class Client
     {
         this.session = session;
         queue = new ArrayList<String>();
-        sending = false;
         try
         {
             setColor(color);
@@ -38,44 +35,25 @@ public class Client
         }
     } // -
 
-    public void send(WebsocketPackage pkg)
+    public void send(WebsocketPackage pkg) throws IOException
     {
         queue.add(pkg.toString());
-        try
-        {
-            sendQueue();
-        }
-        catch(Exception e)
-        {
-        }
+        sendQueue();
     } //
 
-    public void sendList(List<? extends WebsocketPackage> packages)
+    public void sendList(List<? extends WebsocketPackage> packages) throws IOException
     {
         for(WebsocketPackage pkg : packages)
             queue.add(pkg.toString());
-        try
-        {
-            sendQueue();
-        }
-        catch(Exception e)
-        {
-        }
+        sendQueue();
     } //
 
-    private void sendQueue() throws IOException
+    private synchronized void sendQueue() throws IOException
     {
-        if(sending)
-            return;
-        else
+        while(!queue.isEmpty())
         {
-            sending = true;
-            while(!queue.isEmpty())
-            {
-                session.getBasicRemote().sendText(queue.get(0));
-                queue.remove(0);
-            }
-            sending = false;
+            session.getBasicRemote().sendText(queue.get(0));
+            queue.remove(0);
         }
     } //
 
@@ -105,6 +83,11 @@ public class Client
     public String getID()
     {
         return session.getId();
+    } //
+
+    public Session getSession()
+    {
+        return session;
     } //
 
 } // *

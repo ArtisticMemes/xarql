@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.AuthTable;
-import com.xarql.chat.ChatReset;
-import com.xarql.polr.PolrReset;
 import com.xarql.util.Secrets;
 
 /**
@@ -63,7 +61,8 @@ public class Conf extends HttpServlet
             {
                 if(request.getParameter("reset") != null && request.getParameter("reset").equals("yes"))
                 {
-                    boolean allWorked = ChatReset.execute(response) && PolrReset.execute(response);
+                    boolean allWorked = true; // ChatReset.execute(response) &&
+                    // PolrReset.execute(response);
                     request.setAttribute("success", allWorked);
                     if(allWorked)
                         request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);

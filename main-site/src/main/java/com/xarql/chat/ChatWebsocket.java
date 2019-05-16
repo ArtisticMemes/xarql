@@ -1,7 +1,9 @@
 package com.xarql.chat;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -20,7 +22,7 @@ public class ChatWebsocket
     private static final boolean                TESTING = DeveloperOptions.getTesting();
     private static TrackedHashMap<String, Room> rooms   = new TrackedHashMap<>();
 
-    private String room;
+    private String roomName;
 
     public static void main(String[] args)
     {
@@ -33,22 +35,27 @@ public class ChatWebsocket
         System.out.println(map.get("hi"));
     } //
 
-    private TrackedHashMap<String, Client> clients()
+    private Room room()
     {
-        return rooms.get(room).getClients();
+        return rooms.get(roomName);
     } //
 
-    private List<Message> messages()
+    private TrackedHashMap<String, Client> clients()
     {
-        return rooms.get(room).getMessages();
+        return room().getClients();
+    } //
+
+    private CopyOnWriteArrayList<Message> messages()
+    {
+        return room().getMessages();
     } //
 
     @OnOpen
-    public void onOpen(@PathParam ("user") String user, @PathParam ("room") String room, Session session)
+    public void onOpen(@PathParam ("user") String user, @PathParam ("room") String roomName, Session session)
     {
-        if(!rooms.contains(room))
-            rooms.add(room, new Room());
-        this.room = room;
+        if(!rooms.contains(roomName))
+            rooms.add(roomName, new Room());
+        this.roomName = roomName;
         Client c;
         try
         {
@@ -58,12 +65,12 @@ public class ChatWebsocket
         {
             c = new Client(session);
         }
-        c.send(new UsersReport(clients()));
+        sendTo(c, new UsersReport(clients()));
         clients().add(session.getId(), c);
         ripple(new UserJoin(c), c);
         refresh();
-        c.sendList(messages());
-        c.send(new RoomStatus(room));
+        sendTo(c, messages());
+        sendTo(c, new RoomStatus(roomName));
     } //
 
     @OnClose
@@ -72,15 +79,15 @@ public class ChatWebsocket
         Client c = clients().get(session.getId());
         ripple(new UserExit(c), c);
         clients().remove(session.getId());
-        if(clients().size() == 0)
-            rooms.remove(room);
+        if(clients().size() == 0 && !roomName.equals("main"))
+            rooms.remove(roomName);
     } //
 
     @OnMessage
     public void onMessage(Session session, String message)
     {
         WebsocketPackage pkg = parseMessage(session, message);
-        if(pkg.getClass().getSimpleName().equals("Message"))
+        if(pkg instanceof Message)
         {
             Message msg = (Message) pkg;
             if(!msg.getContent().trim().equals(""))
@@ -98,14 +105,21 @@ public class ChatWebsocket
     {
         if(TESTING)
             e.printStackTrace();
-        clients().get(session.getId()).send(new ErrorReport(e));
+        try
+        {
+            clients().get(session.getId()).send(new ErrorReport(e));
+        }
+        catch(Exception issue)
+        {
+            // do nothing
+        }
         onClose(session);
     } //
 
     private void broadcast(WebsocketPackage pkg)
     {
         for(Client c : clients())
-            c.send(pkg);
+            sendTo(c, pkg);
     } //
 
     private void ripple(WebsocketPackage pkg, Client client)
@@ -113,7 +127,31 @@ public class ChatWebsocket
         for(Client c : clients())
         {
             if(!c.equals(client))
-                c.send(pkg);
+                sendTo(c, pkg);
+        }
+    } //
+
+    private void sendTo(Client c, WebsocketPackage pkg)
+    {
+        try
+        {
+            c.send(pkg);
+        }
+        catch(IOException e)
+        {
+            onError(c.getSession(), e);
+        }
+    } //
+
+    private void sendTo(Client c, List<? extends WebsocketPackage> list)
+    {
+        try
+        {
+            c.sendList(list);
+        }
+        catch(IOException e)
+        {
+            onError(c.getSession(), e);
         }
     } //
 
