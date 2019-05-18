@@ -1,5 +1,5 @@
 JavaDocs for backend :
-https://artisticmemes.github.io/xarql
+https://cliserkad.github.io/xarql
 
 User Manual for frontend :
 https://xarql.com/help
