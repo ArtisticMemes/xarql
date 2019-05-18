@@ -4,6 +4,7 @@
 package com.xarql.polr;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xarql.auth.IPTracker;
 import com.xarql.auth.SpamFilter;
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -25,6 +27,8 @@ import com.xarql.util.ServletUtilities;
 public class PostProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+
+    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -81,6 +85,10 @@ public class PostProcessor extends HttpServlet
                 {
                     IPTracker.logPolrPost(request, pc.getDeterminedID());
                     response.setStatus(200);
+                    final PrintWriter pw = response.getWriter();
+                    pw.println("<p>Posting was a success!</p>");
+                    pw.println("<a href=\"" + DOMAIN + "/polr/" + pc.getDeterminedID() + "\">Your Post</a>");
+                    pw.println("<p>You are most likely seeing this page because you disabled JavaScript.</p>");
                 }
                 else
                     response.sendError(500);
