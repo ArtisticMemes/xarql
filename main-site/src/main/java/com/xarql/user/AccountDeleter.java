@@ -19,14 +19,25 @@ public class AccountDeleter extends DatabaseUpdate
     {
         super(COMMAND);
         setUsername(username);
-        execute();
-    } // AccountDeleter()
+    }
+
+    @Override
+    protected boolean execute()
+    {
+        if(makeRequest())
+        {
+            AccountCounter.decreaseCount();
+            return true;
+        }
+        else
+            return false;
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, username);
-    } // setVariables()
+    }
 
     private void setUsername(String username) throws IllegalArgumentException
     {
@@ -39,6 +50,6 @@ public class AccountDeleter extends DatabaseUpdate
         }
         else
             throw new IllegalArgumentException("Username is " + username.length() + " characters long. It must be between " + MIN_USERNAME_LENGTH + " and " + MAX_VARIABLE_LENGTH + " long.");
-    } // setUsername()
+    }
 
-} // AccountDeleter
+}

@@ -31,7 +31,7 @@ public class AccountActions extends HttpServlet
     public AccountActions()
     {
         super();
-    } // AccountActions()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -64,7 +64,7 @@ public class AccountActions extends HttpServlet
         }
         else
             response.sendError(401);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -107,7 +107,7 @@ public class AccountActions extends HttpServlet
         }
         else
             response.sendError(401);
-    } // doPost()
+    }
 
     private static void changePassword(HttpServletRequest request, Account account) throws Exception
     {
@@ -123,7 +123,7 @@ public class AccountActions extends HttpServlet
 
         new Account(account.getUsername(), password); // Check password validity
         PasswordChanger pc = new PasswordChanger(account.getUsername(), newPassword); // Change password in database
-    } // changePassword()
+    }
 
     private static void deleteAccount(HttpServletRequest request, Account account) throws Exception
     {
@@ -137,8 +137,8 @@ public class AccountActions extends HttpServlet
             throw new IllegalArgumentException("The username field didn't match the account's username");
 
         new Account(account.getUsername(), password); // Check password validity
-        AccountDeleter ad = new AccountDeleter(account.getUsername()); // Delete account from database
-    } // deleteAccount()
+        new AccountDeleter(account.getUsername()).use(); // Delete account from database
+    }
 
     private static void attachEmail(HttpServletRequest request, Account account) throws Exception
     {
@@ -148,6 +148,6 @@ public class AccountActions extends HttpServlet
             throw new IllegalArgumentException("A parameter was null");
 
         EmailAttacher ae = new EmailAttacher(account, email);
-    } // attachEmail()
+    }
 
-} // AccountActions
+}

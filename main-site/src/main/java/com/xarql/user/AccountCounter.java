@@ -15,7 +15,7 @@ public class AccountCounter extends DatabaseQuery<Integer>
         super("SELECT COUNT(id) FROM user_secure");
         if(count == 0)
             execute();
-    } // AccountCounter()
+    }
 
     @Override
     protected void processResult(ResultSet rs) throws SQLException
@@ -27,17 +27,22 @@ public class AccountCounter extends DatabaseQuery<Integer>
     public Integer getData()
     {
         return count;
-    } // getData()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         return;
-    } // setVariables()
+    }
 
     public static void increaseCount()
     {
         count++;
-    } // increaseCount()
+    }
 
-} // AccountCounter
+    public static void decreaseCount()
+    {
+        count--;
+    }
+
+}
