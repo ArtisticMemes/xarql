@@ -31,14 +31,14 @@ public class PolrUser extends HttpServlet
     public PolrUser()
     {
         super();
-    } // PolrUser()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/user", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -70,21 +70,16 @@ public class PolrUser extends HttpServlet
                 response.sendError(400);
                 return;
             }
-            if(upr.execute())
-            {
-                request.setAttribute("posts", upr.getData());
-                request.getRequestDispatcher(JSP_PATH).forward(request, response);
-                return;
-            }
-            else
-                response.sendError(500);
+            request.setAttribute("posts", upr.use());
+            request.getRequestDispatcher(JSP_PATH).forward(request, response);
+            return;
         }
         else
         {
             request.getRequestDispatcher(JSP_PATH).forward(request, response);
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -94,6 +89,6 @@ public class PolrUser extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // PolrUser
+}

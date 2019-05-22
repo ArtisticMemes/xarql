@@ -18,7 +18,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
     public DatabaseUpdate(String command)
     {
         super(command);
-    } // DatabaseUpdate()
+    }
 
     /**
      * Sets the command variable to null and the index to 0.
@@ -28,7 +28,17 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
     public DatabaseUpdate()
     {
         super();
-    } // DatabaseUpdate()
+    }
+
+    /**
+     * Makes execute() usable
+     * 
+     * @return true if no errors
+     */
+    public boolean use()
+    {
+        return execute();
+    }
 
     /**
      * Updates the database using the command. Stack traces of errors will be
@@ -72,6 +82,6 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
                 }
             }
         }
-    } // makeRequest()
+    }
 
-} // DatabaseUpdate
+}

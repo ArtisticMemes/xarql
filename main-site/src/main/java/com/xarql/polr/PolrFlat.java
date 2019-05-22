@@ -4,7 +4,6 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -37,14 +36,14 @@ public class PolrFlat extends HttpServlet
     public PolrFlat()
     {
         super();
-    } // PolrFlat()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/flat", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -63,21 +62,14 @@ public class PolrFlat extends HttpServlet
             page = MIN_PAGE; // default
         request.setAttribute(PAGE, page);
 
-        FlatPostRetriever fpr = new FlatPostRetriever(sort, flow, page);
-        if(fpr.execute())
-        {
-            ArrayList<Post> posts = fpr.getData();
-            request.setAttribute("posts", posts);
-            String loc;
-            if(ajax)
-                loc = "/src/polr/flat-ajax.jsp";
-            else
-                loc = "/src/polr/flat.jsp";
-            request.getRequestDispatcher(loc).forward(request, response);
-        }
+        request.setAttribute("posts", new FlatPostRetriever(sort, flow, page).use());
+        String loc;
+        if(ajax)
+            loc = "/src/polr/flat-ajax.jsp";
         else
-            response.sendError(500, "Could not retrieve posts from class FlatPostRetriever");
-    } // doGet()
+            loc = "/src/polr/flat.jsp";
+        request.getRequestDispatcher(loc).forward(request, response);
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

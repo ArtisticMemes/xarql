@@ -36,14 +36,14 @@ public class ProfilePage extends HttpServlet
     public ProfilePage()
     {
         super();
-    } // ProfilePage()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/user/view", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -59,7 +59,7 @@ public class ProfilePage extends HttpServlet
             username = username.toLowerCase();
 
             AccountGrabber ag = new AccountGrabber(username);
-            if(ag.execute())
+            if(ag.use() != null)
             {
                 if(ag.getID() == -1)
                     response.sendError(404);
@@ -74,12 +74,9 @@ public class ProfilePage extends HttpServlet
                         return;
                     }
 
-                    UserPostRetriever upr;
                     try
                     {
-                        upr = new UserPostRetriever(username);
-                        upr.execute();
-                        request.setAttribute("posts", upr.getData());
+                        request.setAttribute("posts", new UserPostRetriever(username).use());
                     }
                     catch(Exception e)
                     {
@@ -97,7 +94,7 @@ public class ProfilePage extends HttpServlet
         }
         else
             response.sendRedirect(DOMAIN + "/user");
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -107,6 +104,6 @@ public class ProfilePage extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // ProfilePage
+}

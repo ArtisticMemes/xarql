@@ -9,7 +9,7 @@ public class Account
     public Account(String username, String password) throws Exception
     {
         AccountGrabber ag = new AccountGrabber(username);
-        if(ag.execute())
+        if(ag.use() != null)
         {
             if(ag.getID() == -1)
             {
@@ -37,32 +37,32 @@ public class Account
         }
         else
             throw new Exception("Account couldn't be retrieved. Please try again");
-    } // Account()
+    }
 
     private void setID(int id)
     {
         this.id = id;
-    } // setID()
+    }
 
     public int getID()
     {
         return id;
-    } // getID()
+    }
 
     private void setUsername(String username)
     {
         this.username = username;
-    } // setUsername()
+    }
 
     public String getUsername()
     {
         return username;
-    } // getUsername()
+    }
 
     public void setEmail(String email)
     {
         this.email = email;
-    } // setEmail()
+    }
 
     public String getEmail()
     {
@@ -70,6 +70,6 @@ public class Account
             return "No email";
         else
             return email;
-    } // getEmail()
+    }
 
-} // Account
+}

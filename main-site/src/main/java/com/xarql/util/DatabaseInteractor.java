@@ -29,7 +29,7 @@ public abstract class DatabaseInteractor
     {
         index = 0;
         this.command = command;
-    } // DatabaseInteractor()
+    }
 
     /**
      * Sets the command variable to null and the index to 0.
@@ -37,7 +37,7 @@ public abstract class DatabaseInteractor
     public DatabaseInteractor()
     {
         this(null);
-    } // DatabaseInteractor()
+    }
 
     /**
      * A least complex implementation of the common execute method. Practically,
@@ -46,10 +46,10 @@ public abstract class DatabaseInteractor
      * @return A boolean denoting success or failure from makeRequest()
      * @see DatabaseInteractor#makeRequest()
      */
-    public boolean execute()
+    protected boolean execute()
     {
         return makeRequest();
-    } // execute()
+    }
 
     /**
      * This allows children to inject the statement in makeRequest() with variables.
@@ -69,7 +69,7 @@ public abstract class DatabaseInteractor
     public String getCommand()
     {
         return command;
-    } // getCommand()
+    }
 
     /**
      * Set's this objects current comamnd
@@ -79,7 +79,7 @@ public abstract class DatabaseInteractor
     protected void setCommand(String command)
     {
         this.command = command;
-    } // setCommand()
+    }
 
     /**
      * Provides access to the object's command index
@@ -89,7 +89,7 @@ public abstract class DatabaseInteractor
     public int getIndex()
     {
         return index;
-    } // getIndex()
+    }
 
     /**
      * Increments the command index. Called in makeRequest()
@@ -97,6 +97,6 @@ public abstract class DatabaseInteractor
     protected void nextIndex()
     {
         index++;
-    } // nextIndex()
+    }
 
-} // DatabaseInteractor
+}

@@ -1,7 +1,6 @@
 package com.xarql.flag;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -27,14 +26,14 @@ public class ReportPage extends HttpServlet
     public ReportPage()
     {
         super();
-    } // ReportPage()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/flag/report", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -47,19 +46,10 @@ public class ReportPage extends HttpServlet
         util.useInt("id");
 
         if(util.userIsMod())
-        {
-            ReportGrabber rg = new ReportGrabber();
-            if(rg.execute())
-            {
-                ArrayList<Report> reports = rg.getData();
-                request.setAttribute("reports", reports);
-            }
-            else
-                return;
-        }
+            request.setAttribute("reports", new ReportGrabber().use());
 
         request.getRequestDispatcher("/src/flag/report.jsp").forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

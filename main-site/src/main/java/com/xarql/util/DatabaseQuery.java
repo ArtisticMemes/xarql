@@ -1,4 +1,4 @@
-package com.xarql.util;
+﻿package com.xarql.util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +25,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
     public DatabaseQuery(String command)
     {
         super(command);
-    } // DatabaseQuery()
+    }
 
     /**
      * Sets the command variable to null and the index to 0.
@@ -35,7 +35,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
     public DatabaseQuery()
     {
         super();
-    } // DatabaseQuery()
+    }
 
     /**
      * One row of the result set is to be processed in to an object that is then
@@ -51,7 +51,15 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
      * 
      * @return All data that was retrieved
      */
-    public abstract RequestedDataClass getData();
+    protected abstract RequestedDataClass getData();
+
+    public RequestedDataClass use()
+    {
+        if(execute())
+            return getData();
+        else
+            return null;
+    }
 
     /**
      * Queries the database for some data and attempts to process it using child
@@ -111,6 +119,6 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
                 }
             }
         }
-    } // makeRequest()
+    } 
 
-} // DatabaseQuery
+}

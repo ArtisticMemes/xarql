@@ -33,7 +33,7 @@ public class ReportProcessor extends HttpServlet
     public ReportProcessor()
     {
         super();
-    } // ReportProcessor()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -43,7 +43,7 @@ public class ReportProcessor extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities.rejectGetMethod(response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -74,9 +74,7 @@ public class ReportProcessor extends HttpServlet
                 return;
             }
 
-            ReportExistenceChecker rec = new ReportExistenceChecker(report.getPostID());
-            rec.execute();
-            if(rec.getData())
+            if(new ReportExistenceChecker(report.getPostID()).use())
             {
                 response.sendError(429);
                 return;
@@ -84,7 +82,7 @@ public class ReportProcessor extends HttpServlet
 
             // File the report, and log the filing
             ReportFiler rf = new ReportFiler(response, report);
-            if(rf.execute())
+            if(rf.use())
             {
                 IPTracker.logReport(request, id);
                 response.sendRedirect(DOMAIN + "/flag");
@@ -96,6 +94,6 @@ public class ReportProcessor extends HttpServlet
             response.sendError(401);
             return;
         }
-    } // doPost()
+    }
 
-} // ReportProcessor
+}

@@ -18,12 +18,11 @@ public class AccountProcessor
         setPassword(password);
 
         AccountGrabber ag = new AccountGrabber(username);
-        if(ag.execute())
+        if(ag.use() != null)
         {
             if(ag.getID() == -1)
             {
-                AccountCreator ac = new AccountCreator(username, Password.hashPassword(password));
-                if(ac.execute())
+                if(new AccountCreator(username, Password.hashPassword(password)).use())
                     AccountCounter.increaseCount();
             }
             else
@@ -31,7 +30,7 @@ public class AccountProcessor
         }
         else
             throw new IllegalArgumentException("Existing usernames couldn't be checked. Please try again");
-    } // AccountProcessor()
+    }
 
     private void setUsername(String username) throws IllegalArgumentException
     {
@@ -44,7 +43,7 @@ public class AccountProcessor
         }
         else
             throw new IllegalArgumentException("Username is " + username.length() + " characters long. It must be between " + MIN_USERNAME_LENGTH + " and " + MAX_VARIABLE_LENGTH + " long.");
-    } // setUsername()
+    }
 
     private void setPassword(String password) throws IllegalArgumentException
     {
@@ -62,6 +61,6 @@ public class AccountProcessor
         }
         else
             throw new IllegalArgumentException("Password is " + password.length() + " characters long. It must be between " + MIN_PASSWORD_LENGTH + " and " + MAX_VARIABLE_LENGTH + " long.");
-    } // setPassword()
+    }
 
-} // AccountProcessor
+}
