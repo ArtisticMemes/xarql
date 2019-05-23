@@ -3,7 +3,6 @@ package com.xarql.user;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.xarql.util.DatabaseQuery;
 
 public class AccountCounter extends DatabaseQuery<Integer>
@@ -13,15 +12,13 @@ public class AccountCounter extends DatabaseQuery<Integer>
     public AccountCounter()
     {
         super("SELECT COUNT(id) FROM user_secure");
-        if(count == 0)
-            execute();
     }
 
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
         count = rs.getInt("COUNT(id)");
-    } // processResult()
+    }
 
     @Override
     public Integer getData()
@@ -33,6 +30,13 @@ public class AccountCounter extends DatabaseQuery<Integer>
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         return;
+    }
+
+    public static Integer getCount()
+    {
+        if(count == 0)
+            count = new AccountCounter().use();
+        return count;
     }
 
     public static void increaseCount()

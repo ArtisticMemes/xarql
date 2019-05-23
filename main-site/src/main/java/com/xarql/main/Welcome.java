@@ -5,7 +5,6 @@ package com.xarql.main;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
-
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.servlet.ServletConfig;
@@ -14,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.auth.AuthTable;
 import com.xarql.user.AccountCounter;
 import com.xarql.util.JSPBuilder;
@@ -36,14 +34,14 @@ public class Welcome extends HttpServlet
     public Welcome()
     {
         super();
-    } // Welcome()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/welcome/welcome", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -52,7 +50,7 @@ public class Welcome extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities util = new ServletUtilities(request);
+        new ServletUtilities(request);
         request.setAttribute("auth_sessions", AuthTable.size());
 
         int activeSessions = 0;
@@ -70,10 +68,10 @@ public class Welcome extends HttpServlet
 
         request.setAttribute("total_sessions", activeSessions);
 
-        int userCount = new AccountCounter().getData();
+        int userCount = AccountCounter.getCount();
         request.setAttribute("user_count", userCount);
         request.getRequestDispatcher("/src/welcome/welcome.jsp").forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -83,6 +81,6 @@ public class Welcome extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Welcome
+}
