@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 /**
  * Used as a template for classes that interact with the database.
- * 
+ *
  * @author Bryan Johnson
  */
 public abstract class DatabaseInteractor
@@ -22,7 +22,7 @@ public abstract class DatabaseInteractor
 
     /**
      * Sets command variable to the provided command and the index to 0.
-     * 
+     *
      * @param command A String containing an SQL query
      */
     public DatabaseInteractor(String command)
@@ -42,7 +42,7 @@ public abstract class DatabaseInteractor
     /**
      * A least complex implementation of the common execute method. Practically,
      * alters makeRequest() to be public.
-     * 
+     *
      * @return A boolean denoting success or failure from makeRequest()
      * @see DatabaseInteractor#makeRequest()
      */
@@ -53,7 +53,7 @@ public abstract class DatabaseInteractor
 
     /**
      * This allows children to inject the statement in makeRequest() with variables.
-     * 
+     *
      * @param statement An SQL statement
      * @throws SQLException If the statement can't be modified in the way specified
      */
@@ -61,7 +61,7 @@ public abstract class DatabaseInteractor
 
     /**
      * Makes a request to the database.
-     * 
+     *
      * @return A boolean denoting success or failure.
      */
     protected abstract boolean makeRequest();
@@ -73,7 +73,7 @@ public abstract class DatabaseInteractor
 
     /**
      * Set's this objects current comamnd
-     * 
+     *
      * @param command A String with an SQL query
      */
     protected void setCommand(String command)
@@ -83,7 +83,7 @@ public abstract class DatabaseInteractor
 
     /**
      * Provides access to the object's command index
-     * 
+     *
      * @return The current command index
      */
     public int getIndex()

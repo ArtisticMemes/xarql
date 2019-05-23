@@ -2,7 +2,6 @@ package com.xarql.util;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import com.xarql.main.DeveloperOptions;
 
 public abstract class DatabaseUpdate extends DatabaseInteractor
@@ -10,8 +9,8 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
     private static final boolean TESTING = DeveloperOptions.getTesting();
 
     /**
-     * Sets command variable to the provided command and the index to 0.
-     * 
+     * Sets the command variable to the provided command and the index to 0.
+     *
      * @param command A String containing an SQL query
      * @see DatabaseInteractor#DatabaseInteractor(String)
      */
@@ -22,7 +21,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
 
     /**
      * Sets the command variable to null and the index to 0.
-     * 
+     *
      * @see DatabaseInteractor#DatabaseInteractor()
      */
     public DatabaseUpdate()
@@ -32,7 +31,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
 
     /**
      * Makes execute() usable
-     * 
+     *
      * @return true if no errors
      */
     public boolean use()
@@ -44,7 +43,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
      * Updates the database using the command. Stack traces of errors will be
      * printed during testing. 1 - Increments the index. 2 - Grabs the command. 3 -
      * Grabs a connection. 4 - Executes the command.
-     * 
+     *
      * @return false for failure. true for success.
      */
     @Override
@@ -71,7 +70,6 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
         {
             // Close in reversed order.
             if(statement != null)
-            {
                 try
                 {
                     statement.close();
@@ -80,7 +78,6 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
                 {
                     // do nothing
                 }
-            }
         }
     }
 
