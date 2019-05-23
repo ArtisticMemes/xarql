@@ -64,9 +64,9 @@ public abstract class DatabaseInteractor
      *
      * @return A boolean denoting success or failure.
      */
-    protected abstract boolean makeRequest();
+    abstract boolean makeRequest();
 
-    public String getCommand()
+    public final String getCommand()
     {
         return command;
     }
@@ -76,7 +76,7 @@ public abstract class DatabaseInteractor
      *
      * @param command A String with an SQL query
      */
-    protected void setCommand(String command)
+    protected final void setCommand(String command)
     {
         this.command = command;
     }
@@ -86,7 +86,7 @@ public abstract class DatabaseInteractor
      *
      * @return The current command index
      */
-    public int getIndex()
+    public final int getIndex()
     {
         return index;
     }
@@ -94,7 +94,7 @@ public abstract class DatabaseInteractor
     /**
      * Increments the command index. Called in makeRequest()
      */
-    protected void nextIndex()
+    protected final void nextIndex()
     {
         index++;
     }

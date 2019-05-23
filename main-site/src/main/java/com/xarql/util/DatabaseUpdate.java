@@ -34,7 +34,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
      *
      * @return true if no errors
      */
-    public boolean use()
+    public final boolean use()
     {
         return execute();
     }
@@ -47,7 +47,7 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
      * @return false for failure. true for success.
      */
     @Override
-    protected boolean makeRequest()
+    protected final boolean makeRequest()
     {
         nextIndex();
         PreparedStatement statement = null;

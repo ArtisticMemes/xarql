@@ -52,7 +52,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
      */
     protected abstract RequestedDataClass getData();
 
-    public RequestedDataClass use()
+    public final RequestedDataClass use()
     {
         if(execute())
             return getData();
@@ -70,7 +70,7 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
      * @return false for failure. true for success.
      */
     @Override
-    protected boolean makeRequest()
+    protected final boolean makeRequest()
     {
         nextIndex();
         PreparedStatement statement = null;
