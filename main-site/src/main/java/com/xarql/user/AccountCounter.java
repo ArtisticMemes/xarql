@@ -41,12 +41,12 @@ public class AccountCounter extends DatabaseQuery<Integer>
 
     public static void increaseCount()
     {
-        count++;
+        count = getCount() + 1;
     }
 
     public static void decreaseCount()
     {
-        count--;
+        count = getCount() - 1;
     }
 
 }
