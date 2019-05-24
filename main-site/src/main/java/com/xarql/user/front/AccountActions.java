@@ -1,13 +1,11 @@
 package com.xarql.user.front;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.main.DeveloperOptions;
 import com.xarql.user.Account;
 import com.xarql.user.AccountDeleter;
@@ -122,7 +120,7 @@ public class AccountActions extends HttpServlet
             throw new IllegalArgumentException("The password confirmation field didn't match the new password field");
 
         new Account(account.getUsername(), password); // Check password validity
-        PasswordChanger pc = new PasswordChanger(account.getUsername(), newPassword); // Change password in database
+        new PasswordChanger(account.getUsername(), newPassword).use();
     }
 
     private static void deleteAccount(HttpServletRequest request, Account account) throws Exception
@@ -147,7 +145,7 @@ public class AccountActions extends HttpServlet
         if(email == null)
             throw new IllegalArgumentException("A parameter was null");
 
-        EmailAttacher ae = new EmailAttacher(account, email);
+        new EmailAttacher(account, email).use();
     }
 
 }

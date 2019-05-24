@@ -18,11 +18,8 @@ public class Account
         if(ag.use() != null)
         {
             if(ag.getID() == -1)
-            {
                 throw new Exception("This username is not associated with an account");
-            }
             else
-            {
                 try
                 {
                     if(Password.checkPassword(password, ag.getHash()))
@@ -38,7 +35,6 @@ public class Account
                 {
                     throw new Exception("The stored hash for this account's password is malformed.");
                 }
-            }
 
         }
         else
@@ -90,7 +86,7 @@ public class Account
         }
     }
 
-    public static boolean checkNameAndPass(String username, String password)
+    public static boolean checkNameAndPass(String username, String password) throws IllegalArgumentException
     {
         checkUsername(username);
         checkPassword(password);

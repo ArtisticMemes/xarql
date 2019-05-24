@@ -8,9 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.DatabaseQuery;
 
 public class HashPostRetriever extends DatabaseQuery<ArrayList<Post>>
@@ -21,30 +18,30 @@ public class HashPostRetriever extends DatabaseQuery<ArrayList<Post>>
     private String          hash;
     private ArrayList<Post> posts;
 
-    public HashPostRetriever(HttpServletResponse response, String hash)
+    public HashPostRetriever(String hash)
     {
         super(HASHTAG_RETRIEVAL);
         this.hash = hash.toLowerCase();
-        posts = new ArrayList<Post>(PostRetriever.DEFAULT_POST_COUNT);
-    } // HashPostRetriever
+        posts = new ArrayList<>(PostRetriever.DEFAULT_POST_COUNT);
+    }
 
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
         posts.add(Post.interperetPost(rs));
-    } // processResult()
+    }
 
     @Override
     public ArrayList<Post> getData()
     {
         return posts;
-    } // getData()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, hash);
         statement.setInt(2, DEFAULT_POST_COUNT);
-    } // setVariables()
+    }
 
-} // HashPostRetriever
+}

@@ -3,7 +3,6 @@ package com.xarql.user;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.xarql.util.DatabaseQuery;
 
 public class AccountGrabber extends DatabaseQuery<String>
@@ -20,7 +19,7 @@ public class AccountGrabber extends DatabaseQuery<String>
         super(ACCOUNT_QUERY);
         this.username = username;
         id = -1;
-    } // AccountGrabber()
+    }
 
     @Override
     protected void processResult(ResultSet rs) throws SQLException
@@ -34,38 +33,38 @@ public class AccountGrabber extends DatabaseQuery<String>
         }
         else
             id = -1;
-    } // processResult()
+    }
 
     @Override
     public String getData()
     {
         return username;
-    } // getData()
+    }
 
     public int getID()
     {
         return id;
-    } // getID()
+    }
 
     public String getUsername()
     {
         return username;
-    } // getUsername()
+    }
 
     public String getHash()
     {
         return hash;
-    } // getHash()
+    }
 
     public String getEmail()
     {
         return email;
-    } // getEmail()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, username);
-    } // setVariables()
+    }
 
-} // AccountGrabber
+}

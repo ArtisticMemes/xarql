@@ -1,15 +1,13 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.xarql.user.AccountProcessor;
+import com.xarql.user.Account;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 import com.xarql.util.TextFormatter;
@@ -23,7 +21,7 @@ public class PolrUser extends HttpServlet
     private static final long serialVersionUID = 1L;
 
     private static final String JSP_PATH            = "/src/polr/user.jsp";
-    private static final int    MAX_USERNAME_LENGTH = AccountProcessor.MAX_VARIABLE_LENGTH;
+    private static final int    MAX_USERNAME_LENGTH = Account.MAX_VARIABLE_LENGTH;
 
     /**
      * @see HttpServlet#HttpServlet()

@@ -1,18 +1,16 @@
 package com.xarql.user.front;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.main.DeveloperOptions;
 import com.xarql.polr.UserPostRetriever;
+import com.xarql.user.Account;
 import com.xarql.user.AccountGrabber;
-import com.xarql.user.AccountProcessor;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
@@ -28,7 +26,7 @@ public class ProfilePage extends HttpServlet
 
     private static final String  DOMAIN              = DeveloperOptions.getDomain();
     private static final boolean TESTING             = DeveloperOptions.getTesting();
-    private static final int     MAX_USERNAME_LENGTH = AccountProcessor.MAX_VARIABLE_LENGTH;
+    private static final int     MAX_USERNAME_LENGTH = Account.MAX_VARIABLE_LENGTH;
 
     /**
      * @see HttpServlet#HttpServlet()

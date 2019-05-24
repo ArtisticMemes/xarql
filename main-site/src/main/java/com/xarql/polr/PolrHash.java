@@ -5,14 +5,12 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 import com.xarql.util.TextFormatter;
@@ -62,7 +60,7 @@ public class PolrHash extends HttpServlet
             }
 
             request.setAttribute("tag", tag);
-            request.setAttribute("posts", new HashPostRetriever(response, tag).use());
+            request.setAttribute("posts", new HashPostRetriever(tag).use());
         }
         request.getRequestDispatcher(JSP_PATH).forward(request, response);
     } // doGet()
