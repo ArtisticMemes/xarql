@@ -73,59 +73,59 @@ code {
 h1 {
   font-size: 6rem;
   font-weight: 100;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .09375rem;
 }
 
 h2 {
   font-size: 3.75rem;
   font-weight: 200;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .03125rem;
 }
 
 h3 {
   font-size: 3rem;
   font-weight: 300;
-  margin: .5em 0 .5em 0;
-  letter-spacing: 0rem;
+  margin: .5em 0;
+  letter-spacing: 0;
 }
 
 h4 {
   font-size: 2.125rem;
   font-weight: 400;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .015625rem;
 }
 
 h5 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: .5em 0 .5em 0;
-  letter-spacing: 0rem;
+  margin: .5em 0;
+  letter-spacing: 0;
 }
 
 h6 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .009375rem;
 }
 
 .subtitle {
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .009375rem;
 }
 
 .subtitle2 {
   font-size: .875rem;
   font-weight: 600;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .00625rem;
 }
 
 p {
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .03125rem;
   word-break: normal;
   word-wrap: break-word;
@@ -134,13 +134,13 @@ p {
 
 .small {
   font-size: .875rem;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .015625rem;
 }
 
 .overline {
   font-size: .625rem;
-  margin: .5em 0 .5em 0;
+  margin: .5em 0;
   letter-spacing: .09375rem;
   text-transform: uppercase;
   font-weight: normal;
@@ -161,7 +161,7 @@ html {
 #column {
   display: block;
   max-width: 100%;
-  padding: 4vh 0.4vw 0px 0.4vw;
+  padding: 4vh 0.4vw 0;
 }
 
 .card {
@@ -177,15 +177,15 @@ html {
 .small-card {
   @extend .card;
   min-height: 3rem;
-  margin: 0 0 1rem 0;
-  padding: 0.4rem 0.8rem 0.2rem 0.8rem;
+  margin: 0 0 1rem;
+  padding: 0.4rem 0.8rem 0.2rem;
 }
 
 .large-card {
   @extend .card;
   min-height: 12rem;
-  margin: 0 0 1.2rem 0;
-  padding: 1rem 3% 1.5rem 3%;
+  margin: 0 0 1.2rem;
+  padding: 1rem 3% 1.5rem;
 }
 
 .spacer::after {
@@ -281,9 +281,9 @@ form textarea:focus {
 }
 
 select {
-  border: 0px;
-  outline: 0px;
-  margin: .5em 0 .5em 0;
+  border: 0;
+  outline: 0;
+  margin: .5em 0;
   letter-spacing: .03125rem;
   font-size: 0.875rem;
   padding: 0.2rem;
@@ -351,11 +351,11 @@ xmp {
 }
 
 #error-title {
-  margin: 1rem 0rem 0rem 0rem;
+  margin: 1rem 0 0;
 }
 
 #error-code {
-  margin: 0 0 0 0;
+  margin: 0;
   line-height: 5rem;
 }
 
@@ -366,7 +366,7 @@ xmp {
   text-transform: uppercase;
   width: 100%;
   text-align: center;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 #moto
@@ -374,7 +374,7 @@ xmp {
   @extend .overline;
   width: 100%;
   text-align: center;
-  margin-top: 0px;
+  margin-top: 0;
   font-size: 0.8rem;
 }
 
