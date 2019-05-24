@@ -9,9 +9,9 @@ import com.xarql.main.DeveloperOptions;
  * Queries the database for some data.
  *
  * @author Bryan Johnson
- * @param <RequestedDataClass> The Java class that represents the database rows.
+ * @param <ResponseDataType> The Java class that represents the database rows.
  */
-public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteractor
+public abstract class DatabaseQuery<ResponseDataType>extends DatabaseInteractor<ResponseDataType>
 {
     private static final boolean TESTING = DeveloperOptions.getTesting();
 
@@ -44,21 +44,6 @@ public abstract class DatabaseQuery<RequestedDataClass>extends DatabaseInteracto
      * @throws SQLException If the set can't be processed in the specified way
      */
     protected abstract void processResult(ResultSet rs) throws SQLException;
-
-    /**
-     * All of the data that was retrieved is to be returned in a useful form.
-     *
-     * @return All data that was retrieved
-     */
-    protected abstract RequestedDataClass getData();
-
-    public final RequestedDataClass use()
-    {
-        if(execute())
-            return getData();
-        else
-            return null;
-    }
 
     /**
      * Queries the database for some data and attempts to process it using child

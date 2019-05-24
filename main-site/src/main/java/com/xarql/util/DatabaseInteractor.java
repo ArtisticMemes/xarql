@@ -4,11 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * Used as a template for classes that interact with the database.
+ * Used for classes that interact with the database.
  *
  * @author Bryan Johnson
+ * @param <ResponseDataType> The Java class that represents the database rows.
  */
-public abstract class DatabaseInteractor
+public abstract class DatabaseInteractor<ResponseDataType>
 {
     /**
      * The current command selected to be executed.
@@ -50,6 +51,27 @@ public abstract class DatabaseInteractor
     {
         return makeRequest();
     }
+
+    /**
+     * Executes this object and returns useful data if the interaction with the
+     * database was successful.
+     *
+     * @return useful data
+     */
+    public final ResponseDataType use()
+    {
+        if(execute())
+            return getData();
+        else
+            return null;
+    }
+
+    /**
+     * All of the data that was retrieved is to be returned in a useful form.
+     *
+     * @return Data that was retrieved
+     */
+    protected abstract ResponseDataType getData();
 
     /**
      * This allows children to inject the statement in makeRequest() with variables.

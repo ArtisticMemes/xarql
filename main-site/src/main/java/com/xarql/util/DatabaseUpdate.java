@@ -4,7 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import com.xarql.main.DeveloperOptions;
 
-public abstract class DatabaseUpdate extends DatabaseInteractor
+/**
+ * Updates the database with some data.
+ *
+ * @author Bryan Johnson
+ */
+public abstract class DatabaseUpdate extends DatabaseInteractor<Boolean>
 {
     private static final boolean TESTING = DeveloperOptions.getTesting();
 
@@ -30,13 +35,13 @@ public abstract class DatabaseUpdate extends DatabaseInteractor
     }
 
     /**
-     * Makes execute() usable
-     *
-     * @return true if no errors
+     * @see DatabaseInteractor#use()
+     * @return true
      */
-    public final boolean use()
+    @Override
+    protected final Boolean getData()
     {
-        return execute();
+        return true;
     }
 
     /**
