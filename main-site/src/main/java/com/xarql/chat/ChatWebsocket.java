@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -12,7 +11,6 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
 import com.xarql.main.DeveloperOptions;
 import com.xarql.util.TrackedHashMap;
 
@@ -33,22 +31,22 @@ public class ChatWebsocket
         System.out.println(map.get("hello"));
         System.out.println(map.get("type"));
         System.out.println(map.get("hi"));
-    } //
+    }
 
     private Room room()
     {
         return rooms.get(roomName);
-    } //
+    }
 
     private TrackedHashMap<String, Client> clients()
     {
         return room().getClients();
-    } //
+    }
 
     private CopyOnWriteArrayList<Message> messages()
     {
         return room().getMessages();
-    } //
+    }
 
     @OnOpen
     public void onOpen(@PathParam ("user") String user, @PathParam ("room") String roomName, Session session)
@@ -71,7 +69,7 @@ public class ChatWebsocket
         refresh();
         sendTo(c, messages());
         sendTo(c, new RoomStatus(roomName));
-    } //
+    }
 
     @OnClose
     public void onClose(Session session)
@@ -81,7 +79,7 @@ public class ChatWebsocket
         clients().remove(session.getId());
         if(clients().size() == 0 && !roomName.equals("main"))
             rooms.remove(roomName);
-    } //
+    }
 
     @OnMessage
     public void onMessage(Session session, String message)
@@ -98,7 +96,7 @@ public class ChatWebsocket
         }
         else
             ripple(pkg, clients().get(session.getId()));
-    } //
+    }
 
     @OnError
     public void onError(Session session, Throwable e)
@@ -114,22 +112,20 @@ public class ChatWebsocket
             // do nothing
         }
         onClose(session);
-    } //
+    }
 
     private void broadcast(WebsocketPackage pkg)
     {
         for(Client c : clients())
             sendTo(c, pkg);
-    } //
+    }
 
     private void ripple(WebsocketPackage pkg, Client client)
     {
         for(Client c : clients())
-        {
             if(!c.equals(client))
                 sendTo(c, pkg);
-        }
-    } //
+    }
 
     private void sendTo(Client c, WebsocketPackage pkg)
     {
@@ -141,7 +137,7 @@ public class ChatWebsocket
         {
             onError(c.getSession(), e);
         }
-    } //
+    }
 
     private void sendTo(Client c, List<? extends WebsocketPackage> list)
     {
@@ -153,7 +149,7 @@ public class ChatWebsocket
         {
             onError(c.getSession(), e);
         }
-    } //
+    }
 
     public static int connectionCount()
     {
@@ -161,7 +157,7 @@ public class ChatWebsocket
         for(Room r : rooms)
             output += r.getClients().size();
         return output;
-    } //
+    }
 
     public static int messageCount()
     {
@@ -169,7 +165,7 @@ public class ChatWebsocket
         for(Room r : rooms)
             output += r.getMessages().size();
         return output;
-    } //
+    }
 
     private synchronized void refresh()
     {
@@ -185,27 +181,21 @@ public class ChatWebsocket
                 ripple(new UserExit(c), c);
                 clients().remove(c.getID());
             }
-    } //
+    }
 
     private WebsocketPackage parseMessage(Session session, String message)
     {
         HashMap<String, String> headers = getHeaders(message);
         String type = headers.get("type");
         if(type.equals("message"))
-        {
             return new Message(getContent(message), clients().get(session.getId()));
-        }
         else if(type.equals("typing"))
-        {
             return new TypingStatus(booleanize(headers.get("typing")), clients().get(session.getId()));
-        }
         else if(type.equals("buffer"))
-        {
             return new BufferStatus(booleanize(headers.get("buffer")), clients().get(session.getId()));
-        }
         else
             return new ErrorReport(null);
-    } //
+    }
 
     private static boolean booleanize(String value)
     {
@@ -214,22 +204,18 @@ public class ChatWebsocket
         else
         {
             value = value.trim().toLowerCase();
-            if(value.equals("true"))
-                return true;
-            else
-                return false;
+            return value.equals("true");
         }
-    } //
+    }
 
     private static HashMap<String, String> getHeaders(String input)
     {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         int i = 0;
         boolean a = true; // Represents being at name in name:value pair
         String name = "";
         String value = "";
         while(input.charAt(i) != '|')
-        {
             if(a)
             {
                 name = "";
@@ -254,13 +240,12 @@ public class ChatWebsocket
                 map.put(name, value);
                 a = true;
             }
-        }
         return map;
-    } //
+    }
 
     private static String getContent(String input)
     {
         return input.substring(input.indexOf('|') + 1);
-    } //
+    }
 
-} // *
+}

@@ -6,7 +6,6 @@ package com.xarql.util;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import com.github.rjeschke.txtmark.Processor;
 
 public class TextFormatter
@@ -20,7 +19,7 @@ public class TextFormatter
 
         test = "Lemme know if you can #tag people with @hello";
         System.out.println(full(test));
-    } // main()
+    }
 
     public static final int HASHTAG_LIMIT = 5;
 
@@ -38,12 +37,12 @@ public class TextFormatter
     public static String processMarkdown(String input)
     {
         return Processor.process(input);
-    } // processMarkdown()
+    }
 
     public static String autoLinks(String input)
     {
         String output = "";
-        ArrayList<String> outputParts = new ArrayList<String>();
+        ArrayList<String> outputParts = new ArrayList<>();
         Pattern p = Pattern.compile(URL_REGEX); // the pattern to search for
         Matcher m = p.matcher(input);
 
@@ -68,23 +67,23 @@ public class TextFormatter
             output += item;
 
         return output;
-    } // autoLinks()
+    }
 
     public static String quickMedia(String input)
     {
 
         return linkShortcut(MEDIA_REGEX, MEDIA_PRE_LINK, input);
-    } // quickPic()
+    }
 
     public static String clickableHashtags(String input)
     {
         return linkShortcut(HASHTAG_REGEX, HASHTAG_PRE_LINK, input);
-    } // clickableHashtags()
+    }
 
     public static String clickableUsers(String input)
     {
         return linkShortcut(USER_REGEX, USER_PRE_LINK, input);
-    } // clickableUsers()
+    }
 
     public static String clickablePosts(String input)
     {
@@ -94,7 +93,7 @@ public class TextFormatter
     public static String linkShortcut(String regex, String preLink, String input)
     {
         String output = "";
-        ArrayList<String> outputParts = new ArrayList<String>();
+        ArrayList<String> outputParts = new ArrayList<>();
         Pattern p = Pattern.compile(regex); // the pattern to search for
         Matcher m = p.matcher(input);
         int start = 0;
@@ -117,11 +116,11 @@ public class TextFormatter
             output += item;
 
         return output;
-    } // linkShortcut()
+    }
 
     public static ArrayList<String> getHashtags(String input)
     {
-        ArrayList<String> tags = new ArrayList<String>(); // tags to be returned
+        ArrayList<String> tags = new ArrayList<>(); // tags to be returned
         Pattern p = Pattern.compile(HASHTAG_REGEX); // the pattern to search for
         Matcher m = p.matcher(input);
         int count = 0;
@@ -136,7 +135,7 @@ public class TextFormatter
             }
         }
         return tags;
-    } // getHashtags()
+    }
 
     public static boolean isAlphaNumeric(char input)
     {
@@ -149,37 +148,33 @@ public class TextFormatter
             return true;
         else
             return false;
-    } // isAlphaNumeric(char)
+    }
 
     public static boolean isAlphaNumeric(String input)
     {
         for(int i = 0; i < input.length(); i++)
-        {
             if(!isAlphaNumeric(input.charAt(i)))
                 return false;
-        }
         return true;
-    } // isAlphaNumeric(String)
+    }
 
     public static boolean isStandardSet(char input)
     {
         int num = input;
         return num >= 33 && num <= 126;
-    } // isStandardSet(char)
+    }
 
     public static boolean isStandardSet(String input)
     {
         for(int i = 0; i < input.length(); i++)
-        {
             if(!isStandardSet(input.charAt(i)))
                 return false;
-        }
         return true;
-    } // isStandardSet(String)
+    }
 
     /**
      * Prepares raw <code>Strings</code> from the user for displaying on a web page
-     * 
+     *
      * @param input Main <code>String</code> from user
      * @return A fully formatted <code>String</code> that is ready to appear as a
      *         post.
@@ -201,11 +196,11 @@ public class TextFormatter
         output = addFormat(output, "underline", 'u');
         output = addFormat(output, "strike", 's'); // strikethrough
         return output;
-    } // full()
+    }
 
     /**
      * Allows special characters from forms to be rendered as HTML.
-     * 
+     *
      * @param input Main <code>String</code> from user
      * @param target Escape character to replace with HTML code
      * @param replacement HTML code that will replace <code>target</code>
@@ -218,21 +213,21 @@ public class TextFormatter
     {
         String output = "";
         StringBuffer text = new StringBuffer(input);
-        int location = (new String(text)).indexOf(target);
+        int location = new String(text).indexOf(target);
         while(location > 0)
         {
             text.replace(location, location + 1, replacement);
-            location = (new String(text)).indexOf(target);
+            location = new String(text).indexOf(target);
         }
         output = new String(text);
         output = removeRepeats(output, replacement, consecutiveLimit);
         return output;
-    } // swapEscapeForHTML()
+    }
 
     /**
      * Removes consecutive repeats of a <code>String</code> after the amount of
      * repeats surpasses a limit.
-     * 
+     *
      * @param input A String from the user, which may have repeats.
      * @param target The <code>String</code> whose repetitions should be limited.
      * @param limit Amount of times the <code>target</code> is allowed to repeat
@@ -263,12 +258,12 @@ public class TextFormatter
             input = input.substring(1);
         }
         return output;
-    } // removeRepeats()
+    }
 
     /**
      * Replace a backtick format marker, such as <code>`b`</code>, with its
      * respective span class
-     * 
+     *
      * @param input A <code>String</code> from the user with formatting markers.
      * @param formatClass The CSS class of the formatting type.
      * @param trigger The character that will be used inside of the backticks to
@@ -280,7 +275,6 @@ public class TextFormatter
         String output = "";
         boolean withinFormat = false;
         for(int i = 0; i < input.length(); i++)
-        {
             if(input.charAt(i) == '`')
             {
                 if(withinFormat)
@@ -294,17 +288,14 @@ public class TextFormatter
                     else
                         output += input.charAt(i);
                 }
-                else
+                else if(input.length() > i + 2 && input.charAt(i + 1) == trigger && input.charAt(i + 2) == '`')
                 {
-                    if(input.length() > i + 2 && input.charAt(i + 1) == trigger && input.charAt(i + 2) == '`')
-                    {
-                        output += "<span class=\"" + formatClass + "\">"; // <span class="formatClass">
-                        i += 2;
-                        withinFormat = true;
-                    }
-                    else
-                        output += input.charAt(i);
+                    output += "<span class=\"" + formatClass + "\">"; // <span class="formatClass">
+                    i += 2;
+                    withinFormat = true;
                 }
+                else
+                    output += input.charAt(i);
             }
             else
             {
@@ -312,18 +303,17 @@ public class TextFormatter
                 if(i == input.length() - 1 && withinFormat)
                     output += "</span>";
             }
-        }
         return output;
-    } // addFormat()
+    }
 
     /**
      * Strip potentially dangerous characters to prevent HTML injection.
-     * 
+     *
      * @param input A <code>String</code> from the user.
      * @return A <code>String</code> without angle brackets representations.
      */
     private static String clean(String input)
     {
         return input.replace("<", "&#60;").replace(">", "&#62;");
-    } // clean()
-} // TextFormatter
+    }
+}

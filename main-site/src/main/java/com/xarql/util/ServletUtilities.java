@@ -9,11 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.auth.AuthSession;
 import com.xarql.auth.AuthTable;
 import com.xarql.main.DeveloperOptions;
@@ -22,7 +20,7 @@ import com.xarql.user.Account;
 
 /**
  * Helper class for servlets.
- * 
+ *
  * @author Bryan Johnson
  */
 public class ServletUtilities
@@ -44,19 +42,19 @@ public class ServletUtilities
 
     /**
      * Allows for using static methods in an object to reduce typing
-     * 
+     *
      * @param request The request to send to static methods
      */
     public ServletUtilities(HttpServletRequest request) throws UnsupportedEncodingException
     {
         this.request = request;
         standardSetup();
-    } // ServletUtilities()
+    }
 
     /**
      * Tries to get a String from a parameter and add the parameter to the request
      * as an attribute
-     * 
+     *
      * @param param The parameter from the user
      * @return The parameter's String
      */
@@ -64,12 +62,12 @@ public class ServletUtilities
     {
         request.setAttribute(param, request.getParameter(param));
         return request.getParameter(param);
-    } // useParam()
+    }
 
     /**
      * Tries to get a String from a parameter and add the parameter to the request
      * as an attribute. Uses the fallback if the request doesn't have the parameter.
-     * 
+     *
      * @param param The name of the parameter
      * @param fallback A default
      * @return The String held by the parameter
@@ -83,12 +81,12 @@ public class ServletUtilities
             request.setAttribute(param, fallback);
             return fallback;
         }
-    } // useParam()
+    }
 
     public int useInt(String name)
     {
         return useInt(name, DEFAULT_INT);
-    } // useInt()
+    }
 
     public int useInt(String name, int fallback)
     {
@@ -103,12 +101,12 @@ public class ServletUtilities
         }
         request.setAttribute(name, output);
         return output;
-    } // useInt()
+    }
 
     public boolean useBoolean(String name)
     {
         return useBoolean(name, DEFAULT_BOOLEAN);
-    } // useBoolean()
+    }
 
     public boolean useBoolean(String name, boolean fallback)
     {
@@ -119,12 +117,12 @@ public class ServletUtilities
             output = fallback;
         request.setAttribute(name, output);
         return output;
-    } // useBoolean()
+    }
 
     /**
      * Sets several attributes to their universal defaults, others to cookies and
      * others to session details. Sets the Character Encoding to UTF-8.
-     * 
+     *
      * @param request The request which requires a standard set up.
      * @throws UnsupportedEncodingException Shouldn't happen. Occurs if the server
      *         or client can't use UTF-8. Although that's extremely rare.
@@ -144,7 +142,7 @@ public class ServletUtilities
             request.setAttribute("account_name", getAccount().getUsername());
         else
             request.setAttribute("account_name", Post.DEFAULT_AUTHOR);
-    } // standardSetup(request)
+    }
 
     private void setFontWeight()
     {
@@ -155,7 +153,6 @@ public class ServletUtilities
         if(cookies != null)
         {
             for(Cookie item : cookies)
-            {
                 if(item.getName().equals("font-weight"))
                 {
                     if(item.getValue().equals("normal"))
@@ -165,17 +162,16 @@ public class ServletUtilities
                     request.setAttribute("font_weight", fontWeight);
                     return;
                 }
-            }
             request.setAttribute("font_weight", NORMAL_FONT_WEIGHT); // default
         }
         else
             request.setAttribute("font_weight", NORMAL_FONT_WEIGHT);
-    } // setFontWeight
+    }
 
     public void setFontSize()
     {
         setAttributeByCookie("font-size", DEFAULT_FONT_SIZE);
-    } // setFontSize()
+    }
 
     public void setAttributeByCookie(String cookie, Object fallback)
     {
@@ -185,110 +181,91 @@ public class ServletUtilities
         if(cookies != null)
         {
             for(Cookie item : cookies)
-            {
                 if(item.getName().equals(cookie))
                 {
                     request.setAttribute(insertableName, item.getValue());
                     return;
                 }
-            }
             request.setAttribute(insertableName, fallback); // default
         }
         else
             request.setAttribute(insertableName, fallback);
-    } // setAttributeByCookie()
+    }
 
     /**
      * Determines if the user that made a request is a moderator. Checks the
      * AuthTable for the Tomcat session ID cookie's status.
-     * 
+     *
      * @param request The request from the user.
      * @return <code>true</code> if the user is a moderator, <code>false</code>
      *         otherwise.
      */
     public boolean userIsMod()
     {
-        if(AuthTable.get(request.getRequestedSessionId()) == null)
-            return false;
-        else if(AuthTable.get(request.getRequestedSessionId()).isMod())
-            return true;
-        else
-            return false;
-    } // userIsMod()
+        return AuthTable.get(request.getRequestedSessionId()) != null && AuthTable.get(request.getRequestedSessionId()).isMod();
+    }
 
     /**
      * Determines if the user that made a request is an authorized user believed to
      * be human. Checks the AuthTable for the Tomcat session ID cookie's status.
-     * 
+     *
      * @param request The request from the user.
      * @return <code>true</code> if the user is authorized, <code>false</code>
      *         otherwise.
      */
     public boolean userIsAuth()
     {
-        if(request.getRequestedSessionId() == null) // NullPointerException protection
-            return false;
-        else if(AuthTable.contains(request.getRequestedSessionId()))
-            return true;
-        else
-            return false;
-    } // userIsAuth()
+        return request.getRequestedSessionId() != null && AuthTable.contains(request.getRequestedSessionId());
+    }
 
     public AuthSession getAuthSession()
     {
-        if(request.getRequestedSessionId() == null) // NullPointerException protection
-            return null;
-        else if(AuthTable.contains(request.getRequestedSessionId()))
+        if(request.getRequestedSessionId() != null && AuthTable.contains(request.getRequestedSessionId()))
             return AuthTable.get(request.getRequestedSessionId());
         else
             return null;
-    } // getAuthSession()
+    }
 
     public boolean userHasAccount()
     {
-        if(request.getRequestedSessionId() == null) // NullPointerException protection
-            return false;
-        else if(AuthTable.get(request.getRequestedSessionId()) != null && AuthTable.get(request.getRequestedSessionId()).getAccount() != null)
-            return true;
-        else
-            return false;
-    } // userHasAccount(HttpServletRequest)
+        return AuthTable.get(request.getRequestedSessionId()) != null && AuthTable.get(request.getRequestedSessionId()).getAccount() != null;
+    }
 
     public Account getAccount()
     {
         return AuthTable.get(request.getRequestedSessionId()).getAccount();
-    } // getAccount(HttpServletRequest)
+    }
 
     /**
      * Adds a "theme" attribute to the request. This is used to chose a style sheet
      * in a .jsp file.
-     * 
+     *
      * @param request The request which needs a theme to be applied.
      */
     public void setTheme()
     {
         setAttributeByCookie("theme", DEFAULT_THEME);
-    } // setTheme()
+    }
 
     /**
      * Used to prevent get methods on endpoints meant for submitting content
-     * 
+     *
      * @param response Response to use for the error
      * @throws IOException Something went wrong with http
      */
     public static void rejectGetMethod(HttpServletResponse response) throws IOException
     {
         response.sendError(405, "Can't use HTTP GET method for this URI");
-    } // rejectGetMethod()
+    }
 
     public static void rejectPostMethod(HttpServletResponse response) throws IOException
     {
         response.sendError(405, "Can't use HTTP POST method for this URI");
-    } // rejectPostMethod()
+    }
 
     /**
      * Checks to see if all of the given parameters are not null and not empty
-     * 
+     *
      * @param parameters The parameters from the client, often represented in the
      *        URL
      * @param request The request the parameters are in
@@ -299,26 +276,22 @@ public class ServletUtilities
     public boolean hasParams(List<String> parameters)
     {
         for(String param : parameters)
-        {
             if(request.getParameter(param) == null || request.getParameter(param).equals(""))
-            {
                 return false;
-            }
-        }
         return true;
-    } // hasParams()
+    }
 
     public boolean hasParams(String[] parameters)
     {
-        List<String> tmp = new ArrayList<String>();
+        List<String> tmp = new ArrayList<>();
         for(String param : parameters)
             tmp.add(param);
         return hasParams(tmp);
-    } // hasParams()
+    }
 
     /**
      * Checks to see if the given parameter is not null and not empty
-     * 
+     *
      * @param parameter The parameter from the client, often represented in the URL
      * @param request The request the parameter is in
      * @return true if the parameter is usable, false otherwise
@@ -326,7 +299,7 @@ public class ServletUtilities
     public boolean hasParam(String parameter)
     {
         return !(request.getParameter(parameter) == null || request.getParameter(parameter).equals(""));
-    } // hasParam()
+    }
 
     public String require(String parameter)
     {
@@ -334,12 +307,11 @@ public class ServletUtilities
             return request.getParameter(parameter).trim();
         else
             throw new NoSuchElementException("The desired parameter (" + parameter + ") wasn't included");
-    } // require()
+    }
 
     public int requireInt(String parameter) throws NoSuchElementException
     {
         if(hasParam(parameter))
-        {
             try
             {
                 int tmp = Integer.parseInt(request.getParameter(parameter).toString());
@@ -350,9 +322,8 @@ public class ServletUtilities
             {
                 throw new NoSuchElementException("The desired parameter (" + parameter + ") was not an int");
             }
-        }
         else
             throw new NoSuchElementException("The desired parameter (" + parameter + ") wasn't included");
-    } // requireInt()
+    }
 
-} // ServletUtilities
+}

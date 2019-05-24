@@ -52,6 +52,8 @@ public class AccountActions extends HttpServlet
                     case "log_out" :
                         util.getAuthSession().kill();
                         break;
+                    default :
+                        throw new IllegalArgumentException("Unrecognized or forbidden action type for HTTP GET method.");
                 }
                 response.sendRedirect(DOMAIN + "/user");
             }
@@ -95,6 +97,8 @@ public class AccountActions extends HttpServlet
                         deleteAccount(request, util.getAccount());
                         util.getAuthSession().kill();
                         break;
+                    default :
+                        throw new IllegalArgumentException("Unrecognized action type.");
                 }
                 response.sendRedirect(DOMAIN + "/user");
             }

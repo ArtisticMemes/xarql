@@ -4,15 +4,12 @@
 package com.xarql.main;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.xarql.auth.AuthTable;
-import com.xarql.util.Secrets;
+import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class Conf
@@ -25,15 +22,13 @@ public class Conf extends HttpServlet
     public static final String POLR_ROOT_POST_TITLE   = "ROOT POST";
     public static final String POLR_ROOT_POST_CONTENT = "Additional information available at <a href=\"https://xarql.com/help\">xarql.com/help</a>";
 
-    private static final String DOMAIN = DeveloperOptions.getDomain();
-
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Conf()
     {
         super();
-    } // Conf()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -42,37 +37,24 @@ public class Conf extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("domain", DOMAIN);
+        ServletUtilities util = new ServletUtilities(request);
 
-        String tomcatSession = request.getRequestedSessionId();
-        if(tomcatSession != null)
+        request.getRequestedSessionId();
+        if(util.userIsMod())
         {
-            String associatedGoogleID;
-            try
+            if(request.getParameter("reset") != null && request.getParameter("reset").equals("yes"))
             {
-                associatedGoogleID = AuthTable.get(tomcatSession).getGoogleId();
-            }
-            catch(Exception e)
-            {
-                response.sendError(401);
+                boolean allWorked = true; // ChatReset.execute(response) &&
+                // PolrReset.execute(response);
+                request.setAttribute("success", allWorked);
+                if(allWorked)
+                    request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
                 return;
             }
-            if(Secrets.modList().contains(associatedGoogleID))
+            else
             {
-                if(request.getParameter("reset") != null && request.getParameter("reset").equals("yes"))
-                {
-                    boolean allWorked = true; // ChatReset.execute(response) &&
-                    // PolrReset.execute(response);
-                    request.setAttribute("success", allWorked);
-                    if(allWorked)
-                        request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
-                    return;
-                }
-                else
-                {
-                    request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
-                    return;
-                }
+                request.getRequestDispatcher("/src/conf/conf.jsp").forward(request, response);
+                return;
             }
         }
         else
@@ -80,7 +62,7 @@ public class Conf extends HttpServlet
             response.sendError(401);
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -90,6 +72,6 @@ public class Conf extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Conf
+}

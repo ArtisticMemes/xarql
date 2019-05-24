@@ -6,7 +6,6 @@ package com.xarql.polr;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-
 import com.xarql.main.DeveloperOptions;
 
 public class Post
@@ -56,7 +55,7 @@ public class Post
         setSubresponses(subresponses);
         setAuthor(author);
         setWarning(warning);
-    } // Post(all)
+    }
 
     // Mutators (All private)
 
@@ -66,7 +65,7 @@ public class Post
             this.id = id;
         else
             this.id = MIN_ID;
-    } // setId(int id)
+    }
 
     private void setTitle(String title)
     {
@@ -74,12 +73,12 @@ public class Post
             this.title = "";
         else
             this.title = title;
-    } // setTitle(String title)
+    }
 
     private void setContent(String content)
     {
         this.content = content;
-    } // setContent(String content)
+    }
 
     private void setAnswers(int answers)
     {
@@ -87,7 +86,7 @@ public class Post
             this.answers = answers;
         else
             this.answers = MIN_ID;
-    } // setAnswers(int answers)
+    }
 
     private void setRemoved(int removed)
     {
@@ -99,22 +98,22 @@ public class Post
             setTitle(TITLE_DELETION_MESSAGE);
             setContent(CONTENT_DELETION_MESSAGE);
         }
-    } // setRemoved(int removed)
+    }
 
     private void setDate(Timestamp date)
     {
         this.date = date;
-    } // setDate(Timestamp date)
+    }
 
     private void setBump(Timestamp bump)
     {
         this.bump = bump;
-    } // setBump(Timestamp bump)
+    }
 
     private void setSubbump(Timestamp subbump)
     {
         this.subbump = subbump;
-    } // setSubbump(Timestamp subbump)
+    }
 
     private void setResponses(int responses)
     {
@@ -122,7 +121,7 @@ public class Post
             this.responses = responses;
         else
             this.responses = MIN_RESPONSES;
-    } // setResponses(int responses)
+    }
 
     private void setSubresponses(int subresponses)
     {
@@ -130,7 +129,7 @@ public class Post
             this.subresponses = subresponses;
         else
             this.subresponses = MIN_SUBRESPONSES;
-    } // setSubresponses(int subresponses)
+    }
 
     private void setAuthor(String author)
     {
@@ -138,7 +137,7 @@ public class Post
             this.author = author;
         else
             this.author = DEFAULT_AUTHOR;
-    } // setAuthor()
+    }
 
     private void setWarning(String warning)
     {
@@ -146,34 +145,34 @@ public class Post
             this.warning = warning;
         else
             this.warning = DEFAULT_WARNING;
-    } // setWarning()
+    }
 
     // Selectors (All public)
 
     public int getId()
     {
         return id;
-    } // getId()
+    }
 
     public String getTitle()
     {
         return title.replace("{DOMAIN}", DOMAIN);
-    } // getTitle()
+    }
 
     public String getTitleText()
     {
         return title.replaceAll("<[^>]*>", "");
-    } // getTitleText()
+    }
 
     public String getContent()
     {
         return content.replace("{DOMAIN}", DOMAIN);
-    } // getContent()
+    }
 
     public String getContentText()
     {
         return content.replaceAll("<[^>]*>", "");
-    } // getContentText()
+    }
 
     public String getContentPreview()
     {
@@ -183,32 +182,32 @@ public class Post
         else
             limit = PREVIEW_LENGTH_LIMIT;
         return getContentText().substring(0, limit - 1);
-    } // getContentPreview()
+    }
 
     public int getAnswers()
     {
         return answers;
-    } // getAnswers()
+    }
 
     public boolean getRemoved()
     {
         return removed;
-    } // getRemoved()
+    }
 
     public Timestamp getDate()
     {
         return date;
-    } // getDate()
+    }
 
     public String getDisplayDate()
     {
         return getDate().toString().substring(0, 19);
-    } // getDisplayDate()
+    }
 
     public Timestamp getBump()
     {
         return bump;
-    } // getBump()
+    }
 
     public String timeSinceBump()
     {
@@ -221,12 +220,12 @@ public class Post
             return timeSince / 3600000 + "h";
         else
             return timeSince / 86400000 + "d";
-    } // timeSinceBump()
+    }
 
     public Timestamp getSubbump()
     {
         return subbump;
-    } // getSubbump()
+    }
 
     public String timeSinceSubbump()
     {
@@ -239,42 +238,39 @@ public class Post
             return timeSince / 3600000 + "h";
         else
             return timeSince / 86400000 + "d";
-    } // timeSinceBump()
+    }
 
     public int getResponses()
     {
         return responses;
-    } // getResponses()
+    }
 
     public int getSubresponses()
     {
         return subresponses;
-    } // getSubresponses()
+    }
 
     public String getAuthor()
     {
         return author;
-    } // getAuthor()
+    }
 
     public String getWarning()
     {
         return warning;
-    } // getWarning()
+    }
 
     public boolean isExpired()
     {
         Timestamp lastWeek = new Timestamp(System.currentTimeMillis() - ONE_WEEK_MILLIS);
-        if(subbump.compareTo(lastWeek) > 0 || getId() == 0)
-            return false;
-        else
-            return true;
-    } // isExpired()
+        return subbump.compareTo(lastWeek) > 0 || getId() == 0;
+    }
 
     @Override
     public String toString()
     {
         return getTitleText() + " ~ " + getContentText();
-    } // toString()
+    }
 
     public String replyStats()
     {
@@ -297,13 +293,13 @@ public class Post
             output += " ~ Bump: " + timeSinceBump() + " ~ SubBump: " + timeSinceSubbump();
 
         return output;
-    } // replyStats()
+    }
 
     /* Static Methods Below */
 
     public static Post interperetPost(ResultSet rs) throws SQLException
     {
         return new Post(rs.getInt("id"), rs.getString("title"), rs.getString("content"), rs.getInt("answers"), rs.getInt("removed"), rs.getTimestamp("date"), rs.getTimestamp("bump"), rs.getTimestamp("subbump"), rs.getInt("responses"), rs.getInt("subresponses"), rs.getString("author"), rs.getString("warning"));
-    } // interperetPost()
+    }
 
-} // Post
+}
