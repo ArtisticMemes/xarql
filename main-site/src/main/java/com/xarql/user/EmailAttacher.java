@@ -10,16 +10,28 @@ public class EmailAttacher extends DatabaseUpdate
 
     private static final String COMMAND = "UPDATE user_secure SET email=? WHERE username=?";
 
-    private String username;
-    private String email;
+    private Account account;
+    private String  username;
+    private String  email;
 
     public EmailAttacher(Account account, String email) throws Exception
     {
         super(COMMAND);
+        this.account = account;
         setUsername(account.getUsername());
         setEmail(email);
-        account.setEmail(email);
-        execute();
+    }
+
+    @Override
+    protected boolean execute()
+    {
+        if(makeRequest())
+        {
+            account.setEmail(email);
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override
