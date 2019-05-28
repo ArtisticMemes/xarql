@@ -9,15 +9,12 @@ public class Message extends WebsocketPackage
     public Message(String content, Client client) throws IllegalArgumentException
     {
         super(content, client);
-    } // -
+    }
 
     public boolean isExpired()
     {
         Timestamp maxAge = new Timestamp(System.currentTimeMillis() - MESSAGE_LIFESPAN);
-        if(getCreationDate().compareTo(maxAge) > 0)
-            return false;
-        else
-            return true;
-    } //
+        return getCreationDate().compareTo(maxAge) > 0;
+    }
 
-} // *
+}

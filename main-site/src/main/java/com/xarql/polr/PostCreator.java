@@ -10,21 +10,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.ConnectionManager;
+import com.xarql.util.DatabaseUpdate;
 import com.xarql.util.TextFormatter;
 
-public class PostCreator
+public class PostCreator extends DatabaseUpdate
 {
 
     // Attributes --> To be set by end user
-    private String  title;
-    private String  content;
-    private int     answers;
-    private String  author;
-    private boolean goodParameters;
+    private String title;
+    private String content;
+    private int    answers;
+    private String author;
 
     private int determinedID;
 
@@ -34,54 +32,51 @@ public class PostCreator
     public static final int MIN_CONTENT_LENGTH = 1;
     public static final int MIN_ID             = 0;
 
-    private static final long ONE_WEEK_MILLIS = 604800000;
-
     // Defaults
     public static final String DEFAULT_AUTHOR  = "Unknown";
     public static final String DEFAULT_WARNING = "None";
 
-    public PostCreator(String title, String content, int answers, String author)
+    public PostCreator(String title, String content, int answers, String author) throws IllegalArgumentException
     {
-        goodParameters = true;
         setTitle(title);
         setContent(content);
         setAnswers(answers);
         setAuthor(author);
-    } // PostCreator(String title, String content, int answers)
+    }
 
-    private void setTitle(String title)
+    private void setTitle(String title) throws IllegalArgumentException
     {
         if(title.length() > MAX_TITLE_LENGTH)
         {
             this.title = "[TITLE TOO LONG]";
-            this.goodParameters = false;
+            throw new IllegalArgumentException("Title too long.");
         }
         else
             this.title = TextFormatter.full(title);
     } // setTitle(String title)
 
-    private void setContent(String content)
+    private void setContent(String content) throws IllegalArgumentException
     {
         if(content.length() > MAX_CONTENT_LENGTH)
         {
             this.content = "[CONTENT TOO LONG]";
-            this.goodParameters = false;
+            throw new IllegalArgumentException("Content too long.");
         }
         else if(content.length() < MIN_CONTENT_LENGTH)
         {
             this.content = "[CONTENT TOO SHORT]";
-            this.goodParameters = false;
+            throw new IllegalArgumentException("Content too short.");
         }
         else
             this.content = TextFormatter.full(content);
     } // setContent()
 
-    private void setAnswers(int answers)
+    private void setAnswers(int answers) throws IllegalArgumentException
     {
         if(answers < MIN_ID)
         {
             answers = MIN_ID;
-            this.goodParameters = false;
+            throw new IllegalArgumentException("Replying to ID too low.");
         }
         else
             this.answers = answers;
@@ -103,24 +98,24 @@ public class PostCreator
     public int getDeterminedID()
     {
         return determinedID;
-    } // getDeterminedID()
+    }
 
-    public boolean execute(HttpServletResponse response) // <-- Not up to naming conventions, but looks Google's naming
+    public boolean usethis()
     {
-        // System.out.println("Attempting to create post");
-        if(goodParameters && postExists(answers, response))
+        if(new PostExistenceChecker(answers).use())
         {
             // These should only return false if the sql connection is faulty, as the
             // conditions in which they fail were tested for in the above if statement
             if(createPost("INSERT INTO polr (title, content, answers, author) VALUES (?, ?, ?, ?)", title, content, answers, author, response) == false)
                 return false;
             // System.out.println("updating stats next");
-            if(updateStats(answers, response) == false)
+            new PostStatUpdater(answers).use();
+            if(updateStats(answers) == false)
                 return false;
 
             PageCache.clear();
 
-            determinedID = determineID(response);
+            determinedID = PolrMaxID.useStatic();
             if(determinedID == 0)
                 return false;
 
@@ -133,61 +128,7 @@ public class PostCreator
         }
         else
             return false;
-    } // execute(HttpServletResponse response)
-
-    private int determineID(HttpServletResponse response)
-    {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        String query = "SELECT MAX(id) FROM polr";
-
-        // System.out.println("Parameters = good");
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement(query);
-
-            rs = statement.executeQuery();
-            rs.first();
-            int id = rs.getInt(1);
-            return id;
-        }
-        catch(SQLException s)
-        {
-            try
-            {
-                response.sendError(500);
-                return 0;
-            }
-            catch(IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return 0;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(statement != null)
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-        }
-    } // determineID()
+    }
 
     private boolean updateStats(int startingId, HttpServletResponse response)
     {
@@ -297,83 +238,10 @@ public class PostCreator
         } // if(answers != 0)
     } // updateStatLoop()
 
-    public boolean postExists(int id, HttpServletResponse response)
-    {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-
-        // System.out.println("Parameters = good");
-        try
-        {
-            connection = ConnectionManager.get();
-            statement = connection.prepareStatement("SELECT * FROM polr WHERE id=? AND removed=0");
-
-            statement.setInt(1, answers);
-
-            rs = statement.executeQuery();
-            Timestamp lastWeek = new Timestamp(System.currentTimeMillis() - ONE_WEEK_MILLIS);
-            if(rs.next() && (lastWeek.compareTo(rs.getTimestamp("subbump")) < 0 || id == 0))
-            {
-                return true;
-            }
-            else
-            {
-                try
-                {
-                    response.sendError(400);
-                    // System.out.println("Prevented post with bad id");
-                }
-                catch(IOException e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                return false;
-            }
-        }
-        catch(SQLException s)
-        {
-            try
-            {
-                response.sendError(500);
-                return false;
-            }
-            catch(IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return false;
-        }
-        finally
-        {
-            // Close in reversed order.
-            if(rs != null)
-                try
-                {
-                    rs.close();
-                }
-                catch(SQLException s)
-                {
-                }
-            if(statement != null)
-                try
-                {
-                    statement.close();
-                }
-                catch(SQLException s)
-                {
-                }
-        }
-    } // postExists()
-
     private boolean createPost(String query, String title, String content, int answers, String author, HttpServletResponse response)
     {
         Connection connection = null;
         PreparedStatement statement = null;
-        int result;
-
         // System.out.println("Parameters = good");
         try
         {
@@ -385,7 +253,7 @@ public class PostCreator
             statement.setInt(3, answers);
             statement.setString(4, author);
 
-            result = statement.executeUpdate();
+            statement.executeUpdate();
             return true;
         }
         catch(SQLException s)
@@ -416,4 +284,17 @@ public class PostCreator
                 }
         }
     } // ArrayList createPost()
+
+    @Override
+    protected void setVariables(PreparedStatement statement) throws SQLException
+    {
+
+    }
+
+    @Override
+    protected boolean execute()
+    {
+
+    }
+
 } // PostCreator
