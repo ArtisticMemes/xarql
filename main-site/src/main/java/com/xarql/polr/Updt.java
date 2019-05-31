@@ -5,14 +5,11 @@ package com.xarql.polr;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.xarql.main.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -25,8 +22,6 @@ public class Updt extends HttpServlet
 
     public static final String DEFAULT_SORT = PostRetriever.DEFAULT_SORT;
     public static final String DEFAULT_FLOW = PostRetriever.DEFAULT_FLOW;
-
-    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()

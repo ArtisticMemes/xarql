@@ -263,7 +263,7 @@ public class Post
     public boolean isExpired()
     {
         Timestamp lastWeek = new Timestamp(System.currentTimeMillis() - ONE_WEEK_MILLIS);
-        return subbump.compareTo(lastWeek) > 0 || getId() == 0;
+        return lastWeek.compareTo(getSubbump()) > 0 && getId() != 0;
     }
 
     @Override

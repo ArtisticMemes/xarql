@@ -28,6 +28,18 @@ public class PolrMaxID extends DatabaseQuery<Integer>
     }
 
     @Override
+    protected boolean execute()
+    {
+        if(!makeRequest())
+        {
+            max = -1;
+            return false;
+        }
+        else
+            return true;
+    }
+
+    @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         return;

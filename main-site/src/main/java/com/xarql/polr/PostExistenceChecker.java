@@ -24,7 +24,7 @@ public class PostExistenceChecker extends DatabaseQuery<Boolean>
     protected void processResult(ResultSet rs) throws SQLException
     {
         Timestamp lastWeek = new Timestamp(System.currentTimeMillis() - ONE_WEEK_MILLIS);
-        exists = lastWeek.compareTo(rs.getTimestamp("subbump")) > 0 && targetID != 0;
+        exists = lastWeek.compareTo(rs.getTimestamp("subbump")) < 0 || targetID == 0;
     }
 
     @Override

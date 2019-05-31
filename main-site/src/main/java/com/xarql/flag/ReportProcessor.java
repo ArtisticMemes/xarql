@@ -1,16 +1,14 @@
 package com.xarql.flag;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
-import com.xarql.polr.PostCreator;
+import com.xarql.polr.PostExistenceChecker;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -23,8 +21,7 @@ public class ReportProcessor extends HttpServlet
 
     public static final String DOMAIN = DeveloperOptions.getDomain();
 
-    private static final String[] REQUIRED_PARAMS = {
-            "type", "description", "id"
+    private static final String[] REQUIRED_PARAMS = { "type", "description", "id"
     };
 
     /**
@@ -59,8 +56,7 @@ public class ReportProcessor extends HttpServlet
             // Make a report
             Report report = null;
             int id = util.useInt("id");
-            PostCreator pc = new PostCreator("", "", id, "");
-            if(pc.postExists(id, response))
+            if(new PostExistenceChecker(id).use())
                 report = new Report(request.getParameter("type"), request.getParameter("description"), id);
             else
             {

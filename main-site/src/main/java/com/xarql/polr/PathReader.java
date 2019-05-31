@@ -4,14 +4,12 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.main.DeveloperOptions;
 import com.xarql.main.Polr;
 import com.xarql.util.JSPBuilder;
@@ -25,7 +23,6 @@ public class PathReader extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private static final String ID           = Polr.ID;
     private static final String SORT         = Polr.SORT;
     private static final String FLOW         = Polr.FLOW;
     public static final String  PAGE         = "page";
