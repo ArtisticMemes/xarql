@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.xarql.util.ConnectionManager;
 import com.xarql.util.TextFormatter;
 
@@ -28,7 +27,7 @@ public class HashLogger
     {
         this.postContent = postContent;
         this.postID = postID;
-    } // HashLogger()
+    }
 
     public boolean execute()
     {
@@ -85,7 +84,7 @@ public class HashLogger
 
         return true;
 
-    } // execute()
+    }
 
     public int getIDFor(String tag) throws SQLException
     {
@@ -99,7 +98,7 @@ public class HashLogger
             return rs.getInt("id");
 
         throw new SQLException("Couldn't get entry");
-    } // getIDFor()
+    }
 
     public void addToRelations(String tag, int tagID) throws SQLException
     {
@@ -111,7 +110,7 @@ public class HashLogger
         statement.setString(3, tag);
 
         statement.executeUpdate();
-    } // addToRelations()
+    }
 
     public void makeNewTag(String tag) throws SQLException
     {
@@ -121,7 +120,7 @@ public class HashLogger
         statement.setString(1, tag);
         statement.executeUpdate();
 
-    } // makeNewTag()
+    }
 
     public void updateCount(String tag) throws SQLException
     {
@@ -133,7 +132,7 @@ public class HashLogger
 
         statement.executeUpdate();
 
-    } // updateCount()
+    }
 
     public boolean tagExists(String tag) throws SQLException
     {
@@ -144,11 +143,7 @@ public class HashLogger
         statement.setString(1, tag);
 
         rs = statement.executeQuery();
-        if(rs.next())
-            return true;
-        else
-            return false;
+        return rs.next();
+    }
 
-    } // tagExists()
-
-} // HashLogger
+}
