@@ -1,4 +1,4 @@
-﻿package com.xarql.util;
+package com.xarql.util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
