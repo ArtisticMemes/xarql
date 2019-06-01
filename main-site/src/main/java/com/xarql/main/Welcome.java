@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthTable;
 import com.xarql.user.AccountCounter;
+import com.xarql.user.AccountGrabber;
+import com.xarql.user.AccountMaxID;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
@@ -65,11 +67,14 @@ public class Welcome extends HttpServlet
         {
             // Do nothing
         }
-
         request.setAttribute("total_sessions", activeSessions);
 
         int userCount = AccountCounter.getCount();
         request.setAttribute("user_count", userCount);
+
+        String newestUsername = new AccountGrabber(AccountMaxID.useStatic()).use();
+        request.setAttribute("newest_username", newestUsername);
+
         request.getRequestDispatcher("/src/welcome/welcome.jsp").forward(request, response);
     }
 

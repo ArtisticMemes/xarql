@@ -7,7 +7,8 @@ import com.xarql.util.DatabaseQuery;
 
 public class AccountGrabber extends DatabaseQuery<String>
 {
-    private static final String ACCOUNT_QUERY = "SELECT * FROM user_secure WHERE username=?";
+    private static final String ACCOUNT_QUERY    = "SELECT * FROM user_secure WHERE username=?";
+    private static final String ACCOUNT_ID_QUERY = "SELECT * FROM user_secure WHERE id=?";
 
     private int    id;
     private String username;
@@ -19,6 +20,13 @@ public class AccountGrabber extends DatabaseQuery<String>
         super(ACCOUNT_QUERY);
         this.username = username;
         id = -1;
+    }
+
+    public AccountGrabber(Integer id)
+    {
+        super(ACCOUNT_ID_QUERY);
+        this.id = id;
+        nextIndex();
     }
 
     @Override
@@ -64,7 +72,10 @@ public class AccountGrabber extends DatabaseQuery<String>
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
-        statement.setString(1, username);
+        if(getCommand().equals(ACCOUNT_QUERY))
+            statement.setString(1, username);
+        else
+            statement.setInt(1, id);
     }
 
 }
