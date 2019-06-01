@@ -4,6 +4,39 @@ $(document).ready(function () {
   var room = $('#room').attr('value');
   console.log(room);
 
+  function parseHeaders(message)
+  {
+    var data = message.data;
+    var headers = new Map();
+    // Repeat until all key:value,key:value pairs are consumed and | terminates them
+    while(data.indexOf(':') != -1 && data.indexOf(':') < data.indexOf('|'))
+    {
+      // Get key from key:value pair
+      var param = data.substr(0, data.indexOf(':'));
+      // Remove the key from the start of data
+      data = data.substr(data.indexOf(':') + 1);
+      // Get the index of , or | --> whichever comes first
+      var stop = 0;
+      if(data.indexOf(',') != -1 && data.indexOf(',') < data.indexOf('|'))
+        stop = data.indexOf(',');
+      else
+        stop = data.indexOf('|');
+      // Get value from key:value pair
+      var value = data.substr(0, stop);
+      // Trim the value and , or | from data
+      data = data.substr(stop + 1);
+      // Add the key:value pair to the map
+      headers.set(param, value);
+    }
+    return headers;
+  }
+
+  function parseContent(message)
+  {
+    var data = message.data;
+    data = data.substr(data.indexOf('|') + 1, data.length - data.indexOf('|'));
+    return data;
+  }
 
 	// AJAX posting
 	$("#message-form" ).submit(function(event) {
@@ -63,28 +96,8 @@ $(document).ready(function () {
     message.value = "";
   }
   function wsGetMessage(message) {
-    var data = message.data;
-    var headers = new Map();
-    // Repeat until all key:value,key:value pairs are consumed and | terminates them
-    while(data.indexOf(':') != -1 && data.indexOf(':') < data.indexOf('|'))
-    {
-      // Get key from key:value pair
-      var param = data.substr(0, data.indexOf(':'));
-      // Remove the key from the start of data
-      data = data.substr(data.indexOf(':') + 1);
-      // Get the index of , or | --> whichever comes first
-      var stop = 0;
-      if(data.indexOf(',') != -1 && data.indexOf(',') < data.indexOf('|'))
-        stop = data.indexOf(',');
-      else
-        stop = data.indexOf('|');
-      // Get value from key:value pair
-      var value = data.substr(0, stop);
-      // Trim the value and , or | from data
-      data = data.substr(stop + 1);
-      // Add the key:value pair to the map
-      headers.set(param, value);
-    }
+    var content = parseContent(message);
+    var headers = parseHeaders(message);
     if(headers.get('TYPE') !== 'message')
     {
       if(headers.get('TYPE') === 'user_join') {
@@ -94,14 +107,14 @@ $(document).ready(function () {
         removeUser(headers.get('CLIENT_COLOR'));
       }
       else if(headers.get('TYPE') === 'users_report') {
-        data = data.substr(7);
-        if(data.length > 1)
+        content = content.substr(7);
+        if(content.length > 1)
         {
-          while(data.length > 0)
+          while(content.length > 0)
           {
-            var client = data.substr(1, 6);
+            var client = content.substr(1, 6);
             addUser(client);
-            data = data.substr(7);
+            content = content.substr(7);
           }
         }
       }
@@ -122,13 +135,16 @@ $(document).ready(function () {
         }
       }
       else {
-        $('#messages').prepend('<div class="small-card"><p class="status">' + data + '</p></div>');
+        $('#messages').prepend('<div id="status-tmp" class="small-card"><p class="status">' + content + '</p></div>');
+        window.setTimeout(function () {
+          $('#status-tmp').remove();
+        }, 3000);
       }
     }
     else {
       var color = headers.get('CLIENT_COLOR');
       var textColor = headers.get('TEXT_COLOR');
-      $('#messages').prepend('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + data + '</p></div>');
+      $('#messages').prepend('<div class="small-card" style="background-color:#' + color + '"><p style="color:#' + textColor + '">' + content + '</p></div>');
     }
   }
   function wsOpen(message) {
