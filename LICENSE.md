@@ -1,5 +1,5 @@
-MIT License
-http://g.xarql.com
+MIT License //
+http://g.xarql.com  
 Copyright (c) 2018 Bryan Christopher Johnson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
