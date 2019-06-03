@@ -3,8 +3,7 @@ package com.xarql.main;
 import com.xarql.util.Secrets;
 
 /**
- * Used for offline/local testing. <code>TESTING</code> determines if the
- * Recaptcha is in testing mode.
+ * Basic setup options to make development easier
  *
  * @author Bryan Johnson
  */

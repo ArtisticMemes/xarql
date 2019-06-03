@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Converts base 10 numbers to base 62 and vice versa. Example: 873 = E5
+ *
+ * @author Bryan Johnson
+ */
 public class Base62Converter
 {
     public static void main(String[] args)
@@ -17,6 +22,14 @@ public class Base62Converter
 
     private static Map<Integer, Character> charValues = new HashMap<>();
 
+    /**
+     * Converts a base 62 number (represented as a String) to a base 10 number
+     * (represented as an int). Example: E5 -> 873
+     *
+     * @param input String representing a base 62 number
+     * @return An int equal to the input
+     * @throws IllegalArgumentException When an illegal character is in the input
+     */
     public static int from(String input) throws IllegalArgumentException
     {
         int output = 0;
@@ -37,6 +50,15 @@ public class Base62Converter
         return output;
     }
 
+    /**
+     * Custom "to the power of" method for determining exponential values. For
+     * whatever reason Math.pow() didn't work properly for this use case. The output
+     * might suffer from an integer overflow if the arguments are too large.
+     *
+     * @param number The base number
+     * @param power The exponent
+     * @return number^power
+     */
     private static int pow(int number, int power)
     {
         if(power == 0 || number == 0)
@@ -50,6 +72,10 @@ public class Base62Converter
         return output;
     }
 
+    /**
+     * Constructs the Map the holds the values for each valid char in a base 62
+     * number String
+     */
     private static void buildCharacterMap()
     {
         HashMap<Integer, Character> builtValues = new HashMap<>(); // This could be kept in memory
@@ -67,6 +93,9 @@ public class Base62Converter
         charValues = builtValues;
     }
 
+    /**
+     * @return built charValues
+     */
     public static Map<Integer, Character> getCharValues()
     {
         if(charValues.isEmpty())
@@ -74,6 +103,13 @@ public class Base62Converter
         return charValues;
     }
 
+    /**
+     * Converts a base 10 number (represented as an int) to a base 62 number
+     * (represented as an String). Example: 873 -> E5
+     *
+     * @param input any int
+     * @return A String equal to the input
+     */
     public static String to(int input)
     {
         String output = "";

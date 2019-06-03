@@ -15,7 +15,7 @@ import net.xarql.util.DeveloperOptions;
 import net.xarql.util.NServletUtilities;
 
 /**
- * Servlet implementation class Viewer
+ * Provides media viewers for media that was requested via its short link
  */
 @WebServlet ("/Viewer")
 public class Viewer extends HttpServlet

@@ -14,7 +14,7 @@ import com.xarql.auth.AuthTable;
 import net.xarql.util.DeveloperOptions;
 
 /**
- * Servlet implementation class RecaptchaHandler
+ * Handles requests for authorization done via a Recaptcha
  */
 @WebServlet ("/RecaptchaHandler")
 public class RecaptchaHandler extends HttpServlet
@@ -32,6 +32,8 @@ public class RecaptchaHandler extends HttpServlet
     }
 
     /**
+     * Rejects the GET method
+     * 
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      *      response)
      */
@@ -42,6 +44,8 @@ public class RecaptchaHandler extends HttpServlet
     }
 
     /**
+     * Processes POST requests from clients trying to authenticate
+     *
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      *      response)
      */

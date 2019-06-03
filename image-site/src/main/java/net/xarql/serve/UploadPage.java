@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.xarql.util.NServletUtilities;
 
 /**
- * Servlet implementation class UploadPage
+ * Gives users a form to upload with. The form will point towards the
+ * UploadProcessor
  */
 @WebServlet ("/UploadPage")
 public class UploadPage extends HttpServlet

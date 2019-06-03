@@ -9,25 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthTable;
 
 /**
- * Servlet implementation class AuthStatus
+ * Copy of com.xarql.auth.AuthStatus
+ *
+ * @see com.xarql.auth.AuthStatus
  */
 @WebServlet ("/AuthStatus")
 public class AuthStatus extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public AuthStatus()
     {
         super();
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -37,10 +32,6 @@ public class AuthStatus extends HttpServlet
             response.sendError(401);
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {

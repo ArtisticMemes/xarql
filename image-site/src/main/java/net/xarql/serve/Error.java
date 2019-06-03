@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.xarql.util.NServletUtilities;
 
 /**
- * Servlet implementation class Error
+ * Provides users with good looking error pages without developer information
  */
 @WebServlet ("/Error")
 public class Error extends HttpServlet
@@ -28,6 +28,10 @@ public class Error extends HttpServlet
     }
 
     /**
+     * Shows an error page with proper descriptive text for the given error code.
+     * This should be used through the web.xml to create error-pages that point to
+     * <code>/-/error?code=</code>
+     *
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      *      response)
      */
@@ -65,6 +69,8 @@ public class Error extends HttpServlet
     }
 
     /**
+     * Invokes doGet()
+     *
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      *      response)
      */

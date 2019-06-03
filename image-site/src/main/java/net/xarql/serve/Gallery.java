@@ -11,7 +11,7 @@ import net.xarql.util.Base62Converter;
 import net.xarql.util.NServletUtilities;
 
 /**
- * Servlet implementation class Gallery
+ * Shows a bunch of recent .jpg and .png images
  */
 @WebServlet ("/Gallery")
 public class Gallery extends HttpServlet
@@ -65,12 +65,12 @@ public class Gallery extends HttpServlet
             PNGinit = DEFAULT_INIT;
 
         // Determine valid IDs of images and add them to a list
-        ArrayList<Image> images = new ArrayList<>();
+        ArrayList<Media> images = new ArrayList<>();
         for(int i = JPGinit; i <= UploadProcessor.getHighestImageID(FileType.JPG) && i <= JPGinit + IMAGE_COUNT; i++)
-            images.add(new Image(Base62Converter.to(i), FileType.JPG));
+            images.add(new Media(Base62Converter.to(i), FileType.JPG));
 
         for(int i = PNGinit; i <= UploadProcessor.getHighestImageID(FileType.PNG) && i <= PNGinit + IMAGE_COUNT; i++)
-            images.add(new Image(Base62Converter.to(i), FileType.PNG));
+            images.add(new Media(Base62Converter.to(i), FileType.PNG));
 
         request.setAttribute("images", images);
         request.getRequestDispatcher("/src/viewer/gallery.jsp").forward(request, response);

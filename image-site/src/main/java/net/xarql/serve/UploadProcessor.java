@@ -21,12 +21,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import com.xarql.util.ServletUtilities;
 import net.xarql.util.Base62Converter;
 import net.xarql.util.DeveloperOptions;
 import net.xarql.util.NServletUtilities;
 
 /**
- * Servlet implementation class Upload
+ * Processes media uploads and writes them to the disk
  */
 @WebServlet ("/Upload")
 @MultipartConfig (fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 5 * 5)
@@ -57,7 +58,7 @@ public class UploadProcessor extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        NServletUtilities.rejectGetMethod(response);
+        ServletUtilities.rejectGetMethod(response);
     }
 
     /**

@@ -4,6 +4,12 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import com.xarql.util.ServletUtilities;
 
+/**
+ * ServletUtilities with appopriate variables for image-site
+ *
+ * @see com.xarql.util.ServletUtilities
+ * @author Bryan Johnson
+ */
 public class NServletUtilities extends ServletUtilities
 {
     private static final String  DOMAIN              = DeveloperOptions.getDomain();

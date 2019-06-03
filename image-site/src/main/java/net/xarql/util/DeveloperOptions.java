@@ -5,6 +5,11 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import com.xarql.util.Secrets;
 
+/**
+ * Basic setup options to make development easier
+ *
+ * @author Bryan Johnson
+ */
 public class DeveloperOptions
 {
     public static final boolean TESTING = true;

@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.xarql.util.DeveloperOptions;
 
 /**
- * Servlet implementation class Source
+ * Provides access to the source code because otherwise the Viewer would consume
+ * all requests
  */
 @WebServlet ("/Source")
 public class Source extends HttpServlet

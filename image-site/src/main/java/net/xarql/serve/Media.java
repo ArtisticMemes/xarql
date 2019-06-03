@@ -2,7 +2,12 @@ package net.xarql.serve;
 
 import net.xarql.util.DeveloperOptions;
 
-public final class Image
+/**
+ * Represents a media location on the site
+ *
+ * @author Bryan Johnson
+ */
+public final class Media
 {
     /**
      * Current root URL
@@ -27,7 +32,7 @@ public final class Image
      * @param type The extension for the image. 0 for jpg. 1 for png.
      * @throws IllegalArgumentException
      */
-    public Image(String id, FileType type) throws IllegalArgumentException
+    public Media(String id, FileType type) throws IllegalArgumentException
     {
         this.id = id;
         this.type = type;

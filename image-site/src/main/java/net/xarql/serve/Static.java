@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.xarql.util.DeveloperOptions;
 
 /**
- * Servlet implementation class StaticProvider
+ * Provides media content from the disk
  */
 @WebServlet ("/StaticProvider")
 public class Static extends HttpServlet
