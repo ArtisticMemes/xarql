@@ -24,7 +24,7 @@ public class Base62Converter
 
     /**
      * Converts a base 62 number (represented as a String) to a base 10 number
-     * (represented as an int). Example: E5 -> 873
+     * (represented as an int). Example: E5; 873
      *
      * @param input String representing a base 62 number
      * @return An int equal to the input
@@ -105,7 +105,7 @@ public class Base62Converter
 
     /**
      * Converts a base 10 number (represented as an int) to a base 62 number
-     * (represented as an String). Example: 873 -> E5
+     * (represented as an String). Example: 873; E5
      *
      * @param input any int
      * @return A String equal to the input

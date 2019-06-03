@@ -30,9 +30,8 @@ public final class Media
      * @param id Represents the image's number. Exclude the first character; that is
      *        only for type indication.
      * @param type The extension for the image. 0 for jpg. 1 for png.
-     * @throws IllegalArgumentException
      */
-    public Media(String id, FileType type) throws IllegalArgumentException
+    public Media(String id, FileType type)
     {
         this.id = id;
         this.type = type;

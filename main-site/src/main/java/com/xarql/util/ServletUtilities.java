@@ -44,6 +44,7 @@ public class ServletUtilities
      * Allows for using static methods in an object to reduce typing
      *
      * @param request The request to send to static methods
+     * @throws UnsupportedEncodingException No idea what this is. Ignore it
      */
     public ServletUtilities(HttpServletRequest request) throws UnsupportedEncodingException
     {
@@ -123,7 +124,6 @@ public class ServletUtilities
      * Sets several attributes to their universal defaults, others to cookies and
      * others to session details. Sets the Character Encoding to UTF-8.
      *
-     * @param request The request which requires a standard set up.
      * @throws UnsupportedEncodingException Shouldn't happen. Occurs if the server
      *         or client can't use UTF-8. Although that's extremely rare.
      */
@@ -196,7 +196,6 @@ public class ServletUtilities
      * Determines if the user that made a request is a moderator. Checks the
      * AuthTable for the Tomcat session ID cookie's status.
      *
-     * @param request The request from the user.
      * @return <code>true</code> if the user is a moderator, <code>false</code>
      *         otherwise.
      */
@@ -209,7 +208,6 @@ public class ServletUtilities
      * Determines if the user that made a request is an authorized user believed to
      * be human. Checks the AuthTable for the Tomcat session ID cookie's status.
      *
-     * @param request The request from the user.
      * @return <code>true</code> if the user is authorized, <code>false</code>
      *         otherwise.
      */
@@ -239,8 +237,6 @@ public class ServletUtilities
     /**
      * Adds a "theme" attribute to the request. This is used to chose a style sheet
      * in a .jsp file.
-     *
-     * @param request The request which needs a theme to be applied.
      */
     public void setTheme()
     {
@@ -268,10 +264,7 @@ public class ServletUtilities
      *
      * @param parameters The parameters from the client, often represented in the
      *        URL
-     * @param request The request the parameters are in
-     * @param response Gives a 400 error
      * @return true if the parameters are usable, false otherwise
-     * @throws IOException Something went wrong with http
      */
     public boolean hasParams(List<String> parameters)
     {
@@ -293,7 +286,6 @@ public class ServletUtilities
      * Checks to see if the given parameter is not null and not empty
      *
      * @param parameter The parameter from the client, often represented in the URL
-     * @param request The request the parameter is in
      * @return true if the parameter is usable, false otherwise
      */
     public boolean hasParam(String parameter)
