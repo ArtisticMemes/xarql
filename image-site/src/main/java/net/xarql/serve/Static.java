@@ -13,13 +13,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.xarql.util.DeveloperOptions;
 
 /**
@@ -41,7 +39,7 @@ public class Static extends HttpServlet
     public Static()
     {
         super();
-    } // Static()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -101,15 +99,12 @@ public class Static extends HttpServlet
             byte[] buffer = new byte[BUFFER_SIZE];
             int length;
             while((length = input.read(buffer)) > 0)
-            {
                 output.write(buffer, 0, length);
-            }
         }
         finally
         {
             // Close the streams if they're still live
             if(input != null)
-            {
                 try
                 {
                     input.close();
@@ -118,9 +113,7 @@ public class Static extends HttpServlet
                 {
                     io.printStackTrace();
                 }
-            }
             if(output != null)
-            {
                 try
                 {
                     output.close();
@@ -129,9 +122,8 @@ public class Static extends HttpServlet
                 {
                     io.printStackTrace();
                 }
-            }
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -143,6 +135,6 @@ public class Static extends HttpServlet
         // Reject POST requests
         response.sendError(400);
         return;
-    } // doPost()
+    }
 
-} // Static()
+}

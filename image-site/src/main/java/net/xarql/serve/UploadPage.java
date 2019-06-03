@@ -22,7 +22,7 @@ public class UploadPage extends HttpServlet
     public UploadPage()
     {
         super();
-    } // UploadPage()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

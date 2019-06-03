@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import com.xarql.util.ConnectionManager;
 import com.xarql.util.DatabaseUpdate;
 
-// TODO: Finish PostStatUpdater class
 public class PostStatUpdater extends DatabaseUpdate
 {
     private int answers;

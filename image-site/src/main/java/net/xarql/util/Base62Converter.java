@@ -5,6 +5,7 @@ package net.xarql.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Base62Converter
 {
@@ -12,9 +13,9 @@ public class Base62Converter
     {
         System.out.println(to(873));
         System.out.println(from("E5"));
-    } // main()
+    }
 
-    private static HashMap<Integer, Character> charValues = new HashMap<Integer, Character>();
+    private static Map<Integer, Character> charValues = new HashMap<>();
 
     public static int from(String input) throws IllegalArgumentException
     {
@@ -30,11 +31,11 @@ public class Base62Converter
                 charValue = input.charAt(i) - 61;
             else
                 throw new IllegalArgumentException("Illegal Character : " + input.charAt(i));
-            int weight = (input.length() - 1) - i;
+            int weight = input.length() - 1 - i;
             output += charValue * pow(62, weight);
         }
         return output;
-    } // fromBase62()
+    }
 
     private static int pow(int number, int power)
     {
@@ -47,11 +48,11 @@ public class Base62Converter
             power--;
         }
         return output;
-    } // pow
+    }
 
     private static void buildCharacterMap()
     {
-        HashMap<Integer, Character> builtValues = new HashMap<Integer, Character>(); // This could be kept in memory
+        HashMap<Integer, Character> builtValues = new HashMap<>(); // This could be kept in memory
         int i = 0;
         int booster = 48;
         while(i < 62)
@@ -64,24 +65,29 @@ public class Base62Converter
             i++;
         }
         charValues = builtValues;
-    } // buildCharacterMap()
+    }
+
+    public static Map<Integer, Character> getCharValues()
+    {
+        if(charValues.isEmpty())
+            buildCharacterMap();
+        return charValues;
+    }
 
     public static String to(int input)
     {
         String output = "";
-        if(charValues.isEmpty())
-            buildCharacterMap();
 
-        ArrayList<Integer> digits = new ArrayList<Integer>();
+        ArrayList<Integer> digits = new ArrayList<>();
         do
         {
             digits.add(input % 62);
-            input = (input - (input % 62)) / 62;
+            input = (input - input % 62) / 62;
         }
         while(input > 0);
 
         for(int i = digits.size() - 1; i >= 0; i--)
-            output += charValues.get(digits.get(i));
+            output += getCharValues().get(digits.get(i));
         return output;
-    } // toBase62()
-} // base62Converter
+    }
+}

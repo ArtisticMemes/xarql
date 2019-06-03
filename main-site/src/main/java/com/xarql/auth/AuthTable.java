@@ -4,18 +4,17 @@
 package com.xarql.auth;
 
 import java.sql.Timestamp;
-
 import com.xarql.util.TrackedHashMap;
 
 public class AuthTable
 {
-    private static TrackedHashMap<String, AuthSession> sessions = new TrackedHashMap<String, AuthSession>();
+    private static TrackedHashMap<String, AuthSession> sessions = new TrackedHashMap<>();
     private static Timestamp                           lastTrimTime;
 
     public AuthTable()
     {
         sessions.clear();
-    } // -
+    }
 
     public static void add(AuthSession session)
     {
@@ -31,7 +30,7 @@ public class AuthTable
             trim();
             setLastTrimTime();
         }
-    } //
+    }
 
     public static boolean contains(String tomcatSession)
     {
@@ -42,45 +41,43 @@ public class AuthTable
             sessions.remove(tomcatSession);
             return false;
         }
-    } //
+    }
 
     public static void trim()
     {
         for(int i = 0; i < sessions.size(); i++)
-        {
             if(sessions.get(sessions.key(i)).expired())
             {
                 sessions.remove(sessions.key(i));
                 i--;
             }
-        }
-    } //
+    }
 
     public static void remove(String session)
     {
         sessions.remove(session);
-    } //
+    }
 
     public static AuthSession get(String session)
     {
         return sessions.get(session);
-    } //
+    }
 
     public static int size()
     {
         return sessions.size();
-    } //
+    }
 
     private static Timestamp getLastTrimTime()
     {
         if(lastTrimTime == null)
             lastTrimTime = new Timestamp(System.currentTimeMillis());
         return lastTrimTime;
-    } //
+    }
 
     private static void setLastTrimTime()
     {
         lastTrimTime = new Timestamp(System.currentTimeMillis());
-    } //
+    }
 
-} // *
+}

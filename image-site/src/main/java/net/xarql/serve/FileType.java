@@ -10,35 +10,21 @@ enum FileType
     private String   extension;
     private String[] aliases;
 
-    private FileType(String[] validExtensions)
+    private FileType(String... extensions)
     {
-        this.extension = validExtensions[0];
-        this.aliases = validExtensions;
-    } // FileTypes(String[])
-
-    private FileType(String extension, String alias)
-    {
-        this(new String[]{
-                extension, alias
-        });
-    } // FileType(String, String)
-
-    private FileType(String extension)
-    {
-        this(new String[]{
-                extension
-        });
-    } // FileTypes(String)
+        extension = extensions[0];
+        aliases = extensions;
+    }
 
     public String getExtension()
     {
-        return this.extension;
-    } // getExtension()
+        return extension;
+    }
 
     public String dotExtension()
     {
-        return "." + this.extension;
-    } // dotExtension()
+        return "." + extension;
+    }
 
     public List<String> getAliases()
     {
@@ -46,7 +32,7 @@ enum FileType
         for(String str : aliases)
             types.add(str);
         return types;
-    } // getAliases()
+    }
 
     public static boolean isValidFileType(String extension)
     {
@@ -56,13 +42,11 @@ enum FileType
         {
             extension = prepare(extension);
             for(FileType type : FileType.values())
-            {
                 if(type.getAliases().contains(extension))
                     return true;
-            }
         }
         return false;
-    } // isValidFileType()
+    }
 
     public static FileType determine(String extension) throws IllegalArgumentException
     {
@@ -71,12 +55,10 @@ enum FileType
             throw new IllegalArgumentException("FileType was invalid : " + extension);
         else
             for(FileType type : FileType.values())
-            {
                 if(type.getAliases().contains(extension))
                     return type;
-            }
         return null;
-    } // determine(extension)
+    }
 
     public static FileType determine(String extension, FileType fallback)
     {
@@ -88,15 +70,13 @@ enum FileType
         {
             return fallback;
         }
-    } // determine(extension, fallback)
+    }
 
     public static FileType determine(int number) throws IllegalArgumentException
     {
         for(FileType type : FileType.values())
-        {
             if(number == type.ordinal())
                 return type;
-        }
         throw new IllegalArgumentException("Index didn't correlate to a valid FileType. Index : " + number);
     }
 
@@ -143,6 +123,6 @@ enum FileType
             return extension.substring(extension.indexOf('.') + 1);
         else
             return extension;
-    } // prepare()
+    }
 
-} // FileTypes
+}

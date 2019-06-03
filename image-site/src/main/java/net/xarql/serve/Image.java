@@ -21,7 +21,7 @@ public final class Image
 
     /**
      * Creates a new image with the supplied id and type.
-     * 
+     *
      * @param id Represents the image's number. Exclude the first character; that is
      *        only for type indication.
      * @param type The extension for the image. 0 for jpg. 1 for png.
@@ -31,27 +31,27 @@ public final class Image
     {
         this.id = id;
         this.type = type;
-    } // Image()
+    }
 
     /**
      * Gives the short link to this image which opens in an image viewer.
-     * 
+     *
      * @return The short link
      */
     public String getLink()
     {
         return DOMAIN + "/" + type.ordinal() + id;
-    } // getLink()
+    }
 
     /**
      * Gives the long link to this image which provides the actual file on its own.
      * The file will be named raw.
-     * 
+     *
      * @return The raw link
      */
     public String getRawLink()
     {
         return DOMAIN + "/-/static/" + type.getExtension() + "/" + id + "/raw." + type.getExtension();
-    } // getRawLink()
+    }
 
-} // Image
+}

@@ -12,13 +12,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.xarql.util.DeveloperOptions;
 
 /**
@@ -43,7 +41,7 @@ public class Source extends HttpServlet
         SimpleDateFormat gmt = new SimpleDateFormat("EEE, MMM d, yyyy hh:mm:ss z");
         gmt.setTimeZone(TimeZone.getTimeZone("GMT"));
         lastModified = gmt.format(new Date());
-    } // Source()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -93,32 +91,29 @@ public class Source extends HttpServlet
 
         // Allocate space for file/response streams
         BufferedInputStream input = null;
-        ByteArrayOutputStream image = null;
+        ByteArrayOutputStream text = null;
         BufferedOutputStream output = null;
 
         try
         {
             // input is file from disk. output is this servlet's response
             input = new BufferedInputStream(new FileInputStream(file), INPUT_BUFFER);
-            image = new ByteArrayOutputStream(INPUT_BUFFER);
+            text = new ByteArrayOutputStream(INPUT_BUFFER);
             // Stream input to image
             byte[] buffer = new byte[INPUT_BUFFER];
             int length;
             while((length = input.read(buffer)) > 0)
-            {
-                image.write(buffer, 0, length);
-            }
+                text.write(buffer, 0, length);
 
             output = new BufferedOutputStream(response.getOutputStream());
 
             // Stream image to output
-            output.write(image.toByteArray());
+            output.write(text.toByteArray());
         }
         finally
         {
             // Close the streams if they're still live
             if(input != null)
-            {
                 try
                 {
                     input.close();
@@ -127,9 +122,7 @@ public class Source extends HttpServlet
                 {
                     io.printStackTrace();
                 }
-            }
             if(output != null)
-            {
                 try
                 {
                     output.close();
@@ -138,9 +131,8 @@ public class Source extends HttpServlet
                 {
                     io.printStackTrace();
                 }
-            }
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -150,6 +142,6 @@ public class Source extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Source
+}
