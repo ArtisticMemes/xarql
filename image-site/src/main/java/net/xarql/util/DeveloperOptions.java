@@ -3,6 +3,7 @@ package net.xarql.util;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import com.xarql.util.Secrets;
 
 public class DeveloperOptions
 {
@@ -23,7 +24,7 @@ public class DeveloperOptions
             return "";
         else
             return GOOGLE_ANALYTICS_ID;
-    } // getGoogleAnalyticsID()
+    }
 
     public static String getRecaptchaKey()
     {
@@ -31,7 +32,7 @@ public class DeveloperOptions
             return TEST_RECAPTCHA_KEY;
         else
             return Secrets.RECAPTCHA_KEY;
-    } // getRecaptchaKey()
+    }
 
     public static String getRecaptchaSecret()
     {
@@ -39,7 +40,7 @@ public class DeveloperOptions
             return TEST_RECAPTCHA_SECRET;
         else
             return Secrets.RECAPTCHA_SECRET;
-    } // getRecaptchaSecret()
+    }
 
     public static String getDomain()
     {
@@ -47,24 +48,27 @@ public class DeveloperOptions
             return TEST_DOMAIN;
         else
             return DOMAIN;
-    } // getDomain()
+    }
 
     public static String getFileStore()
     {
         if(TESTING)
-            return Secrets.LOCALIZED_FILE_STORE;
+            return NetSecrets.LOCALIZED_FILE_STORE;
         else
             return FILE_STORE;
-    } // getFileStore()
+    }
+
+    public static boolean getTesting()
+    {
+        return TESTING;
+    }
 
     public static String[] getBase()
     {
         try
         {
             if(getDomain().equals(DOMAIN))
-            {
                 return new String[]{ };
-            }
             else
             {
                 String path = new URI(getDomain()).getPath();
@@ -87,4 +91,4 @@ public class DeveloperOptions
         }
     }
 
-} // DeveloperOptions
+}

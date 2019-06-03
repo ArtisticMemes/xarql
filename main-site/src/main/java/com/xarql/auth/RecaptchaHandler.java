@@ -4,13 +4,11 @@
 package com.xarql.auth;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.main.DeveloperOptions;
 
 /**
@@ -29,7 +27,7 @@ public class RecaptchaHandler extends HttpServlet
     public RecaptchaHandler()
     {
         super();
-    } // -
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,7 +37,7 @@ public class RecaptchaHandler extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.sendRedirect(DOMAIN + "/auth");
-    } //
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -67,6 +65,6 @@ public class RecaptchaHandler extends HttpServlet
         }
         else
             response.sendError(400, "Recaptcha Invalid");
-    } //
+    }
 
-} // *
+}

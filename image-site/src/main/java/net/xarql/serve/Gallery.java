@@ -2,15 +2,13 @@ package net.xarql.serve;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.xarql.util.Base62Converter;
-import net.xarql.util.ServletUtilities;
+import net.xarql.util.NServletUtilities;
 
 /**
  * Servlet implementation class Gallery
@@ -30,7 +28,7 @@ public class Gallery extends HttpServlet
     public Gallery()
     {
         super();
-    } // Gallery()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,8 +37,7 @@ public class Gallery extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
+        NServletUtilities util = new NServletUtilities(request);
 
         // Try to get the newest images based on the highest image id
         int JPGinit = DEFAULT_INIT;
@@ -49,8 +46,7 @@ public class Gallery extends HttpServlet
         PNGinit = UploadProcessor.getHighestImageID(FileType.PNG) - IMAGE_COUNT;
 
         // If the user has specified a starting id (initial id), use that instead
-        if(request.getParameter("init") != null && !request.getParameter("init").equals(""))
-        {
+        if(util.hasParam("init"))
             try
             {
                 JPGinit = Integer.parseInt(request.getParameter("init"));
@@ -61,17 +57,12 @@ public class Gallery extends HttpServlet
                 JPGinit = DEFAULT_INIT;
                 PNGinit = DEFAULT_INIT;
             }
-        }
 
         // Prevent errors where init is too low
         if(JPGinit < MIN_INIT)
-        {
             JPGinit = DEFAULT_INIT;
-        }
         if(PNGinit < MIN_INIT)
-        {
             PNGinit = DEFAULT_INIT;
-        }
 
         // Determine valid IDs of images and add them to a list
         ArrayList<Image> images = new ArrayList<>();
@@ -83,7 +74,7 @@ public class Gallery extends HttpServlet
 
         request.setAttribute("images", images);
         request.getRequestDispatcher("/src/viewer/gallery.jsp").forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -93,6 +84,6 @@ public class Gallery extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Gallery
+}

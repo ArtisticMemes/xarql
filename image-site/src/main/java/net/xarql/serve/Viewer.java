@@ -5,16 +5,14 @@ package net.xarql.serve;
 
 import java.io.IOException;
 import java.util.Arrays;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.xarql.util.Base62Converter;
 import net.xarql.util.DeveloperOptions;
-import net.xarql.util.ServletUtilities;
+import net.xarql.util.NServletUtilities;
 
 /**
  * Servlet implementation class Viewer
@@ -33,7 +31,7 @@ public class Viewer extends HttpServlet
     public Viewer()
     {
         super();
-    } // Viewer()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -42,8 +40,7 @@ public class Viewer extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
+        new NServletUtilities(request);
 
         String URI = request.getRequestURI();
         String[] pathParts = URI.split("/");
@@ -81,7 +78,6 @@ public class Viewer extends HttpServlet
                 return;
             }
             else
-            {
                 try
                 {
                     Base62Converter.from(id);
@@ -91,7 +87,6 @@ public class Viewer extends HttpServlet
                     response.sendError(400, e.getMessage());
                     return;
                 }
-            }
 
             request.setAttribute("id", id);
             request.setAttribute("type", extension.getExtension());
@@ -110,7 +105,7 @@ public class Viewer extends HttpServlet
             response.sendError(400, "Too many path elements.");
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -120,6 +115,6 @@ public class Viewer extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Viewer
+}

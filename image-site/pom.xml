@@ -17,6 +17,14 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  
+  <repositories>
+    <repository>
+      <id>ProjectRepo</id>
+      <name>ProjectRepo</name>
+      <url>file://${project.basedir}/lib</url>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -39,6 +47,11 @@
     	<groupId>javax.servlet</groupId>
     	<artifactId>javax.servlet-api</artifactId>
     	<version>4.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.xarql</groupId>
+      <artifactId>main-site</artifactId>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 

@@ -4,14 +4,12 @@
 package net.xarql.serve;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.xarql.util.ServletUtilities;
+import net.xarql.util.NServletUtilities;
 
 /**
  * Servlet implementation class Error
@@ -21,15 +19,13 @@ public class Error extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    private HttpServletRequest currentRequest = null;
-
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Error()
     {
         super();
-    } // Error()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -38,16 +34,9 @@ public class Error extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ServletUtilities util = new ServletUtilities(request);
-        util.standardSetup();
+        NServletUtilities util = new NServletUtilities(request);
 
-        currentRequest = request;
-        request.setAttribute("code", request.getParameter("code"));
-        if(attributeEmpty("code"))
-        {
-            request.setAttribute("code", "???");
-        }
-        String code = request.getAttribute("code").toString();
+        String code = util.useParam("code", "???");
         String type;
         switch(code)
         {
@@ -73,16 +62,7 @@ public class Error extends HttpServlet
         request.setAttribute("code", code);
         request.setAttribute("type", type);
         request.getRequestDispatcher("/src/error/error.jsp").forward(request, response);
-    } // doGet()
-
-    // Check if the attribute has content
-    private boolean attributeEmpty(String name)
-    {
-        if(currentRequest.getAttribute(name) == null || currentRequest.getAttribute(name).toString().equals(""))
-            return true;
-        else
-            return false;
-    } // attributeEmpty()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -92,6 +72,6 @@ public class Error extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Error
+}

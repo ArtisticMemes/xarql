@@ -127,7 +127,7 @@ public class ServletUtilities
      * @throws UnsupportedEncodingException Shouldn't happen. Occurs if the server
      *         or client can't use UTF-8. Although that's extremely rare.
      */
-    private void standardSetup() throws UnsupportedEncodingException
+    protected void standardSetup() throws UnsupportedEncodingException
     {
         request.setAttribute("domain", DOMAIN);
         request.setAttribute("google_analytics_id", GOOGLE_ANALYTICS_ID);
@@ -324,6 +324,11 @@ public class ServletUtilities
             }
         else
             throw new NoSuchElementException("The desired parameter (" + parameter + ") wasn't included");
+    }
+
+    protected final HttpServletRequest getRequest()
+    {
+        return request;
     }
 
 }

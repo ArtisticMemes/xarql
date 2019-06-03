@@ -1,13 +1,11 @@
 package com.xarql.auth;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.main.DeveloperOptions;
 
 /**
@@ -26,7 +24,7 @@ public class AuthStatus extends HttpServlet
     public AuthStatus()
     {
         super();
-    } // -
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,7 +37,7 @@ public class AuthStatus extends HttpServlet
             request.getRequestDispatcher("/src/auth/status.jsp").forward(request, response);
         else
             response.sendError(401, "Client has not authenticated. Go to " + DOMAIN + "/auth");
-    } //
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -49,6 +47,6 @@ public class AuthStatus extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } //
+    }
 
-} // *
+}

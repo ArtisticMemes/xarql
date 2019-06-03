@@ -1,12 +1,12 @@
 package net.xarql.auth;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.xarql.auth.AuthTable;
 
 /**
  * Servlet implementation class AuthStatus
@@ -22,7 +22,6 @@ public class AuthStatus extends HttpServlet
     public AuthStatus()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -33,12 +32,10 @@ public class AuthStatus extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         if(request.getRequestedSessionId() != null && AuthTable.contains(request.getRequestedSessionId()))
-        {
             response.setStatus(200);
-        }
         else
             response.sendError(401);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -48,6 +45,6 @@ public class AuthStatus extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // AuthStatus
+}

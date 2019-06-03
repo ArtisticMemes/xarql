@@ -14,7 +14,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +21,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
 import net.xarql.util.Base62Converter;
 import net.xarql.util.DeveloperOptions;
-import net.xarql.util.ServletUtilities;
+import net.xarql.util.NServletUtilities;
 
 /**
  * Servlet implementation class Upload
@@ -50,7 +48,7 @@ public class UploadProcessor extends HttpServlet
     {
         super();
         ensureInit();
-    } // UploadProcessor()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -59,9 +57,8 @@ public class UploadProcessor extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // Reject GET requests
-        response.sendError(400);
-    } // doGet()
+        NServletUtilities.rejectGetMethod(response);
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -73,8 +70,8 @@ public class UploadProcessor extends HttpServlet
         ensureInit();
 
         FileType fileType;
-        ServletUtilities util = new ServletUtilities(request);
-        if(util.isAuth())
+        NServletUtilities util = new NServletUtilities(request);
+        if(util.userIsAuth())
         {
             if(!FILE_STORE.exists())
                 FILE_STORE.mkdirs();
@@ -88,7 +85,7 @@ public class UploadProcessor extends HttpServlet
                     response.sendError(400, "Uploaded file was an invalid type.");
                     return;
                 }
-                final File dir = new File(FILE_STORE + "/" + fileType.getExtension() + "/" + (Base62Converter.to(getHighestImageID(fileType) + 1)));
+                final File dir = new File(FILE_STORE + "/" + fileType.getExtension() + "/" + Base62Converter.to(getHighestImageID(fileType) + 1));
                 if(!dir.exists())
                     dir.mkdirs();
                 part.write(dir.getPath() + "/" + "raw" + fileType.dotExtension());
@@ -96,11 +93,11 @@ public class UploadProcessor extends HttpServlet
             }
 
             response.sendRedirect(DOMAIN + "/" + fileType.ordinal() + Base62Converter.to(getHighestImageID(fileType)));
-            util.revokeAuth();
+            util.getAuthSession().kill();
         }
         else
             response.sendError(401);
-    } // doPost()
+    }
 
     // Make sure that accurate image counts were gotten at some point
     private static void ensureInit()
@@ -110,32 +107,30 @@ public class UploadProcessor extends HttpServlet
             initialize();
             firstRun = false;
         }
-    } // ensureInit()
+    }
 
     // Get accurate image counts
     private static void initialize()
     {
         for(FileType extension : FileType.values())
             setHighestImageID(getHighestImageID(false, extension), extension);
-    } // init()
+    }
 
     private static FileType getFileType(Part part)
     {
         for(String content : part.getHeader("content-disposition").split(";"))
-        {
             if(content.trim().startsWith("filename"))
             {
                 String name = content.substring(content.indexOf("=") + 2, content.length() - 1);
                 return FileType.determine(name, null);
             }
-        }
         return null;
-    } // getFileType
+    }
 
     public static int getHighestImageID(FileType fileType)
     {
         return getHighestImageID(true, fileType);
-    } // getHighestImageID()
+    }
 
     private static int getHighestImageID(boolean trustingFile, FileType fileType)
     {
@@ -167,9 +162,7 @@ public class UploadProcessor extends HttpServlet
                     {
                         int folderID = Base62Converter.from(path.getFileName().toString());
                         if(folderID > maxFolderID)
-                        {
                             maxFolderID = folderID;
-                        }
                     }
                 }
                 catch(IOException e)
@@ -192,7 +185,7 @@ public class UploadProcessor extends HttpServlet
         }
         else
             return highestImageID.get(fileType);
-    } // getHighestImageID()
+    }
 
     private static void setHighestImageID(int input, FileType fileType)
     {
@@ -209,6 +202,6 @@ public class UploadProcessor extends HttpServlet
         {
             highestImageID.put(fileType, getHighestImageID(false, fileType));
         }
-    } // setHighestImageID()
+    }
 
-} // FileWriter
+}
