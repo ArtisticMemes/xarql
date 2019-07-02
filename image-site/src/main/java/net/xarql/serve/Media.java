@@ -15,21 +15,21 @@ public final class Media
     private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
-     * The ID of the image. Represented as a base 62 alphanumeric number. Excludes
+     * The ID of the media. Represented as a base 62 alphanumeric number. Excludes
      * the first character used for type indication.
      */
     private final String   id;
     /**
-     * The file extension of the image.
+     * The file extension of the media.
      */
     private final FileType type;
 
     /**
-     * Creates a new image with the supplied id and type.
+     * Creates a new media with the supplied id and type.
      *
-     * @param id Represents the image's number. Exclude the first character; that is
+     * @param id Represents the media's number. Exclude the first character; that is
      *        only for type indication.
-     * @param type The extension for the image. 0 for jpg. 1 for png.
+     * @param type The extension for the media.
      */
     public Media(String id, FileType type)
     {
@@ -38,7 +38,7 @@ public final class Media
     }
 
     /**
-     * Gives the short link to this image which opens in an image viewer.
+     * Gives the short link to this media which opens in an media viewer.
      *
      * @return The short link
      */
@@ -48,7 +48,7 @@ public final class Media
     }
 
     /**
-     * Gives the long link to this image which provides the actual file on its own.
+     * Gives the long link to this media which provides the actual file on its own.
      * The file will be named raw.
      *
      * @return The raw link

@@ -3,11 +3,11 @@ package net.xarql.serve;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * All permitted file types on xarql.net
+ */
 enum FileType
 {
-    /**
-     * All permitted file types on xarql.net
-     */
     JPG("jpg", "jpeg"), PNG("png"), MP3("mp3"), WEBP("webp"), WEBM("webm"), MP4("mp4");
 
     /**

@@ -15,8 +15,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta id="domain" value="${domain}">
-  <link rel="stylesheet" type="text/css" id="theme-styles" href="https://xarql.com/src/common/light-common.min.css">
-  <link rel="shortcut icon" href="https://xarql.com/logo.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" id="theme-styles" href="https://xarql.net/-/src/css/light-common.min.css">
+  <link rel="shortcut icon" href="https://xarql.net/-/src/icon/logo.png" type="image/x-icon">
   <title>Upload An Image ~ xarql</title>
 </head>
 <body>

@@ -1,0 +1,48 @@
+@charset "UTF-8";
+@import 'common';
+
+#wrapper,
+html,
+body {
+  background-color: #2d2d2d;
+}
+
+.warn {
+  color: #d60e0e;
+}
+
+.card {
+  color: #d3d3d3;
+  background-color: #333333;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.65);
+}
+
+a {
+  color: #179dd6;
+}
+
+a:visited {
+  color: #179dd6;
+}
+
+button {
+  color: #eee;
+  background-color: #111;
+}
+
+form input {
+  background-color: #2f2f2f;
+  color: #fff;
+  border-color: #888;
+}
+
+form textarea {
+  background-color: #2f2f2f;
+  color: #fff;
+  border-color: #888;
+}
+
+select {
+  background-color: #282828;
+  color: #eee;
+}

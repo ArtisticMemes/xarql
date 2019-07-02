@@ -13,7 +13,7 @@
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="https://xarql.com/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="https://xarql.net/-/src/icon/logo.png" type="image/x-icon">
   <title>Image Viewer ~ xarql</title>
   <!-- rich embed tags -->
   <meta property="og:title" content="View This Image">

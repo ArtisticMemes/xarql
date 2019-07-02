@@ -13,7 +13,7 @@
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="https://xarql.com/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="https://xarql.net/-/src/icon/logo.png" type="image/x-icon">
   <title>Video Watcher ~ xarql</title>
   <style>
 #wrapper,html,body{border:0px;padding:0px;margin:0px;overflow-x:hidden;display:flex;justify-content:center;background-color:#000000;visibility:visible}html,body{width:100vw;height:100vh}html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}body{font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"}#wrapper{width:100%;height:100%}#column{display:block;max-width:100%}a{text-decoration:none;color:#287bff;max-width:100%;max-height:100%;display:block}a:hover{text-decoration:underline}a:active{position:relative;top:0.05em}a:visited{color:#287bff}video{max-width:100vw;max-height:80vh;width:50em;height:50em}p{color:#000;text-align:center;font-family:inherit}

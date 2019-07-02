@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@import "common";
+
+#wrapper,
+html,
+body {
+  background-color: #f2f2f2;
+}
+
+.warn {
+  color: #ff0000;
+}
+
+.card {
+  color: #000;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+a {
+  color: #00f;
+}
+
+a:visited {
+  color: #00f;
+}
+
+button {
+  color: #fff;
+  background-color: #666;
+}
+
+form input {
+  border-color: #444;
+}
+
+form textarea {
+  border-color: #444;
+}
+
+select {
+  background-color: #f2f2f2;
+  color: #000;
+}
