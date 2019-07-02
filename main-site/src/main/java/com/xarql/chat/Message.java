@@ -14,7 +14,7 @@ public class Message extends WebsocketPackage
     public boolean isExpired()
     {
         Timestamp maxAge = new Timestamp(System.currentTimeMillis() - MESSAGE_LIFESPAN);
-        return getCreationDate().compareTo(maxAge) > 0;
+        return getCreationDate().compareTo(maxAge) < 0;
     }
 
 }
