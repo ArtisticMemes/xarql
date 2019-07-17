@@ -287,7 +287,7 @@ public class Post
         // Bump
         if(getBump().equals(getDate()))
             output += "";
-        else if(getBump().equals(getSubbump()))
+        else if(timeSinceBump().equals(timeSinceSubbump()))
             output += " ~ bump: " + timeSinceBump();
         else
             output += " ~ bump: " + timeSinceBump() + ", sub: " + timeSinceSubbump();

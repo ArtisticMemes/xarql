@@ -17,7 +17,7 @@
         <div class="large-card">
             <p class="overline">ID: <span id="main-post-id">${post.getId()}</span> ~ <a href="${domain}/polr/${post.getAnswers()}" class="view-link" post-id="${post.getAnswers()}">Replied To: ${post.getAnswers()}</a>~ ${post.getDisplayDate()}</p>
             <p class="overline">${post.replyStats()}</p>
-            <h6>${post.getTitle()}</h6>
+            <h6 id="main-post-title">${post.getTitle()}</h6>
             <p>${post.getContent()}</p>
             <c:if test="${post.isExpired()}">
                 <p class="warn">This post has expired. You can not reply to it.</p>
