@@ -15,7 +15,7 @@
 <div id="main-post">
     <c:forEach begin="0" var="post" items="${posts}" end="0">
         <div class="large-card">
-            <p class="overline">ID: <span id="main-post-id">${post.getId()}</span> ~ <a href="${domain}/polr/${post.getAnswers()}" class="view-link" post-id="${post.getAnswers()}">Replied To: ${post.getAnswers()}</a> ~ Date: ${post.getDisplayDate()}</p>
+            <p class="overline">ID: <span id="main-post-id">${post.getId()}</span> ~ <a href="${domain}/polr/${post.getAnswers()}" class="view-link" post-id="${post.getAnswers()}">Replied To: ${post.getAnswers()}</a>~ ${post.getDisplayDate()}</p>
             <p class="overline">${post.replyStats()}</p>
             <h6>${post.getTitle()}</h6>
             <p>${post.getContent()}</p>

@@ -201,7 +201,7 @@ public class Post
 
     public String getDisplayDate()
     {
-        return getDate().toString().substring(0, 19);
+        return getDate().toString().substring(0, 16);
     }
 
     public Timestamp getBump()
@@ -278,21 +278,26 @@ public class Post
 
         // Replies
         if(getResponses() == 0)
-            output += "No Replies";
+            output += "no replies";
         else if(getResponses() == getSubresponses())
-            output += "Replies: " + getResponses();
+            output += "replies: " + getResponses();
         else
-            output += "Replies: " + getResponses() + " ~ SubReplies: " + getSubresponses();
+            output += "replies: " + getResponses() + ", sub: " + indirectReplies();
 
         // Bump
         if(getBump().equals(getDate()))
             output += "";
         else if(getBump().equals(getSubbump()))
-            output += " ~ Bump: " + timeSinceBump();
+            output += " ~ bump: " + timeSinceBump();
         else
-            output += " ~ Bump: " + timeSinceBump() + " ~ SubBump: " + timeSinceSubbump();
+            output += " ~ bump: " + timeSinceBump() + ", sub: " + timeSinceSubbump();
 
         return output;
+    }
+
+    public int indirectReplies()
+    {
+        return getSubresponses() - getResponses();
     }
 
     /* Static Methods Below */
