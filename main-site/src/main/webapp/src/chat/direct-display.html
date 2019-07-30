@@ -1,0 +1,10 @@
+<title>Messages For ${convos.get(0).recipient} ~ xarql</title>
+<!-- END HEAD -->
+<div id="convos">
+    <c:forEach begin="0" var="convo" items="${convos}">
+        <div class="large-card">
+          <h6 class="sender"><a href="${domain}/chat/dm/view?user=${convo.sender}">${convo.sender}</a></h6>
+          <p>${convo.message(0).content}</p>
+        </div>
+    </c:forEach>
+</div>

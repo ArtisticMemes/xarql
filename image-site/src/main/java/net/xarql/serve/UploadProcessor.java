@@ -83,7 +83,7 @@ public class UploadProcessor extends HttpServlet
                 fileType = getFileType(part);
                 if(fileType == null)
                 {
-                    response.sendError(400, "Uploaded file was an invalid type.");
+                    response.sendError(415, "Uploaded file was an invalid type.");
                     return;
                 }
                 final File dir = new File(FILE_STORE + "/" + fileType.getExtension() + "/" + Base62Converter.to(getHighestImageID(fileType) + 1));

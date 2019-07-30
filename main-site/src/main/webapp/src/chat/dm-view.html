@@ -1,0 +1,9 @@
+<title>DM from @${convo.sender} ~ xarql</title>
+<!-- END HEAD -->
+<div id="messages">
+    <c:forEach begin="0" var="msg" items="${convo.messages}">
+        <div class="small-card">
+          <p>${msg.content}</p>
+        </div>
+    </c:forEach>
+</div>
