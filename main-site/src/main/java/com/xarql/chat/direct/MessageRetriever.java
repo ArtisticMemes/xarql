@@ -23,7 +23,10 @@ public class MessageRetriever extends DatabaseQuery<Conversation>
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
-        convo = Conversation.process(rs);
+        if(convo == null)
+            convo = new Conversation(DirectMessage.process(rs));
+        else
+            convo.add(rs.getString("content"));
     }
 
     @Override

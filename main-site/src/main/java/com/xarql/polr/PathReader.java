@@ -102,7 +102,12 @@ public class PathReader extends HttpServlet
             {
                 request.setAttribute("posts", ps.getData());
                 if(ps.getData().size() > 0)
-                    request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
+                {
+                    if(ps.getData().get(0).getRemoved())
+                        response.sendError(410);
+                    else
+                        request.getRequestDispatcher("/src/polr/polr.jsp").forward(request, response);
+                }
                 else
                     response.sendError(404);
                 return;

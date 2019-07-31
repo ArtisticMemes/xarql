@@ -24,7 +24,7 @@ public class RecentRetriever extends DatabaseQuery<List<Conversation>>
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
-        conversations.add(Conversation.process(rs));
+        conversations.add(new Conversation(DirectMessage.process(rs)));
     }
 
     @Override
