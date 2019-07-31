@@ -1,21 +1,20 @@
 package com.xarql.chat.direct;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.main.DeveloperOptions;
-import com.xarql.util.JSPBuilder;
+import com.xarql.user.AccountExistence;
 import com.xarql.util.ServletUtilities;
 
 /**
- * Servlet implementation class DMViewer
+ * Servlet implementation class DMProcessor
  */
-@WebServlet ("/chat/dm/view")
-public class DMViewer extends HttpServlet
+@WebServlet ("/chat/dm/send")
+public class DMProcessor extends HttpServlet
 {
     private static final long   serialVersionUID = 1L;
     private static final String DOMAIN           = DeveloperOptions.getDomain();
@@ -23,16 +22,9 @@ public class DMViewer extends HttpServlet
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DMViewer()
+    public DMProcessor()
     {
         super();
-    }
-
-    @Override
-    public void init(ServletConfig config) throws ServletException
-    {
-        super.init(config);
-        JSPBuilder.build("/chat/dm-view", getServletContext());
     }
 
     /**
@@ -45,18 +37,22 @@ public class DMViewer extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         if(util.userHasAccount())
         {
-            if(util.hasParam("user"))
+            if(util.hasParam("recipient") && util.hasParam("content"))
             {
-                String sender = util.useParam("user");
-                Conversation convo = new MessageRetriever(util.getAccount().getUsername(), sender).use();
-                request.setAttribute("convo", convo);
-                request.getRequestDispatcher("/src/chat/dm-view.jsp").forward(request, response);
+                String recipient = util.useParam("recipient");
+                if(AccountExistence.check(recipient))
+                {
+                    new MessageCreator(recipient, util.getAccount().getUsername(), util.useParam("content")).use();
+                    response.sendRedirect(DOMAIN + "/chat/dm/view?user=" + recipient);
+                }
+                else
+                    response.sendError(400);
             }
             else
                 response.sendError(400);
         }
         else
-            response.sendRedirect(DOMAIN + "/user/log_in");
+            response.sendError(401);
     }
 
     /**

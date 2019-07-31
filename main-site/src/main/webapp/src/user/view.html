@@ -2,6 +2,7 @@
 <!-- END HEAD -->
 <div class="large-card">
     <h4>${username}</h4>
+    <p><a href="${domain}/chat/dm/view?user=${username}">Send A Message</a></p>
     <c:if test="${is_mod}">
         <p>This user is a moderator. They can censor, remove, and restore posts.</p>
     </c:if>

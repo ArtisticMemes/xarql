@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.xarql.main.DeveloperOptions;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
@@ -20,6 +21,7 @@ public class ConversationsDisplay extends HttpServlet
     private static final long serialVersionUID = 1L;
 
     private static final String EMPTY_INBOX_MESSAGE = "Hello! Welcome to the direct message system on xarql.com, here you can send users (like me) messages. You've recieved this message to test out the interface. Click my username to start talking with me.";
+    private static final String DOMAIN              = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,7 +60,7 @@ public class ConversationsDisplay extends HttpServlet
 
         }
         else
-            response.sendError(401);
+            response.sendRedirect(DOMAIN + "/user/log_in");
     }
 
     /**

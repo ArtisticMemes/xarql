@@ -1,4 +1,4 @@
-<title>DM from @${convo.sender} ~ xarql</title>
+<title>DM from @${user} ~ xarql</title>
 <!-- END HEAD -->
 <div id="messages">
     <c:forEach begin="0" var="msg" items="${convo.messages}">
@@ -6,4 +6,13 @@
           <p>${msg.content}</p>
         </div>
     </c:forEach>
+</div>
+<div class="large-card">
+  <form id="message-form" action="${domain}/chat/dm/send?recipient=${user}" method="POST" accept-charset="UTF-8">
+      <input id="message" autocomplete="off" spellcheck="true" type="text" name="content" placeholder="Message" maxlength="256" style="width:100%;">
+      <input id="send-button" value="Send" type="submit" class="button">
+  </form>
+  <c:if test="${account_name != 'Unknown'}">
+      <p>Currently logged in as <a href="${domain}/user">@${account_name}</a></p>
+  </c:if>
 </div>

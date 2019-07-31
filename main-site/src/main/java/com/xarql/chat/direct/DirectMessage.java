@@ -35,7 +35,7 @@ public class DirectMessage
 
     public String getContent()
     {
-        return content;
+        return "@" + sender + ": " + content;
     }
 
     public static DirectMessage copy(DirectMessage msg)

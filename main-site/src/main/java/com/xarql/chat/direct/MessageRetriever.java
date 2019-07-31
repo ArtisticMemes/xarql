@@ -7,7 +7,7 @@ import com.xarql.util.DatabaseQuery;
 
 public class MessageRetriever extends DatabaseQuery<Conversation>
 {
-    private static final String COMMAND = "SELECT * FROM direct_messages WHERE recipient=? AND sender=? ORDER BY date LIMIT 25";
+    private static final String COMMAND = "SELECT * FROM direct_messages WHERE (recipient=? AND sender=?) OR (recipient=? AND sender=?) ORDER BY date LIMIT 25";
 
     private Conversation convo;
     private final String recipient;
@@ -26,7 +26,7 @@ public class MessageRetriever extends DatabaseQuery<Conversation>
         if(convo == null)
             convo = new Conversation(DirectMessage.process(rs));
         else
-            convo.add(rs.getString("content"));
+            convo.add(DirectMessage.process(rs));
     }
 
     @Override
@@ -40,6 +40,8 @@ public class MessageRetriever extends DatabaseQuery<Conversation>
     {
         statement.setString(1, recipient);
         statement.setString(2, sender);
+        statement.setString(3, sender);
+        statement.setString(4, recipient);
     }
 
 }

@@ -1,9 +1,9 @@
-<title>Messages For ${convos.get(0).recipient} ~ xarql</title>
+<title>Messages For ${account_name} ~ xarql</title>
 <!-- END HEAD -->
 <div id="convos">
     <c:forEach begin="0" var="convo" items="${convos}">
-        <div class="large-card">
-          <h6 class="sender"><a href="${domain}/chat/dm/view?user=${convo.sender}">${convo.sender}</a></h6>
+        <div class="small-card">
+          <h6 class="sender"><a href="${domain}/chat/dm/view?user=${convo.getOtherUser(account_name)}">${convo.getOtherUser(account_name)}</a></h6>
           <p>${convo.message(0).content}</p>
         </div>
     </c:forEach>

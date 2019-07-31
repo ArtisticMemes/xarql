@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Conversation
 {
-    public final String         recipient;
-    public final String         sender;
+    private final String        user1;
+    private final String        user2;
     private List<DirectMessage> messages;
 
     public Conversation(DirectMessage msg)
     {
-        recipient = msg.recipient;
-        sender = msg.sender;
+        // user1 being recipient or sender is arbitrary, but user2 must be the same
+        user1 = msg.recipient;
+        user2 = msg.sender;
         messages = new ArrayList<>();
         messages.add(msg);
     }
@@ -27,9 +28,9 @@ public class Conversation
         return messages.size();
     }
 
-    public void add(String content)
+    public void add(DirectMessage dm)
     {
-        messages.add(new DirectMessage(recipient, sender, content));
+        messages.add(dm);
     }
 
     /**
@@ -51,14 +52,17 @@ public class Conversation
         return messages.isEmpty();
     }
 
-    public String getRecipient()
+    public String getOtherUser(String knownUser)
     {
-        return recipient;
+        if(user1.equals(knownUser))
+            return user2;
+        else
+            return user1;
     }
 
-    public String getSender()
+    public boolean containsUser(String user)
     {
-        return sender;
+        return user1.equals(user) || user2.equals(user);
     }
 
 }
