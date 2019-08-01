@@ -1,13 +1,11 @@
 package com.xarql.user.front;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.auth.AuthSession;
 import com.xarql.main.DeveloperOptions;
 import com.xarql.user.Account;
@@ -49,10 +47,7 @@ public class LogInHandler extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        if(util.hasParams(new String[]{
-                "username", "password"
-        }))
-        {
+        if(util.hasParams("username", "password"))
             try
             {
                 new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
@@ -66,7 +61,6 @@ public class LogInHandler extends HttpServlet
                 else
                     response.sendRedirect(DOMAIN + "/user/log_in?fail=" + e.getMessage());
             }
-        }
         else
             response.sendError(400);
     } // doPost()

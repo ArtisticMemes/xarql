@@ -37,7 +37,7 @@ public class DMProcessor extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         if(util.userHasAccount())
         {
-            if(util.hasParam("recipient") && util.hasParam("content"))
+            if(util.hasParams("recipient", "content"))
             {
                 String recipient = util.useParam("recipient");
                 if(AccountExistence.check(recipient))

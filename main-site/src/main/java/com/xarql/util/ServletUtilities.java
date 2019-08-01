@@ -6,8 +6,6 @@ package com.xarql.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +28,7 @@ public class ServletUtilities
     private static final String  RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
     private static final boolean TESTING             = DeveloperOptions.getTesting();
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     private static final int    NORMAL_FONT_WEIGHT = 400;
     private static final int    LIGHT_FONT_WEIGHT  = 200;
@@ -266,20 +264,12 @@ public class ServletUtilities
      *        URL
      * @return true if the parameters are usable, false otherwise
      */
-    public boolean hasParams(List<String> parameters)
+    public boolean hasParams(String... parameters)
     {
         for(String param : parameters)
-            if(request.getParameter(param) == null || request.getParameter(param).equals(""))
+            if(!hasParam(param))
                 return false;
         return true;
-    }
-
-    public boolean hasParams(String[] parameters)
-    {
-        List<String> tmp = new ArrayList<>();
-        for(String param : parameters)
-            tmp.add(param);
-        return hasParams(tmp);
     }
 
     /**

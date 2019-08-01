@@ -1,13 +1,11 @@
 package com.xarql.user.front;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.auth.AuthSession;
 import com.xarql.auth.IPTracker;
 import com.xarql.main.DeveloperOptions;
@@ -55,34 +53,26 @@ public class SignUpHandler extends HttpServlet
         {
             if(util.userHasAccount())
                 response.sendError(403, "Please log out");
-            else
-            {
-
-                if(util.hasParams(new String[]{
-                        "username", "password"
-                }))
+            else if(util.hasParams("username", "password"))
+                try
                 {
-                    try
-                    {
-                        String username = request.getParameter("username").trim().toLowerCase();
-                        String password = request.getParameter("password");
-                        new AccountProcessor(username, password);
-                        new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
-                        IPTracker.logNewUser(request);
-                        response.sendRedirect(DOMAIN + "/user?msg=Account Created");
-                    }
-                    catch(Exception e)
-                    {
-                        String username = request.getParameter("username");
-                        if(username != null && !username.equals(""))
-                            response.sendRedirect(DOMAIN + "/user/sign_up?prefill=" + username + "&fail=" + e.getMessage());
-                        else
-                            response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
-                    }
+                    String username = request.getParameter("username").trim().toLowerCase();
+                    String password = request.getParameter("password");
+                    new AccountProcessor(username, password);
+                    new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
+                    IPTracker.logNewUser(request);
+                    response.sendRedirect(DOMAIN + "/user?msg=Account Created");
                 }
-                else
-                    response.sendError(400);
-            }
+                catch(Exception e)
+                {
+                    String username = request.getParameter("username");
+                    if(username != null && !username.equals(""))
+                        response.sendRedirect(DOMAIN + "/user/sign_up?prefill=" + username + "&fail=" + e.getMessage());
+                    else
+                        response.sendRedirect(DOMAIN + "/user/sign_up?fail=" + e.getMessage());
+                }
+            else
+                response.sendError(400);
         }
         else
             response.sendRedirect(DOMAIN + "/auth?redirect=/user/sign_up");

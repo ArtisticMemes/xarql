@@ -44,7 +44,7 @@ public class Updt extends HttpServlet
         String sort = util.useParam("sort", DEFAULT_SORT);
         String flow = util.useParam("flow", DEFAULT_FLOW);
 
-        if(!util.hasParam("id") || !util.hasParam("page"))
+        if(!util.hasParams("id", "page"))
         {
             response.sendError(400);
             return;

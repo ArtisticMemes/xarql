@@ -49,9 +49,8 @@ public class ConversationsDisplay extends HttpServlet
         if(util.userHasAccount())
         {
             List<Conversation> convos = new RecentRetriever(util.getAccount().getUsername()).use();
-            if(convos.size() == 0)
+            if(convos == null || convos.size() == 0)
             {
-                System.out.println("convos is empty");
                 new MessageCreator(util.getAccount().getUsername(), "test", EMPTY_INBOX_MESSAGE).use();
                 convos = new RecentRetriever(util.getAccount().getUsername()).use();
             }

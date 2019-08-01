@@ -21,9 +21,6 @@ public class ReportProcessor extends HttpServlet
 
     public static final String DOMAIN = DeveloperOptions.getDomain();
 
-    private static final String[] REQUIRED_PARAMS = { "type", "description", "id"
-    };
-
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,7 +47,7 @@ public class ReportProcessor extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        if(util.userIsAuth() && util.hasParams(REQUIRED_PARAMS))
+        if(util.userIsAuth() && util.hasParams("type", "description", "id"))
         {
 
             // Make a report
