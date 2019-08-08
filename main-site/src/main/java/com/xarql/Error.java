@@ -1,7 +1,7 @@
 /*
  * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
  */
-package com.xarql.main;
+package com.xarql;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

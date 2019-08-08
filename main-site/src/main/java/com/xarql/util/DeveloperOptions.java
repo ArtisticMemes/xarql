@@ -1,6 +1,4 @@
-package com.xarql.main;
-
-import com.xarql.util.Secrets;
+package com.xarql.util;
 
 /**
  * Basic setup options to make development easier

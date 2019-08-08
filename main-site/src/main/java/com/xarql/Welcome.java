@@ -1,7 +1,7 @@
 /*
  * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
  */
-package com.xarql.main;
+package com.xarql;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -17,6 +17,7 @@ import com.xarql.auth.AuthTable;
 import com.xarql.user.AccountCounter;
 import com.xarql.user.AccountGrabber;
 import com.xarql.user.AccountMaxID;
+import com.xarql.util.DeveloperOptions;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 

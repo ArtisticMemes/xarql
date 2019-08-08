@@ -3,7 +3,6 @@ package com.xarql.util;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.xarql.main.DeveloperOptions;
 
 /**
  * Queries the database for some data.

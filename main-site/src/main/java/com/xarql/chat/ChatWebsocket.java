@@ -11,7 +11,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import com.xarql.main.DeveloperOptions;
+import com.xarql.util.DeveloperOptions;
 import com.xarql.util.TrackedHashMap;
 
 @ServerEndpoint ("/chat/websocket/{room}/{user}")

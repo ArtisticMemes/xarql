@@ -1,8 +1,7 @@
 package com.xarql.chat;
 
 import java.sql.Timestamp;
-
-import com.xarql.main.DeveloperOptions;
+import com.xarql.util.DeveloperOptions;
 import com.xarql.util.TextFormatter;
 import com.xarql.util.TrackedHashMap;
 

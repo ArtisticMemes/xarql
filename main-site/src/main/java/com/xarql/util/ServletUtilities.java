@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthSession;
 import com.xarql.auth.AuthTable;
-import com.xarql.main.DeveloperOptions;
 import com.xarql.polr.Post;
 import com.xarql.user.Account;
 

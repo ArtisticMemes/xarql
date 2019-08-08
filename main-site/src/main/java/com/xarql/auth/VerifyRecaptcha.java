@@ -18,8 +18,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.json.JSONObject;
-
-import com.xarql.main.DeveloperOptions;
+import com.xarql.util.DeveloperOptions;
 
 public class VerifyRecaptcha
 {

@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthSession;
 import com.xarql.auth.IPTracker;
-import com.xarql.main.DeveloperOptions;
 import com.xarql.user.Account;
 import com.xarql.user.AccountProcessor;
+import com.xarql.util.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**

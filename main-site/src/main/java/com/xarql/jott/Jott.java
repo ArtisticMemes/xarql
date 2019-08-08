@@ -1,44 +1,31 @@
-/*
- * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
- */
-package com.xarql.main;
+package com.xarql.jott;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xarql.auth.AuthSession;
-import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
+import com.xarql.util.TextFormatter;
 
 /**
- * Servlet implementation class Chat
+ * Servlet implementation class Jott
  */
-@WebServlet ("/chat")
-public class Chat extends HttpServlet
+@WebServlet ("/Jott")
+public class Jott extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Chat()
+    public Jott()
     {
         super();
-    } // Chat()
-
-    @Override
-    public void init(ServletConfig config) throws ServletException
-    {
-        super.init(config);
-        JSPBuilder.build("/chat/chat", getServletContext());
-    } // init()
+    } // Jott()
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -48,19 +35,20 @@ public class Chat extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
-        util.useParam("room", "main");
-        boolean idDone = false;
-        if(request.getCookies() != null)
+
+        try
         {
-            for(Cookie cookie : request.getCookies())
-            {
-                if(cookie.getName().equals("chat-id"))
-                    idDone = true;
-            }
+            String input = request.getParameter("content");
+            request.setAttribute("input", input);
+            request.setAttribute("output", TextFormatter.full(input));
         }
-        if(!idDone)
-            response.addCookie(new Cookie("chat-id", AuthSession.generateColor()));
-        request.getRequestDispatcher("/src/chat/chat.jsp").forward(request, response);
+        catch(NullPointerException npe)
+        {
+            request.setAttribute("input", "");
+            request.setAttribute("output", "");
+        }
+
+        request.getRequestDispatcher("/src/jott/jott.jsp").forward(request, response);
     } // doGet()
 
     /**
@@ -73,4 +61,4 @@ public class Chat extends HttpServlet
         doGet(request, response);
     } // doPost()
 
-} // Chat
+} // Jott

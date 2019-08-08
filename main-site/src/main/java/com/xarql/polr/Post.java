@@ -6,7 +6,7 @@ package com.xarql.polr;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import com.xarql.main.DeveloperOptions;
+import com.xarql.util.DeveloperOptions;
 
 public class Post
 {

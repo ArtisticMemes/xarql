@@ -2,7 +2,6 @@ package com.xarql.util;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import com.xarql.main.DeveloperOptions;
 
 /**
  * Updates the database with some data.

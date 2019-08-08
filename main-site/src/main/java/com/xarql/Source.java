@@ -1,7 +1,7 @@
 /*
  * MIT License http://g.xarql.net Copyright (c) 2018 Bryan Christopher Johnson
  */
-package com.xarql.main;
+package com.xarql;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -12,13 +12,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.xarql.util.DeveloperOptions;
 import com.xarql.util.ServletUtilities;
 
 /**
@@ -105,9 +104,7 @@ public class Source extends HttpServlet
             byte[] buffer = new byte[INPUT_BUFFER];
             int length;
             while((length = input.read(buffer)) > 0)
-            {
                 tmp.write(buffer, 0, length);
-            }
 
             output = new BufferedOutputStream(response.getOutputStream());
 
@@ -118,7 +115,6 @@ public class Source extends HttpServlet
         {
             // Close the streams if they're still live
             if(input != null)
-            {
                 try
                 {
                     input.close();
@@ -127,9 +123,7 @@ public class Source extends HttpServlet
                 {
                     io.printStackTrace();
                 }
-            }
             if(output != null)
-            {
                 try
                 {
                     output.close();
@@ -138,7 +132,6 @@ public class Source extends HttpServlet
                 {
                     io.printStackTrace();
                 }
-            }
         }
     } // doGet()
 

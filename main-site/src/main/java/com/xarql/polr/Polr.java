@@ -1,7 +1,7 @@
 /*
  * MIT License http://g.xarql.com Copyright (c) 2018 Bryan Christopher Johnson
  */
-package com.xarql.main;
+package com.xarql.polr;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.xarql.polr.PostRetriever;
+import com.xarql.util.DeveloperOptions;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
