@@ -8,37 +8,37 @@
     <description></description>
     <display-name>Welcome</display-name>
     <servlet-name>Welcome</servlet-name>
-    <servlet-class>com.xarql.main.Welcome</servlet-class>
+    <servlet-class>com.xarql.Welcome</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.main.Welcome</servlet-name>
+    <servlet-name>com.xarql.Welcome</servlet-name>
     <url-pattern>//*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>com.xarql.main.Welcome</servlet-name>
+    <servlet-name>com.xarql.Welcome</servlet-name>
     <url-pattern></url-pattern>
   </servlet-mapping>
   <servlet>
     <display-name>Source</display-name>
     <servlet-name>Source</servlet-name>
-    <servlet-class>com.xarql.main.Source</servlet-class>
+    <servlet-class>com.xarql.Source</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.main.Source</servlet-name>
+    <servlet-name>com.xarql.Source</servlet-name>
     <url-pattern>*.css</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>com.xarql.main.Source</servlet-name>
+    <servlet-name>com.xarql.Source</servlet-name>
     <url-pattern>*.js</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>Error</display-name>
     <servlet-name>Error</servlet-name>
-    <servlet-class>com.xarql.main.Error</servlet-class>
+    <servlet-class>com.xarql.Error</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.main.Error</servlet-name>
+    <servlet-name>com.xarql.Error</servlet-name>
     <url-pattern>/error</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -65,10 +65,10 @@
     <description>Jott it down</description>
     <display-name>Jott</display-name>
     <servlet-name>Jott</servlet-name>
-    <servlet-class>com.xarql.main.Jott</servlet-class>
+    <servlet-class>com.xarql.jott.Jott</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>com.xarql.main.Jott</servlet-name>
+    <servlet-name>com.xarql.jott.Jott</servlet-name>
     <url-pattern>/jott</url-pattern>
   </servlet-mapping>
   <servlet>
