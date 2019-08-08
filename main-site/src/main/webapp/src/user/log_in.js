@@ -8,6 +8,10 @@ $(document).ready(function() {
   form.submit(function( event ) {
 	// Stop form from submitting normally
 	    event.preventDefault();
+
+      $("#status").text("Working...");
+      $("#status").show();
+
       var username = $("#username").val();
       var password = $("#password").val();
       form.trigger('reset');
@@ -24,7 +28,6 @@ $(document).ready(function() {
       success: function(data) {
         $xml = $(data);
         $("#status").text($xml.find("comment").text());
-        $("#status").show();
         if($xml.find("success").text() == "true") {
           window.location.href = domain + "/user";
         }

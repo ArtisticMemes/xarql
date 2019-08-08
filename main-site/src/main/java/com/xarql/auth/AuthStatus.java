@@ -11,7 +11,7 @@ import com.xarql.main.DeveloperOptions;
 /**
  * Servlet implementation class AuthStatus
  */
-@WebServlet ("/AuthStatus")
+@WebServlet ("/auth/status")
 public class AuthStatus extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

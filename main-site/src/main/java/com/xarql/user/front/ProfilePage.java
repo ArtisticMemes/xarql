@@ -19,7 +19,7 @@ import com.xarql.util.TextFormatter;
 /**
  * Servlet implementation class ProfilePage
  */
-@WebServlet ("/ProfilePage")
+@WebServlet ("/user/view")
 public class ProfilePage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

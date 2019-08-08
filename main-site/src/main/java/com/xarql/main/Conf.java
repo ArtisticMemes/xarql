@@ -14,7 +14,7 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class Conf
  */
-@WebServlet ("/Conf")
+@WebServlet ("/conf")
 public class Conf extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

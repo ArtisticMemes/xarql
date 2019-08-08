@@ -14,7 +14,7 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class ReportProcessor
  */
-@WebServlet ("/ReportProcessor")
+@WebServlet ("/flag/report")
 public class ReportProcessor extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

@@ -15,7 +15,7 @@ import com.xarql.util.TextFormatter;
 /**
  * Servlet implementation class PolrUser
  */
-@WebServlet ("/PolrUser")
+@WebServlet ("/polr/user")
 public class PolrUser extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

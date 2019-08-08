@@ -5,14 +5,12 @@ package com.xarql.main;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.polr.PostRetriever;
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
@@ -20,7 +18,7 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class Polr
  */
-@WebServlet ("/Polr")
+@WebServlet ("/polr")
 public class Polr extends HttpServlet
 {
 

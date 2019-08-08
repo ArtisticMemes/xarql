@@ -14,7 +14,7 @@ import com.xarql.main.DeveloperOptions;
 /**
  * Servlet implementation class RecaptchaHandler
  */
-@WebServlet ("/RecaptchaHandler")
+@WebServlet ("/auth/recaptcha")
 public class RecaptchaHandler extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

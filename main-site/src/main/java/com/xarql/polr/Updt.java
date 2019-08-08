@@ -15,7 +15,7 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class Updt
  */
-@WebServlet ("/Updt")
+@WebServlet ("/polr/updt")
 public class Updt extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

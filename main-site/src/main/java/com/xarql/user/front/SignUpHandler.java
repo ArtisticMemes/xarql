@@ -16,7 +16,7 @@ import com.xarql.util.ServletUtilities;
 /**
  * Servlet implementation class SignUpHandler
  */
-@WebServlet ("/SignUpHandler")
+@WebServlet ("/user/sign_up/form")
 public class SignUpHandler extends HttpServlet
 {
     private static final long serialVersionUID = 1L;

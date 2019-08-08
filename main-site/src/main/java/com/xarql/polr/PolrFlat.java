@@ -4,21 +4,19 @@
 package com.xarql.polr;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class PolrFlat
  */
-@WebServlet ("/PolrFlat")
+@WebServlet ("/polr/flat")
 public class PolrFlat extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -79,6 +77,6 @@ public class PolrFlat extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // PolrFlat
+}

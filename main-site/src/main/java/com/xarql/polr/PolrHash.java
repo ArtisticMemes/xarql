@@ -18,7 +18,7 @@ import com.xarql.util.TextFormatter;
 /**
  * Servlet implementation class PolrHash
  */
-@WebServlet ("/PolrHash")
+@WebServlet ("/polr/hash")
 public class PolrHash extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
