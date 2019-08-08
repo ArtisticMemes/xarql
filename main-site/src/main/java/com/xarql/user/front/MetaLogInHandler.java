@@ -7,24 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.auth.AuthSession;
-import com.xarql.main.DeveloperOptions;
 import com.xarql.user.Account;
 import com.xarql.util.ServletUtilities;
 
 /**
- * Servlet implementation class LogInHandler
+ * Servlet implementation class JSLogInHandler
  */
-@WebServlet ("/user/log_in/form")
-public class LogInHandler extends HttpServlet
+@WebServlet ("/user/log_in/meta")
+public class MetaLogInHandler extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    private static final String DOMAIN = DeveloperOptions.getDomain();
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogInHandler()
+    public MetaLogInHandler()
     {
         super();
     }
@@ -47,18 +44,28 @@ public class LogInHandler extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities util = new ServletUtilities(request);
+        LoginAttempt attempt;
         if(util.hasParams("username", "password"))
+        {
+            String username = util.useParam("username").trim().toLowerCase();
+            String password = util.useParam("password");
             try
             {
-                new AuthSession(request.getRequestedSessionId(), new Account(request.getParameter("username").trim().toLowerCase(), request.getParameter("password")));
-                response.sendRedirect(DOMAIN + "/user");
+                new AuthSession(request.getRequestedSessionId(), new Account(username, password));
+                attempt = new LoginAttempt(username, true, "You are now logged in.");
             }
             catch(Exception e)
             {
-                response.sendRedirect(DOMAIN + "/user/log_in?prefill=" + util.useParam("username") + "&fail=" + e.getMessage());
+                attempt = new LoginAttempt(username, false, e.getMessage());
             }
+        }
         else
+        {
             response.sendError(400);
+            return;
+        }
+
+        response.getOutputStream().print(attempt.toString());
     }
 
 }

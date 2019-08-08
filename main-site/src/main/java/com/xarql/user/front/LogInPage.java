@@ -1,21 +1,19 @@
 package com.xarql.user.front;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.JSPBuilder;
 import com.xarql.util.ServletUtilities;
 
 /**
  * Servlet implementation class AccountPage
  */
-@WebServlet ("/LogInPage")
+@WebServlet ("/user/log_in")
 public class LogInPage extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -26,14 +24,14 @@ public class LogInPage extends HttpServlet
     public LogInPage()
     {
         super();
-    } // AccountPage()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/user/log_in", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,7 +44,7 @@ public class LogInPage extends HttpServlet
         util.useParam("fail");
         util.useParam("prefill");
         request.getRequestDispatcher("/src/user/log_in.jsp").forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -56,6 +54,6 @@ public class LogInPage extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // AccountPage
+}
