@@ -24,7 +24,7 @@
   <div id="column">
     <a href="https://xarql.com"><img alt="Uptime Robot status for xarql.com" src="https://img.shields.io/uptimerobot/status/m782801843-c06553f1f0d2851224a9915b.svg?label=xarql.com"></a>
     <div class="large-card">
-      <h4>Upload An Image</h4>
+      <h4>Upload Media</h4>
       <form id="file-form" action="${domain}/-/upload_endpoint" method="POST" enctype="multipart/form-data">
         <input type="file" required accept="image/jpeg,image/x-png,audio/x-mpeg,.png,.jpg,.jpeg,.mp3,.webp,.webm,.mp4," multiple="false" name="file" id="file-browser">
         <input type="submit" value="Submit" id="submit" class="button">

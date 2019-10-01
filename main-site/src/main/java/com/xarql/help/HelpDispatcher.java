@@ -6,14 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.github.rjeschke.txtmark.Processor;
 import com.xarql.util.DeveloperOptions;
 import com.xarql.util.JSPBuilder;
@@ -109,15 +107,13 @@ public class HelpDispatcher extends HttpServlet
                 ArrayList<String> fileNames = new ArrayList<>();
 
                 for(File file : files)
-                {
                     if(file.isFile())
                     {
                         // add file name excluding extension
                         String name = file.getName().substring(0, file.getName().indexOf('.'));
-                        if(!fileNames.contains(name))
+                        if(!name.equals("main") && !fileNames.contains(name))
                             fileNames.add(name);
                     }
-                }
                 request.setAttribute("pages", fileNames);
             }
 

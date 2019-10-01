@@ -1,7 +1,7 @@
 ### TextFormatter.java
 This class has static methods that allow for easily making posts more appealing.
 ##### Clickable links
-Links will be automatically detected by a regex.
+Links will be automatically detected by a regex. Current Regex is `((http)s?(:\/\/)([a-z0-9]+\.)+([a-z]+(\/)?)|([a-z0-9]+\.)((com|net|org|io|co)(\/)?))([a-zA-Z0-9-_]+(\/)?)*(\.[a-zA-Z0-9-_]{1,4})?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-_]+)?(&[a-zA-Z0-9-_]+=[a-zA-Z0-9-_+]+)*`. Test it on [regex101.com](https://regex101.com/r/Q9SCTV/4)
 ##### Newlines
 To make text go on to a newline, simply put a newline in the form. If you see that the text is separated, then it's done!
 ##### Bold, Italic, or Underlined
