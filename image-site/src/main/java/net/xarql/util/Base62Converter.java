@@ -16,8 +16,8 @@ public class Base62Converter
 {
     public static void main(String[] args)
     {
-        System.out.println(to(873));
-        System.out.println(from("E5"));
+        assert to(873).equals("E5") : "Converting to base62 failed";
+        assert from("E5") == 873 : "Converting from base62 failed";
     }
 
     private static Map<Integer, Character> charValues = new HashMap<>();

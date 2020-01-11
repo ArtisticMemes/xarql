@@ -49,8 +49,9 @@ public class Gallery extends HttpServlet
         if(util.hasParam("init"))
             try
             {
-                JPGinit = Integer.parseInt(request.getParameter("init"));
-                PNGinit = Integer.parseInt(request.getParameter("init"));
+                int givenInit = Integer.parseInt(request.getParameter("init"));
+                JPGinit = givenInit;
+                PNGinit = givenInit;
             }
             catch(NumberFormatException nfe)
             {
