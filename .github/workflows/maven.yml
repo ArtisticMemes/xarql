@@ -26,4 +26,4 @@ jobs:
       run: |
         cd main-site/target
         mv main-site.war ROOT.war
-        curl -v -u ${{ secrets.MNGR_USER }}:${{ secrets.MNGR_PASS }} -T xarql.war 'https://xarql.com/manager/text/deploy?path=/&update=true'
+        curl -v -u ${{ secrets.MNGR_USER }}:${{ secrets.MNGR_PASS }} -T ROOT.war 'https://xarql.com/manager/text/deploy?path=/&update=true'
