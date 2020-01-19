@@ -24,6 +24,6 @@ jobs:
         mvn -B -e package --file main-site/pom.xml
     - name: Upload to xarql.com
       run: |
-        cd target
+        cd main-site/target
         mv main-site.war ROOT.war
         curl -v -u ${{ secrets.MNGR_USER }}:${{ secrets.MNGR_PASS }} -T xarql.war 'https://xarql.com/manager/text/deploy?path=/&update=true'
