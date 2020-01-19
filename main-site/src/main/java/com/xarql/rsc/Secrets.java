@@ -1,4 +1,4 @@
-package com.xarql.util;
+package com.xarql.rsc;
 
 import java.util.ArrayList;
 

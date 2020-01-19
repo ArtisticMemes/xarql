@@ -13,8 +13,6 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-Secrets.java
-
 # Package Files #
 *.war
 *.nar

@@ -129,7 +129,7 @@
       </snapshots>
       <id>central</id>
       <name>Central Repository</name>
-      <url>http://repo.maven.apache.org/maven2</url>
+      <url>https://repo.maven.apache.org/maven2</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -142,7 +142,7 @@
       </snapshots>
       <id>central</id>
       <name>Central Repository</name>
-      <url>http://repo.maven.apache.org/maven2</url>
+      <url>https://repo.maven.apache.org/maven2</url>
     </pluginRepository>
   </pluginRepositories>
   <build>
@@ -173,8 +173,11 @@
               <goals>
                 <goal>filter-sources</goal>
               </goals>
-              <configuration>           
-                <sourceDirectory>${basedir}/src/main/java/com/xarql/util</sourceDirectory>
+              <configuration>
+                <delimiters>
+                  <delimiter>${*}</delimiter>
+                </delimiters>         
+                <sourceDirectory>${basedir}/src/main/java/com/xarql/rsc</sourceDirectory>
                 <outputDirectory>${project.build.directory}/generated-sources/java-templates</outputDirectory>
               </configuration>
             </execution>

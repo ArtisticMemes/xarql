@@ -1,5 +1,7 @@
 package com.xarql.util;
 
+import com.xarql.rsc.Secrets;
+
 /**
  * Basic setup options to make development easier
  *

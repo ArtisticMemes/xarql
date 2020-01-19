@@ -6,10 +6,11 @@ package com.xarql.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import com.xarql.rsc.Secrets;
 
 /**
  * Provides connections to the database. The database used is MariaDB.
- * 
+ *
  * @author Bryan Johnson
  */
 public class ConnectionManager
@@ -19,13 +20,12 @@ public class ConnectionManager
     /**
      * This method provides the connection. It tries to use the static connection
      * variable to speed up database use.
-     * 
+     *
      * @return A connection to the database
      */
     public static Connection get()
     {
         if(connection == null)
-        {
             try
             {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,7 +36,6 @@ public class ConnectionManager
                 e.printStackTrace();
                 return null;
             }
-        }
         return connection;
     } // getConnection()
 
@@ -46,7 +45,6 @@ public class ConnectionManager
     private static void close()
     {
         if(connection != null)
-        {
             try
             {
                 connection.close();
@@ -54,7 +52,6 @@ public class ConnectionManager
             catch(SQLException s)
             {
             }
-        }
     } // close()
 
 } // DBManager

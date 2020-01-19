@@ -19,7 +19,9 @@ jobs:
         XARQL_DB_PASS: ${{ secrets.DB_PASS }}
         XARQL_NOBOT_KEY: ${{ secrets.NOBOT_KEY }}
         XARQL_NOBOT_SECRET: ${{ secrets.NOBOT_SECRET }}
-      run: mvn -B -e -Dmaven.wagon.http.pool=false package --file main-site/pom.xml
+      run: |
+        mvn templating:filter-sources
+        mvn -B -e package --file main-site/pom.xml
     - name: Upload to xarql.com
       run: |
         cd target

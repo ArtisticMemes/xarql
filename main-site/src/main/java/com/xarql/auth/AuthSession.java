@@ -5,8 +5,8 @@ package com.xarql.auth;
 
 import java.sql.Timestamp;
 import java.util.Random;
+import com.xarql.rsc.Secrets;
 import com.xarql.user.Account;
-import com.xarql.util.Secrets;
 
 public class AuthSession
 {

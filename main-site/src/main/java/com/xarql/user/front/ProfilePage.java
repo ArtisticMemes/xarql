@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.xarql.polr.UserPostRetriever;
+import com.xarql.rsc.Secrets;
 import com.xarql.user.Account;
 import com.xarql.user.AccountGrabber;
 import com.xarql.util.DeveloperOptions;
 import com.xarql.util.JSPBuilder;
-import com.xarql.util.Secrets;
 import com.xarql.util.ServletUtilities;
 import com.xarql.util.TextFormatter;
 
