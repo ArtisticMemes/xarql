@@ -15,7 +15,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       env:
-        XARQL_DB_USER: ${{ secrets.DB_USER} }
+        XARQL_DB_USER: ${{ secrets.DB_USER }}
         XARQL_DB_PASS: ${{ secrets.DB_PASS }}
         XARQL_NOBOT_KEY: ${{ secrets.NOBOT_KEY }}
         XARQL_NOBOT_SECRET: ${{ secrets.NOBOT_SECRET }}
