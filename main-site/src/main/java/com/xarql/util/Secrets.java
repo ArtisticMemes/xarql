@@ -5,19 +5,12 @@ import java.util.ArrayList;
 public class Secrets
 {
     // DBManager
-    public static final String DBUser = null;
-    public static final String DBPass = null;
+    public static final String DBUser = "$db_user";
+    public static final String DBPass = "$db_pass";
 
-    // VerifyRecaptcha
-    public static final String RECAPTCHA_KEY    = null;
-    public static final String RECAPTCHA_SECRET = null;
-
-    // TextFormatter
-    @Deprecated
-    public static final String[] CENSORED_WORDS = { ""
-    };
-
-    public static final String MOD_SIGNATURE = "UwU";
+    // VerifyRecaptcha - "nobot" is used because I can't spell
+    public static final String RECAPTCHA_KEY    = "$nobot_key";
+    public static final String RECAPTCHA_SECRET = "$nobot_secret";
 
     private static final ArrayList<String> MODERATOR_LIST = new ArrayList<>(1);
 
