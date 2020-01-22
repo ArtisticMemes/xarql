@@ -1,24 +1,26 @@
-// Copy & Paste in to another file to limit amount of requests
-// Logic for the option pane
-$(document).ready(function () {
-  // Change font size
+/*
+ * copy & Paste in to another file to limit amount of requests
+ * Logic for the option pane
+ */
+$(document).ready(function() {
+  // change font size
   $('html').css('font-size', Cookies.get('font-size'));
   $("#text-up").on("click", function() {
     var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
     $('#font-size').remove();
-    $('html').css('font-size', (computedFontSize + 1) + 'px');
-    Cookies.set('font-size', (computedFontSize + 1) + 'px');
+    $('html').css('font-size', computedFontSize + 1 + 'px');
+    Cookies.set('font-size', computedFontSize + 1 + 'px');
   });
   $("#text-dn").on("click", function() {
-    var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // Get font size of <html></html>
+    var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // get font size of <html></html>
     $('#font-size').remove();
-    $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
-    Cookies.set('font-size', (computedFontSize - 1) + 'px');
+    $('html').css('font-size', computedFontSize - 1 + 'px'); // change font size by -1
+    Cookies.set('font-size', computedFontSize - 1 + 'px');
   });
 
-  // Change theme
+  // change theme
   function changeTheme(theme) {
-    if(theme === 'light' || theme === 'dark' || theme === 'purple') {
+    if (theme === 'light' || theme === 'dark' || theme === 'purple') {
     }
     else {
       theme = "light";
@@ -29,17 +31,16 @@ $(document).ready(function () {
     $("#" + theme + "-theme-button").hide();
   }
   changeTheme(Cookies.get("theme"));
-  $(".theme-button").each(function () {
+  $(".theme-button").each(function() {
 		var $this = $(this);
-		$this.on("click", function () {
+		$this.on("click", function() {
 			changeTheme($this.attr("data"));
 		});
 	});
 
-  // Change font weight
-  function fontWeight(weight)
-  {
-	  if(weight === 'light') {
+  // change font weight
+  function fontWeight(weight) {
+	  if (weight === 'light') {
 		  $('p').css('font-weight', '200');
 		  $('.bold').css('font-weight', '400');
       $('h6').css('font-weight', '400');
@@ -64,7 +65,7 @@ $(document).ready(function () {
 	  fontWeight('normal');
   });
 
-  // Show option pane
+  // show option pane
   $(".ajax-bar").each(function() {
 	  $(this).show();
   });

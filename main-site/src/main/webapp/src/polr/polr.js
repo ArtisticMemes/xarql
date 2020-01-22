@@ -1,14 +1,14 @@
-/* After editing, manually rename the nav() function in the .min.js file to stay as nav() */
-$(document).ready(function () {
+/* after editing, manually rename the nav() function in the .min.js file to stay as nav() */
+$(document).ready(function() {
   var domain = document.getElementById('domain').getAttribute('value');
 
-	// Update page contents
+	// update page contents
 	function update() {
 		$(".status").each(function() {
 			$(this).text("trying");
 		});
 	    var updt = $("<div></div>").load(domain + "/polr/updt?id=" + $("#main-post-id").text() + "&page=" + $("#page").text() + "&sort=" + $("#sort").text() + "&flow=" + $("#flow").text() + "#full", function(response, status, xhr) {
-	    	if(status == "error") {
+	    	if (status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
 	    		});
@@ -26,22 +26,22 @@ $(document).ready(function () {
 	    });
 	}
 
-  $(".update-button").each(function () {
+  $(".update-button").each(function() {
 		var $this = $(this);
-		$this.on("click", function () {
+		$this.on("click", function() {
 			update();
 		});
 	});
 
-  // AJAX posting
+  // aJAX posting
   $( "#post-form" ).submit(function( event ) {
-	// Stop form from submitting normally
+	// stop form from submitting normally
 	    event.preventDefault();
 	$(".status").each(function() {
 		$(this).text("trying");
 	});
 
-    // Get values from form, reset form
+    // get values from form, reset form
     var $form = $( this ),
       title = $form.find("input[name='title']").val(),
       content = $form.find("textarea[name='content']").val(),
@@ -50,7 +50,7 @@ $(document).ready(function () {
     $form.trigger('reset');
     $("#replying-to-input").val(parseInt($("#main-post-id").text()));
 
-    // Send the data using AJAX POST
+    // send the data using AJAX POST
     $.ajax({
     	type: "POST",
     	url: url,
@@ -65,7 +65,8 @@ $(document).ready(function () {
           $("#advisory").text("Wait 20 seconds between posts");
           $("#advisory").show();
     		});
-    	}).fail(function(){
+    	})
+.fail(function(){
     		$(".status").each(function() {
           $form.find("input[name='title']").val(title.trim());
           $form.find("textarea[name='content']").val(content.trim());
@@ -74,7 +75,8 @@ $(document).ready(function () {
           $("#advisory").text("Try reloading if posting fails. Remember to solve the Recaptcha.");
           $("#advisory").show();
     		});
-    	}).always(function(){
+    	})
+.always(function(){
     		window.setTimeout(update, 500); // wait .5 seconds
     	});
     });
@@ -88,7 +90,7 @@ $(document).ready(function () {
 	      sort = $("#sort-dropdown").val(),
 	      flow = $("#flow-dropdown").val();
 	    var updt = $("<div></div>").load(domain + "/polr/updt?id=" + $("#main-post-id").text() + "&page=" + page + "&sort=" + sort + "&flow=" + flow, function(response, status, xhr) {
-	    	if(status == "error") {
+	    	if (status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
 	    		});
@@ -103,8 +105,18 @@ $(document).ready(function () {
 				  $("#flow").text(flow);
 				  viewLinks();
           revealLinks();
-				  if(page > 0) { $("#prev-form").show(); $("#prev-form").css("display", "inline");} else { $("#prev-form").hide(); }
-				  if(page < 4) { $("#next-form").show(); $("#next-form").css("display", "inline");} else { $("#next-form").hide(); }
+				  if (page > 0) {
+ $("#prev-form").show(); $("#prev-form").css("display", "inline");
+}
+ else {
+ $("#prev-form").hide();
+}
+				  if (page < 4) {
+ $("#next-form").show(); $("#next-form").css("display", "inline");
+}
+ else {
+ $("#next-form").hide();
+}
 				  $(".status").each(function() {
 					  $(this).text(xhr.statusText);
 				  });
@@ -119,31 +131,33 @@ $(document).ready(function () {
 	$('#next-form').submit(function(event) {
 		event.preventDefault();
 		var pageNum = parseInt($('#page-dropdown').val());
-		if(pageNum < 9)
-			$('#page-dropdown').val(pageNum + 1);
+		if (pageNum < 9) {
+$('#page-dropdown').val(pageNum + 1);
+}
 		nav();
 	});
 	$('#prev-form').submit(function(event) {
 		event.preventDefault();
 		var pageNum = parseInt($('#page-dropdown').val());
-		if(pageNum > 0)
-			$('#page-dropdown').val(pageNum - 1);
+		if (pageNum > 0) {
+$('#page-dropdown').val(pageNum - 1);
+}
 		nav();
 	});
 
-  // Change font size
+  // change font size
   $('html').css('font-size', Cookies.get('font-size'));
   $("#text-up").on("click", function() {
 	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
     $('#font-size').remove();
-	  $('html').css('font-size', (computedFontSize + 1) + 'px');
-	  Cookies.set('font-size', (computedFontSize + 1) + 'px');
+	  $('html').css('font-size', computedFontSize + 1 + 'px');
+	  Cookies.set('font-size', computedFontSize + 1 + 'px');
   });
   $("#text-dn").on("click", function() {
-	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // Get font size of <html></html>
+	  var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // get font size of <html></html>
     $('#font-size').remove();
-	  $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
-	  Cookies.set('font-size', (computedFontSize - 1) + 'px');
+	  $('html').css('font-size', computedFontSize - 1 + 'px'); // change font size by -1
+	  Cookies.set('font-size', computedFontSize - 1 + 'px');
   });
 
   var nav = false;
@@ -152,7 +166,7 @@ $(document).ready(function () {
 			$(this).text("trying");
 		});
 	    var updt = $("<div></div>").load(domain + "/polr/updt?id=" + id + "&page=0", function(response, status, xhr) {
-	    	if(status == "error") {
+	    	if (status == "error") {
 	    		$(".status").each(function() {
 	    			$(this).text(xhr.statusText);
 	    		});
@@ -161,9 +175,10 @@ $(document).ready(function () {
 				$("#main-post").replaceWith(updt.find("#main-post-container").html());
 				$("#replies").replaceWith(updt.find("#replies-container").html());
 				$("title").text(updt.find("#main-post-title").text() + " ~ xarql");
-        if(popstate) {
-          // Do nothing
-        } else {
+        if (popstate) {
+          // do nothing
+        }
+ else {
           history.pushState("xarql", "xarql", domain + "/polr/" + id);
         }
 				$(".status").each(function() {
@@ -181,11 +196,10 @@ $(document).ready(function () {
 	    });
 	}
 
-  function viewLinks()
-  {
-	  $(".view-link").each(function () {
+  function viewLinks() {
+	  $(".view-link").each(function() {
 		  $(this).unbind("click");
-		  $(this).on("click", function () {
+		  $(this).on("click", function() {
 			  var id = $(this).attr("post-id");
 			  view(id, false);
 			  return false;
@@ -196,9 +210,9 @@ $(document).ready(function () {
 
   window.addEventListener('popstate', function(event) {
       var pieces = window.location.href.split('/');
-      if(pieces[pieces.length - 2] == 'polr') {
+      if (pieces[pieces.length - 2] == 'polr') {
         var currentID = pieces[pieces.length - 1];
-        if(currentID.includes('?')) {
+        if (currentID.includes('?')) {
           window.location.href = window.location.href;
         }
         else {
@@ -210,9 +224,8 @@ $(document).ready(function () {
       }
   }, false);
 
-
   function changeTheme(theme) {
-    if(theme === 'light' || theme === 'dark' || theme === 'rainbow') {
+    if (theme === 'light' || theme === 'dark' || theme === 'rainbow') {
     }
     else {
       theme = "light";
@@ -223,17 +236,16 @@ $(document).ready(function () {
     $("#" + theme + "-theme-button").hide();
   }
   changeTheme(Cookies.get("theme"));
-  $(".theme-button").each(function () {
+  $(".theme-button").each(function() {
 		var $this = $(this);
-		$this.on("click", function () {
+		$this.on("click", function() {
 			changeTheme($this.attr("data"));
 		});
 	});
 
-  // Option Pane
-  function fontWeight(weight)
-  {
-	  if(weight === 'light') {
+  // option Pane
+  function fontWeight(weight) {
+	  if (weight === 'light') {
 		  $('p').css('font-weight', '200');
 		  $('.bold').css('font-weight', '400');
       $('h6').css('font-weight', '400');
@@ -258,7 +270,7 @@ $(document).ready(function () {
 	  fontWeight('normal');
   });
 
-  // Enable JS buttons + Option Pane
+  // enable JS buttons + Option Pane
   $(".ajax-bar").each(function() {
 	  $(this).show();
   });
@@ -273,16 +285,16 @@ $(document).ready(function () {
 	  $(this).hide();
   });
 
-  // Enables links for viewing censored content
+  // enables links for viewing censored content
   function reveal(id) {
     $('#post-inner-' + id).show();
     $('#post-warning-' + id).hide();
   } // reveal()
 
   function revealLinks() {
-    $(".reveal-link").each(function () {
+    $(".reveal-link").each(function() {
   		var $this = $(this);
-	  	$this.on("click", function () {
+	  	$this.on("click", function() {
 	  		reveal($this.attr('data'));
         $this.hide();
 		  });
@@ -290,16 +302,18 @@ $(document).ready(function () {
   }
   revealLinks();
 
-  /* Auto update page to reflect options set on another page
-  function autoOption() {
-	  if($('#styles').length)
-		  defaultStylesInjected = true;
-	  if(defaultStylesInjected == false)
-		  window.setTimeout(autoCrunch, 100);  wait 100 milliseconds before checking again
-	  else {
-		  if(Cookies.get('theme') === 'dark')
-			  setTheme('dark');
-	  }
-  }
-  autoOption();*/
+  /*
+   * auto update page to reflect options set on another page
+   * function autoOption() {
+   * if($('#styles').length)
+   * defaultStylesInjected = true;
+   * if(defaultStylesInjected == false)
+   * window.setTimeout(autoCrunch, 100);  wait 100 milliseconds before checking again
+   * else {
+   * if(Cookies.get('theme') === 'dark')
+   * setTheme('dark');
+   * }
+   * }
+   * autoOption();
+   */
 });

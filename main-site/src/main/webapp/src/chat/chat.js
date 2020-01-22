@@ -1,46 +1,45 @@
-$(document).ready(function () {
-	// Update Messages
+$(document).ready(function() {
+	// update Messages
   var domain = $('#domain').attr('value');
   var room = $('#room').attr('value');
   console.log(room);
 
-  function parseHeaders(message)
-  {
+  function parseHeaders(message) {
     var data = message.data;
     var headers = new Map();
-    // Repeat until all key:value,key:value pairs are consumed and | terminates them
-    while(data.indexOf(':') != -1 && data.indexOf(':') < data.indexOf('|'))
-    {
-      // Get key from key:value pair
+    // repeat until all key:value,key:value pairs are consumed and | terminates them
+    while (data.indexOf(':') != -1 && data.indexOf(':') < data.indexOf('|')) {
+      // get key from key:value pair
       var param = data.substr(0, data.indexOf(':'));
-      // Remove the key from the start of data
+      // remove the key from the start of data
       data = data.substr(data.indexOf(':') + 1);
-      // Get the index of , or | --> whichever comes first
+      // get the index of , or | --> whichever comes first
       var stop = 0;
-      if(data.indexOf(',') != -1 && data.indexOf(',') < data.indexOf('|'))
-        stop = data.indexOf(',');
-      else
-        stop = data.indexOf('|');
-      // Get value from key:value pair
+      if (data.indexOf(',') != -1 && data.indexOf(',') < data.indexOf('|')) {
+stop = data.indexOf(',');
+}
+      else {
+stop = data.indexOf('|');
+}
+      // get value from key:value pair
       var value = data.substr(0, stop);
-      // Trim the value and , or | from data
+      // trim the value and , or | from data
       data = data.substr(stop + 1);
-      // Add the key:value pair to the map
+      // add the key:value pair to the map
       headers.set(param, value);
     }
     return headers;
   }
 
-  function parseContent(message)
-  {
+  function parseContent(message) {
     var data = message.data;
     data = data.substr(data.indexOf('|') + 1, data.length - data.indexOf('|'));
     return data;
   }
 
-	// AJAX posting
+	// aJAX posting
 	$("#message-form" ).submit(function(event) {
-		// Stop form from submitting normally
+		// stop form from submitting normally
 		event.preventDefault();
     wsSendMessage();
 	});
@@ -54,10 +53,12 @@ $(document).ready(function () {
   }
 
   function userTyping(color) {
-    if(Cookies.get('theme') === 'dark')
-      $('#user-' + color).css('box-shadow', '0px 5px 5px #000');
-    else
-      $('#user-' + color).css('box-shadow', '0px 5px 5px #999');
+    if (Cookies.get('theme') === 'dark') {
+$('#user-' + color).css('box-shadow', '0px 5px 5px #000');
+}
+    else {
+$('#user-' + color).css('box-shadow', '0px 5px 5px #999');
+}
   }
 
   function userNotTyping(color) {
@@ -80,63 +81,71 @@ $(document).ready(function () {
   $('#updates').prepend('<div class="small-card" id="status"><p class="status">Connecting...</p></div>');
   var webSocket;
   var protocol;
-  if(domain.includes('https://'))
-    protocol = "wss";
-  else
-    protocol = "ws";
+  if (domain.includes('https://')) {
+protocol = "wss";
+}
+  else {
+protocol = "ws";
+}
   webSocket = new WebSocket(protocol + domain.substr(domain.indexOf("://")) + "/chat/websocket/" + room + "/" + Cookies.get('chat-id').substr(1));
   var message = document.getElementById("message");
-  webSocket.onopen = function(message){ wsOpen(message);};
-  webSocket.onmessage = function(message){ wsGetMessage(message);};
-  webSocket.onclose = function(message){ wsClose(message);};
-  webSocket.onerror = function(message){ wsError(message);};
+  webSocket.onopen = function(message){
+ wsOpen(message);
+};
+  webSocket.onmessage = function(message){
+ wsGetMessage(message);
+};
+  webSocket.onclose = function(message){
+ wsClose(message);
+};
+  webSocket.onerror = function(message){
+ wsError(message);
+};
   function wsSendMessage() {
-    if(message.value.length !== 0 && message.value.trim() !== "")
-      webSocket.send("type:message|" + message.value);
+    if (message.value.length !== 0 && message.value.trim() !== "") {
+webSocket.send("type:message|" + message.value);
+}
     message.value = "";
   }
   function wsGetMessage(message) {
     var content = parseContent(message);
     var headers = parseHeaders(message);
-    if(headers.get('TYPE') !== 'message')
-    {
-      if(headers.get('TYPE') === 'user_join') {
+    if (headers.get('TYPE') !== 'message') {
+      if (headers.get('TYPE') === 'user_join') {
         addUser(headers.get('CLIENT_COLOR'));
       }
-      else if(headers.get('TYPE') === 'user_exit') {
+      else if (headers.get('TYPE') === 'user_exit') {
         removeUser(headers.get('CLIENT_COLOR'));
       }
-      else if(headers.get('TYPE') === 'users_report') {
+      else if (headers.get('TYPE') === 'users_report') {
         content = content.substr(7);
-        if(content.length > 1)
-        {
-          while(content.length > 0)
-          {
+        if (content.length > 1) {
+          while (content.length > 0) {
             var client = content.substr(1, 6);
             addUser(client);
             content = content.substr(7);
           }
         }
       }
-      else if(headers.get('TYPE') === 'typing_status') {
-        if(headers.get('TYPING') === 'true') {
+      else if (headers.get('TYPE') === 'typing_status') {
+        if (headers.get('TYPING') === 'true') {
           userTyping(headers.get('CLIENT_COLOR'));
         }
-        else if(headers.get('TYPING') === 'false') {
+        else if (headers.get('TYPING') === 'false') {
           userNotTyping(headers.get('CLIENT_COLOR'));
         }
       }
-      else if(headers.get('TYPE') === 'buffer_status') {
-        if(headers.get('BUFFER') === 'true') {
+      else if (headers.get('TYPE') === 'buffer_status') {
+        if (headers.get('BUFFER') === 'true') {
           userBuffered(headers.get('CLIENT_COLOR'));
         }
-        else if(headers.get('BUFFER') === 'false') {
+        else if (headers.get('BUFFER') === 'false') {
           userNotBuffered(headers.get('CLIENT_COLOR'));
         }
       }
       else {
         $('#messages').prepend('<div id="status-tmp" class="small-card"><p class="status">' + content + '</p></div>');
-        window.setTimeout(function () {
+        window.setTimeout(function() {
           $('#status-tmp').remove();
         }, 3000);
       }
@@ -149,13 +158,13 @@ $(document).ready(function () {
   }
   function wsOpen(message) {
     $('#status').replaceWith('<div class="small-card" id="status"><p class="status">Connected!</p>');
-    window.setTimeout(function () {
+    window.setTimeout(function() {
       $('#status').remove();
     }, 3000);
   }
   function wsClose(message) {
     $('#updates').prepend('<div class="small-card"><p class="warn">Disconnected</p></div>');
-    window.setTimeout(function () {
+    window.setTimeout(function() {
       $('#updates').prepend('<div class="small-card"><p class="status">Reloading...</p></div>');
       location.reload();
     }, 3000);
@@ -168,23 +177,20 @@ $(document).ready(function () {
   var typing = false;
   var buffered = false;
   $("#message").on("change keyup keydown paste", function(event) {
-    if(message.value.trim() !== "") {
-      if(!buffered) {
+    if (message.value.trim() !== "") {
+      if (!buffered) {
         webSocket.send("type:buffer,buffer:true|true");
         buffered = true;
       }
     }
-    else {
-      if(buffered)
-      {
+    else if (buffered) {
         webSocket.send("type:buffer,buffer:false|false");
         buffered = false;
       }
-    }
 
-    if(event.which !== 13 && event.which !== 8 && typeof event.which !== "undefined") {
-      if(canSendTyping) {
-        if(typing == false) {
+    if (event.which !== 13 && event.which !== 8 && typeof event.which !== "undefined") {
+      if (canSendTyping) {
+        if (typing == false) {
           typing = true;
           webSocket.send("type:typing,typing:true|true");
         }
@@ -192,7 +198,7 @@ $(document).ready(function () {
         setTimeout(function() {
           canSendTyping = true;
           setTimeout(function() {
-            if(canSendTyping) {
+            if (canSendTyping) {
               webSocket.send("type:typing,typing:false|false");
               typing = false;
             }
@@ -202,24 +208,24 @@ $(document).ready(function () {
     }
   });
 
-  // Change font size
+  // change font size
   $('html').css('font-size', Cookies.get('font-size'));
   $("#text-up").on("click", function() {
     var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize);
     $('#font-size').remove();
-    $('html').css('font-size', (computedFontSize + 1) + 'px');
-    Cookies.set('font-size', (computedFontSize + 1) + 'px');
+    $('html').css('font-size', computedFontSize + 1 + 'px');
+    Cookies.set('font-size', computedFontSize + 1 + 'px');
   });
   $("#text-dn").on("click", function() {
-    var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // Get font size of <html></html>
+    var computedFontSize = parseFloat(window.getComputedStyle(document.getElementById("html")).fontSize); // get font size of <html></html>
     $('#font-size').remove();
-    $('html').css('font-size', (computedFontSize - 1) + 'px'); // Change font size by -1
-    Cookies.set('font-size', (computedFontSize - 1) + 'px');
+    $('html').css('font-size', computedFontSize - 1 + 'px'); // change font size by -1
+    Cookies.set('font-size', computedFontSize - 1 + 'px');
   });
 
-  // Change theme
+  // change theme
   function changeTheme(theme) {
-    if(theme === 'light' || theme === 'dark' || theme === 'rainbow') {
+    if (theme === 'light' || theme === 'dark' || theme === 'rainbow') {
     }
     else {
       theme = "light";
@@ -230,17 +236,16 @@ $(document).ready(function () {
     $("#" + theme + "-theme-button").hide();
   }
   changeTheme(Cookies.get("theme"));
-  $(".theme-button").each(function () {
+  $(".theme-button").each(function() {
 		var $this = $(this);
-		$this.on("click", function () {
+		$this.on("click", function() {
 			changeTheme($this.attr("data"));
 		});
 	});
 
-  // Change font weight
-  function fontWeight(weight)
-  {
-	  if(weight === 'light') {
+  // change font weight
+  function fontWeight(weight) {
+	  if (weight === 'light') {
 		  $('p').css('font-weight', '200');
 		  $('.bold').css('font-weight', '400');
       $('h6').css('font-weight', '400');
@@ -265,7 +270,7 @@ $(document).ready(function () {
 	  fontWeight('normal');
   });
 
-  // Show option pane
+  // show option pane
   $(".ajax-bar").each(function() {
 	  $(this).show();
   });

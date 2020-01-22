@@ -4,9 +4,9 @@ $(document).ready(function() {
   var form = $("#log_in-form");
   var url = domain + "/user/log_in/meta";
 
-  // AJAX posting
+  // aJAX posting
   form.submit(function( event ) {
-	// Stop form from submitting normally
+	// stop form from submitting normally
 	    event.preventDefault();
 
       $("#status").text("Working...");
@@ -16,7 +16,7 @@ $(document).ready(function() {
       var password = $("#password").val();
       form.trigger('reset');
 
-    // Send the data using AJAX POST
+    // send the data using AJAX POST
     var attempt = $.ajax({
     	type: "POST",
     	url: url,
@@ -28,7 +28,7 @@ $(document).ready(function() {
       success: function(data) {
         $xml = $(data);
         $("#status").text($xml.find("comment").text());
-        if($xml.find("success").text() == "true") {
+        if ($xml.find("success").text() == "true") {
           window.location.href = domain + "/user";
         }
         else {
