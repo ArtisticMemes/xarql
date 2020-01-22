@@ -1,0 +1,87 @@
+rules:
+  # Comments
+  no-warning-comments:
+    - warn
+    - terms:
+      - TODO
+      - FIXME
+
+  # Errors | Syntax issues
+  no-self-assign: error # no var foo = ?; foo = foo;
+  no-cond-assign: error # Remove if(foo = true)
+  no-empty: error # No empty { }
+  eqeqeq: error # Change == to ===
+  curly: error # Require closing }
+  quotes: # Change all quotes from ' to "
+    - error
+    - double
+  no-empty-function: error # no function test() { }
+  init-declarations: # no var foo;
+    - error
+    - always
+  no-extra-semi: error # no test();;
+  no-redeclare: error # no var foo = ? and var foo = ?
+  no-extra-parens: error # no println(1 + (1 + 3))
+  no-shadow-restricted-names: error # no var window = ?
+  no-use-before-define: error # no test(); before function test() { println(?) }
+  no-undef: error # no println(foo) without var foo = ?
+  no-undef-init: error # no var foo = undefined
+  no-undefined: error # no var undefined = "hello world"
+  no-unreachable: error # no return; output = 5;
+  no-useless-return: error # no return; }
+  yoda: error # no "hello world" === foo
+  eol-last: error # ensure trailing /n for unix
+  linebreak-style:
+    - error
+    - unix
+  no-multi-assign: error
+  no-tabs: error
+  no-trailing-spaces: error
+  no-irregular-whitespace: error
+  no-dupe-args: error
+  no-duplicate-case: error
+  semi:
+    - error
+    - always
+  no-unsafe-finally: error # ensure finally doesn't interrupt try catch flow
+  no-fallthrough: error # end all cases with break;
+  no-floating-decimal: error # always put 0 before . as in 0.5
+  no-global-assign: error # ensure no window = null or other global var is reassigned
+  no-lone-blocks: error # no pointless { }
+  no-octal: error # prevent base 8 numbers
+  no-ternary: error # ternary is simply a horrible syntax
+  no-unneeded-ternary: error # allow --fix to attempt to fix ternary
+  space-before-function-paren:
+    - error
+    - never # remove space; bar(x, y)
+  no-whitespace-before-property: error # js engines are much too lenient; prevents obj. prop .test()
+
+  # Warnings | Readability
+  no-magic-numbers: warn # no resposne === 404 # sometimes 1 or 0 are fine
+  no-unused-labels: warn # idk wtf labels are
+  brace-style:
+    - error
+    - stroustrup
+  indent:
+    - error
+    - 2
+  no-unused-vars: warn
+  func-call-spacing: error
+  capitalized-comments:
+    - warn
+    - never
+  keyword-spacing: error
+  no-multiple-empty-lines:
+    - warn
+    - { max: 1, maxEOF: 0, maxBOF: 0 }
+  multiline-comment-style:
+    - warn
+    - starred-block
+  newline-per-chained-call:
+    - warn
+    - ignoreChainWithDepth: 2
+  no-negated-condition: warn # no confusingly negated if's
+  no-useless-escape: warn
+  no-lonely-if: warn # you should use else if
+  spaced-comment: warn # default is yes, comments should start with a space
+  no-useless-concat: warn # auto fix joining literals
