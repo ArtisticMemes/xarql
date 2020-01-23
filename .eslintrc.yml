@@ -23,7 +23,7 @@ rules:
   no-redeclare: error # no var foo = ? and var foo = ?
   no-extra-parens: error # no println(1 + (1 + 3))
   no-shadow-restricted-names: error # no var window = ?
-  no-use-before-define: error # no test(); before function test() { println(?) }
+  no-use-before-define: warn # no test(); before function test() { println(?) } # lambdas will not obey this
   no-undef: error # no println(foo) without var foo = ?
   no-undef-init: error # no var foo = undefined
   no-undefined: error # no var undefined = "hello world"
@@ -57,7 +57,9 @@ rules:
   no-whitespace-before-property: error # js engines are much too lenient; prevents obj. prop .test()
 
   # Warnings | Readability
-  no-magic-numbers: warn # no resposne === 404 # sometimes 1 or 0 are fine
+  no-magic-numbers:
+    - warn # no response === 404 # sometimes 1 or 0 are fine
+    - ignore: [0, 1, -1]
   no-unused-labels: warn # idk wtf labels are
   brace-style:
     - error

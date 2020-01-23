@@ -1,34 +1,36 @@
+/* global $ */
+/* eslint-env browser*/
 $(document).ready(function() {
   var domain = $("#domain").attr("value");
 
   var form = $("#log_in-form");
   var url = domain + "/user/log_in/meta";
 
-  // AJAX posting
+  // aJAX posting
   form.submit(function( event ) {
-	// Stop form from submitting normally
-	    event.preventDefault();
+    // stop form from submitting normally
+    event.preventDefault();
 
-      $("#status").text("Working...");
-      $("#status").show();
+    $("#status").text("Working...");
+    $("#status").show();
 
-      var username = $("#username").val();
-      var password = $("#password").val();
-      form.trigger('reset');
+    var username = $("#username").val();
+    var password = $("#password").val();
+    form.trigger("reset");
 
-    // Send the data using AJAX POST
-    var attempt = $.ajax({
-    	type: "POST",
-    	url: url,
+    // send the data using AJAX POST
+    $.ajax({
+      type: "POST",
+      url: url,
       dataType: "xml",
-    	data : {
+      data : {
         username: username,
         password: password
-    	},
+      },
       success: function(data) {
-        $xml = $(data);
-        $("#status").text($xml.find("comment").text());
-        if($xml.find("success").text() == "true") {
+        var xml = $(data);
+        $("#status").text(xml.find("comment").text());
+        if (xml.find("success").text() === "true") {
           window.location.href = domain + "/user";
         }
         else {
