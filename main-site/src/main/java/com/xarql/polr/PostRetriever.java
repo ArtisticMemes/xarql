@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.xarql.util.DatabaseQuery;
 
 public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
@@ -37,18 +36,17 @@ public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
         setFlow(flow);
         setPostSkipCount(postSkipCount);
         setPostCount(postCount);
-    } // PostRetriever(int id, String sort, String flow, int postSkipCount, int
-      // postCount)
+    }
 
     public PostRetriever(int id, String sort, String flow)
     {
         this(id, sort, flow, DEFAULT_POST_SKIP_COUNT, DEFAULT_POST_COUNT);
-    } // PostRetriever(int id, String sort, String flow)
+    }
 
     public PostRetriever(int id)
     {
         this(id, DEFAULT_SORT, DEFAULT_FLOW);
-    } // PostRetriever(int id)
+    }
 
     private void setID(int id)
     {
@@ -56,33 +54,27 @@ public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
             this.id = DEFAULT_ID;
         else
             this.id = id;
-    } // setID(int id)
+    }
 
     private void setSort(String sort)
     {
         if(sort == null)
             this.sort = DEFAULT_SORT;
+        else if(sort.equals("date") || sort.equals("responses") || sort.equals("subresponses") || sort.equals("bump") || sort.equals("subbump"))
+            this.sort = sort;
         else
-        {
-            if(sort.equals("date") || sort.equals("responses") || sort.equals("subresponses") || sort.equals("bump") || sort.equals("subbump"))
-                this.sort = sort;
-            else
-                this.sort = DEFAULT_SORT;
-        }
-    } // setSort(String sort)
+            this.sort = DEFAULT_SORT;
+    }
 
     private void setFlow(String flow)
     {
         if(flow == null)
             this.flow = DEFAULT_FLOW;
+        else if(flow.equals("asc") || flow.equals("desc"))
+            this.flow = flow;
         else
-        {
-            if(flow.equals("asc") || flow.equals("desc"))
-                this.flow = flow;
-            else
-                this.flow = DEFAULT_FLOW;
-        }
-    } // setSort(String sort)
+            this.flow = DEFAULT_FLOW;
+    }
 
     private void setPostSkipCount(int postSkipCount)
     {
@@ -90,15 +82,15 @@ public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
             this.postSkipCount = postSkipCount;
         else
             this.postSkipCount = DEFAULT_POST_SKIP_COUNT;
-    } // setPostSkipCount(int postSkipCount)
+    }
 
     private void setPostCount(int postCount)
     {
-        if(postCount > 0 && postCount < (FARTHEST_POST - postSkipCount))
+        if(postCount > 0 && postCount < FARTHEST_POST - postSkipCount)
             this.postCount = postCount;
         else
             this.postCount = DEFAULT_POST_COUNT;
-    } // setPostCount(int postCount)
+    }
 
     // Return a specific set of posts
     @Override
@@ -112,7 +104,7 @@ public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
         }
         else
         {
-            posts = new ArrayList<Post>();
+            posts = new ArrayList<>();
             setCommand("SELECT * FROM polr WHERE id=?");
             if(makeRequest())
             {
@@ -128,24 +120,24 @@ public class PostRetriever extends DatabaseQuery<ArrayList<Post>>
             else
                 return false;
         }
-    } // ArrayList execute(HttpServletResponse response)
+    }
 
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
         posts.add(Post.interperetPost(rs));
-    } // rs()
+    }
 
     @Override
     public ArrayList<Post> getData()
     {
         return posts;
-    } // getData()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setInt(1, id);
-    } // setVariables()
+    }
 
-} // PostRetriever
+}

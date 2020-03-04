@@ -27,14 +27,14 @@ public class AuthMainPage extends HttpServlet
     public AuthMainPage()
     {
         super();
-    } // -
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/auth/auth", getServletContext());
-    } //
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,7 +46,7 @@ public class AuthMainPage extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         util.useParam("redirect");
         request.getRequestDispatcher("/src/auth/auth.jsp").forward(request, response);
-    } //
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -56,6 +56,6 @@ public class AuthMainPage extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } //
+    }
 
-} // *
+}

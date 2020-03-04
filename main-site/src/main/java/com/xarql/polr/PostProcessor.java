@@ -33,7 +33,7 @@ public class PostProcessor extends HttpServlet
     public PostProcessor()
     {
         super();
-    } // PostProcessor()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -44,7 +44,7 @@ public class PostProcessor extends HttpServlet
     {
         response.sendError(400);
         return;
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -105,6 +105,6 @@ public class PostProcessor extends HttpServlet
         }
         else
             response.sendError(401);
-    } // doPost()
+    }
 
-} // PostProcessor
+}

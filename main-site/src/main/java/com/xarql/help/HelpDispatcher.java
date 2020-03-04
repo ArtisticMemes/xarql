@@ -35,7 +35,7 @@ public class HelpDispatcher extends HttpServlet
     public HelpDispatcher()
     {
         super();
-    } // HelpDispatcher()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
@@ -43,7 +43,7 @@ public class HelpDispatcher extends HttpServlet
         super.init(config);
         JSPBuilder.build("/help/help", getServletContext());
         JSPBuilder.build("/help/docs/main", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -131,7 +131,7 @@ public class HelpDispatcher extends HttpServlet
             response.sendRedirect(ROOT_PATH);
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -141,6 +141,6 @@ public class HelpDispatcher extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // HelpDispatcher
+}

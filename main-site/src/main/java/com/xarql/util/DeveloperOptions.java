@@ -35,7 +35,7 @@ public class DeveloperOptions
             return "";
         else
             return GOOGLE_ANALYTICS_ID;
-    } // getGoogleAnalyticsID()
+    }
 
     public static String getRecaptchaKey()
     {
@@ -43,7 +43,7 @@ public class DeveloperOptions
             return TEST_RECAPTCHA_KEY;
         else
             return Secrets.RECAPTCHA_KEY;
-    } // getRecaptchaKey()
+    }
 
     public static String getRecaptchaSecret()
     {
@@ -51,7 +51,7 @@ public class DeveloperOptions
             return TEST_RECAPTCHA_SECRET;
         else
             return Secrets.RECAPTCHA_SECRET;
-    } // getRecaptchaSecret()
+    }
 
     public static String getDomain()
     {
@@ -59,7 +59,7 @@ public class DeveloperOptions
             return TEST_DOMAIN;
         else
             return DOMAIN;
-    } // getDomain()
+    }
 
     public static String getContext()
     {
@@ -67,11 +67,11 @@ public class DeveloperOptions
             return TEST_CONTEXT;
         else
             return CONTEXT;
-    } // getContext()
+    }
 
     public static boolean getTesting()
     {
         return TESTING;
-    } // getTesting()
+    }
 
-} // DeveloperOptions
+}

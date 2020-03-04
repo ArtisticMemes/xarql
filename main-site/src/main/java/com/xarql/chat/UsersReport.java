@@ -8,7 +8,7 @@ public class UsersReport extends WebsocketPackage
     public UsersReport(TrackedHashMap<String, Client> clients) throws IllegalArgumentException
     {
         super(genReport(clients));
-    } // -
+    }
 
     private static String genReport(TrackedHashMap<String, Client> clients)
     {
@@ -20,6 +20,6 @@ public class UsersReport extends WebsocketPackage
                 output += ",";
         }
         return output;
-    } //
+    }
 
-} // *
+}

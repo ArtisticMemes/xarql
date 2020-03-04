@@ -27,14 +27,14 @@ public class Help extends HttpServlet
     public Help()
     {
         super();
-    } // Help()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/help/help", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,7 +46,7 @@ public class Help extends HttpServlet
         ServletUtilities util = new ServletUtilities(request);
         response.setHeader("Cache-Control", "public, max-age=86400");
         request.getRequestDispatcher("/src/help/help.jsp").forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -56,6 +56,6 @@ public class Help extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Help
+}

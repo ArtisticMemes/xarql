@@ -28,14 +28,14 @@ public class PolrFind extends HttpServlet
     public PolrFind()
     {
         super();
-    } // PolrFind()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/find", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -61,7 +61,7 @@ public class PolrFind extends HttpServlet
         }
         else
             response.sendError(500, "The search couldn't be completed");
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -71,6 +71,6 @@ public class PolrFind extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // PolrFind
+}

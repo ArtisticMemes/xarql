@@ -49,7 +49,7 @@ public class PostCreator extends DatabaseUpdate
         }
         else
             this.title = TextFormatter.full(title);
-    } // setTitle(String title)
+    }
 
     private void setContent(String content) throws IllegalArgumentException
     {
@@ -65,7 +65,7 @@ public class PostCreator extends DatabaseUpdate
         }
         else
             this.content = TextFormatter.full(content);
-    } // setContent()
+    }
 
     private void setAnswers(int answers) throws IllegalArgumentException
     {
@@ -76,7 +76,7 @@ public class PostCreator extends DatabaseUpdate
         }
         else
             this.answers = answers;
-    } // setAnswers()
+    }
 
     private void setAuthor(String author)
     {
@@ -84,12 +84,12 @@ public class PostCreator extends DatabaseUpdate
             this.author = author;
         else
             this.author = DEFAULT_AUTHOR;
-    } // setAuthor()
+    }
 
     public int getAnswers()
     {
         return answers;
-    } // getAnswers()
+    }
 
     public int getDeterminedID()
     {
@@ -137,4 +137,4 @@ public class PostCreator extends DatabaseUpdate
         return true; // Will execute if neither of the above 2 return statements have
     }
 
-} // PostCreator
+}

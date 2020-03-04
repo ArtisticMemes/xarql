@@ -6,6 +6,5 @@ public class TypingStatus extends WebsocketPackage
     {
         super(client);
         setHeader(Headers.TYPING, value);
-    } // -
-
-} // *
+    }
+}

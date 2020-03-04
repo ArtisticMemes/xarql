@@ -39,14 +39,14 @@ public class Polr extends HttpServlet
     public Polr()
     {
         super();
-    } // Polr()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/polr", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -74,7 +74,7 @@ public class Polr extends HttpServlet
             response.sendRedirect(DOMAIN + "/polr/0");
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -84,5 +84,5 @@ public class Polr extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
-} // Polr
+    }
+}

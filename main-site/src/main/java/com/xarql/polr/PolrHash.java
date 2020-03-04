@@ -31,14 +31,14 @@ public class PolrHash extends HttpServlet
     public PolrHash()
     {
         super();
-    } // PolrHash()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/hash", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -63,7 +63,7 @@ public class PolrHash extends HttpServlet
             request.setAttribute("posts", new HashPostRetriever(tag).use());
         }
         request.getRequestDispatcher(JSP_PATH).forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -73,6 +73,6 @@ public class PolrHash extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // PolrHash
+}

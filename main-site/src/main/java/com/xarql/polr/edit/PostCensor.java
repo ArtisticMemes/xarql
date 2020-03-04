@@ -2,14 +2,12 @@ package com.xarql.polr.edit;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import com.xarql.polr.PageCache;
 import com.xarql.util.DatabaseUpdate;
 
 public class PostCensor extends DatabaseUpdate
 {
-    private static final String[] WARNING_TYPES   = {
-            "Violent", "Sexual", "Offensive", "None"
+    private static final String[] WARNING_TYPES   = { "Violent", "Sexual", "Offensive", "None"
     };
     private static final String   DEFAULT_WARNING = "None";
 
@@ -23,27 +21,25 @@ public class PostCensor extends DatabaseUpdate
         super(COMMAND);
         this.id = id;
         setWarning(warning);
-    } // PostRemover()
+    }
 
     private void setWarning(String warning)
     {
-        for(int i = 0; i < WARNING_TYPES.length; i++)
-        {
-            if(warning.equals(WARNING_TYPES[i]))
+        for(String element : WARNING_TYPES)
+            if(warning.equals(element))
             {
                 this.warning = warning;
                 return;
             }
-        }
         this.warning = DEFAULT_WARNING;
-    } // setWarning()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setString(1, warning);
         statement.setInt(2, id);
-    } // setVariables()
+    }
 
     @Override
     public boolean execute()
@@ -51,6 +47,6 @@ public class PostCensor extends DatabaseUpdate
         boolean output = makeRequest();
         PageCache.clear();
         return output;
-    } // execute()
+    }
 
-} // PostCensor
+}

@@ -27,14 +27,14 @@ public class AccountPage extends HttpServlet
     public AccountPage()
     {
         super();
-    } // AccountPage()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/user/account", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -54,7 +54,7 @@ public class AccountPage extends HttpServlet
         }
         else
             response.sendRedirect(DOMAIN + "/user/log_in");
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -64,6 +64,6 @@ public class AccountPage extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // AccountPage
+}

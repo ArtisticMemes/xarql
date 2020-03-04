@@ -80,7 +80,7 @@ public class Updt extends HttpServlet
             else
                 response.sendError(500);
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -90,6 +90,6 @@ public class Updt extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Updt
+}

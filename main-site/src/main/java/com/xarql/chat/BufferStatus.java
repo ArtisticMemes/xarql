@@ -6,6 +6,5 @@ public class BufferStatus extends WebsocketPackage
     {
         super(source);
         setHeader(Headers.BUFFER, value);
-    } // -
-
-} // *
+    }
+}

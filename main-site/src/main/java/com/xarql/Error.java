@@ -29,14 +29,14 @@ public class Error extends HttpServlet
     public Error()
     {
         super();
-    } // Error()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/error/error", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -91,7 +91,7 @@ public class Error extends HttpServlet
         }
         request.setAttribute("type", type);
         request.getRequestDispatcher("/src/error/error.jsp").forward(request, response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -101,6 +101,6 @@ public class Error extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // Error
+}

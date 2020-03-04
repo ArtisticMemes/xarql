@@ -1,7 +1,6 @@
 package com.xarql.auth;
 
 import java.sql.Timestamp;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class SpamFilter
@@ -20,6 +19,6 @@ public class SpamFilter
             as.updateLastSubmitTime();
             return false;
         }
-    } //
+    }
 
-} // *
+}

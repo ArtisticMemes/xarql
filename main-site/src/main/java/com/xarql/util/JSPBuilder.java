@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-
 import javax.servlet.ServletContext;
 
 public class JSPBuilder
@@ -40,7 +39,7 @@ public class JSPBuilder
         {
             e.printStackTrace();
         }
-    } // build()
+    }
 
     public static String grabFile(File file)
     {
@@ -49,9 +48,7 @@ public class JSPBuilder
             Scanner scan = new Scanner(file);
             String content = "";
             while(scan.hasNextLine())
-            {
                 content += scan.nextLine();
-            }
             scan.close();
             return content;
         }
@@ -59,11 +56,11 @@ public class JSPBuilder
         {
             return null;
         }
-    } // grabFile()
+    }
 
     public static String grabFile(String filePath)
     {
         return grabFile(new File(filePath));
-    } // grabFile()
+    }
 
-} // JSPBuilder
+}

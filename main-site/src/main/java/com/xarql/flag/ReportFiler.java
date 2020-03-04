@@ -2,9 +2,7 @@ package com.xarql.flag;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.util.DatabaseUpdate;
 
 public class ReportFiler extends DatabaseUpdate
@@ -17,7 +15,7 @@ public class ReportFiler extends DatabaseUpdate
     {
         super(COMMAND);
         this.report = report;
-    } // ReportFiler
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
@@ -25,6 +23,6 @@ public class ReportFiler extends DatabaseUpdate
         statement.setInt(1, report.getPostID());
         statement.setString(2, report.getType());
         statement.setString(3, report.getDescription());
-    } // setVariables()
+    }
 
-} // ReportFiler
+}

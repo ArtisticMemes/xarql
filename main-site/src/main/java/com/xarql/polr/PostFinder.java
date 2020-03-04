@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.xarql.util.DatabaseQuery;
 
 public class PostFinder extends DatabaseQuery<ArrayList<Post>>
@@ -21,16 +20,16 @@ public class PostFinder extends DatabaseQuery<ArrayList<Post>>
     public PostFinder(String query)
     {
         super(SEARCH_COMMAND);
-        posts = new ArrayList<Post>(POST_COUNT);
+        posts = new ArrayList<>(POST_COUNT);
         setQuery(query);
-    } // PostFinder(response, query)
+    }
 
     private void setQuery(String query)
     {
         query += "*";
         query = query.toLowerCase();
         this.query = query;
-    } // setQuery()
+    }
 
     @Override
     public boolean execute()
@@ -39,19 +38,19 @@ public class PostFinder extends DatabaseQuery<ArrayList<Post>>
             return makeRequest();
         else
             return true;
-    } // execute()
+    }
 
     @Override
     protected void processResult(ResultSet rs) throws SQLException
     {
         posts.add(Post.interperetPost(rs));
-    } // processResult()
+    }
 
     @Override
     public ArrayList<Post> getData()
     {
         return posts;
-    } // getData()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
@@ -59,6 +58,6 @@ public class PostFinder extends DatabaseQuery<ArrayList<Post>>
         statement.setString(1, query);
         statement.setString(2, query);
         statement.setInt(3, POST_COUNT);
-    } // setVariables()
+    }
 
-} // PostFinder
+}

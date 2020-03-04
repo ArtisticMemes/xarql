@@ -1,7 +1,6 @@
 package com.xarql.util;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -18,17 +17,17 @@ public class CacheController implements Filter
     {
         chain.doFilter(request, response);
         response.setHeader("Cache-Control", "public, max-age=86400");
-    } // doFilter()
+    }
 
     @Override
     public void destroy()
     {
-    } // destroy()
+    }
 
     @Override
     public void init(FilterConfig arg0) throws ServletException
     {
-    } // init()
+    }
 
     @Override
     public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) throws IOException, ServletException
@@ -37,4 +36,4 @@ public class CacheController implements Filter
         HttpServletResponse response = (HttpServletResponse) arg1;
         doFilter(request, response, arg2);
     }
-} // CacheController
+}

@@ -29,7 +29,7 @@ public class SignUpHandler extends HttpServlet
     public SignUpHandler()
     {
         super();
-    } // SignUpHandler()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,7 +39,7 @@ public class SignUpHandler extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities.rejectGetMethod(response);
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -76,6 +76,6 @@ public class SignUpHandler extends HttpServlet
         }
         else
             response.sendRedirect(DOMAIN + "/auth?redirect=/user/sign_up");
-    } // doPost()
+    }
 
-} // SignUpHandler
+}

@@ -37,7 +37,7 @@ public class ConnectionManager
                 return null;
             }
         return connection;
-    } // getConnection()
+    }
 
     /**
      * Closes the static connection variable
@@ -52,6 +52,6 @@ public class ConnectionManager
             catch(SQLException s)
             {
             }
-    } // close()
+    }
 
-} // DBManager
+}

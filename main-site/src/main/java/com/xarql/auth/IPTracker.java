@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-
 import javax.servlet.http.HttpServletRequest;
-
 import com.xarql.util.ConnectionManager;
 
 public class IPTracker
@@ -14,42 +12,42 @@ public class IPTracker
     public static void logPolrPost(HttpServletRequest request, int postID)
     {
         log(request, postID, "polr/post");
-    } //
+    }
 
     public static void logChatSend(HttpServletRequest request, int sendID)
     {
         log(request, sendID, "chat/send");
-    } //
+    }
 
     public static void logPolrEditRemove(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/remove");
-    } //
+    }
 
     public static void logPolrEditRestore(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/restore");
-    } //
+    }
 
     public static void logPolrEditReplace(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/replace");
-    } //
+    }
 
     public static void logPolrEditCensor(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "polr/edit/censor");
-    } //
+    }
 
     public static void logReport(HttpServletRequest request, int targetPostID)
     {
         log(request, targetPostID, "flag");
-    } //
+    }
 
     public static void logNewUser(HttpServletRequest request)
     {
         log(request, 0, "user/sign_up");
-    } //
+    }
 
     private static void log(HttpServletRequest request, int submissionID, String submissionType)
     {
@@ -80,7 +78,6 @@ public class IPTracker
         {
             // Close in reversed order.
             if(statement != null)
-            {
                 try
                 {
                     statement.close();
@@ -88,8 +85,7 @@ public class IPTracker
                 catch(SQLException s)
                 { // do nothing
                 }
-            }
         }
-    } //
+    }
 
-} // *
+}

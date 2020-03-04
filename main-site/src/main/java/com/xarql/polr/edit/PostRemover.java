@@ -2,9 +2,7 @@ package com.xarql.polr.edit;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletResponse;
-
 import com.xarql.polr.PageCache;
 import com.xarql.util.DatabaseUpdate;
 
@@ -18,13 +16,13 @@ public class PostRemover extends DatabaseUpdate
     {
         super(COMMAND);
         this.id = id;
-    } // PostRemover()
+    }
 
     @Override
     protected void setVariables(PreparedStatement statement) throws SQLException
     {
         statement.setInt(1, id);
-    } // setVariables()
+    }
 
     @Override
     public boolean execute()
@@ -32,6 +30,6 @@ public class PostRemover extends DatabaseUpdate
         boolean output = makeRequest();
         PageCache.clear();
         return output;
-    } // execute()
+    }
 
-} // PostRemover
+}

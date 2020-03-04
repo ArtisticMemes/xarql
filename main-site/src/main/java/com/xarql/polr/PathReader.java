@@ -41,14 +41,14 @@ public class PathReader extends HttpServlet
     public PathReader()
     {
         super();
-    } // PathReader()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/polr", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -124,7 +124,7 @@ public class PathReader extends HttpServlet
             response.sendRedirect(DOMAIN + "/polr/0");
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -134,6 +134,6 @@ public class PathReader extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // PathReader
+}

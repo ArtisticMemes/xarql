@@ -27,14 +27,14 @@ public class SignUpPage extends HttpServlet
     public SignUpPage()
     {
         super();
-    } // SignUpPage()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/user/sign_up", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -52,7 +52,7 @@ public class SignUpPage extends HttpServlet
         }
         else
             response.sendRedirect(DOMAIN + "/auth?redirect=/user/sign_up");
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -62,6 +62,6 @@ public class SignUpPage extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doGet(request, response);
-    } // doPost()
+    }
 
-} // SignUpPage
+}

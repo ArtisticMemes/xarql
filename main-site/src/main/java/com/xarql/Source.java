@@ -42,7 +42,7 @@ public class Source extends HttpServlet
         SimpleDateFormat gmt = new SimpleDateFormat("EEE, MMM d, yyyy hh:mm:ss z");
         gmt.setTimeZone(TimeZone.getTimeZone("GMT"));
         lastModified = gmt.format(new Date());
-    } // Source()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -133,7 +133,7 @@ public class Source extends HttpServlet
                     io.printStackTrace();
                 }
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -143,6 +143,6 @@ public class Source extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         ServletUtilities.rejectPostMethod(response);
-    } // doPost()
+    }
 
-} // Source
+}

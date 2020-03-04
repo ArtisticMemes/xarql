@@ -9,14 +9,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.cert.X509Certificate;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
 import org.json.JSONObject;
 import com.xarql.util.DeveloperOptions;
 
@@ -34,26 +31,25 @@ public class VerifyRecaptcha
              * sun.security.provider.certpath.SunCertPathBuilderException: unable to find
              * valid certification path to requested target
              */
-            TrustManager[] trustAllCerts = new TrustManager[]{
-                    new X509TrustManager()
-                    {
-                        @Override
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers()
-                        {
-                            return null;
-                        }
+            TrustManager[] trustAllCerts = new TrustManager[]{ new X509TrustManager()
+            {
+                @Override
+                public java.security.cert.X509Certificate[] getAcceptedIssuers()
+                {
+                    return null;
+                }
 
-                        @Override
-                        public void checkClientTrusted(X509Certificate[] certs, String authType)
-                        {
-                        }
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType)
+                {
+                }
 
-                        @Override
-                        public void checkServerTrusted(X509Certificate[] certs, String authType)
-                        {
-                        }
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType)
+                {
+                }
 
-                    }
+            }
             };
 
             SSLContext sc = SSLContext.getInstance("SSL");
@@ -61,14 +57,7 @@ public class VerifyRecaptcha
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
             // Create all-trusting host name verifier
-            HostnameVerifier allHostsValid = new HostnameVerifier()
-            {
-                @Override
-                public boolean verify(String hostname, SSLSession session)
-                {
-                    return true;
-                }
-            };
+            HostnameVerifier allHostsValid = (hostname, session) -> true;
             // Install the all-trusting host verifier
             HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
             /*
@@ -82,9 +71,7 @@ public class VerifyRecaptcha
             StringBuilder sb = new StringBuilder();
             int cp;
             while((cp = rd.read()) != -1)
-            {
                 sb.append((char) cp);
-            }
             String jsonText = sb.toString();
             res.close();
 
@@ -95,5 +82,5 @@ public class VerifyRecaptcha
         {
             return false;
         }
-    } //
-} // *
+    }
+}

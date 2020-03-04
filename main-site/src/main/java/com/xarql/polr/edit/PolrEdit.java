@@ -28,14 +28,14 @@ public class PolrEdit extends HttpServlet
     public PolrEdit()
     {
         super();
-    } // PolrEdit()
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
         JSPBuilder.build("/polr/edit", getServletContext());
-    } // init()
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -55,7 +55,7 @@ public class PolrEdit extends HttpServlet
             response.sendError(401);
             return;
         }
-    } // doGet()
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -150,6 +150,6 @@ public class PolrEdit extends HttpServlet
             response.sendError(401);
             return;
         }
-    } // doPost()
+    }
 
-} // PolrEdit
+}
