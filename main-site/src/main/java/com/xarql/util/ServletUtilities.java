@@ -27,15 +27,15 @@ public class ServletUtilities
     private static final String  RECAPTCHA_KEY       = DeveloperOptions.getRecaptchaKey();
     private static final boolean TESTING             = DeveloperOptions.getTesting();
 
-    private final HttpServletRequest request;
-
     private static final int    NORMAL_FONT_WEIGHT = 400;
     private static final int    LIGHT_FONT_WEIGHT  = 200;
     private static final String DEFAULT_FONT_SIZE  = "1rem";
-    private static final String DEFAULT_THEME      = "light";
+    private static final String DEFAULT_THEME      = "dark";
 
     private static final int     DEFAULT_INT     = 0;
     private static final boolean DEFAULT_BOOLEAN = false;
+
+    private final HttpServletRequest request;
 
     /**
      * Allows for using static methods in an object to reduce typing
@@ -141,6 +141,7 @@ public class ServletUtilities
             request.setAttribute("account_name", Post.DEFAULT_AUTHOR);
     }
 
+    // FIXME I think this is broken lol
     private void setFontWeight()
     {
         // TODO: make this use setAttributeByCookie()
@@ -290,7 +291,7 @@ public class ServletUtilities
             throw new NoSuchElementException("The desired parameter (" + parameter + ") wasn't included");
     }
 
-    public int requireInt(String parameter) throws NoSuchElementException
+    public int requireInt(String parameter)
     {
         if(hasParam(parameter))
             try

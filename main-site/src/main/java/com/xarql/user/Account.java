@@ -90,7 +90,7 @@ public class Account
     {
         checkUsername(username);
         checkPassword(password);
-        if(password.equals(username))
+        if(password.equalsIgnoreCase(username))
             throw new IllegalArgumentException("Password was the same as the username. Please use a password that is NOT your username.");
         return true;
     }
